@@ -4,12 +4,7 @@ project(Coolgame VERSION 0.1.1)
 include(CTest)
 enable_testing()
 
-add_executable(Coolgame main.cpp
-                        # src/application.cpp
-                        # src/State/state.cpp
-                        # src/window.cpp
-                        # src/GL.cpp)
-                    
+add_executable(Coolgame main.cpp                    
                     src/Application/Application.cpp
                     src/event/Event.cpp
                     src/event/types/key/KeyEvent.cpp
