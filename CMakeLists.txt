@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0.0)
 project(Coolgame VERSION 0.1.1)
 
 include(CTest)
+set_property(GLOBAL PROPERTY CTEST_TARGETS_ADDED 1)
 enable_testing()
 
 add_executable(Coolgame main.cpp                    
