@@ -48,7 +48,7 @@ void Application::OnEvent(Event &e)
 void Application::Run()
 {
     glfwSwapInterval(1);
-    
+
     while (m_Running)
     {
         glClear(GL_COLOR_BUFFER_BIT);

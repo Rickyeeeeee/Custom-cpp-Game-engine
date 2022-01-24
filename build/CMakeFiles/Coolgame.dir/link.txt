@@ -1,3 +1,3 @@
-C:\Users\ricky\as\CMake\bin\cmake.exe -E rm -f CMakeFiles\Coolgame.dir/objects.a
-C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\ar.exe qc CMakeFiles\Coolgame.dir/objects.a @CMakeFiles\Coolgame.dir\objects1.rsp
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Coolgame.dir/objects.a
+C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\ar.exe cr CMakeFiles\Coolgame.dir/objects.a @CMakeFiles\Coolgame.dir\objects1.rsp
 C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe -g -Wl,--whole-archive CMakeFiles\Coolgame.dir/objects.a -Wl,--no-whole-archive -o Coolgame.exe -Wl,--out-implib,libCoolgame.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Coolgame.dir\linklibs.rsp
