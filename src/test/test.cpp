@@ -11,12 +11,15 @@ public:
     int num;
 };
 
+class bool_struct
+{
+public:
+    char flag1;
+};
+
 int main()
 {
-    base *b;
-    b->print(1);
-
-
+    std::cout << sizeof(bool_struct) << std::endl;
     return 0;
 }
 

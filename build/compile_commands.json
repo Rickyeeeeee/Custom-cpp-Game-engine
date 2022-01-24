@@ -88,5 +88,45 @@
   "directory": "C:/Users/ricky/Dev/coolgame/build",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\player\\Ship.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\player\\Ship.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/player/Ship.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\imgui\\imgui_draw.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\imgui\\imgui_draw.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/imgui/imgui_draw.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\imgui\\imgui_impl_glfw.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\imgui\\imgui_impl_glfw.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/imgui/imgui_impl_glfw.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\imgui\\imgui_impl_opengl3.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\imgui\\imgui_impl_opengl3.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/imgui/imgui_impl_opengl3.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\imgui\\imgui_tables.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\imgui\\imgui_tables.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/imgui/imgui_tables.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\imgui\\imgui_widgets.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\imgui\\imgui_widgets.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/imgui/imgui_widgets.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\imgui\\imgui_demo.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\imgui\\imgui_demo.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/imgui/imgui_demo.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\imgui\\imgui.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\imgui\\imgui.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/imgui/imgui.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\Coolgame.dir\\src\\layer\\imguiLayer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\layer\\imguiLayer.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/layer/imguiLayer.cpp"
 }
 ]

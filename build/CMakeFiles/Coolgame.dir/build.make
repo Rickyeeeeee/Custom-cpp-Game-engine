@@ -320,6 +320,118 @@ CMakeFiles/Coolgame.dir/src/player/Ship.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/player/Ship.cpp.s"
 	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\player\Ship.cpp -o CMakeFiles\Coolgame.dir\src\player\Ship.cpp.s
 
+CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.obj: ../src/imgui/imgui_draw.cpp
+CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.obj -MF CMakeFiles\Coolgame.dir\src\imgui\imgui_draw.cpp.obj.d -o CMakeFiles\Coolgame.dir\src\imgui\imgui_draw.cpp.obj -c C:\Users\ricky\Dev\coolgame\src\imgui\imgui_draw.cpp
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\src\imgui\imgui_draw.cpp > CMakeFiles\Coolgame.dir\src\imgui\imgui_draw.cpp.i
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\imgui\imgui_draw.cpp -o CMakeFiles\Coolgame.dir\src\imgui\imgui_draw.cpp.s
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.obj: ../src/imgui/imgui_impl_glfw.cpp
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.obj -MF CMakeFiles\Coolgame.dir\src\imgui\imgui_impl_glfw.cpp.obj.d -o CMakeFiles\Coolgame.dir\src\imgui\imgui_impl_glfw.cpp.obj -c C:\Users\ricky\Dev\coolgame\src\imgui\imgui_impl_glfw.cpp
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\src\imgui\imgui_impl_glfw.cpp > CMakeFiles\Coolgame.dir\src\imgui\imgui_impl_glfw.cpp.i
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\imgui\imgui_impl_glfw.cpp -o CMakeFiles\Coolgame.dir\src\imgui\imgui_impl_glfw.cpp.s
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.obj: ../src/imgui/imgui_impl_opengl3.cpp
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.obj -MF CMakeFiles\Coolgame.dir\src\imgui\imgui_impl_opengl3.cpp.obj.d -o CMakeFiles\Coolgame.dir\src\imgui\imgui_impl_opengl3.cpp.obj -c C:\Users\ricky\Dev\coolgame\src\imgui\imgui_impl_opengl3.cpp
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\src\imgui\imgui_impl_opengl3.cpp > CMakeFiles\Coolgame.dir\src\imgui\imgui_impl_opengl3.cpp.i
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\imgui\imgui_impl_opengl3.cpp -o CMakeFiles\Coolgame.dir\src\imgui\imgui_impl_opengl3.cpp.s
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.obj: ../src/imgui/imgui_tables.cpp
+CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.obj -MF CMakeFiles\Coolgame.dir\src\imgui\imgui_tables.cpp.obj.d -o CMakeFiles\Coolgame.dir\src\imgui\imgui_tables.cpp.obj -c C:\Users\ricky\Dev\coolgame\src\imgui\imgui_tables.cpp
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\src\imgui\imgui_tables.cpp > CMakeFiles\Coolgame.dir\src\imgui\imgui_tables.cpp.i
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\imgui\imgui_tables.cpp -o CMakeFiles\Coolgame.dir\src\imgui\imgui_tables.cpp.s
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.obj: ../src/imgui/imgui_widgets.cpp
+CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.obj -MF CMakeFiles\Coolgame.dir\src\imgui\imgui_widgets.cpp.obj.d -o CMakeFiles\Coolgame.dir\src\imgui\imgui_widgets.cpp.obj -c C:\Users\ricky\Dev\coolgame\src\imgui\imgui_widgets.cpp
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\src\imgui\imgui_widgets.cpp > CMakeFiles\Coolgame.dir\src\imgui\imgui_widgets.cpp.i
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\imgui\imgui_widgets.cpp -o CMakeFiles\Coolgame.dir\src\imgui\imgui_widgets.cpp.s
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.obj: ../src/imgui/imgui_demo.cpp
+CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.obj -MF CMakeFiles\Coolgame.dir\src\imgui\imgui_demo.cpp.obj.d -o CMakeFiles\Coolgame.dir\src\imgui\imgui_demo.cpp.obj -c C:\Users\ricky\Dev\coolgame\src\imgui\imgui_demo.cpp
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\src\imgui\imgui_demo.cpp > CMakeFiles\Coolgame.dir\src\imgui\imgui_demo.cpp.i
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\imgui\imgui_demo.cpp -o CMakeFiles\Coolgame.dir\src\imgui\imgui_demo.cpp.s
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.obj: ../src/imgui/imgui.cpp
+CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.obj -MF CMakeFiles\Coolgame.dir\src\imgui\imgui.cpp.obj.d -o CMakeFiles\Coolgame.dir\src\imgui\imgui.cpp.obj -c C:\Users\ricky\Dev\coolgame\src\imgui\imgui.cpp
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\src\imgui\imgui.cpp > CMakeFiles\Coolgame.dir\src\imgui\imgui.cpp.i
+
+CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\imgui\imgui.cpp -o CMakeFiles\Coolgame.dir\src\imgui\imgui.cpp.s
+
+CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj: ../src/layer/imguiLayer.cpp
+CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj -MF CMakeFiles\Coolgame.dir\src\layer\imguiLayer.cpp.obj.d -o CMakeFiles\Coolgame.dir\src\layer\imguiLayer.cpp.obj -c C:\Users\ricky\Dev\coolgame\src\layer\imguiLayer.cpp
+
+CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\src\layer\imguiLayer.cpp > CMakeFiles\Coolgame.dir\src\layer\imguiLayer.cpp.i
+
+CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\src\layer\imguiLayer.cpp -o CMakeFiles\Coolgame.dir\src\layer\imguiLayer.cpp.s
+
 # Object files for target Coolgame
 Coolgame_OBJECTS = \
 "CMakeFiles/Coolgame.dir/main.cpp.obj" \
@@ -339,7 +451,15 @@ Coolgame_OBJECTS = \
 "CMakeFiles/Coolgame.dir/src/renderer/Renderer.cpp.obj" \
 "CMakeFiles/Coolgame.dir/src/model/Model.cpp.obj" \
 "CMakeFiles/Coolgame.dir/src/mesh/Mesh.cpp.obj" \
-"CMakeFiles/Coolgame.dir/src/player/Ship.cpp.obj"
+"CMakeFiles/Coolgame.dir/src/player/Ship.cpp.obj" \
+"CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.obj" \
+"CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.obj" \
+"CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.obj" \
+"CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.obj" \
+"CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.obj" \
+"CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.obj" \
+"CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.obj" \
+"CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj"
 
 # External object files for target Coolgame
 Coolgame_EXTERNAL_OBJECTS =
@@ -362,11 +482,19 @@ Coolgame.exe: CMakeFiles/Coolgame.dir/src/renderer/Renderer.cpp.obj
 Coolgame.exe: CMakeFiles/Coolgame.dir/src/model/Model.cpp.obj
 Coolgame.exe: CMakeFiles/Coolgame.dir/src/mesh/Mesh.cpp.obj
 Coolgame.exe: CMakeFiles/Coolgame.dir/src/player/Ship.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj
 Coolgame.exe: CMakeFiles/Coolgame.dir/build.make
 Coolgame.exe: CMakeFiles/Coolgame.dir/linklibs.rsp
 Coolgame.exe: CMakeFiles/Coolgame.dir/objects1.rsp
 Coolgame.exe: CMakeFiles/Coolgame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable Coolgame.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Linking CXX executable Coolgame.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Coolgame.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

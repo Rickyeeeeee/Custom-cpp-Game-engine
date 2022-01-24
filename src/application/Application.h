@@ -19,6 +19,11 @@ public:
     void OnEvent(Event &e);
     void Run();
 
+    void PushLayer(Layer* layer);
+    void PushOverLayer(Layer* layer);
+    
+    inline static Application& Get() { return *s_Instance; }
+    inline Window& GetWindow() { return *m_Window; }
 private:
     // functions
     bool OnWindowClose(WindowCloseEvent& e);
@@ -28,4 +33,6 @@ private:
     LayerStack m_layerStack;
     // variables
     bool m_Running = true;
+private:
+    static Application* s_Instance;
 };

@@ -47,3 +47,4 @@ private:
     // camera
     Camera      m_Camera;
 };
+

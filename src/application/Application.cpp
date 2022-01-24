@@ -1,12 +1,20 @@
 #include "Application.h"
+#include "../layer/imguiLayer.h"
+
 #include <iostream>
+
+Application* Application::s_Instance = nullptr;
+
 Application::Application()
 {
+    s_Instance = this;
+
     m_Window = std::unique_ptr<Window>(Window::create());
     m_Window->SetEventCallback(
         std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
-    m_layerStack.PushLayer(new Game_Layer(m_Window->GetWidth(), m_Window->GetHeight()));
+    // PushLayer(new Game_Layer(m_Window->GetWidth(), m_Window->GetHeight()));
+    PushLayer(new ImGuiLayer());
 }
 
 Application::~Application()
@@ -59,4 +67,16 @@ void Application::Run()
 
         m_Window->OnUpdate();
     }
+}
+
+void Application::PushLayer(Layer* layer) 
+{
+    m_layerStack.PushLayer(layer);
+    layer->OnAttach();
+}
+
+void Application::PushOverLayer(Layer* layer) 
+{
+    m_layerStack.PushOverLayer(layer);
+    layer->OnAttach();
 }

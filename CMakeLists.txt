@@ -23,6 +23,14 @@ add_executable(Coolgame main.cpp
                         src/model/Model.cpp
                         src/mesh/Mesh.cpp
                         src/player/Ship.cpp
+                        src/imgui/imgui_draw.cpp
+                        src/imgui/imgui_impl_glfw.cpp
+                        src/imgui/imgui_impl_opengl3.cpp
+                        src/imgui/imgui_tables.cpp
+                        src/imgui/imgui_widgets.cpp
+                        src/imgui/imgui_demo.cpp
+                        src/imgui/imgui.cpp
+                        src/layer/imguiLayer.cpp
                     )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

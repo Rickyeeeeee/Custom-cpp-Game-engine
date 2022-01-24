@@ -714,6 +714,174 @@ src/event/types/window/WindowEvent.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/event/types/window/WindowEvent.cpp.s
 .PHONY : src/event/types/window/WindowEvent.cpp.s
 
+src/imgui/imgui.obj: src/imgui/imgui.cpp.obj
+.PHONY : src/imgui/imgui.obj
+
+# target to build an object file
+src/imgui/imgui.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.obj
+.PHONY : src/imgui/imgui.cpp.obj
+
+src/imgui/imgui.i: src/imgui/imgui.cpp.i
+.PHONY : src/imgui/imgui.i
+
+# target to preprocess a source file
+src/imgui/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.i
+.PHONY : src/imgui/imgui.cpp.i
+
+src/imgui/imgui.s: src/imgui/imgui.cpp.s
+.PHONY : src/imgui/imgui.s
+
+# target to generate assembly for a file
+src/imgui/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui.cpp.s
+.PHONY : src/imgui/imgui.cpp.s
+
+src/imgui/imgui_demo.obj: src/imgui/imgui_demo.cpp.obj
+.PHONY : src/imgui/imgui_demo.obj
+
+# target to build an object file
+src/imgui/imgui_demo.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.obj
+.PHONY : src/imgui/imgui_demo.cpp.obj
+
+src/imgui/imgui_demo.i: src/imgui/imgui_demo.cpp.i
+.PHONY : src/imgui/imgui_demo.i
+
+# target to preprocess a source file
+src/imgui/imgui_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.i
+.PHONY : src/imgui/imgui_demo.cpp.i
+
+src/imgui/imgui_demo.s: src/imgui/imgui_demo.cpp.s
+.PHONY : src/imgui/imgui_demo.s
+
+# target to generate assembly for a file
+src/imgui/imgui_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_demo.cpp.s
+.PHONY : src/imgui/imgui_demo.cpp.s
+
+src/imgui/imgui_draw.obj: src/imgui/imgui_draw.cpp.obj
+.PHONY : src/imgui/imgui_draw.obj
+
+# target to build an object file
+src/imgui/imgui_draw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.obj
+.PHONY : src/imgui/imgui_draw.cpp.obj
+
+src/imgui/imgui_draw.i: src/imgui/imgui_draw.cpp.i
+.PHONY : src/imgui/imgui_draw.i
+
+# target to preprocess a source file
+src/imgui/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.i
+.PHONY : src/imgui/imgui_draw.cpp.i
+
+src/imgui/imgui_draw.s: src/imgui/imgui_draw.cpp.s
+.PHONY : src/imgui/imgui_draw.s
+
+# target to generate assembly for a file
+src/imgui/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_draw.cpp.s
+.PHONY : src/imgui/imgui_draw.cpp.s
+
+src/imgui/imgui_impl_glfw.obj: src/imgui/imgui_impl_glfw.cpp.obj
+.PHONY : src/imgui/imgui_impl_glfw.obj
+
+# target to build an object file
+src/imgui/imgui_impl_glfw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.obj
+.PHONY : src/imgui/imgui_impl_glfw.cpp.obj
+
+src/imgui/imgui_impl_glfw.i: src/imgui/imgui_impl_glfw.cpp.i
+.PHONY : src/imgui/imgui_impl_glfw.i
+
+# target to preprocess a source file
+src/imgui/imgui_impl_glfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.i
+.PHONY : src/imgui/imgui_impl_glfw.cpp.i
+
+src/imgui/imgui_impl_glfw.s: src/imgui/imgui_impl_glfw.cpp.s
+.PHONY : src/imgui/imgui_impl_glfw.s
+
+# target to generate assembly for a file
+src/imgui/imgui_impl_glfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_glfw.cpp.s
+.PHONY : src/imgui/imgui_impl_glfw.cpp.s
+
+src/imgui/imgui_impl_opengl3.obj: src/imgui/imgui_impl_opengl3.cpp.obj
+.PHONY : src/imgui/imgui_impl_opengl3.obj
+
+# target to build an object file
+src/imgui/imgui_impl_opengl3.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.obj
+.PHONY : src/imgui/imgui_impl_opengl3.cpp.obj
+
+src/imgui/imgui_impl_opengl3.i: src/imgui/imgui_impl_opengl3.cpp.i
+.PHONY : src/imgui/imgui_impl_opengl3.i
+
+# target to preprocess a source file
+src/imgui/imgui_impl_opengl3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.i
+.PHONY : src/imgui/imgui_impl_opengl3.cpp.i
+
+src/imgui/imgui_impl_opengl3.s: src/imgui/imgui_impl_opengl3.cpp.s
+.PHONY : src/imgui/imgui_impl_opengl3.s
+
+# target to generate assembly for a file
+src/imgui/imgui_impl_opengl3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_impl_opengl3.cpp.s
+.PHONY : src/imgui/imgui_impl_opengl3.cpp.s
+
+src/imgui/imgui_tables.obj: src/imgui/imgui_tables.cpp.obj
+.PHONY : src/imgui/imgui_tables.obj
+
+# target to build an object file
+src/imgui/imgui_tables.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.obj
+.PHONY : src/imgui/imgui_tables.cpp.obj
+
+src/imgui/imgui_tables.i: src/imgui/imgui_tables.cpp.i
+.PHONY : src/imgui/imgui_tables.i
+
+# target to preprocess a source file
+src/imgui/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.i
+.PHONY : src/imgui/imgui_tables.cpp.i
+
+src/imgui/imgui_tables.s: src/imgui/imgui_tables.cpp.s
+.PHONY : src/imgui/imgui_tables.s
+
+# target to generate assembly for a file
+src/imgui/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_tables.cpp.s
+.PHONY : src/imgui/imgui_tables.cpp.s
+
+src/imgui/imgui_widgets.obj: src/imgui/imgui_widgets.cpp.obj
+.PHONY : src/imgui/imgui_widgets.obj
+
+# target to build an object file
+src/imgui/imgui_widgets.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.obj
+.PHONY : src/imgui/imgui_widgets.cpp.obj
+
+src/imgui/imgui_widgets.i: src/imgui/imgui_widgets.cpp.i
+.PHONY : src/imgui/imgui_widgets.i
+
+# target to preprocess a source file
+src/imgui/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.i
+.PHONY : src/imgui/imgui_widgets.cpp.i
+
+src/imgui/imgui_widgets.s: src/imgui/imgui_widgets.cpp.s
+.PHONY : src/imgui/imgui_widgets.s
+
+# target to generate assembly for a file
+src/imgui/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/imgui/imgui_widgets.cpp.s
+.PHONY : src/imgui/imgui_widgets.cpp.s
+
 src/layer/Layer.obj: src/layer/Layer.cpp.obj
 .PHONY : src/layer/Layer.obj
 
@@ -761,6 +929,30 @@ src/layer/LayerStack.s: src/layer/LayerStack.cpp.s
 src/layer/LayerStack.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/layer/LayerStack.cpp.s
 .PHONY : src/layer/LayerStack.cpp.s
+
+src/layer/imguiLayer.obj: src/layer/imguiLayer.cpp.obj
+.PHONY : src/layer/imguiLayer.obj
+
+# target to build an object file
+src/layer/imguiLayer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj
+.PHONY : src/layer/imguiLayer.cpp.obj
+
+src/layer/imguiLayer.i: src/layer/imguiLayer.cpp.i
+.PHONY : src/layer/imguiLayer.i
+
+# target to preprocess a source file
+src/layer/imguiLayer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.i
+.PHONY : src/layer/imguiLayer.cpp.i
+
+src/layer/imguiLayer.s: src/layer/imguiLayer.cpp.s
+.PHONY : src/layer/imguiLayer.s
+
+# target to generate assembly for a file
+src/layer/imguiLayer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.s
+.PHONY : src/layer/imguiLayer.cpp.s
 
 src/map/Map.obj: src/map/Map.cpp.obj
 .PHONY : src/map/Map.obj
@@ -1018,12 +1210,36 @@ help:
 	@echo ... src/event/types/window/WindowEvent.obj
 	@echo ... src/event/types/window/WindowEvent.i
 	@echo ... src/event/types/window/WindowEvent.s
+	@echo ... src/imgui/imgui.obj
+	@echo ... src/imgui/imgui.i
+	@echo ... src/imgui/imgui.s
+	@echo ... src/imgui/imgui_demo.obj
+	@echo ... src/imgui/imgui_demo.i
+	@echo ... src/imgui/imgui_demo.s
+	@echo ... src/imgui/imgui_draw.obj
+	@echo ... src/imgui/imgui_draw.i
+	@echo ... src/imgui/imgui_draw.s
+	@echo ... src/imgui/imgui_impl_glfw.obj
+	@echo ... src/imgui/imgui_impl_glfw.i
+	@echo ... src/imgui/imgui_impl_glfw.s
+	@echo ... src/imgui/imgui_impl_opengl3.obj
+	@echo ... src/imgui/imgui_impl_opengl3.i
+	@echo ... src/imgui/imgui_impl_opengl3.s
+	@echo ... src/imgui/imgui_tables.obj
+	@echo ... src/imgui/imgui_tables.i
+	@echo ... src/imgui/imgui_tables.s
+	@echo ... src/imgui/imgui_widgets.obj
+	@echo ... src/imgui/imgui_widgets.i
+	@echo ... src/imgui/imgui_widgets.s
 	@echo ... src/layer/Layer.obj
 	@echo ... src/layer/Layer.i
 	@echo ... src/layer/Layer.s
 	@echo ... src/layer/LayerStack.obj
 	@echo ... src/layer/LayerStack.i
 	@echo ... src/layer/LayerStack.s
+	@echo ... src/layer/imguiLayer.obj
+	@echo ... src/layer/imguiLayer.i
+	@echo ... src/layer/imguiLayer.s
 	@echo ... src/map/Map.obj
 	@echo ... src/map/Map.i
 	@echo ... src/map/Map.s
