@@ -5,6 +5,8 @@
 
 #include "../application/Application.h"
 
+#include "../event/EventDispatcher.h"
+
 #include <GLFW/glfw3.h>
 
 ImGuiLayer::ImGuiLayer() 
@@ -74,6 +76,13 @@ void ImGuiLayer::OnUpdate()
     static bool show = true;
     ImGui::ShowDemoWindow(&show);
 
+    ImGui::Begin("start");
+    
+    ImGui::SliderFloat("Speed", &this->speed, 0.0f, 100.f, "%3.1f m/s");
+    ImGui::Value("screen width", app.GetWindow().GetWidth());
+    ImGui::Value("screen height", app.GetWindow().GetHeight());
+    ImGui::End();
+
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
@@ -81,5 +90,76 @@ void ImGuiLayer::OnUpdate()
 
 void ImGuiLayer::OnEvent(Event& event) 
 {
+#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+    EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<MousePressedEvent>(BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
+    dispatcher.Dispatch<MouseReleasedEvent>(BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
+    dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN(ImGuiLayer::OnMouseMovedEvent));
+    dispatcher.Dispatch<MouseScrollEvent>(BIND_EVENT_FN(ImGuiLayer::OnMouseScrollEvent));
+    dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(ImGuiLayer::OnKeyPressedEvent));
+    dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
+    dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(ImGuiLayer::OnWindowResizeEvent));
+}
+
+bool ImGuiLayer::OnMouseButtonPressedEvent(MousePressedEvent& e) 
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.MouseDown[e.getButton()] = true;
+
+    return false;
+}
+
+bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseReleasedEvent& e) 
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.MouseDown[e.getButton()] = false;
+
+    return false;
+}
+
+bool ImGuiLayer::OnMouseMovedEvent(MouseMovedEvent& e) 
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.MousePos = ImVec2(e.getX(), e.getY());
+
+    return false;
+}
+
+bool ImGuiLayer::OnMouseScrollEvent(MouseScrollEvent& e) 
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.MouseWheel  += e.GetxOffset();
+    io.MouseWheelH += e.GetyOffset();
+
+    return false;
+}
+
+bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e) 
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.KeysDown[e.GetKeyCode()] = true;
+
+    io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+    io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+    io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+    io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+    
+    return false;
+}
+
+bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e) 
+{
+    
+    return false;
+}
+
+bool ImGuiLayer::OnWindowResizeEvent(WindowResizeEvent& e) 
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.DisplaySize = ImVec2(e.getWidth(), e.getHeight());
+    io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+    glViewport(0, 0, e.getWidth(), e.getHeight());
+
+    return false;
     
 }

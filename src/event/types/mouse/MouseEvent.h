@@ -10,7 +10,7 @@ protected:
     MouseButtonEvent(int button, EventType type);
 
 public:
-    constexpr int getButton() const;
+    inline int getButton() { return this->button; }
 };
 // ----------------------------------------------------
 
@@ -37,8 +37,8 @@ public:
 class MouseMovedEvent : public Event
 {
 public:
-    inline int getX();
-    inline int getY();
+    inline int getX() { return this->x; }
+    inline int getY() { return this->y; }
     MouseMovedEvent(int, int);
 
     static EventType getStaticType();
@@ -52,8 +52,8 @@ class MouseScrollEvent : public Event
 {
 public:
     MouseScrollEvent(const float xOffset, const float yOffset);
-    inline float GetxOffset();
-    inline float GetyOffset();
+    inline float GetxOffset() { return this->m_xOffset; }
+    inline float GetyOffset() { return this->m_yOffset; }
 
     static EventType getStaticType();
 private:

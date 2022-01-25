@@ -11,8 +11,8 @@ protected:
 public:
     WindowResizeEvent(int width, int height);
 
-    inline int getWidth();
-    inline int getHeight();
+    inline int getWidth()  { return this->width; }
+    inline int getHeight() { return this->height; }
     static EventType getStaticType();
 };
 

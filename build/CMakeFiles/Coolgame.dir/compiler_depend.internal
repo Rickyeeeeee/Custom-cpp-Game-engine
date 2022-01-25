@@ -3716,6 +3716,7 @@ CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj
  C:/Users/ricky/Dev/coolgame/src/camera/Camera.h
  C:/Users/ricky/Dev/coolgame/src/map/Map.h
  C:/Users/ricky/Dev/coolgame/src/player/Ship.h
+ C:/Users/ricky/Dev/coolgame/src/event/types/mouse/MouseEvent.h
  C:/Users/ricky/Dev/coolgame/src/imgui/imgui_impl_opengl3.h
  C:/Users/ricky/Dev/coolgame/src/application/Application.h
  C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/memory
@@ -3732,7 +3733,6 @@ CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj
  C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/atomic_lockfree_defines.h
  C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward/auto_ptr.h
  C:/Users/ricky/Dev/coolgame/src/Window/Window.h
- C:/Users/ricky/Dev/coolgame/src/event/types/mouse/MouseEvent.h
  C:/Users/ricky/Dev/coolgame/src/layer/LayerStack.h
  C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm
  C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h

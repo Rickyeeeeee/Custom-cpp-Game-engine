@@ -13,8 +13,8 @@ Application::Application()
     m_Window->SetEventCallback(
         std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
-    // PushLayer(new Game_Layer(m_Window->GetWidth(), m_Window->GetHeight()));
-    PushLayer(new ImGuiLayer());
+    PushLayer(new Game_Layer(m_Window->GetWidth(), m_Window->GetHeight()));
+    PushOverLayer(new ImGuiLayer());
 }
 
 Application::~Application()
@@ -36,7 +36,6 @@ bool Application::OnKeyPressed(KeyPressedEvent& e)
     }
     return false;
 }
-
 void Application::OnEvent(Event &e)
 {
     EventDispatcher dispatcher(e);

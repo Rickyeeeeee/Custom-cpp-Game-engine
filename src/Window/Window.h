@@ -40,14 +40,8 @@ public:
     static Window *create(const WindowProps &props = WindowProps());
     void OnUpdate();
 
-    inline unsigned int GetWidth() const
-    {
-        return m_Data.Height;
-    }
-    inline unsigned int GetHeight() const
-    {
-        return m_Data.Width;
-    }
+    inline unsigned int GetWidth()  { return m_Data.Width; }
+    inline unsigned int GetHeight() { return m_Data.Height; }
     void SetEventCallback(const EventCallbackFn &fn);
 
 private:

@@ -6,16 +6,6 @@ WindowResizeEvent::WindowResizeEvent(int width, int height)
     
 }
 
-inline int WindowResizeEvent::getWidth() 
-{
-    return this->width;    
-}
-
-inline int WindowResizeEvent::getHeight() 
-{
-    return this->height;
-}
-
 EventType WindowResizeEvent::getStaticType() 
 {
     return WINDOW_RESIZE;

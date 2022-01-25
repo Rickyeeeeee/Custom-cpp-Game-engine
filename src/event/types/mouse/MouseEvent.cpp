@@ -6,10 +6,6 @@ MouseButtonEvent::MouseButtonEvent(int button, EventType type)
 {
 }
 
-constexpr int MouseButtonEvent::getButton() const
-{
-    return this->button;
-}
 // -------------------------------------------
 
 // Mouse pressed event
@@ -37,16 +33,7 @@ EventType MouseReleasedEvent::getStaticType()
 }
 // -------------------------------------------
 
-// Mouse moved event
-inline int MouseMovedEvent::getX()
-{
-    return this->x;
-}
 
-inline int MouseMovedEvent::getY()
-{
-    return this->y;
-}
 
 MouseMovedEvent::MouseMovedEvent(int x, int y)
     : Event(MOUSE_MOVED), x(x), y(y)
@@ -64,16 +51,6 @@ MouseScrollEvent::MouseScrollEvent(const float xOffset, const float yOffset)
     : Event(MOUSE_SCROLL), m_xOffset(xOffset), m_yOffset(yOffset)
 {
     
-}
-
-inline float MouseScrollEvent::GetxOffset() 
-{
-    return this->m_xOffset;   
-}
-
-inline float MouseScrollEvent::GetyOffset() 
-{
-    return this->m_yOffset;
 }
 
 EventType MouseScrollEvent::getStaticType()

@@ -3698,6 +3698,7 @@ CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj: ../src/layer/imguiLayer.cp
   ../src/camera/Camera.h \
   ../src/map/Map.h \
   ../src/player/Ship.h \
+  ../src/event/types/mouse/MouseEvent.h \
   ../src/imgui/imgui_impl_opengl3.h \
   ../src/application/Application.h \
   C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/memory \
@@ -3714,7 +3715,6 @@ CMakeFiles/Coolgame.dir/src/layer/imguiLayer.cpp.obj: ../src/layer/imguiLayer.cp
   C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/atomic_lockfree_defines.h \
   C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward/auto_ptr.h \
   ../src/Window/Window.h \
-  ../src/event/types/mouse/MouseEvent.h \
   ../src/layer/LayerStack.h \
   C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/algorithm \
   C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/stl_algo.h \
