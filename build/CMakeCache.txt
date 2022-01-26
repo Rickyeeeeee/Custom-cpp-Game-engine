@@ -291,6 +291,18 @@ CTEST_SUBMIT_RETRY_COUNT:STRING=3
 CTEST_SUBMIT_RETRY_DELAY:STRING=5
 
 //Value Computed by CMake
+Coo_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
+
+//Value Computed by CMake
+Coo_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
+
+//Value Computed by CMake
+Coolga_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
+
+//Value Computed by CMake
+Coolga_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
+
+//Value Computed by CMake
 Coolgame_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
 
 //Value Computed by CMake
@@ -314,8 +326,26 @@ MEMORYCHECK_COMMAND:FILEPATH=MEMORYCHECK_COMMAND-NOTFOUND
 //File that contains suppressions for the memory checker
 MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 
+//Value Computed by CMake
+Project_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
+
+//Value Computed by CMake
+Project_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
+
 //Name of the computer/site where compile is being run
 SITE:STRING=LAPTOP-D3770PCE
+
+//Value Computed by CMake
+c_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
+
+//Value Computed by CMake
+c_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
+
+//Dependencies for the target
+engine_LIB_DEPENDS:STATIC=general;glad;general;glfw3;
+
+//Dependencies for the target
+src_LIB_DEPENDS:STATIC=general;glad;general;glfw3;
 
 
 ########################
@@ -340,8 +370,6 @@ CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 CMAKE_COMMAND:INTERNAL=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe
 //Path to cpack program executable.
 CMAKE_CPACK_COMMAND:INTERNAL=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cpack.exe
-//ADVANCED property for variable: CMAKE_CTEST_COMMAND
-CMAKE_CTEST_COMMAND-ADVANCED:INTERNAL=1
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe
 //ADVANCED property for variable: CMAKE_CXX_COMPILER
@@ -426,7 +454,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

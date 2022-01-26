@@ -11,20 +11,9 @@ class ImGuiLayer : public Layer
 public:
     ImGuiLayer();
     ~ImGuiLayer();
-    void OnAttach();
-    void OnDetach();
-    void OnUpdate();
-    void OnEvent(Event& event);
-
-private:
-    bool OnMouseButtonPressedEvent(MousePressedEvent& e);
-    bool OnMouseButtonReleasedEvent(MouseReleasedEvent& e);
-    bool OnMouseMovedEvent(MouseMovedEvent& e);
-    bool OnMouseScrollEvent(MouseScrollEvent& e);
-    bool OnKeyPressedEvent(KeyPressedEvent& e);
-    bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-    bool OnWindowResizeEvent(WindowResizeEvent& e);
-
+    virtual void OnAttach() override;
+    virtual void OnDetach() override;
+    virtual void OnUpdate() override;
 private:
     float m_Time = 0.0f;
     float speed = 0.0f;
