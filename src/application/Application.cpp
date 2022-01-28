@@ -1,8 +1,6 @@
 #include "Application.h"
 #include "../layer/imguiLayer.h"
-
 #include <iostream>
-
 Application* Application::s_Instance = nullptr;
 
 Application::Application()
@@ -14,7 +12,6 @@ Application::Application()
         std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
     PushLayer(new Game_Layer(m_Window->GetWidth(), m_Window->GetHeight()));
-    PushOverLayer(new ImGuiLayer());
 }
 
 Application::~Application()

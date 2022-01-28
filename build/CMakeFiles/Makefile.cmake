@@ -16,8 +16,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakeRCInformation.cmake"
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakeSystemSpecificInformation.cmake"
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CMakeSystemSpecificInitialize.cmake"
-  "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CPack.cmake"
-  "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/CPackComponent.cmake"
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Compiler/GNU-C.cmake"
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Compiler/GNU-CXX.cmake"
@@ -30,12 +28,12 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Platform/Windows-windres.cmake"
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Platform/Windows.cmake"
   "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Modules/Platform/WindowsPaths.cmake"
-  "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20/Templates/CPackConfig.cmake.in"
   "../CMakeLists.txt"
   "CMakeFiles/3.20.21032501-MSVC_2/CMakeCCompiler.cmake"
   "CMakeFiles/3.20.21032501-MSVC_2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.20.21032501-MSVC_2/CMakeRCCompiler.cmake"
   "CMakeFiles/3.20.21032501-MSVC_2/CMakeSystem.cmake"
+  "../external/imgui/CMakeLists.txt"
   "../src/CMakeLists.txt"
   )
 
@@ -48,13 +46,13 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "CPackConfig.cmake"
-  "CPackSourceConfig.cmake"
+  "external/imgui/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Coolgame.dir/DependInfo.cmake"
+  "external/imgui/CMakeFiles/imgui.dir/DependInfo.cmake"
   "src/CMakeFiles/engine.dir/DependInfo.cmake"
   )

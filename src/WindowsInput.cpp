@@ -1,6 +1,5 @@
 #include "WindowsInput.h"
 #include "application/Application.h"
-
 Input* Input::s_Instance = new WindowsInput();
 
 bool WindowsInput::IsKeyPressedimpl(int keycode) 

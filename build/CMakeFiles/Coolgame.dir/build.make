@@ -68,31 +68,32 @@ include CMakeFiles/Coolgame.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Coolgame.dir/flags.make
 
-CMakeFiles/Coolgame.dir/sandbox.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
-CMakeFiles/Coolgame.dir/sandbox.cpp.obj: CMakeFiles/Coolgame.dir/includes_CXX.rsp
-CMakeFiles/Coolgame.dir/sandbox.cpp.obj: ../sandbox.cpp
-CMakeFiles/Coolgame.dir/sandbox.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Coolgame.dir/sandbox.cpp.obj"
-	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/sandbox.cpp.obj -MF CMakeFiles\Coolgame.dir\sandbox.cpp.obj.d -o CMakeFiles\Coolgame.dir\sandbox.cpp.obj -c C:\Users\ricky\Dev\coolgame\sandbox.cpp
+CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj: CMakeFiles/Coolgame.dir/flags.make
+CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj: CMakeFiles/Coolgame.dir/includes_CXX.rsp
+CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj: ../sandbox/sandbox.cpp
+CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj: CMakeFiles/Coolgame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj -MF CMakeFiles\Coolgame.dir\sandbox\sandbox.cpp.obj.d -o CMakeFiles\Coolgame.dir\sandbox\sandbox.cpp.obj -c C:\Users\ricky\Dev\coolgame\sandbox\sandbox.cpp
 
-CMakeFiles/Coolgame.dir/sandbox.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/sandbox.cpp.i"
-	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\sandbox.cpp > CMakeFiles\Coolgame.dir\sandbox.cpp.i
+CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.i"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\ricky\Dev\coolgame\sandbox\sandbox.cpp > CMakeFiles\Coolgame.dir\sandbox\sandbox.cpp.i
 
-CMakeFiles/Coolgame.dir/sandbox.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/sandbox.cpp.s"
-	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\sandbox.cpp -o CMakeFiles\Coolgame.dir\sandbox.cpp.s
+CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.s"
+	C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\ricky\Dev\coolgame\sandbox\sandbox.cpp -o CMakeFiles\Coolgame.dir\sandbox\sandbox.cpp.s
 
 # Object files for target Coolgame
 Coolgame_OBJECTS = \
-"CMakeFiles/Coolgame.dir/sandbox.cpp.obj"
+"CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj"
 
 # External object files for target Coolgame
 Coolgame_EXTERNAL_OBJECTS =
 
-Coolgame.exe: CMakeFiles/Coolgame.dir/sandbox.cpp.obj
+Coolgame.exe: CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj
 Coolgame.exe: CMakeFiles/Coolgame.dir/build.make
 Coolgame.exe: src/libengine.a
+Coolgame.exe: external/imgui/libimgui.a
 Coolgame.exe: CMakeFiles/Coolgame.dir/linklibs.rsp
 Coolgame.exe: CMakeFiles/Coolgame.dir/objects1.rsp
 Coolgame.exe: CMakeFiles/Coolgame.dir/link.txt

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "input.h"
-
 class WindowsInput : public Input
 {
 protected:

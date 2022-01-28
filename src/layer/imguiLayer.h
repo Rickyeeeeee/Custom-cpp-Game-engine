@@ -1,6 +1,4 @@
 #pragma once
-
-#include "../imgui/imgui.h"
 #include "Layer.h"
 #include "../event/Event.h"
 #include "../event/types/mouse/MouseEvent.h"
@@ -13,7 +11,10 @@ public:
     ~ImGuiLayer();
     virtual void OnAttach() override;
     virtual void OnDetach() override;
-    virtual void OnUpdate() override;
+    virtual void OnImGuiRender() override;
+
+    void Begin();
+    void End();
 private:
     float m_Time = 0.0f;
     float speed = 0.0f;

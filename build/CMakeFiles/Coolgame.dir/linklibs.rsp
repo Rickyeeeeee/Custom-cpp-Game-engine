@@ -1,1 +1,1 @@
-  -LC:/Users/ricky/Dev/coolgame/src  src/libengine.a -lglad -lglfw3 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
+  -LC:/Users/ricky/Dev/coolgame/src  -LC:/Users/ricky/Dev/coolgame/external/imgui  src/libengine.a external/imgui/libimgui.a -lglad -lglfw3 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

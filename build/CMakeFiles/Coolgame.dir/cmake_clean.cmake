@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Coolgame.dir/sandbox.cpp.obj"
-  "CMakeFiles/Coolgame.dir/sandbox.cpp.obj.d"
+  "CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj"
+  "CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj.d"
   "Coolgame.exe"
   "Coolgame.exe.manifest"
   "Coolgame.pdb"

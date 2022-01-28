@@ -9,7 +9,6 @@
 #include "../Window/Window.h"
 #include "../layer/Layer.h"
 #include "../layer/LayerStack.h"
-
 class Application
 {
 public:

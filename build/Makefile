@@ -149,6 +149,19 @@ Coolgame/fast:
 .PHONY : Coolgame/fast
 
 #=============================================================================
+# Target rules for targets named imgui
+
+# Build rule for target.
+imgui: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 imgui
+.PHONY : imgui
+
+# fast build rule for target.
+imgui/fast:
+	$(MAKE) $(MAKESILENT) -f external\imgui\CMakeFiles\imgui.dir\build.make external/imgui/CMakeFiles/imgui.dir/build
+.PHONY : imgui/fast
+
+#=============================================================================
 # Target rules for targets named engine
 
 # Build rule for target.
@@ -161,29 +174,29 @@ engine/fast:
 	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\engine.dir\build.make src/CMakeFiles/engine.dir/build
 .PHONY : engine/fast
 
-sandbox.obj: sandbox.cpp.obj
-.PHONY : sandbox.obj
+sandbox/sandbox.obj: sandbox/sandbox.cpp.obj
+.PHONY : sandbox/sandbox.obj
 
 # target to build an object file
-sandbox.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox.cpp.obj
-.PHONY : sandbox.cpp.obj
+sandbox/sandbox.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj
+.PHONY : sandbox/sandbox.cpp.obj
 
-sandbox.i: sandbox.cpp.i
-.PHONY : sandbox.i
+sandbox/sandbox.i: sandbox/sandbox.cpp.i
+.PHONY : sandbox/sandbox.i
 
 # target to preprocess a source file
-sandbox.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox.cpp.i
-.PHONY : sandbox.cpp.i
+sandbox/sandbox.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.i
+.PHONY : sandbox/sandbox.cpp.i
 
-sandbox.s: sandbox.cpp.s
-.PHONY : sandbox.s
+sandbox/sandbox.s: sandbox/sandbox.cpp.s
+.PHONY : sandbox/sandbox.s
 
 # target to generate assembly for a file
-sandbox.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox.cpp.s
-.PHONY : sandbox.cpp.s
+sandbox/sandbox.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.s
+.PHONY : sandbox/sandbox.cpp.s
 
 # Help Target
 help:
@@ -197,9 +210,10 @@ help:
 	@echo ... rebuild_cache
 	@echo ... Coolgame
 	@echo ... engine
-	@echo ... sandbox.obj
-	@echo ... sandbox.i
-	@echo ... sandbox.s
+	@echo ... imgui
+	@echo ... sandbox/sandbox.obj
+	@echo ... sandbox/sandbox.i
+	@echo ... sandbox/sandbox.s
 .PHONY : help
 
 

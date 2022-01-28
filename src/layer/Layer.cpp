@@ -1,5 +1,4 @@
 #include "Layer.h"
-
 // layer virtual functions
 Layer::Layer() {}
 Layer::~Layer() {}
@@ -36,6 +35,10 @@ void Game_Layer::OnUpdate()
     // // render
     m_MapRenderer.render(m_Map.getModel(), m_Camera);
     m_Renderer.render(m_Ship.getModel(), m_Camera);
+}
+
+void Layer::OnImGuiRender() 
+{
 }
 
 void Game_Layer::OnEvent(Event &e)

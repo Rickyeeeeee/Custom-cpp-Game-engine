@@ -1,5 +1,4 @@
 #include "Event.h"
-
 EventType Event::getType()
 {
     return this->type;
