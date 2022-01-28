@@ -1,5 +1,5 @@
 #include "Window.h"
-
+#include "../OpenGl/OpenGLContext.h"
 Window::Window(const WindowProps &props)
 {
     Init(props);
@@ -23,7 +23,6 @@ void Window::Shutdown()
 void Window::Init(const WindowProps &props)
 {
     m_Data = props;
-
     if (!s_GLFWInitialized)
     {
         int success = glfwInit();
@@ -46,10 +45,9 @@ void Window::Init(const WindowProps &props)
                                 nullptr,
                                 nullptr);
 
-    glfwMakeContextCurrent(m_Window);
+    m_Context = new OpenGLContext(m_Window);
+    m_Context->Init();
     glfwSetWindowUserPointer(m_Window, &m_Data);
-
-    gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
     glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height)
     { 
@@ -142,8 +140,7 @@ void Window::SetEventCallback(const EventCallbackFn& fn)
 
 void Window::OnUpdate()
 {
-    glfwSwapBuffers(m_Window);
-
     glfwPollEvents();
+    m_Context->SwapBuffers();
 }
 

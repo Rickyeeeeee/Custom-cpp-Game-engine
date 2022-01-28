@@ -11,7 +11,7 @@
 #include "../event/types/window/WindowEvent.h"
 #include "../event/types/key/KeyEvent.h"
 #include "../event/types/mouse/MouseEvent.h"
-
+#include "../MainRenderer/GraphicsContext.h"
 
 static bool s_GLFWInitialized = false;
 
@@ -49,10 +49,11 @@ public:
 private:
     void Init(const WindowProps &props);
     void Shutdown();
+    
 
 private:
     GLFWwindow *m_Window;
-
+    GraphicsContext* m_Context;
     struct WindowData
     {
         std::string Title;

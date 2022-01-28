@@ -41,7 +41,7 @@ void ImGuiLayer::OnAttach()
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
     Application& app = Application::Get();
-    GLFWwindow* window = app.getWindow().getWindow();
+    GLFWwindow* window = app.GetWindow().getWindow();
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 410");
@@ -71,7 +71,7 @@ void ImGuiLayer::End()
 {
     ImGuiIO& io = ImGui::GetIO();
     Application& app = Application::Get();
-    io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight())
+    io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

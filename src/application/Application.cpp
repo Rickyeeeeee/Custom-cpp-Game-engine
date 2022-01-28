@@ -11,7 +11,10 @@ Application::Application()
     m_Window->SetEventCallback(
         std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
+    
     PushLayer(new Game_Layer(m_Window->GetWidth(), m_Window->GetHeight()));
+    m_ImGuiLayer = new ImGuiLayer;
+    PushOverLayer(m_ImGuiLayer);
 }
 
 Application::~Application()
@@ -56,10 +59,15 @@ void Application::Run()
     while (m_Running)
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        glClearColor(0.3, 0.5, 0.7, 1.0);
+        glClearColor(0.3, 0.2, 0.4, 1.0);
 
         for (Layer *layer : m_layerStack)
             layer->OnUpdate();
+
+        m_ImGuiLayer->Begin();
+        for (Layer *layer : m_layerStack)
+            layer->OnImGuiRender();
+        m_ImGuiLayer->End();
 
         m_Window->OnUpdate();
     }

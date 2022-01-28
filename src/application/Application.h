@@ -9,6 +9,7 @@
 #include "../Window/Window.h"
 #include "../layer/Layer.h"
 #include "../layer/LayerStack.h"
+#include "../layer/imguiLayer.h"
 class Application
 {
 public:
@@ -27,8 +28,9 @@ private:
     // functions
     bool OnWindowClose(WindowCloseEvent& e);
     bool OnKeyPressed(KeyPressedEvent& e);
-    // objects
+    // objects 
     std::unique_ptr<Window> m_Window;
+    ImGuiLayer* m_ImGuiLayer;
     LayerStack m_layerStack;
     // variables
     bool m_Running = true;
