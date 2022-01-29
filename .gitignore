@@ -43,6 +43,7 @@ Training
 Blog
 About
 
+.make
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -58,3 +59,4 @@ _deps
 build 
 
 [Bb][Uu][Ii][Ll][Dd]/
+build/CMakeFiles/Coolgame.dir/objects.a

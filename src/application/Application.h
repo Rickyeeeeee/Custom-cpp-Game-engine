@@ -1,15 +1,22 @@
 #pragma once
 
-#include <memory>
-#include <iostream>
+#include "../pch.h"
+
 #include "../event/Event.h"
 #include "../event/EventDispatcher.h"
 #include "../event/types/window/WindowEvent.h"
 #include "../event/types/key/KeyEvent.h"
+
 #include "../Window/Window.h"
+
 #include "../layer/Layer.h"
 #include "../layer/LayerStack.h"
 #include "../layer/imguiLayer.h"
+
+#include "../MainRenderer/Buffer.h"
+#include "../MainRenderer/Shader.h"
+#include "../MainRenderer/VertexArray.h"
+
 class Application
 {
 public:
@@ -32,6 +39,11 @@ private:
     std::unique_ptr<Window> m_Window;
     ImGuiLayer* m_ImGuiLayer;
     LayerStack m_layerStack;
+
+    std::shared_ptr<Shader> m_Shader;
+    std::shared_ptr<VertexBuffer> m_VertexBuffer;
+    std::shared_ptr<IndexBuffer> m_IndexBuffer;
+    std::shared_ptr<VertexArray> m_VertexArray;
     // variables
     bool m_Running = true;
 private:

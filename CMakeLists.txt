@@ -13,7 +13,6 @@ include_directories(${PROJECT_SOURCE_DIR}/src
 # target_include_directories(${PROJECT_NAME} PUBLIC src
 #                                            PUBLIC external/imgui)
 
-
 target_link_directories(${PROJECT_NAME}
     PRIVATE src
     PRIVATE external/imgui)
