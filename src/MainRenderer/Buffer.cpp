@@ -1,14 +1,15 @@
 #include "Buffer.h"
-#include "../pch.h"
-#include "Renderer.h"
-#include "../OpenGl/OpenGLBuffer.h"
+#include "pch.h"
+#include "MainRenderer/Renderer.h"
+#include "MainRenderer/RendererAPI.h"
+#include "OpenGl/OpenGLBuffer.h"
 
 VertexBuffer* VertexBuffer::Create(float* vertices, unsigned int size) 
 {
     switch(Renderer::GetAPI())
     {
-        case RendererAPI::None:     std::cout << "RendererAPI::None is currently not supported!" << std::endl;
-        case RendererAPI::OpenGL:   return new OpenGLVertexBuffer(vertices, size);
+        case RendererAPI::API::None:     std::cout << "RendererAPI::None is currently not supported!" << std::endl;
+        case RendererAPI::API::OpenGL:   return new OpenGLVertexBuffer(vertices, size);
     }
 
     std::cout << "unknown REndererAPI!" << std::endl;
@@ -19,8 +20,8 @@ IndexBuffer* IndexBuffer::Create(unsigned int* indices, unsigned int size)
 {
     switch(Renderer::GetAPI())
     {
-        case RendererAPI::None:     std::cout << "RendererAPI::None is currently not supported!" << std::endl;
-        case RendererAPI::OpenGL:   return new OpenGLIndexBuffer(indices, size);
+        case RendererAPI::API::None:     std::cout << "RendererAPI::None is currently not supported!" << std::endl;
+        case RendererAPI::API::OpenGL:   return new OpenGLIndexBuffer(indices, size);
     }
 
     std::cout << "unknown REndererAPI!" << std::endl;

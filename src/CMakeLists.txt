@@ -5,28 +5,42 @@ cmake_minimum_required(VERSION 3.0.0)
 
 add_library(engine 
     Application/Application.cpp
+
     Window/Window.cpp
+
     event/Event.cpp
     event/types/key/KeyEvent.cpp
     event/types/mouse/MouseEvent.cpp
     event/types/window/WindowEvent.cpp
     event/EventDispatcher.cpp
+
     layer/Layer.cpp
     layer/LayerStack.cpp
     layer/imguiLayer.cpp
+
     ImGui/ImGuiBuild.cpp
+
     OpenGL/OpenGLContext.cpp
     OpenGL/OpenGLBuffer.cpp
     OpenGL/OpenGLVertexArray.cpp
+    OpenGL/OpenGLRendererAPI.cpp
+
+    MainRenderer/RendererAPI.cpp
     MainRenderer/Buffer.cpp
     MainRenderer/GraphicsContext.cpp
     MainRenderer/Shader.cpp
     MainRenderer/Renderer.cpp
     MainRenderer/VertexArray.cpp
+    MainRenderer/RenderCommand.cpp
+
     Windowsinput.cpp
 )
 
-target_include_directories(engine PUBLIC ../external/imgui)
+target_include_directories(
+    engine 
+    PUBLIC ../external/imgui
+    PUBLIC ../src
+    )
 
 target_link_libraries(
     engine

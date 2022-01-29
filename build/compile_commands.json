@@ -101,6 +101,16 @@
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLRendererAPI.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLRendererAPI.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLRendererAPI.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\RendererAPI.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\RendererAPI.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/RendererAPI.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Buffer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Buffer.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Buffer.cpp"
 },
@@ -123,6 +133,11 @@
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\VertexArray.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\VertexArray.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/VertexArray.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\RenderCommand.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\RenderCommand.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/RenderCommand.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",

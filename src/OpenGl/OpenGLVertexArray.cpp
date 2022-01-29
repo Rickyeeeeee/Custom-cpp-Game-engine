@@ -1,5 +1,6 @@
 #include "OpenGLVertexArray.h"
 #include "../pch.h"
+#include "../MainRenderer/Buffer.h"
 
 #include <glad/glad.h>
 
@@ -24,7 +25,7 @@ static GLenum ShaderDataTypeToOpenGlBaseType(ShaderDataType type)
 
 OpenGLVertexArray::OpenGLVertexArray() 
 {
-    glCreateVertexArrays(1, &m_RendererID);    
+    glGenVertexArrays(1, &m_RendererID);    
 }
 
 void OpenGLVertexArray::Bind() const 
@@ -37,7 +38,7 @@ void OpenGLVertexArray::Unbind() const
     glBindVertexArray(0);
 }
 
-void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) const 
+void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
 {
     glBindVertexArray(m_RendererID);
     vertexBuffer->Bind();
@@ -59,7 +60,7 @@ void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& ver
     m_VertexBuffers.push_back(vertexBuffer);
 }
 
-void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) const 
+void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
 {
     glBindVertexArray(m_RendererID);
     indexBuffer->Bind();

@@ -1,6 +1,7 @@
-#include "../pch.h"
 #include "Application.h"
-#include "../layer/imguiLayer.h"
+#include "pch.h"
+#include "layer/imguiLayer.h"
+#include "MainRenderer/Renderer.h"
 
 Application* Application::s_Instance = nullptr;
 
@@ -109,12 +110,13 @@ void Application::Run()
 
     while (m_Running)
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-        glClearColor(0.7, 0.2, 0.4, 1.0);
+        RenderCommand::SetClearColor({ 0.7, 0.2, 0.4, 1.0 });
+        RenderCommand::Clear();
 
+        Renderer::BeginScene();
         m_Shader->Bind();
-        m_VertexArray->Bind();
-        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+        Renderer::Submit(m_VertexArray);            
+        Renderer::EndScene();
 
         for (Layer *layer : m_layerStack)
             layer->OnUpdate();
