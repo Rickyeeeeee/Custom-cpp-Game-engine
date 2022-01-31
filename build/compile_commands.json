@@ -1,8 +1,13 @@
 [
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/Coolgame.dir/includes_CXX.rsp -g -o CMakeFiles\\Coolgame.dir\\sandbox\\sandbox.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\sandbox\\sandbox.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/project1.dir/includes_CXX.rsp -g -o CMakeFiles\\project1.dir\\sandbox\\sandbox.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\sandbox\\sandbox.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/sandbox/sandbox.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/project2.dir/includes_CXX.rsp -g -o CMakeFiles\\project2.dir\\sandbox\\demo3d.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\sandbox\\demo3d.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/sandbox/demo3d.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/imgui",
@@ -106,6 +111,11 @@
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLShader.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLShader.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLShader.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\RendererAPI.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\RendererAPI.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/RendererAPI.cpp"
 },
@@ -138,6 +148,11 @@
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\RenderCommand.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\RenderCommand.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/RenderCommand.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Orthograhpic2DCamera.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Orthograhpic2DCamera.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Orthograhpic2DCamera.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",

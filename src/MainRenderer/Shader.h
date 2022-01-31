@@ -1,16 +1,14 @@
 #pragma once 
-
+#include "core/core.h"
 #include <string>
 
 class Shader
 {
 public:
-    Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
-    ~Shader();
+    virtual ~Shader() {};
 
-    void Bind() const;
-    void UnBind() const;
+    virtual void Bind() const = 0;
+    virtual void UnBind() const = 0;
 
-private:
-    unsigned int m_RendererID;    
+    static Shader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);   
 };

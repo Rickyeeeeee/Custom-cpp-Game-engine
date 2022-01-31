@@ -64,6 +64,16 @@ CMAKE_BINARY_DIR = C:\Users\ricky\Dev\coolgame\build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+.PHONY : rebuild_cache/fast
+
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
@@ -93,16 +103,6 @@ edit_cache:
 # Special rule for the target edit_cache
 edit_cache/fast: edit_cache
 .PHONY : edit_cache/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -136,17 +136,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Coolgame
+# Target rules for targets named project1
 
 # Build rule for target.
-Coolgame: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Coolgame
-.PHONY : Coolgame
+project1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 project1
+.PHONY : project1
 
 # fast build rule for target.
-Coolgame/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/build
-.PHONY : Coolgame/fast
+project1/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/build
+.PHONY : project1/fast
+
+#=============================================================================
+# Target rules for targets named project2
+
+# Build rule for target.
+project2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 project2
+.PHONY : project2
+
+# fast build rule for target.
+project2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/build
+.PHONY : project2/fast
 
 #=============================================================================
 # Target rules for targets named imgui
@@ -174,12 +187,36 @@ engine/fast:
 	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\engine.dir\build.make src/CMakeFiles/engine.dir/build
 .PHONY : engine/fast
 
+sandbox/demo3d.obj: sandbox/demo3d.cpp.obj
+.PHONY : sandbox/demo3d.obj
+
+# target to build an object file
+sandbox/demo3d.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/sandbox/demo3d.cpp.obj
+.PHONY : sandbox/demo3d.cpp.obj
+
+sandbox/demo3d.i: sandbox/demo3d.cpp.i
+.PHONY : sandbox/demo3d.i
+
+# target to preprocess a source file
+sandbox/demo3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/sandbox/demo3d.cpp.i
+.PHONY : sandbox/demo3d.cpp.i
+
+sandbox/demo3d.s: sandbox/demo3d.cpp.s
+.PHONY : sandbox/demo3d.s
+
+# target to generate assembly for a file
+sandbox/demo3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/sandbox/demo3d.cpp.s
+.PHONY : sandbox/demo3d.cpp.s
+
 sandbox/sandbox.obj: sandbox/sandbox.cpp.obj
 .PHONY : sandbox/sandbox.obj
 
 # target to build an object file
 sandbox/sandbox.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/sandbox/sandbox.cpp.obj
 .PHONY : sandbox/sandbox.cpp.obj
 
 sandbox/sandbox.i: sandbox/sandbox.cpp.i
@@ -187,7 +224,7 @@ sandbox/sandbox.i: sandbox/sandbox.cpp.i
 
 # target to preprocess a source file
 sandbox/sandbox.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/sandbox/sandbox.cpp.i
 .PHONY : sandbox/sandbox.cpp.i
 
 sandbox/sandbox.s: sandbox/sandbox.cpp.s
@@ -195,7 +232,7 @@ sandbox/sandbox.s: sandbox/sandbox.cpp.s
 
 # target to generate assembly for a file
 sandbox/sandbox.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Coolgame.dir\build.make CMakeFiles/Coolgame.dir/sandbox/sandbox.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/sandbox/sandbox.cpp.s
 .PHONY : sandbox/sandbox.cpp.s
 
 # Help Target
@@ -208,9 +245,13 @@ help:
 	@echo ... package
 	@echo ... package_source
 	@echo ... rebuild_cache
-	@echo ... Coolgame
 	@echo ... engine
 	@echo ... imgui
+	@echo ... project1
+	@echo ... project2
+	@echo ... sandbox/demo3d.obj
+	@echo ... sandbox/demo3d.i
+	@echo ... sandbox/demo3d.s
 	@echo ... sandbox/sandbox.obj
 	@echo ... sandbox/sandbox.i
 	@echo ... sandbox/sandbox.s

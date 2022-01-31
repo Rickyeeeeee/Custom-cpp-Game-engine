@@ -7,8 +7,7 @@ class RenderCommand
 public:
     static inline void SetClearColor(const Vector4& color ) { s_RendererAPI->SetClearColor(color); }
     static inline void Clear() { s_RendererAPI->Clear(); }
-
-    static inline void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+    static inline void DrawIndexed(const Ref<VertexArray>& vertexArray)
     {
         s_RendererAPI->DrawIndexed(vertexArray);
     }

@@ -1,7 +1,7 @@
-#include "../pch.h"
+#include "pch.h"
 #include "VertexArray.h"
 #include "Renderer.h"
-#include "../OpenGl/OpenGLVertexArray.h"
+#include "OpenGl/OpenGLVertexArray.h"
 
 VertexArray* VertexArray::Create() 
 {

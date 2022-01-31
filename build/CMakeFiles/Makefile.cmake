@@ -52,7 +52,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/Coolgame.dir/DependInfo.cmake"
+  "CMakeFiles/project1.dir/DependInfo.cmake"
+  "CMakeFiles/project2.dir/DependInfo.cmake"
   "external/imgui/CMakeFiles/imgui.dir/DependInfo.cmake"
   "src/CMakeFiles/engine.dir/DependInfo.cmake"
   )

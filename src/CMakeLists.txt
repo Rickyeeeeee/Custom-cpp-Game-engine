@@ -24,7 +24,8 @@ add_library(engine
     OpenGL/OpenGLBuffer.cpp
     OpenGL/OpenGLVertexArray.cpp
     OpenGL/OpenGLRendererAPI.cpp
-
+    OpenGL/OpenGLShader.cpp
+    
     MainRenderer/RendererAPI.cpp
     MainRenderer/Buffer.cpp
     MainRenderer/GraphicsContext.cpp
@@ -32,6 +33,7 @@ add_library(engine
     MainRenderer/Renderer.cpp
     MainRenderer/VertexArray.cpp
     MainRenderer/RenderCommand.cpp
+    MainRenderer/Orthograhpic2DCamera.cpp
 
     Windowsinput.cpp
 )

@@ -1,8 +1,9 @@
-C:/Users/ricky/Dev/coolgame/build/CMakeFiles/Coolgame.dir
+C:/Users/ricky/Dev/coolgame/build/CMakeFiles/rebuild_cache.dir
+C:/Users/ricky/Dev/coolgame/build/CMakeFiles/project1.dir
+C:/Users/ricky/Dev/coolgame/build/CMakeFiles/project2.dir
 C:/Users/ricky/Dev/coolgame/build/CMakeFiles/package.dir
 C:/Users/ricky/Dev/coolgame/build/CMakeFiles/package_source.dir
 C:/Users/ricky/Dev/coolgame/build/CMakeFiles/edit_cache.dir
-C:/Users/ricky/Dev/coolgame/build/CMakeFiles/rebuild_cache.dir
 C:/Users/ricky/Dev/coolgame/build/external/imgui/CMakeFiles/imgui.dir
 C:/Users/ricky/Dev/coolgame/build/external/imgui/CMakeFiles/package.dir
 C:/Users/ricky/Dev/coolgame/build/external/imgui/CMakeFiles/package_source.dir
