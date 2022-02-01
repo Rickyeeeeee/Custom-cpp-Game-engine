@@ -14,6 +14,8 @@ Application::Application()
     m_Window->SetEventCallback(
         std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
+    Renderer::Init();
+
     m_ImGuiLayer = new ImGuiLayer;
     PushOverLayer(m_ImGuiLayer);
     

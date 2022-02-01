@@ -22,7 +22,7 @@ public:
         {
             BufferLayout layout = {
                 { ShaderDataType::Float3, "a_Position" },
-                { ShaderDataType::Float2, "a_TexCoords"}
+                { ShaderDataType::Float2, "a_TexCoord"}
             };
             m_VertexBuffer->SetLayout(layout);
         }
@@ -33,37 +33,43 @@ public:
         m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
         m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
-        std::string vertexSrc = R"(
-            #version 330 core
+        // std::string vertexSrc = R"(
+        //     #version 330 core
 
-            layout(location = 0) in vec3 a_Position;
-            layout(location = 1) in vec2 a_TexCoords;
+        //     layout(location = 0) in vec3 a_Position;
+        //     layout(location = 1) in vec2 a_TexCoord;
 
-            uniform mat4 u_ViewProjection;
-            uniform mat4 u_Transform;
+        //     uniform mat4 u_ViewProjection;
+        //     uniform mat4 u_Transform;
 
-            out vec2 v_TexCoords;
+        //     out vec2 v_TexCoord;
 
-            void main()
-            {
-                gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-                v_TexCoords = a_TexCoords;
-            }
-        )";
+        //     void main()
+        //     {
+        //         gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+        //         v_TexCoord = a_TexCoord;
+        //     }
+        // )";
 
-        std::string fragmentSrc = R"(
-            #version 330 core
+        // std::string fragmentSrc = R"(
+        //     #version 330 core
 
-            layout(location = 0) out vec4 color;
+        //     layout(location = 0) out vec4 color;
 
-            in vec2 v_TexCoords;
+        //     in vec2 v_TexCoord;
 
-            void main()
-            {
-                color = texture(v_TexCoords);
-            }
-        )";
-        m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
+        //     uniform sampler2D u_Texture;
+
+        //     void main()
+        //     {
+        //         color = texture(u_Texture, v_TexCoord);
+        //     }
+        // )";
+        m_Shader.reset(Shader::Create("asset/shaders/example.glsl"));
+        m_Texture = Texture2D::Create("asset/picture/n.png");
+
+        std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->Bind();
+        std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->UploadUniformInt("u_Texture", 0);
     }
 
     void OnUpdate(Timestep ts) override
@@ -89,6 +95,7 @@ public:
         m_Camera.SetPosition(m_CameraPosition);
 
         Renderer::BeginScene(m_Camera);
+        m_Texture->Bind();
         Renderer::Submit(m_VertexArray, m_Shader);            
         Renderer::EndScene();
     }
@@ -105,7 +112,7 @@ private:
     Ref<VertexBuffer> m_VertexBuffer;
     Ref<IndexBuffer> m_IndexBuffer; 
     Ref<VertexArray> m_VertexArray;
-
+    Ref<Texture> m_Texture;
     Orthographic2DCamera m_Camera;
     Vector3 m_CameraPosition = {0.0f, 0.0f, 0.0f,};
     float m_CameraSpeed = 0.1f;

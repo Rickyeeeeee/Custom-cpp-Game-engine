@@ -13,3 +13,14 @@ Shader* Shader::Create(const std::string& vertexSrc, const std::string& fragment
 
     return nullptr;
 }
+
+Shader* Shader::Create(const std::string& filepath) 
+{
+    switch (Renderer::GetAPI())
+    {
+        case RendererAPI::API::None:     std::cout << "renderer api not support"; 
+        case RendererAPI::API::OpenGL:   return new OpenGLShader(filepath);
+    }    
+
+    return nullptr;   
+}

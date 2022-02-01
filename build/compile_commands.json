@@ -41,13 +41,103 @@
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\ImGui\\ImGuiBuild.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\ImGui\\ImGuiBuild.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/ImGui/ImGuiBuild.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Buffer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Buffer.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Buffer.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\GraphicsContext.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\GraphicsContext.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/GraphicsContext.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Orthograhpic2DCamera.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Orthograhpic2DCamera.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Orthograhpic2DCamera.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\RenderCommand.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\RenderCommand.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/RenderCommand.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Renderer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Renderer.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Renderer.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\RendererAPI.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\RendererAPI.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/RendererAPI.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Shader.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Shader.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Shader.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Texture.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Texture.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Texture.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\VertexArray.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\VertexArray.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/VertexArray.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLBuffer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLBuffer.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLBuffer.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLContext.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLContext.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLContext.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLRendererAPI.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLRendererAPI.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLRendererAPI.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLShader.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLShader.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLShader.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLTexture.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLTexture.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLTexture.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLVertexArray.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLVertexArray.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLVertexArray.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\Window\\Window.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\Window\\Window.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/Window/Window.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\WindowsInput.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\WindowsInput.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/WindowsInput.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\event\\Event.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\event\\Event.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/event/Event.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\event\\EventDispatcher.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\event\\EventDispatcher.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/event/EventDispatcher.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
@@ -66,11 +156,6 @@
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\event\\EventDispatcher.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\event\\EventDispatcher.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/event/EventDispatcher.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\layer\\Layer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\layer\\Layer.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/layer/Layer.cpp"
 },
@@ -86,77 +171,7 @@
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\ImGui\\ImGuiBuild.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\ImGui\\ImGuiBuild.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/ImGui/ImGuiBuild.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLContext.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLContext.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLContext.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLBuffer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLBuffer.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLBuffer.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLVertexArray.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLVertexArray.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLVertexArray.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLRendererAPI.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLRendererAPI.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLRendererAPI.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\OpenGl\\OpenGLShader.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\OpenGl\\OpenGLShader.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/OpenGl/OpenGLShader.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\RendererAPI.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\RendererAPI.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/RendererAPI.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Buffer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Buffer.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Buffer.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\GraphicsContext.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\GraphicsContext.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/GraphicsContext.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Shader.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Shader.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Shader.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Renderer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Renderer.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Renderer.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\VertexArray.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\VertexArray.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/VertexArray.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\RenderCommand.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\RenderCommand.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/RenderCommand.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\MainRenderer\\Orthograhpic2DCamera.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\MainRenderer\\Orthograhpic2DCamera.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/MainRenderer/Orthograhpic2DCamera.cpp"
-},
-{
-  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\WindowsInput.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\WindowsInput.cpp",
-  "file": "C:/Users/ricky/Dev/coolgame/src/WindowsInput.cpp"
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -o CMakeFiles\\engine.dir\\stb_image\\stb_image.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\stb_image\\stb_image.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/stb_image/stb_image.cpp"
 }
 ]

@@ -8,9 +8,11 @@
 class Renderer
 {
 public:
+    static void Init();
+    
     static void BeginScene(Orthographic2DCamera& camera);
     static void EndScene();
-
+    
     static void Submit( const Ref<VertexArray>& VertexArray, const Ref<Shader>& shader, const Matrix4& transform = Matrix4(1.0f));
 
     inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }

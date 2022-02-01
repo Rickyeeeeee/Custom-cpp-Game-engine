@@ -26,15 +26,14 @@ void Window::Init(const WindowProps &props)
     if (!s_GLFWInitialized)
     {
         int success = glfwInit();
-
         if (!success)
         {
             std::cout << "Could not initialize GLFW" << std::endl;
 
             s_GLFWInitialized = true;
         }
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     }
@@ -48,7 +47,6 @@ void Window::Init(const WindowProps &props)
     m_Context = new OpenGLContext(m_Window);
     m_Context->Init();
     glfwSetWindowUserPointer(m_Window, &m_Data);
-
     glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height)
     { 
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window); 

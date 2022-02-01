@@ -2,11 +2,14 @@
 
 #include "GLM/GLM.h"
 #include "MainRenderer/Shader.h"
-
+#include <unordered_map>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 class OpenGLShader : public Shader
 {
 public:
     OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+    OpenGLShader(const std::string& filepath);
     ~OpenGLShader();
 
     virtual void Bind() const override;
@@ -19,6 +22,10 @@ public:
     void UploadUniformVector4(const std::string& name, const Vector4& vector); 
     void UploadUniformMat3(const std::string& name, const Matrix3& matrix);
     void UploadUniformMat4(const std::string& name, const Matrix4& matrix);
+private:
+    std::string ReadFile(const std::string& filepath);
+    std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
+    void Complie(const std::unordered_map<GLenum, std::string>& shaderSources);
 private:
     unsigned int m_RendererID;    
 };

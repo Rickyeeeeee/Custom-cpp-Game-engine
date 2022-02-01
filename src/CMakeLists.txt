@@ -3,44 +3,38 @@ cmake_minimum_required(VERSION 3.0.0)
 # set(CMAKE_CXX_STANDARD 17)
 # set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_library(engine 
-    Application/Application.cpp
 
-    Window/Window.cpp
+file(GLOB CPP_SOURCE 
+    *.cpp
 
-    event/Event.cpp
-    event/types/key/KeyEvent.cpp
-    event/types/mouse/MouseEvent.cpp
-    event/types/window/WindowEvent.cpp
-    event/EventDispatcher.cpp
+    Application/*.cpp
 
-    layer/Layer.cpp
-    layer/LayerStack.cpp
-    layer/imguiLayer.cpp
+    Window/*.cpp
 
-    ImGui/ImGuiBuild.cpp
-
-    OpenGL/OpenGLContext.cpp
-    OpenGL/OpenGLBuffer.cpp
-    OpenGL/OpenGLVertexArray.cpp
-    OpenGL/OpenGLRendererAPI.cpp
-    OpenGL/OpenGLShader.cpp
+    event/*.cpp
+    event/types/key/*.cpp
+    event/types/mouse/*.cpp
+    event/types/window/*.cpp
     
-    MainRenderer/RendererAPI.cpp
-    MainRenderer/Buffer.cpp
-    MainRenderer/GraphicsContext.cpp
-    MainRenderer/Shader.cpp
-    MainRenderer/Renderer.cpp
-    MainRenderer/VertexArray.cpp
-    MainRenderer/RenderCommand.cpp
-    MainRenderer/Orthograhpic2DCamera.cpp
-
-    Windowsinput.cpp
+    layer/*.cpp
+    
+    ImGui/*.cpp
+    
+    stb_image/*.cpp
+    
+    OpenGL/*.cpp
+    
+    MainRenderer/*.cpp
+    
+    )
+add_library(engine 
+    ${CPP_SOURCE}
 )
 
 target_include_directories(
     engine 
     PUBLIC ../external/imgui
+    PUBLIC ../external/stb_image
     PUBLIC ../src
     )
 
