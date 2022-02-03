@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../MainRenderer/VertexArray.h"
+#include "Renderer/VertexArray.h"
 
 
 class OpenGLVertexArray : public VertexArray

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Event.h"
+#include "event/Event.h"
 
-#include "types/window/WindowEvent.h"
+#include "event/WindowEvent.h"
 // event dispatcher
 class EventDispatcher
 {

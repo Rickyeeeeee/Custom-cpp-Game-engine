@@ -1,5 +1,5 @@
-#include "OpenGLBuffer.h"
-#include "../pch.h"
+#include "OpenGL/OpenGLBuffer.h"
+#include "core/pch.h"
 
 // vertex buffer--------------------------------------------
 OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, unsigned int size) 

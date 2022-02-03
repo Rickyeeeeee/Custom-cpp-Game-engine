@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GLM/GLM.h"
-#include "MainRenderer/Shader.h"
+#include "core/GLM.h"
+#include "Renderer/Shader.h"
 #include <unordered_map>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

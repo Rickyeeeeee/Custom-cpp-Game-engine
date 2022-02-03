@@ -6,28 +6,12 @@ set(CMAKE_BUILD_TYPE)
 
 file(GLOB CPP_SOURCE 
     *.cpp
-
-    Application/*.cpp
-
-    core/EntryPoint.cpp
-
-    Window/*.cpp
-
+    core/*.cpp
     event/*.cpp
-    event/types/key/*.cpp
-    event/types/mouse/*.cpp
-    event/types/window/*.cpp
-    
-    layer/*.cpp
-    
     ImGui/*.cpp
-    
     stb_image/*.cpp
-    
     OpenGL/*.cpp
-    
-    MainRenderer/*.cpp
-    
+    Renderer/*.cpp
     )
 add_library(engine 
     ${CPP_SOURCE}
@@ -35,8 +19,7 @@ add_library(engine
 
 target_include_directories(
     engine 
-    PRIVATE ../external/imgui
-    PRIVATE ../external/stb_image
+    PRIVATE ../external
     # PRIVATE ../external/spdlog/include
     PRIVATE ../src
     )

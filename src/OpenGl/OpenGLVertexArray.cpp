@@ -1,6 +1,6 @@
-#include "OpenGLVertexArray.h"
-#include "../pch.h"
-#include "../MainRenderer/Buffer.h"
+#include "OpenGL/OpenGLVertexArray.h"
+#include "core/pch.h"
+#include "Renderer/Buffer.h"
 
 #include <glad/glad.h>
 

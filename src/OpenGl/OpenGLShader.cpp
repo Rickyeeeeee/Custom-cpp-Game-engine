@@ -1,5 +1,5 @@
-#include "pch.h"
-#include "OpenGLShader.h"
+#include "core/pch.h"
+#include "OpenGL/OpenGLShader.h"
 #include <fstream>
 #include <sstream>
 #include <string>

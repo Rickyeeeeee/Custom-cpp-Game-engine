@@ -1,7 +1,7 @@
 #pragma once
 
-#include "pch.h"
-#include "MainRenderer/Texture.h"
+#include "core/pch.h"
+#include "Renderer/Texture.h"
 
 class OpenGLTexture2D : public Texture2D
 {
