@@ -2,8 +2,10 @@
 #include "OpenGLShader.h"
 #include <fstream>
 #include <sstream>
+#include <string>
 
-OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc) 
+OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) 
+    : m_Name(name)
 {
     std::unordered_map<GLenum, std::string> shaderSources;
     shaderSources[GL_VERTEX_SHADER] = vertexSrc;
@@ -16,6 +18,12 @@ OpenGLShader::OpenGLShader(const std::string& filepath)
     std::string source = ReadFile(filepath);
     auto shaderSources = PreProcess(source);
     Complie(shaderSources);
+    // take out the name
+    auto lastSlash = filepath.find_last_of("/\\");
+    lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+    auto lastDot = filepath.rfind('.');
+    auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+    m_Name = filepath.substr(lastSlash, count);
 }
 
 OpenGLShader::~OpenGLShader() 
@@ -31,6 +39,11 @@ void OpenGLShader::Bind() const
 void OpenGLShader::UnBind() const
 {
     glUseProgram(m_RendererID);
+}
+
+const std::string OpenGLShader::GetName() const 
+{
+    return m_Name;
 }
 
 void OpenGLShader::UploadUniformInt(const std::string& name, const int& value) 
@@ -142,7 +155,7 @@ void OpenGLShader::Complie(const std::unordered_map<GLenum, std::string>& shader
     GLuint program = glCreateProgram();
     
     std::vector<GLenum> glShaderIDs;
-    glShaderIDs.resize(shaderSources.size());
+    glShaderIDs.reserve(shaderSources.size());
     for (auto&& [type, source] : shaderSources)
     {
         GLuint shader = glCreateShader(type);
@@ -170,7 +183,7 @@ void OpenGLShader::Complie(const std::unordered_map<GLenum, std::string>& shader
         	break;
         }
         glAttachShader(program, shader);
-        glShaderIDs.push_back(type);
+        glShaderIDs.emplace_back(type);
     }
     glLinkProgram(program);
 

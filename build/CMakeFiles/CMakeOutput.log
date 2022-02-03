@@ -1002,3 +1002,55 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: C:/Users/ricky/Dev/coolgame/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f Makefile cmTC_716ca/fast && C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_716ca.dir\build.make CMakeFiles/cmTC_716ca.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/Users/ricky/Dev/coolgame/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_716ca.dir/CheckIncludeFile.c.obj
+C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe    -o CMakeFiles\cmTC_716ca.dir\CheckIncludeFile.c.obj -c C:\Users\ricky\Dev\coolgame\build\CMakeFiles\CMakeTmp\CheckIncludeFile.c
+Linking C executable cmTC_716ca.exe
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_716ca.dir\link.txt --verbose=1
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E rm -f CMakeFiles\cmTC_716ca.dir/objects.a
+C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\ar.exe cr CMakeFiles\cmTC_716ca.dir/objects.a @CMakeFiles\cmTC_716ca.dir\objects1.rsp
+C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe -Wl,--whole-archive CMakeFiles\cmTC_716ca.dir/objects.a -Wl,--no-whole-archive -o cmTC_716ca.exe -Wl,--out-implib,libcmTC_716ca.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTC_716ca.dir\linklibs.rsp
+mingw32-make.exe[1]: Leaving directory 'C:/Users/ricky/Dev/coolgame/build/CMakeFiles/CMakeTmp'
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD succeeded with the following output:
+Change Dir: C:/Users/ricky/Dev/coolgame/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f Makefile cmTC_143b4/fast && C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_143b4.dir\build.make CMakeFiles/cmTC_143b4.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/Users/ricky/Dev/coolgame/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_143b4.dir/src.c.obj
+C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles\cmTC_143b4.dir\src.c.obj -c C:\Users\ricky\Dev\coolgame\build\CMakeFiles\CMakeTmp\src.c
+Linking C executable cmTC_143b4.exe
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_143b4.dir\link.txt --verbose=1
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E rm -f CMakeFiles\cmTC_143b4.dir/objects.a
+C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\ar.exe cr CMakeFiles\cmTC_143b4.dir/objects.a @CMakeFiles\cmTC_143b4.dir\objects1.rsp
+C:\Users\ricky\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\x86_64-w64-mingw32-gcc.exe -Wl,--whole-archive CMakeFiles\cmTC_143b4.dir/objects.a -Wl,--no-whole-archive -o cmTC_143b4.exe -Wl,--out-implib,libcmTC_143b4.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTC_143b4.dir\linklibs.rsp
+mingw32-make.exe[1]: Leaving directory 'C:/Users/ricky/Dev/coolgame/build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+

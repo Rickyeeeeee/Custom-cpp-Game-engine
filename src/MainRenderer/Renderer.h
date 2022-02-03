@@ -13,7 +13,8 @@ public:
     static void BeginScene(Orthographic2DCamera& camera);
     static void EndScene();
     
-    static void Submit( const Ref<VertexArray>& VertexArray, const Ref<Shader>& shader, const Matrix4& transform = Matrix4(1.0f));
+    static void Submit( const Ref<VertexArray>& vertexArray, const Ref<Shader>& shader, const Matrix4& transform = Matrix4(1.0f));
+    static void Submit( const Ref<VertexArray>& vertexArray, const Ref<Shader>& shader, const Matrix4& transform , const Matrix4& mat);
 
     inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 private:

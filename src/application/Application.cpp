@@ -2,12 +2,15 @@
 #include "pch.h"
 #include "layer/imguiLayer.h"
 #include "MainRenderer/Renderer.h"
+#include "core/Log.h"
 
 Application* Application::s_Instance = nullptr;
 
 
 Application::Application()
 {
+    Log::Init();
+    Log::GetCoreLogger()->warn("intialized log");
     s_Instance = this;
 
     m_Window = std::unique_ptr<Window>(Window::create());

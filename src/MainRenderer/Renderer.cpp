@@ -26,6 +26,19 @@ void Renderer::Submit(const Ref<VertexArray>& vertexArray,
     RenderCommand::DrawIndexed(vertexArray);
 }
 
+void Renderer::Submit(const Ref<VertexArray>& vertexArray, 
+                        const Ref<Shader>& shader, 
+                        const Matrix4& transform, 
+                        const Matrix4& mat) 
+{
+    std::dynamic_pointer_cast<OpenGLShader>(shader)->Bind();
+    std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", mat);
+    std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+
+    vertexArray->Bind();
+    RenderCommand::DrawIndexed(vertexArray);
+}
+
 void Renderer::Init() 
 {
     RenderCommand::Init();

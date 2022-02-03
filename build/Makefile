@@ -175,6 +175,19 @@ imgui/fast:
 .PHONY : imgui/fast
 
 #=============================================================================
+# Target rules for targets named spdlog
+
+# Build rule for target.
+spdlog: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 spdlog
+.PHONY : spdlog
+
+# fast build rule for target.
+spdlog/fast:
+	$(MAKE) $(MAKESILENT) -f external\spdlog\CMakeFiles\spdlog.dir\build.make external/spdlog/CMakeFiles/spdlog.dir/build
+.PHONY : spdlog/fast
+
+#=============================================================================
 # Target rules for targets named engine
 
 # Build rule for target.
@@ -249,6 +262,7 @@ help:
 	@echo ... imgui
 	@echo ... project1
 	@echo ... project2
+	@echo ... spdlog
 	@echo ... sandbox/demo3d.obj
 	@echo ... sandbox/demo3d.i
 	@echo ... sandbox/demo3d.s

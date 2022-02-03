@@ -46,7 +46,8 @@
     "cinttypes": "cpp",
     "typeinfo": "cpp",
     "cstring": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "filesystem": "cpp"
   },
   "C_Cpp.errorSquiggles": "Enabled"
 }

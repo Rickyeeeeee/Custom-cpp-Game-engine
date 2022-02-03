@@ -9,6 +9,11 @@ C:/Users/ricky/Dev/coolgame/build/external/imgui/CMakeFiles/package.dir
 C:/Users/ricky/Dev/coolgame/build/external/imgui/CMakeFiles/package_source.dir
 C:/Users/ricky/Dev/coolgame/build/external/imgui/CMakeFiles/edit_cache.dir
 C:/Users/ricky/Dev/coolgame/build/external/imgui/CMakeFiles/rebuild_cache.dir
+C:/Users/ricky/Dev/coolgame/build/external/spdlog/CMakeFiles/spdlog.dir
+C:/Users/ricky/Dev/coolgame/build/external/spdlog/CMakeFiles/package.dir
+C:/Users/ricky/Dev/coolgame/build/external/spdlog/CMakeFiles/package_source.dir
+C:/Users/ricky/Dev/coolgame/build/external/spdlog/CMakeFiles/edit_cache.dir
+C:/Users/ricky/Dev/coolgame/build/external/spdlog/CMakeFiles/rebuild_cache.dir
 C:/Users/ricky/Dev/coolgame/build/src/CMakeFiles/package.dir
 C:/Users/ricky/Dev/coolgame/build/src/CMakeFiles/engine.dir
 C:/Users/ricky/Dev/coolgame/build/src/CMakeFiles/package_source.dir

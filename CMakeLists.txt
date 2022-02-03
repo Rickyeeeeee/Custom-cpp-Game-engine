@@ -4,7 +4,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../sandbox)
 
 set(project1 engine2d)
 
-
 set(project2 engine3d)
 
 add_executable(
@@ -17,29 +16,23 @@ add_executable(
     sandbox/demo3d.cpp
     )
     
-add_subdirectory(external/imgui)
-    
+add_subdirectory(external/imgui) 
+add_subdirectory(external/spdlog)
 add_subdirectory(src)
-    
+
+
 include_directories(
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/external/imgui
+    ${PROJECT_SOURCE_DIR}/external/spdlog/include
     )
-    
-    target_link_directories(
-    project1
-    PRIVATE src
-    PRIVATE external/imgui)
-    target_link_directories(
-    project2
-    PRIVATE src
-    PRIVATE external/imgui)
                     
 target_link_libraries(
     project1 
     engine
-    imgui)
+    )
+    
 target_link_libraries(
-    project2 
+    project2  
     engine
-    imgui)
+    )
