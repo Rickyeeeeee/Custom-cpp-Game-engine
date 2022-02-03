@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 3.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-
+set(CMAKE_BUILD_TYPE)
 
 file(GLOB CPP_SOURCE 
     *.cpp
 
     Application/*.cpp
 
-    core/*.cpp
+    core/EntryPoint.cpp
 
     Window/*.cpp
 
@@ -35,17 +35,17 @@ add_library(engine
 
 target_include_directories(
     engine 
-    PUBLIC ../external/imgui
-    PUBLIC ../external/stb_image
-    PUBILC ../external/spdlog/include
-    PUBLIC ../src
+    PRIVATE ../external/imgui
+    PRIVATE ../external/stb_image
+    # PRIVATE ../external/spdlog/include
+    PRIVATE ../src
     )
 
 target_link_libraries(
     engine
+    # spdlog::spdlog
+    imgui
     glad
     glfw3
-    imgui
-    spdlog::spdlog
     )
 

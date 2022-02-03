@@ -15,7 +15,7 @@
 ########################
 
 //Build the testing tree.
-BUILD_TESTING:BOOL=ON
+BUILD_TESTING:BOOL=TRUE
 
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/addr2line.exe
@@ -27,7 +27,7 @@ CMAKE_AR:FILEPATH=C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/min
 CMAKE_BUILD_TYPE:STRING=Debug
 
 //Enable/Disable color output during build.
-CMAKE_COLOR_MAKEFILE:BOOL=ON
+CMAKE_COLOR_MAKEFILE:BOOL=TRUE
 
 //No help, variable specified on the command line.
 CMAKE_CXX_COMPILER:FILEPATH=C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/x86_64-w64-mingw32-g++.exe
@@ -109,7 +109,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE
 
 //Convert GNU import libraries to MS format (requires Visual Studio)
-CMAKE_GNUtoMS:BOOL=OFF
+CMAKE_GNUtoMS:BOOL=FALSE
 
 //User executables (bin)
 CMAKE_INSTALL_BINDIR:PATH=bin
@@ -267,10 +267,10 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //If set, runtime paths are not added when installing shared libraries,
 // but are added when building.
-CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
+CMAKE_SKIP_INSTALL_RPATH:BOOL=FALSE
 
 //If set, runtime paths are not added when using shared libraries.
-CMAKE_SKIP_RPATH:BOOL=NO
+CMAKE_SKIP_RPATH:BOOL=FALSE
 
 //Flags used by the linker during the creation of static libraries
 // during all build types.
@@ -309,28 +309,28 @@ COVERAGE_COMMAND:FILEPATH=C:/Users/ricky/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-
 COVERAGE_EXTRA_FLAGS:STRING=-l
 
 //Enable to build 7-Zip packages
-CPACK_BINARY_7Z:BOOL=OFF
+CPACK_BINARY_7Z:BOOL=FALSE
 
 //Enable to build IFW packages
-CPACK_BINARY_IFW:BOOL=OFF
+CPACK_BINARY_IFW:BOOL=FALSE
 
 //Enable to build NSIS packages
-CPACK_BINARY_NSIS:BOOL=ON
+CPACK_BINARY_NSIS:BOOL=TRUE
 
 //Enable to build NuGet packages
-CPACK_BINARY_NUGET:BOOL=OFF
+CPACK_BINARY_NUGET:BOOL=FALSE
 
 //Enable to build WiX packages
-CPACK_BINARY_WIX:BOOL=OFF
+CPACK_BINARY_WIX:BOOL=FALSE
 
 //Enable to build ZIP packages
-CPACK_BINARY_ZIP:BOOL=OFF
+CPACK_BINARY_ZIP:BOOL=FALSE
 
 //Enable to build 7-Zip source packages
-CPACK_SOURCE_7Z:BOOL=ON
+CPACK_SOURCE_7Z:BOOL=TRUE
 
 //Enable to build ZIP source packages
-CPACK_SOURCE_ZIP:BOOL=ON
+CPACK_SOURCE_ZIP:BOOL=TRUE
 
 //How many times to retry timed-out CTest submissions.
 CTEST_SUBMIT_RETRY_COUNT:STRING=3
@@ -384,81 +384,81 @@ Project_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
 SITE:STRING=LAPTOP-D3770PCE
 
 //Build all artifacts
-SPDLOG_BUILD_ALL:BOOL=OFF
+SPDLOG_BUILD_ALL:BOOL=FALSE
 
 //Build benchmarks (Requires https://github.com/google/benchmark.git
 // to be installed)
-SPDLOG_BUILD_BENCH:BOOL=OFF
+SPDLOG_BUILD_BENCH:BOOL=FALSE
 
 //Build example
-SPDLOG_BUILD_EXAMPLE:BOOL=OFF
+SPDLOG_BUILD_EXAMPLE:BOOL=FALSE
 
 //Build header only example
-SPDLOG_BUILD_EXAMPLE_HO:BOOL=OFF
+SPDLOG_BUILD_EXAMPLE_HO:BOOL=FALSE
 
 //Build shared library
-SPDLOG_BUILD_SHARED:BOOL=OFF
+SPDLOG_BUILD_SHARED:BOOL=FALSE
 
 //Build tests
-SPDLOG_BUILD_TESTS:BOOL=OFF
+SPDLOG_BUILD_TESTS:BOOL=FALSE
 
 //Build tests using the header only version
-SPDLOG_BUILD_TESTS_HO:BOOL=OFF
+SPDLOG_BUILD_TESTS_HO:BOOL=FALSE
 
 //Enable compiler warnings
-SPDLOG_BUILD_WARNINGS:BOOL=OFF
+SPDLOG_BUILD_WARNINGS:BOOL=FALSE
 
 //non supported option
 SPDLOG_CLOCK_COARSE:BOOL=OFF
 
 //Disable default logger creation
-SPDLOG_DISABLE_DEFAULT_LOGGER:BOOL=OFF
+SPDLOG_DISABLE_DEFAULT_LOGGER:BOOL=FALSE
 
 //Build static or shared library using precompiled header to speed
 // up compilation time
-SPDLOG_ENABLE_PCH:BOOL=OFF
+SPDLOG_ENABLE_PCH:BOOL=FALSE
 
 //Use external fmt library instead of bundled
-SPDLOG_FMT_EXTERNAL:BOOL=OFF
+SPDLOG_FMT_EXTERNAL:BOOL=FALSE
 
 //Use external fmt header-only library instead of bundled
-SPDLOG_FMT_EXTERNAL_HO:BOOL=OFF
+SPDLOG_FMT_EXTERNAL_HO:BOOL=FALSE
 
 //Generate the install target
-SPDLOG_INSTALL:BOOL=OFF
+SPDLOG_INSTALL:BOOL=FALSE
 
 //prevent spdlog from using of std::atomic log levels (use only
 // if your code never modifies log levels concurrently
-SPDLOG_NO_ATOMIC_LEVELS:BOOL=OFF
+SPDLOG_NO_ATOMIC_LEVELS:BOOL=FALSE
 
 //Compile with -fno-exceptions. Call abort() on any spdlog exceptions
-SPDLOG_NO_EXCEPTIONS:BOOL=OFF
+SPDLOG_NO_EXCEPTIONS:BOOL=FALSE
 
 //prevent spdlog from querying the thread id on each log call if
 // thread id is not needed
-SPDLOG_NO_THREAD_ID:BOOL=OFF
+SPDLOG_NO_THREAD_ID:BOOL=FALSE
 
 //prevent spdlog from using thread local storage
-SPDLOG_NO_TLS:BOOL=OFF
+SPDLOG_NO_TLS:BOOL=FALSE
 
 //Prevent from child processes to inherit log file descriptors
-SPDLOG_PREVENT_CHILD_FD:BOOL=OFF
+SPDLOG_PREVENT_CHILD_FD:BOOL=FALSE
 
 //Enable address sanitizer in tests
-SPDLOG_SANITIZE_ADDRESS:BOOL=OFF
+SPDLOG_SANITIZE_ADDRESS:BOOL=FALSE
 
 //run clang-tidy
-SPDLOG_TIDY:BOOL=OFF
+SPDLOG_TIDY:BOOL=FALSE
 
 //Use std::format instead of fmt library. No compile-time format
 // string checking.
-SPDLOG_USE_STD_FORMAT:BOOL=OFF
+SPDLOG_USE_STD_FORMAT:BOOL=FALSE
 
 //Support wchar filenames
-SPDLOG_WCHAR_FILENAMES:BOOL=OFF
+SPDLOG_WCHAR_FILENAMES:BOOL=FALSE
 
 //Support wchar api
-SPDLOG_WCHAR_SUPPORT:BOOL=OFF
+SPDLOG_WCHAR_SUPPORT:BOOL=FALSE
 
 //Value Computed by CMake
 c_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
@@ -467,7 +467,7 @@ c_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
 c_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
 
 //Dependencies for the target
-engine_LIB_DEPENDS:STATIC=general;glad;general;glfw3;general;imgui;general;spdlog::spdlog;
+engine_LIB_DEPENDS:STATIC=general;imgui;general;glad;general;glfw3;
 
 //Value Computed by CMake
 spdlog_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build/external/spdlog

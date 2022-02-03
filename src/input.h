@@ -1,5 +1,7 @@
 #pragma once
 #include <utility>
+#include "Keycode.h"
+#include "Mousecode.h"
 class Input
 {
 public:

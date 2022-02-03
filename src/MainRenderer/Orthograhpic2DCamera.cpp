@@ -8,6 +8,14 @@ Orthographic2DCamera::Orthographic2DCamera(float left, float right, float bottom
     m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 }
 
+
+void Orthographic2DCamera::SetProjection(float left, float right, float bottom, float top) 
+{
+    m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+    m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+}
+
+
 void Orthographic2DCamera::RecalculateViewMatrix() 
 {
     Matrix4 transform = glm::translate(Matrix4(1.0f), m_Position) 

@@ -83,8 +83,7 @@ public:
     }
 };
 
-int main()
+Application* CreateApplication()
 {
-    auto app = new App();
-    app->Run();    
+    return new App;
 }

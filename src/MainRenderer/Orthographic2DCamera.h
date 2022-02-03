@@ -7,6 +7,7 @@ class Orthographic2DCamera
 public:
     Orthographic2DCamera(float left, float right, float bottom, float top);
 
+    void SetProjection(float left, float right, float bottom, float top);
     void SetPosition(const Vector3& position) { m_Position = position;  RecalculateViewMatrix();}
     void SetRotation(const Vector3& rotation) { m_Position = rotation;  RecalculateViewMatrix();}
 
@@ -26,3 +27,4 @@ private:
     Vector3 m_Position = { 0.0f, 0.0f, 0.0f};
     float m_Rotation = 0.0f;
 };
+

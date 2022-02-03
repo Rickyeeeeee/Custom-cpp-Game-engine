@@ -4,7 +4,9 @@ class ExampleLayer : public Layer
 {
 public:
     ExampleLayer()
-        : Layer(), m_Camera(-1.0f, 1.0f, -1.0f, 1.0f)
+        : Layer(), m_CameraController(
+            Application::Get().GetWindow().GetWidth() / 
+            Application::Get().GetWindow().GetHeight())
     {
         m_VertexArray.reset(VertexArray::Create());
         float vertices[ 4 * 5 ] = {
@@ -40,27 +42,10 @@ public:
 
     void OnUpdate(Timestep ts) override
     {
-
-
-        if (Input::IsKeyPressed(KEY_LEFT))
-            m_CameraPosition.x -= m_CameraSpeed * ts;
-
-        if (Input::IsKeyPressed(KEY_RIGHT))
-            m_CameraPosition.x += m_CameraSpeed * ts;
-        
-        if (Input::IsKeyPressed(KEY_UP))
-            m_CameraPosition.y -= m_CameraSpeed * ts;
-
-        if (Input::IsKeyPressed(KEY_DOWN))
-            m_CameraPosition.y += m_CameraSpeed * ts;
-        
-
         RenderCommand::SetClearColor({ 0.1, 0.1, 0.1, 1.0 });
         RenderCommand::Clear();
-
-        m_Camera.SetPosition(m_CameraPosition);
-
-        Renderer::BeginScene(m_Camera);
+        m_CameraController.OnUpdate(ts);
+        Renderer::BeginScene(m_CameraController.GetCamera());
         m_Texture->Bind();
         auto shader = m_ShaderLibrary.Get("example");
         Renderer::Submit(m_VertexArray, shader);            
@@ -72,6 +57,7 @@ public:
 
     void OnEvent(Event& event) override
     {
+        m_CameraController.OnEvent(event);
     }
 
 private:
@@ -81,9 +67,7 @@ private:
     Ref<IndexBuffer> m_IndexBuffer; 
     Ref<VertexArray> m_VertexArray;
     Ref<Texture> m_Texture;
-    Orthographic2DCamera m_Camera;
-    Vector3 m_CameraPosition = {0.0f, 0.0f, 0.0f,};
-    float m_CameraSpeed = 0.1f;
+    OrthographicCameraController m_CameraController;
 };
 
 class Sandbox : public Application
@@ -97,8 +81,8 @@ public:
 
 };
 
-int main()
+
+Application* CreateApplication()
 {
-    auto* sandboxApplication = new Sandbox();
-    sandboxApplication->Run();   
+    return new Sandbox;
 }
