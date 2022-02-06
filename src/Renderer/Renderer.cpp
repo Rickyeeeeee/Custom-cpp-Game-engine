@@ -3,6 +3,7 @@
 #include "OpenGl/OpenGLShader.h"
 #include "core/core.h"
 #include "Renderer/Renderer2D.h"
+#include "Renderer/Renderer3D.h"
 Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
 
 void Renderer::BeginScene(Orthographic2DCamera& camera) 
@@ -43,6 +44,7 @@ void Renderer::Init()
 {
     RenderCommand::Init();
     Renderer2D::Init();
+    Renderer3D::Init();
 }
 
 void Renderer::OnWindowResize(unsigned int width, unsigned int height) 

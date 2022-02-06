@@ -141,6 +141,11 @@
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\engine.dir\\Renderer\\Renderer3D.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\Renderer\\Renderer3D.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/Renderer/Renderer3D.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\engine.dir\\Renderer\\RendererAPI.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\Renderer\\RendererAPI.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/Renderer/RendererAPI.cpp"
 },

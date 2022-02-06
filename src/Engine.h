@@ -10,6 +10,7 @@
 #include "Renderer/Texture.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Renderer2D.h"
+#include "Renderer/Renderer3D.h"
 #include "OpenGl/OpenGLShader.h"
 #include "core/OrthographicCameraController.h"
 #include "core/Editor3DCameraController.h"

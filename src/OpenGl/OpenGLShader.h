@@ -15,6 +15,7 @@ public:
     virtual void Bind() const override;
     virtual void UnBind() const override;
 
+    virtual void SetFloat(const std::string& name, const float& value) override;
     virtual void SetFloat3(const std::string& name,const Vector3& vec) override;
     virtual void SetFloat4(const std::string& name,const Vector4& vec) override;
     virtual void SetMat4(const std::string& name,const Matrix4& mat) override;

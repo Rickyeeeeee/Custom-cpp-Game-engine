@@ -41,6 +41,11 @@ void OpenGLShader::UnBind() const
     glUseProgram(m_RendererID);
 }
 
+void OpenGLShader::SetFloat(const std::string& name, const float& value) 
+{
+    this->UploadUniformFloat(name, value);
+}
+
 void OpenGLShader::SetFloat3(const std::string& name, const Vector3& vec) 
 {
     this->UploadUniformVector3(name, vec);

@@ -41,58 +41,30 @@ ExampleLayer::ExampleLayer()
 : Layer(), 
   m_CameraController({ (float)Application::Get().GetWindow().GetWidth() / 
            (float)Application::Get().GetWindow().GetHeight()
-  , 45.0f, 0.1f, 100.0f }), m_model(1.0f)
+  , 45.0f, 0.1f, 100.0f })
 {
-    m_VertexArray = VertexArray::Create();
-    float vertices[3 * 8] = {
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f, -0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f
-    };
-    unsigned int indices[3 * 2 * 6] = {
-        0, 4, 6,    6, 2, 0,
-        0, 2, 3,    3, 1, 2,
-        4, 0, 1,    1, 5, 4,
-        2, 6, 7,    7, 3, 2,
-        6, 4, 5,    5, 7, 6,
-        1, 3, 7,    7, 5, 1
-    };
-    m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-    {
-        BufferLayout layout = {
-            { ShaderDataType::Float3, "a_Position" }
-        };
-        m_VertexBuffer->SetLayout(layout);
-    }
-    m_VertexArray->AddVertexBuffer(m_VertexBuffer);
-    m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
-    m_VertexArray->SetIndexBuffer(m_IndexBuffer);    
-    m_Shader = Shader::Create("asset/shaders/simple3d.glsl");
+    m_transform1 = glm::translate(Matrix4(1.0f), Vector3(2.0f, 3.0f, 2.0f))
+                 * glm::scale(Matrix4(1.0f), Vector3(2.0f, 0.5f, 1.0f));
 }
 
 void ExampleLayer::OnUpdate(Timestep ts) 
 {
     PROFILE_SCOPE("ExamplerLayer OnUpdate: ");
 
-    RenderCommand::SetClearColor( { 0.1f, 0.1f, 0.1f, 1.0f });
-    RenderCommand::Clear();
-    
     Vector2 MousePosition = { Input::GetMouseX(), Input::GetMouseY()};
     Vector2 offset = MousePosition - LastMousePosition;
     LastMousePosition = MousePosition;
 
     m_CameraController.OnUpdate(ts, offset);
 
-    m_Shader->Bind();
-    m_Shader->SetMat4("u_ViewProjection", m_CameraController.GetCamera().GetViewProjectionMatrix());
-    m_Shader->SetMat4("u_Model", m_model);
-    m_VertexArray->Bind();
-    RenderCommand::DrawIndexed(m_VertexArray);
+    RenderCommand::SetClearColor( { 0.1f, 0.1f, 0.1f, 1.0f });
+    RenderCommand::Clear();
+    
+    Renderer3D::BeginScene(m_CameraController.GetCamera());
+    Renderer3D::DrawCube(Matrix4(1.0f));
+    Renderer3D::DrawCube(m_transform1);
+    Renderer3D::EndScene();
+
 }
 
 void ExampleLayer::OnImGuiRender()
