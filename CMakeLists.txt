@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(Coolgame VERSION 0.1.1)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../sandbox)
 
 add_executable(
@@ -20,10 +23,13 @@ add_subdirectory(src)
 target_include_directories(
     project1
     PRIVATE src
+    PRIVATE external
     )
+
 target_include_directories(
     project2
     PRIVATE src
+    PRIVATE external
     )
                     
 target_link_libraries(

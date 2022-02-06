@@ -20,7 +20,6 @@ void Orthographic2DCamera::RecalculateViewMatrix()
 {
     Matrix4 transform = glm::translate(Matrix4(1.0f), m_Position) 
                       * glm::rotate(Matrix4(1.0f), glm::radians(m_Rotation), Vector3(0,0,1));
-    
     m_ViewMatrix = glm::inverse(transform);
     m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 }

@@ -41,6 +41,26 @@ void OpenGLShader::UnBind() const
     glUseProgram(m_RendererID);
 }
 
+void OpenGLShader::SetFloat3(const std::string& name, const Vector3& vec) 
+{
+    this->UploadUniformVector3(name, vec);
+}
+
+void OpenGLShader::SetFloat4(const std::string& name, const Vector4& vec) 
+{
+    this->UploadUniformVector4(name, vec);
+}
+
+void OpenGLShader::SetMat4(const std::string& name, const Matrix4& mat) 
+{
+    this->UploadUniformMat4(name, mat);
+}
+
+void OpenGLShader::SetInt(const std::string& name, int value) 
+{
+    this->UploadUniformInt(name, value);
+}
+
 const std::string OpenGLShader::GetName() const 
 {
     return m_Name;

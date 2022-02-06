@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_BUILD_TYPE)
 
 file(GLOB CPP_SOURCE 
     *.cpp
@@ -12,7 +11,7 @@ file(GLOB CPP_SOURCE
     stb_image/*.cpp
     OpenGL/*.cpp
     Renderer/*.cpp
-    )
+)
 add_library(engine 
     ${CPP_SOURCE}
 )

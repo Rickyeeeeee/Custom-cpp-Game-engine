@@ -1,72 +1,72 @@
 [
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/project1.dir/includes_CXX.rsp -g -o CMakeFiles\\project1.dir\\sandbox\\sandbox.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\sandbox\\sandbox.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/project1.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\project1.dir\\sandbox\\sandbox.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\sandbox\\sandbox.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/sandbox/sandbox.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/project2.dir/includes_CXX.rsp -g -o CMakeFiles\\project2.dir\\sandbox\\demo3d.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\sandbox\\demo3d.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/project2.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\project2.dir\\sandbox\\demo3d.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\sandbox\\demo3d.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/sandbox/demo3d.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/imgui",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\imgui.dir\\imgui_demo.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui_demo.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_demo.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui_demo.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/imgui/imgui_demo.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/imgui",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\imgui.dir\\imgui_draw.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui_draw.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_draw.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui_draw.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/imgui/imgui_draw.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/imgui",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\imgui.dir\\imgui_tables.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui_tables.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_tables.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui_tables.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/imgui/imgui_tables.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/imgui",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\imgui.dir\\imgui_widgets.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui_widgets.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_widgets.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui_widgets.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/imgui/imgui_widgets.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/imgui",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -o CMakeFiles\\imgui.dir\\imgui.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe   -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\imgui\\imgui.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/imgui/imgui.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/spdlog",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\spdlog.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\spdlog.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\spdlog.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\spdlog.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/spdlog/src/spdlog.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/spdlog",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\stdout_sinks.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\stdout_sinks.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\stdout_sinks.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\stdout_sinks.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/spdlog/src/stdout_sinks.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/spdlog",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\color_sinks.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\color_sinks.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\color_sinks.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\color_sinks.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/spdlog/src/color_sinks.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/spdlog",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\file_sinks.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\file_sinks.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\file_sinks.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\file_sinks.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/spdlog/src/file_sinks.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/spdlog",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\async.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\async.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\async.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\async.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/spdlog/src/async.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/spdlog",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\cfg.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\cfg.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\cfg.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\cfg.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/spdlog/src/cfg.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/external/spdlog",
-  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\fmt.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\fmt.cpp",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe -DSPDLOG_COMPILED_LIB @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\fmt.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\external\\spdlog\\src\\fmt.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/external/spdlog/src/fmt.cpp"
 },
 {
@@ -121,6 +121,11 @@
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\engine.dir\\Renderer\\Perspective3DCamera.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\Renderer\\Perspective3DCamera.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/Renderer/Perspective3DCamera.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\engine.dir\\Renderer\\RenderCommand.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\Renderer\\RenderCommand.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/Renderer/RenderCommand.cpp"
 },
@@ -128,6 +133,11 @@
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\engine.dir\\Renderer\\Renderer.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\Renderer\\Renderer.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/Renderer/Renderer.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\engine.dir\\Renderer\\Renderer2D.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\Renderer\\Renderer2D.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/Renderer/Renderer2D.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
@@ -153,6 +163,11 @@
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",
   "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\engine.dir\\core\\Application.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\core\\Application.cpp",
   "file": "C:/Users/ricky/Dev/coolgame/src/core/Application.cpp"
+},
+{
+  "directory": "C:/Users/ricky/Dev/coolgame/build/src",
+  "command": "C:\\Users\\ricky\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/engine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\engine.dir\\core\\Editor3DCameraController.cpp.obj -c C:\\Users\\ricky\\Dev\\coolgame\\src\\core\\Editor3DCameraController.cpp",
+  "file": "C:/Users/ricky/Dev/coolgame/src/core/Editor3DCameraController.cpp"
 },
 {
   "directory": "C:/Users/ricky/Dev/coolgame/build/src",

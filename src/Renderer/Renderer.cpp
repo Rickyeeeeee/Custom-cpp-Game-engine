@@ -2,7 +2,7 @@
 #include "Renderer/Renderer.h"
 #include "OpenGl/OpenGLShader.h"
 #include "core/core.h"
-
+#include "Renderer/Renderer2D.h"
 Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
 
 void Renderer::BeginScene(Orthographic2DCamera& camera) 
@@ -42,6 +42,7 @@ void Renderer::Submit(const Ref<VertexArray>& vertexArray,
 void Renderer::Init() 
 {
     RenderCommand::Init();
+    Renderer2D::Init();
 }
 
 void Renderer::OnWindowResize(unsigned int width, unsigned int height) 

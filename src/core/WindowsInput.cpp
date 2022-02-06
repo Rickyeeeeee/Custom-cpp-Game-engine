@@ -24,7 +24,7 @@ std::pair<float, float> WindowsInput::GetMousePositionimpl()
     return { (float)xpos, (float)ypos };
 }
 
-bool WindowsInput::GetMouseXimpl() 
+float WindowsInput::GetMouseXimpl() 
 {
     auto window = Application::Get().GetWindow().getWindow();
     double xpos, ypos;
@@ -32,7 +32,7 @@ bool WindowsInput::GetMouseXimpl()
     return (float)xpos;
 }
 
-bool WindowsInput::GetMouseYimpl() 
+float WindowsInput::GetMouseYimpl() 
 {
     auto window = Application::Get().GetWindow().getWindow();
     double xpos, ypos;

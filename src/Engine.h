@@ -5,11 +5,14 @@
 #include "core/Keycode.h"
 #include "core/Mousecode.h"
 #include "core/core.h"
-
+#include "core/pch.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/Texture.h"
 #include "Renderer/Shader.h"
-
+#include "Renderer/Renderer2D.h"
 #include "OpenGl/OpenGLShader.h"
 #include "core/OrthographicCameraController.h"
+#include "core/Editor3DCameraController.h"
+#include "Renderer/Perspective3DCamera.h"
+#include "core/imguiLayer.h"
 // #include "core/Log.h"
