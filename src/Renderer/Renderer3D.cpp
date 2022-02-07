@@ -56,10 +56,7 @@ void Renderer3D::Init()
         20, 21, 22, 22, 23, 20
     };
 
-    Ref<VertexBuffer> cubeVB;
-    Ref<IndexBuffer>  cubeIB;
-
-    cubeVB.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+    Ref<VertexBuffer> cubeVB = VertexBuffer::Create(vertices, sizeof(vertices));
     {
         BufferLayout layout = {
             { ShaderDataType::Float3, "a_Position" },
@@ -68,7 +65,7 @@ void Renderer3D::Init()
         cubeVB->SetLayout(layout);
     }
     s_Data->CubeVertexArray->AddVertexBuffer(cubeVB);
-    cubeIB.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
+    Ref<IndexBuffer> cubeIB = IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int));
     s_Data->CubeVertexArray->SetIndexBuffer(cubeIB);    
     s_Data->simple3dShader = Shader::Create("asset/shaders/simple3d.glsl");
     s_Data->simple3dShader->Bind();

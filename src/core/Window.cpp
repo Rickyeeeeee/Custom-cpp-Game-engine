@@ -126,6 +126,20 @@ void Window::Init(const WindowProps &props)
         data.EventCallback(event);
     });
 
+    glDebugMessageCallback([](GLenum source,
+                 GLenum type,
+                 GLuint id,
+                 GLenum severity,
+                 GLsizei length,
+                 const GLchar* message,
+                 const void* userParam )
+    {
+        fprintf( stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+               ( type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "" ),
+                type, severity, message );
+    }, 0);
+
+    glEnable(GL_DEBUG_OUTPUT);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

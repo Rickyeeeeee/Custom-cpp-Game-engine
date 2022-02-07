@@ -25,7 +25,8 @@ static GLenum ShaderDataTypeToOpenGlBaseType(ShaderDataType type)
 
 OpenGLVertexArray::OpenGLVertexArray() 
 {
-    glGenVertexArrays(1, &m_RendererID);    
+    glCreateVertexArrays(1, &m_RendererID);    
+    glBindVertexArray(m_RendererID);
 }
 
 void OpenGLVertexArray::Bind() const 

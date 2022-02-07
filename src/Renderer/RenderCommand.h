@@ -12,9 +12,10 @@ public:
     }
     static inline void SetClearColor(const Vector4& color ) { s_RendererAPI->SetClearColor(color); }
     static inline void Clear() { s_RendererAPI->Clear(); }
-    static inline void DrawIndexed(const Ref<VertexArray>& vertexArray)
+    static inline void DrawIndexed(const Ref<VertexArray>& vertexArray, unsigned int indexCount = 0)
     {
-        s_RendererAPI->DrawIndexed(vertexArray);
+        vertexArray->Bind();
+        s_RendererAPI->DrawIndexed(vertexArray, indexCount);
     }
 private:
     static RendererAPI* s_RendererAPI;

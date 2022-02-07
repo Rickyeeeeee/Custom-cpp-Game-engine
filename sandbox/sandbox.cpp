@@ -20,13 +20,19 @@ public:
         RenderCommand::Clear();
 
         Renderer2D::BeginScene(m_CameraController.GetCamera());
-        Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f}, { 0.5f, 0.5f }, { 1.0f, 0.2f, 0.3f, 1.0f });            
-        Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f}, { 0.5f, 0.5f }, m_Texture);            
+        Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.4f, 1.0f });            
+        Renderer2D::DrawQuad({ -1.0f, -1.0f}, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.4f, 1.0f });            
+        // Renderer2D::DrawQuad({ 0.0f, 1.0f, 0.1f }, { 1.0f, 1.0f }, { 0.5f, 1.0f, 0.4f, 1.0f });            
+        // Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f}, { 0.5f, 0.5f }, m_Texture);            
         Renderer2D::EndScene();
     }
 
     virtual void OnImGuiRender() override
     {
+        // auto rendererData =  Renderer2D::Get();
+        ImGui::Begin("Renderer2D");
+        // ImGui::Text("")
+        ImGui::End();
     }
 
     void OnEvent(Event& event) override
@@ -37,6 +43,7 @@ public:
 private:
     Ref<Texture2D> m_Texture;
     OrthographicCameraController m_CameraController;
+
 };
 
 class Sandbox : public Application
