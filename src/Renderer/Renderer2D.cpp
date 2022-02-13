@@ -10,13 +10,15 @@ struct QuadVertex
     Vector3 Position;
     Vector4 Color;
     Vector2 TexCoord;
+    float   TexIndex;
 };
 
 struct Renderer2DData
 {
-    const unsigned int MaxQuads = 100;
-    const unsigned int MaxVertices = MaxQuads * 4;
-    const unsigned int MaxIndices = MaxQuads * 6;
+    static const unsigned int MaxQuads = 10000;
+    static const unsigned int MaxVertices = MaxQuads * 4;
+    static const unsigned int MaxIndices = MaxQuads * 6;
+    static const unsigned int MaxTextureSlots = 32;
 
     Ref<VertexArray> QuadVertexArray;
     Ref<VertexBuffer> QuadVertexBuffer;
@@ -26,6 +28,12 @@ struct Renderer2DData
     unsigned int QuadIndexCount = 0;
     QuadVertex* QuadVertexBufferBase = nullptr;
     QuadVertex* QuadVertexBufferPtr = nullptr;
+
+    std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
+    unsigned int TextureSlotIndex = 1;
+
+
+    Renderer2D::Statistics Stats;
 };
 
 
@@ -38,7 +46,8 @@ void Renderer2D::Init()
     s_Data.QuadVertexBuffer->SetLayout({
         { ShaderDataType::Float3, "a_Position" },
         { ShaderDataType::Float4, "a_Color"    },
-        { ShaderDataType::Float2, "a_TexCoord" }
+        { ShaderDataType::Float2, "a_TexCoord" },
+        { ShaderDataType::Float,  "a_TexIndex" }
     });
     s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
     s_Data.QuadVertexBufferBase = new QuadVertex[s_Data.MaxVertices];
@@ -66,9 +75,15 @@ void Renderer2D::Init()
     unsigned int white_texture_data = 0xffffffff;
     s_Data.WhiteTexture->SetData(&white_texture_data, sizeof(unsigned int));
 
+    int samplers[s_Data.MaxTextureSlots];
+    for (unsigned int i = 0; i < s_Data.MaxTextureSlots; i++)
+        samplers[i] = i;
+
     s_Data.TextureShader = Shader::Create("asset/shaders/Texture.glsl");
     s_Data.TextureShader->Bind();
-    s_Data.TextureShader->SetInt("u_Texture", 0);
+    s_Data.TextureShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
+
+    s_Data.TextureSlots[0] = s_Data.WhiteTexture;
 }
 
 void Renderer2D::Shutdown() 
@@ -83,14 +98,27 @@ void Renderer2D::BeginScene(const Orthographic2DCamera& camera)
 
     s_Data.QuadIndexCount = 0;
     s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+
+    s_Data.TextureSlotIndex = 1;
 }
 
 void Renderer2D::Flush() 
 {
+    for (unsigned int i = 0; i < s_Data.TextureSlotIndex; i++)
+        s_Data.TextureSlots[i]->Bind(i);
     s_Data.QuadVertexArray->Bind();
-    RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
+    RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);   
 
-    
+    s_Data.Stats.DrawCalls++;
+}
+
+void Renderer2D::FlushAndReset()
+{
+    EndScene();
+    s_Data.QuadIndexCount = 0;
+    s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+
+    s_Data.TextureSlotIndex = 1;
 }
 
 void Renderer2D::EndScene() 
@@ -100,11 +128,6 @@ void Renderer2D::EndScene()
     Flush();
 }
 
-// Renderer2DData& Renderer2D::Get() 
-// {
-//     return s_Data;
-// }
-
 void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Vector4& color) 
 {
     DrawQuad({ position.x, position.y, 0.0f }, size, color);
@@ -112,39 +135,40 @@ void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Ve
 
 void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Vector4& color) 
 {
+    const float texIndex = 0.0f;
+
+    if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+    {
+        FlushAndReset(); 
+    }
+
     s_Data.QuadVertexBufferPtr->Position = position;
-    s_Data.QuadVertexBufferPtr->Color = color;
+    s_Data.QuadVertexBufferPtr->Color    = color;
     s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = texIndex;
     s_Data.QuadVertexBufferPtr++;
     
     s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y, position.z };
-    s_Data.QuadVertexBufferPtr->Color = color;
+    s_Data.QuadVertexBufferPtr->Color    = color;
     s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = texIndex;
     s_Data.QuadVertexBufferPtr++;
 
     s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y + size.y, position.z };
-    s_Data.QuadVertexBufferPtr->Color = color;
+    s_Data.QuadVertexBufferPtr->Color    = color;
     s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = texIndex;
     s_Data.QuadVertexBufferPtr++;
 
     s_Data.QuadVertexBufferPtr->Position = { position.x, position.y + size.y, position.z };
-    s_Data.QuadVertexBufferPtr->Color = color;
+    s_Data.QuadVertexBufferPtr->Color    = color;
     s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = texIndex;
     s_Data.QuadVertexBufferPtr++;
 
     s_Data.QuadIndexCount += 6;
-    // s_Data.TextureShader->Bind();
-    // s_Data.TextureShader->SetFloat4("u_Color", color);
-    // s_Data.TextureShader->SetFloat("u_TilingFactor", 1.0f);
-    // s_Data.WhiteTexture->Bind();
 
-    // Matrix4 transform = glm::translate(Matrix4(1.0f), position)
-    //                  * glm::scale(Matrix4(1.0f), { size.x, size.y, 1.0f });
-
-    // s_Data.TextureShader->SetMat4("u_Transform", transform);
-    // s_Data.QuadVertexArray->Bind();
-
-    // RenderCommand::DrawIndexed(s_Data.QuadVertexArray);
+    s_Data.Stats.QuadCount++;
 }
 
 void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Ref<Texture2D>& texture) 
@@ -154,17 +178,61 @@ void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Re
 
 void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Ref<Texture2D>& texture) 
 {
-    s_Data.TextureShader->Bind();
-    s_Data.TextureShader->SetFloat4("u_Color", { 1.0f, 1.0f, 1.0f, 1.0f});
-    s_Data.TextureShader->SetFloat("u_TilingFactor", 1.0f);
+    constexpr Vector4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-    texture->Bind();
+    float textureIndex = 0.0f;
 
-    Matrix4 transform = glm::translate(Matrix4(1.0f), position)
-                     * glm::scale(Matrix4(1.0f), { size.x, size.y, 1.0f });
+    for (unsigned int i = 1; i < s_Data.TextureSlotIndex; i++)
+    {
+        if (*s_Data.TextureSlots[i].get() == *texture.get())
+        {
+            textureIndex = (float)i;
+            break;
+        }
+    }
+
+    if (textureIndex == 0.0f)
+    {
+        textureIndex = (float)s_Data.TextureSlotIndex;
+        s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
+        s_Data.TextureSlotIndex++;
+    }
+
+    s_Data.QuadVertexBufferPtr->Position = position;
+    s_Data.QuadVertexBufferPtr->Color    = color;
+    s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+    s_Data.QuadVertexBufferPtr++;
     
-    s_Data.TextureShader->SetMat4("u_Transform", transform);
-    s_Data.QuadVertexArray->Bind();
-    
-    RenderCommand::DrawIndexed(s_Data.QuadVertexArray);
+    s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y, position.z };
+    s_Data.QuadVertexBufferPtr->Color    = color;
+    s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+    s_Data.QuadVertexBufferPtr++;
+
+    s_Data.QuadVertexBufferPtr->Position = { position.x + size.x, position.y + size.y, position.z };
+    s_Data.QuadVertexBufferPtr->Color    = color;
+    s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+    s_Data.QuadVertexBufferPtr++;
+
+    s_Data.QuadVertexBufferPtr->Position = { position.x, position.y + size.y, position.z };
+    s_Data.QuadVertexBufferPtr->Color    = color;
+    s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+    s_Data.QuadVertexBufferPtr++;
+
+    s_Data.QuadIndexCount += 6;
+
+    s_Data.Stats.QuadCount++;
+}
+
+void Renderer2D::ResetStats()
+{
+    memset(&s_Data.Stats, 0, sizeof(Statistics));
+}
+
+Renderer2D::Statistics Renderer2D::GetStats() 
+{
+    return s_Data.Stats;
 }

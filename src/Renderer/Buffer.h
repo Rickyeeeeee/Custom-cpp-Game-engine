@@ -104,6 +104,7 @@ public:
     virtual void SetLayout(const BufferLayout& layout) = 0;
 
     virtual void SetData(const void* data, unsigned int size) = 0;
+    virtual void SetData(const void* data, int offset, unsigned int size) = 0;
 
     static Ref<VertexBuffer> Create(unsigned int size);
     static Ref<VertexBuffer> Create(float* vertices, unsigned int size);
@@ -117,6 +118,9 @@ public:
     virtual void Bind() const = 0;
     virtual void Unbind() const = 0;
     virtual unsigned int GetCount() const = 0;
+
+    virtual void SetData(const void* data, unsigned int count) = 0;
+    virtual void SetData(const void* data, int offset, unsigned int count) = 0;
 
     static Ref<IndexBuffer> Create(unsigned int size);
     static Ref<IndexBuffer> Create(unsigned int* indices, unsigned int count);

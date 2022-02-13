@@ -20,15 +20,19 @@ public:
     virtual void SetFloat4(const std::string& name,const Vector4& vec) override;
     virtual void SetMat4(const std::string& name,const Matrix4& mat) override;
     virtual void SetInt(const std::string& name, int value) override;
+    virtual void SetIntArray(const std::string& name, int* value, unsigned int count) override;
+    virtual void SetMat4Array(const std::string& name, Matrix4* matrix, unsigned int count) override;
     virtual const std::string GetName() const override;
 
     void UploadUniformInt(const std::string& name, const int& value);
+    void UploadUniformIntArray(const std::string& name, const int* values, unsigned int count);
     void UploadUniformFloat(const std::string& name, const float& value);
     void UploadUniformVector2(const std::string& name, const Vector2& vector);
     void UploadUniformVector3(const std::string& name, const Vector3& vector);
     void UploadUniformVector4(const std::string& name, const Vector4& vector); 
     void UploadUniformMat3(const std::string& name, const Matrix3& matrix);
     void UploadUniformMat4(const std::string& name, const Matrix4& matrix);
+    void UploadUniformMat4Array(const std::string& name, const Matrix4* matrix, unsigned int count);
 private:
     std::string ReadFile(const std::string& filepath);
     std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);

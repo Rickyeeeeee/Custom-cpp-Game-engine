@@ -66,6 +66,16 @@ void OpenGLShader::SetInt(const std::string& name, int value)
     this->UploadUniformInt(name, value);
 }
 
+void OpenGLShader::SetIntArray(const std::string& name, int* values, unsigned int count) 
+{
+    this->UploadUniformIntArray(name, values, count);
+}
+
+void OpenGLShader::SetMat4Array(const std::string& name, Matrix4* matrix, unsigned int count) 
+{
+    this->UploadUniformMat4Array(name, matrix, count);
+}
+
 const std::string OpenGLShader::GetName() const 
 {
     return m_Name;
@@ -75,6 +85,12 @@ void OpenGLShader::UploadUniformInt(const std::string& name, const int& value)
 {
     GLuint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniform1i(location, value);
+}
+
+void OpenGLShader::UploadUniformIntArray(const std::string& name, const int* values, unsigned int count) 
+{
+    GLuint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniform1iv(location, count, values);
 }
 
 void OpenGLShader::UploadUniformFloat(const std::string& name, const float& value) 
@@ -111,6 +127,12 @@ void OpenGLShader::UploadUniformMat4(const std::string& name, const Matrix4& mat
 {
     GLuint location = glGetUniformLocation(m_RendererID, name.c_str());
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+void OpenGLShader::UploadUniformMat4Array(const std::string& name, const Matrix4* matrix, unsigned int count) 
+{
+    GLuint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniformMatrix4fv(location, count, GL_FALSE, (float*)matrix);    
 }
 
 std::string OpenGLShader::ReadFile(const std::string& filepath) 

@@ -31,6 +31,11 @@ void OpenGLVertexBuffer::SetData(const void* data, unsigned int size)
     glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
     glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 }
+void OpenGLVertexBuffer::SetData(const void* data, int offset, unsigned int size)
+{
+    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+    glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+}
 
 OpenGLVertexBuffer::~OpenGLVertexBuffer() 
 {
@@ -53,6 +58,19 @@ OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int* indices, unsigned int count)
     glCreateBuffers(1, &m_RendererID);
     glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
     glBufferData(GL_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW);    
+}
+
+void OpenGLIndexBuffer::SetData(const void* data, unsigned int count) 
+{
+    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, count * sizeof(unsigned int), data);
+    
+}
+
+void OpenGLIndexBuffer::SetData(const void* data, int offset, unsigned int count) 
+{
+    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+    glBufferSubData(GL_ARRAY_BUFFER, offset, count * sizeof(unsigned int), data);
 }
 
 void OpenGLIndexBuffer::Bind() const 

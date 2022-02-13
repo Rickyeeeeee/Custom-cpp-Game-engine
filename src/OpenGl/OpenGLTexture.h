@@ -16,6 +16,11 @@ public:
     virtual unsigned int GetHeight() const override { return m_Height; }
     virtual void SetData(void* data, unsigned int size) override;
     virtual void Bind(unsigned int slot) const override;
+
+    virtual bool operator==(const Texture& other) const override 
+    { 
+        return m_RendererID == ((OpenGLTexture2D&)other).m_RendererID; 
+    }
 private:
     std::string m_Path;
     int m_Width, m_Height;

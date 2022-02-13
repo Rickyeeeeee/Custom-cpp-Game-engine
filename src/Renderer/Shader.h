@@ -17,6 +17,8 @@ public:
     virtual void SetFloat4(const std::string& name,const Vector4& vec) = 0;
     virtual void SetMat4(const std::string& name,const Matrix4& mat) = 0;
     virtual void SetInt(const std::string& name, int value) = 0;
+    virtual void SetIntArray(const std::string& name, int* value, unsigned int count) = 0;
+    virtual void SetMat4Array(const std::string& name, Matrix4* value, unsigned int count) = 0;
 
     virtual const std::string GetName() const = 0;
 

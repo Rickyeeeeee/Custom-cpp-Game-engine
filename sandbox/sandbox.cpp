@@ -16,6 +16,8 @@ public:
     {
         m_CameraController.OnUpdate(ts);
 
+        Renderer2D::ResetStats();
+
         RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
         RenderCommand::Clear();
 
@@ -23,7 +25,7 @@ public:
         Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.4f, 1.0f });            
         Renderer2D::DrawQuad({ -1.0f, -1.0f}, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.4f, 1.0f });            
         // Renderer2D::DrawQuad({ 0.0f, 1.0f, 0.1f }, { 1.0f, 1.0f }, { 0.5f, 1.0f, 0.4f, 1.0f });            
-        // Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f}, { 0.5f, 0.5f }, m_Texture);            
+        Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f}, { 0.5f, 0.5f }, m_Texture);            
         Renderer2D::EndScene();
     }
 
@@ -32,6 +34,15 @@ public:
         // auto rendererData =  Renderer2D::Get();
         ImGui::Begin("Renderer2D");
         // ImGui::Text("")
+        ImGui::End();
+        
+        auto stats = Renderer2D::GetStats();
+        ImGui::Begin("Settings");
+        ImGui::Text("Renderer2D Stats:");
+        ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+        ImGui::Text("Quads: ", stats.QuadCount);
+        ImGui::Text("Vertices: %d ", stats.GetTotalVertexCount());
+        ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
         ImGui::End();
     }
 

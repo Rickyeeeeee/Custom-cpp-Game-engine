@@ -14,13 +14,14 @@ public:
     void OnEvent(Event& event) override;
 private:
     Editor3DCameraController m_CameraController;
-    Ref<Shader> m_Shader;
-    Ref<VertexBuffer> m_VertexBuffer;
-    Ref<IndexBuffer> m_IndexBuffer;
-    Ref<VertexArray> m_VertexArray;
 
     Matrix4 m_transform1;
     Vector2 LastMousePosition;
+    std::vector<Vertex3DSimple> m_Vertices;
+    std::array<std::vector<unsigned int>, 1000> m_Indices;
+
+    unsigned int m_offset = 0;
+    bool Initialized = false;
 
     struct profile_result
     {
