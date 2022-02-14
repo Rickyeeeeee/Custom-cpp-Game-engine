@@ -17,8 +17,7 @@ private:
 
     Matrix4 m_transform1;
     Vector2 LastMousePosition;
-    std::vector<Vertex3DSimple> m_Vertices;
-    std::array<std::vector<unsigned int>, 1000> m_Indices;
+    std::array<Mesh, 1000> m_Meshes;
 
     unsigned int m_offset = 0;
     bool Initialized = false;

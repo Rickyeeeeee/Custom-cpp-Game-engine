@@ -3,6 +3,7 @@
 #include "Renderer/Perspective3DCamera.h"
 #include "Renderer/Transform.h"
 #include "Renderer/Vertex3D.h"
+#include "Renderer/Mesh.h"
 #include "core/pch.h"
 
 class Renderer3D
@@ -19,10 +20,10 @@ public:
     static void Init();
     static void Shutdown();
 
-    static void SubmitStaticMesh(std::vector<Vertex3DSimple>& vertices, std::vector<unsigned int>& indices);
-    static void DrawStaticMesh(const std::vector<unsigned int>& indices);
+    static void SubmitStaticMesh(Mesh& mesh);
     
     static void BeginScene(const Perspective3DCamera& camera);
+    static void DrawStaticMesh(const Mesh& indices);
     static void EndScene();
     static void Flush();
 

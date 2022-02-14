@@ -10,7 +10,7 @@ struct Vertex3DSimple
     Vector4 Color;
     Vector3 Normal;
     unsigned int ID;
-
+    Vertex3DSimple() {}
     Vertex3DSimple(const Vector3& position, const Vector4 color, const Vector3& normal, unsigned int id)
         : Position(position), Color(color), Normal(normal), ID(id) {}
 

@@ -31,6 +31,7 @@ public:
     OpenGLIndexBuffer(unsigned int count);
     OpenGLIndexBuffer(unsigned int* indices, unsigned int count);
 
+    virtual void ResetData(const void* data, unsigned int count) override;
     virtual void SetData(const void* data, unsigned int count) override;
     virtual void SetData(const void* data, int offset, unsigned int count) override;
 

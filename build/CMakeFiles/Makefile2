@@ -136,12 +136,12 @@ CMakeFiles/project1.dir/all: external/imgui/CMakeFiles/imgui.dir/all
 CMakeFiles/project1.dir/all: src/CMakeFiles/engine.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=42,43 "Built target project1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=43,44 "Built target project1"
 .PHONY : CMakeFiles/project1.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/project1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 43
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 44
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/project1.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 0
 .PHONY : CMakeFiles/project1.dir/rule
@@ -163,12 +163,12 @@ CMakeFiles/project2.dir/all: external/imgui/CMakeFiles/imgui.dir/all
 CMakeFiles/project2.dir/all: src/CMakeFiles/engine.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=44,45 "Built target project2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=45,46 "Built target project2"
 .PHONY : CMakeFiles/project2.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/project2.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 43
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 44
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/project2.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 0
 .PHONY : CMakeFiles/project2.dir/rule
@@ -189,7 +189,7 @@ CMakeFiles/project2.dir/clean:
 external/imgui/CMakeFiles/imgui.dir/all:
 	$(MAKE) $(MAKESILENT) -f external\imgui\CMakeFiles\imgui.dir\build.make external/imgui/CMakeFiles/imgui.dir/depend
 	$(MAKE) $(MAKESILENT) -f external\imgui\CMakeFiles\imgui.dir\build.make external/imgui/CMakeFiles/imgui.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=36,37,38,39,40,41 "Built target imgui"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=37,38,39,40,41,42 "Built target imgui"
 .PHONY : external/imgui/CMakeFiles/imgui.dir/all
 
 # Build rule for subdir invocation for target.
@@ -215,7 +215,7 @@ external/imgui/CMakeFiles/imgui.dir/clean:
 external/spdlog/CMakeFiles/spdlog.dir/all:
 	$(MAKE) $(MAKESILENT) -f external\spdlog\CMakeFiles\spdlog.dir\build.make external/spdlog/CMakeFiles/spdlog.dir/depend
 	$(MAKE) $(MAKESILENT) -f external\spdlog\CMakeFiles\spdlog.dir\build.make external/spdlog/CMakeFiles/spdlog.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=46,47,48,49,50,51,52,53 "Built target spdlog"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=47,48,49,50,51,52,53,54 "Built target spdlog"
 .PHONY : external/spdlog/CMakeFiles/spdlog.dir/all
 
 # Build rule for subdir invocation for target.
@@ -241,12 +241,12 @@ external/spdlog/CMakeFiles/spdlog.dir/clean:
 src/CMakeFiles/engine.dir/all: external/imgui/CMakeFiles/imgui.dir/all
 	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\engine.dir\build.make src/CMakeFiles/engine.dir/depend
 	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\engine.dir\build.make src/CMakeFiles/engine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 "Built target engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\ricky\Dev\coolgame\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36 "Built target engine"
 .PHONY : src/CMakeFiles/engine.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/engine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 41
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 42
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/CMakeFiles/engine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\ricky\Dev\coolgame\build\CMakeFiles 0
 .PHONY : src/CMakeFiles/engine.dir/rule

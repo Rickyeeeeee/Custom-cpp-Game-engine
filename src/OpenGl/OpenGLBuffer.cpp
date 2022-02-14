@@ -60,6 +60,12 @@ OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int* indices, unsigned int count)
     glBufferData(GL_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW);    
 }
 
+void OpenGLIndexBuffer::ResetData(const void* data, unsigned int count) 
+{
+    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+    glBufferData(GL_ARRAY_BUFFER, count * sizeof(unsigned int), data, GL_STATIC_DRAW);    
+}
+
 void OpenGLIndexBuffer::SetData(const void* data, unsigned int count) 
 {
     glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
