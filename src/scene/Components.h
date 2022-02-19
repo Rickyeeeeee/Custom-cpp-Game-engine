@@ -1,5 +1,5 @@
 #pragma once
-
+#include <string>
 #include "core/GLM.h"
 
 struct TransformComponent
@@ -11,7 +11,7 @@ struct TransformComponent
     TransformComponent(const Matrix4& transform)
         : Transform(transform) {}
     operator Matrix4& () { return Transform; }
-    operator const Matrix4& () { return Transform; }
+    operator const Matrix4& () const{ return Transform; }
 };  
 
 struct SpriteComponent
@@ -22,4 +22,16 @@ struct SpriteComponent
     SpriteComponent(const SpriteComponent&) = default;
     SpriteComponent(const Vector4& color)
         : Color(color) {}
+};
+
+struct TagComponent
+{
+    std::string Tag;
+
+    TagComponent() = default;   
+    TagComponent(const TagComponent&) = default;   
+    TagComponent(const std::string& tag) 
+        : Tag(tag)
+    {
+    }   
 };

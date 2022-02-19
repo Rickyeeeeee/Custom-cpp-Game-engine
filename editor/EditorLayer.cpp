@@ -22,7 +22,9 @@ void EditorLayer::OnAttach()
 
     m_ActiveScene = CreateRef<Scene>();
 
-    m_ActiveScene->CreateEntity();
+    auto square = m_ActiveScene->CreateEntity("Square");
+    square.AddComponent<SpriteComponent>(Vector4{ 0.0f, 1.0f, 0.0f, 1.0f });
+    m_SquareEntity = square;
 }
 
 void EditorLayer::OnUpdate(Timestep ts) 
@@ -33,10 +35,11 @@ void EditorLayer::OnUpdate(Timestep ts)
     RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
     RenderCommand::Clear();
     Renderer2D::BeginScene(m_CameraController.GetCamera());
-    Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.4f, 1.0f });            
-    Renderer2D::DrawQuad({ -1.0f, -1.0f}, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.4f, 1.0f });            
+    m_ActiveScene->OnUpdate(ts);
+    // Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.4f, 1.0f });            
+    // Renderer2D::DrawQuad({ -1.0f, -1.0f}, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.4f, 1.0f });            
     // Renderer2D::DrawQuad({ 0.0f, 1.0f, 0.1f }, { 1.0f, 1.0f }, { 0.5f, 1.0f, 0.4f, 1.0f });            
-    Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f}, { 0.5f, 0.5f }, m_Texture);            
+    // Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f}, { 0.5f, 0.5f }, m_Texture);            
     Renderer2D::EndScene();
     m_Framebuffer->Unbind();
 }

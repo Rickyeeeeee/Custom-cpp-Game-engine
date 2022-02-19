@@ -21,6 +21,7 @@
 
 #include "scene/Scene.h"
 #include "scene/Components.h"
+#include "scene/Entity.h"
 
 #include "OpenGl/OpenGLShader.h"
 // #include "core/Log.h"

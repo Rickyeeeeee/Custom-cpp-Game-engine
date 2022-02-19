@@ -128,6 +128,51 @@ void Renderer2D::EndScene()
     Flush();
 }
 
+void Renderer2D::DrawQuad(const Matrix4& transform, const Vector4& color)
+{
+    const float texIndex = 0.0f;
+
+    if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
+    {
+        FlushAndReset(); 
+    }
+
+    const Vector4 position[4] = {
+        { -0.5f, -0.5f, 0.0f, 1.0f },
+        {  0.5f, -0.5f, 0.0f, 1.0f },
+        {  0.5f,  0.5f, 0.0f, 1.0f },
+        { -0.5f,  0.5f, 0.0f, 1.0f }
+    };
+
+    s_Data.QuadVertexBufferPtr->Position = transform * position[0];
+    s_Data.QuadVertexBufferPtr->Color    = color;
+    s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = texIndex;
+    s_Data.QuadVertexBufferPtr++;
+    
+    s_Data.QuadVertexBufferPtr->Position = transform * position[1];
+    s_Data.QuadVertexBufferPtr->Color    = color;
+    s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = texIndex;
+    s_Data.QuadVertexBufferPtr++;
+
+    s_Data.QuadVertexBufferPtr->Position = transform * position[2];
+    s_Data.QuadVertexBufferPtr->Color    = color;
+    s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = texIndex;
+    s_Data.QuadVertexBufferPtr++;
+
+    s_Data.QuadVertexBufferPtr->Position = transform * position[3];
+    s_Data.QuadVertexBufferPtr->Color    = color;
+    s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
+    s_Data.QuadVertexBufferPtr->TexIndex = texIndex;
+    s_Data.QuadVertexBufferPtr++;
+
+    s_Data.QuadIndexCount += 6;
+
+    s_Data.Stats.QuadCount++;
+}
+
 void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Vector4& color) 
 {
     DrawQuad({ position.x, position.y, 0.0f }, size, color);
@@ -225,6 +270,11 @@ void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Re
     s_Data.QuadIndexCount += 6;
 
     s_Data.Stats.QuadCount++;
+}
+
+void Renderer2D::DrawQuad(const Matrix4& transform, const Ref<Texture2D>& texture)
+{
+    
 }
 
 void Renderer2D::ResetStats()

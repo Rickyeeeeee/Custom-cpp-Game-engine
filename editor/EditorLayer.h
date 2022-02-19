@@ -16,6 +16,7 @@ private:
     Ref<Texture2D> m_Texture;
     Ref<Framebuffer> m_Framebuffer;
     Ref<Scene> m_ActiveScene;
+    Entity m_SquareEntity;
     OrthographicCameraController m_CameraController;
     bool m_ViewportFocused = false;
     bool m_ViewportHovered = false;

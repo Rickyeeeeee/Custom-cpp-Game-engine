@@ -1,4 +1,8 @@
 #include "Scene.h"
+#include "Entity.h"
+#include "Components.h"
+#include "Renderer/Renderer2D.h"
+
 Scene::Scene()
 {
 }
@@ -8,12 +12,23 @@ Scene::~Scene()
     
 }
 
-entt::entity Scene::CreateEntity()
+Entity Scene::CreateEntity(const std::string& name)
 {
-    return m_Registry.create();
+    Entity entity = { m_Registry.create(), this };    
+    entity.AddComponent<TransformComponent>(Matrix4(1.0f));
+    auto& tag = entity.AddComponent<TagComponent>();
+    tag.Tag = name.empty() ? "Entity" : name;
+    return entity;
 }
+
 
 void Scene::OnUpdate(Timestep ts)
 {
-    
+    auto group = m_Registry.group<TransformComponent>(entt::get<SpriteComponent>);
+    for (auto entity : group)
+    {
+        auto [transform, sprite] = group.get<TransformComponent, SpriteComponent>(entity);
+
+        Renderer2D::DrawQuad(transform, sprite.Color);
+    }
 }
