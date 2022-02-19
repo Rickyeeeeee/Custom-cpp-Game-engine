@@ -204,7 +204,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Coolgame
+CMAKE_PROJECT_NAME:STATIC=project1
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=0.1.1
@@ -470,6 +470,24 @@ c_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
 engine_LIB_DEPENDS:STATIC=general;imgui;general;glad;general;glfw3;
 
 //Value Computed by CMake
+proje_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
+
+//Value Computed by CMake
+proje_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
+
+//Value Computed by CMake
+project1_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
+
+//Value Computed by CMake
+project1_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
+
+//Value Computed by CMake
+project2_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build
+
+//Value Computed by CMake
+project2_SOURCE_DIR:STATIC=C:/Users/ricky/Dev/coolgame
+
+//Value Computed by CMake
 spdlog_BINARY_DIR:STATIC=C:/Users/ricky/Dev/coolgame/build/external/spdlog
 
 //The directory containing a CMake configuration file for spdlog.
@@ -624,7 +642,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

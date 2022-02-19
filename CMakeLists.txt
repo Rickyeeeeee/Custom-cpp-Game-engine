@@ -1,43 +1,26 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(Coolgame VERSION 0.1.1)
+project(project1 VERSION 0.1.1)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../run)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../sandbox)
-
-add_executable(
-    project1
-    sandbox/sandbox.cpp
-    )
-    
-add_executable(
-    project2
-    sandbox/demo3d.cpp
-    )
-    
+include_directories(
+    PUBLIC external/entt/include
+    PUBLIC external
+    PUBLIC external/std_image
+)
+ 
 add_subdirectory(external/imgui) 
 add_subdirectory(external/spdlog)
-add_subdirectory(src)
+add_subdirectory(src) 
+add_subdirectory(sandbox)
+add_subdirectory(editor)
 
 
 target_include_directories(
-    project1
+    engine 
+    # PRIVATE external
+    # PRIVATE ../external/spdlog/include
     PRIVATE src
-    PRIVATE external
-    )
+)
 
-target_include_directories(
-    project2
-    PRIVATE src
-    PRIVATE external
-    )
-                    
-target_link_libraries(
-    project1 
-    engine
-    )
-    
-target_link_libraries(
-    project2  
-    engine
-    )

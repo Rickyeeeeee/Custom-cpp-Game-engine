@@ -1,22 +1,21 @@
-#include "core/WindowsInput.h"
+#include "core/Input.h"
 #include "core/Application.h"
-Input* Input::s_Instance = new WindowsInput();
 
-bool WindowsInput::IsKeyPressedimpl(int keycode) 
+bool Input::IsKeyPressed(int keycode) 
 {
     auto window = Application::Get().GetWindow().getWindow();
     auto state = glfwGetKey(window, keycode);
     return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
-bool WindowsInput::IsMouseButtonPressedimpl(int button) 
+bool Input::IsMouseButtonPressed(int button) 
 {
     auto window = Application::Get().GetWindow().getWindow();
     auto state = glfwGetMouseButton(window, button);
     return state == GLFW_PRESS;
 }
 
-std::pair<float, float> WindowsInput::GetMousePositionimpl() 
+std::pair<float, float> Input::GetMousePosition() 
 {
     auto window = Application::Get().GetWindow().getWindow();
     double xpos, ypos;
@@ -24,7 +23,7 @@ std::pair<float, float> WindowsInput::GetMousePositionimpl()
     return { (float)xpos, (float)ypos };
 }
 
-float WindowsInput::GetMouseXimpl() 
+float Input::GetMouseX() 
 {
     auto window = Application::Get().GetWindow().getWindow();
     double xpos, ypos;
@@ -32,7 +31,7 @@ float WindowsInput::GetMouseXimpl()
     return (float)xpos;
 }
 
-float WindowsInput::GetMouseYimpl() 
+float Input::GetMouseY() 
 {
     auto window = Application::Get().GetWindow().getWindow();
     double xpos, ypos;

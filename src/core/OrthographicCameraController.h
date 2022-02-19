@@ -14,6 +14,8 @@ public:
     OrthographicCameraController(float aspectRatio, bool rotation = false);
     void OnUpdate(Timestep ts);
     void OnEvent(Event& e);
+
+    void Resize(unsigned int width, unsigned int height);
     Orthographic2DCamera& GetCamera();
 
     void SetZoomLevel(float level) { m_ZoomLevel = level; }

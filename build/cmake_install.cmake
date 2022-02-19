@@ -42,6 +42,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/ricky/Dev/coolgame/build/external/imgui/cmake_install.cmake")
   include("C:/Users/ricky/Dev/coolgame/build/external/spdlog/cmake_install.cmake")
   include("C:/Users/ricky/Dev/coolgame/build/src/cmake_install.cmake")
+  include("C:/Users/ricky/Dev/coolgame/build/sandbox/cmake_install.cmake")
+  include("C:/Users/ricky/Dev/coolgame/build/editor/cmake_install.cmake")
 
 endif()
 

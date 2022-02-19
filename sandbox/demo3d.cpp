@@ -107,6 +107,11 @@ void ExampleLayer::OnImGuiRender()
     m_ProfileResults.clear();
     ImGui::End();
 
+    ImGui::Begin("Renderer3D Profile: ");
+    ImGui::Text("Draw call: %d", Renderer3D::GetDrawcall());
+    ImGui::Text("Vertex count: %d", Renderer3D::GetVertexCount());
+    ImGui::End();
+
 }
 
 void ExampleLayer::OnEvent(Event& event) 

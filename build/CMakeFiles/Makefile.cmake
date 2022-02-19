@@ -41,10 +41,12 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.20.21032501-MSVC_2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.20.21032501-MSVC_2/CMakeRCCompiler.cmake"
   "CMakeFiles/3.20.21032501-MSVC_2/CMakeSystem.cmake"
+  "../editor/CMakeLists.txt"
   "../external/imgui/CMakeLists.txt"
   "../external/spdlog/CMakeLists.txt"
   "../external/spdlog/cmake/ide.cmake"
   "../external/spdlog/cmake/utils.cmake"
+  "../sandbox/CMakeLists.txt"
   "../src/CMakeLists.txt"
   )
 
@@ -60,13 +62,16 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "external/imgui/CMakeFiles/CMakeDirectoryInformation.cmake"
   "external/spdlog/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "sandbox/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "editor/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/project1.dir/DependInfo.cmake"
-  "CMakeFiles/project2.dir/DependInfo.cmake"
   "external/imgui/CMakeFiles/imgui.dir/DependInfo.cmake"
   "external/spdlog/CMakeFiles/spdlog.dir/DependInfo.cmake"
   "src/CMakeFiles/engine.dir/DependInfo.cmake"
+  "sandbox/CMakeFiles/sandbox.dir/DependInfo.cmake"
+  "sandbox/CMakeFiles/demo3d.dir/DependInfo.cmake"
+  "editor/CMakeFiles/editor.dir/DependInfo.cmake"
   )

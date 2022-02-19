@@ -62,11 +62,11 @@ void Application::OnEvent(Event &e)
     dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT(Application::OnKeyPressed));
     dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT(Application::OnWindowResize));
 
-    for (Layer* layer : m_layerStack)
+    for (auto it = m_layerStack.rbegin(); it != m_layerStack.rend(); ++it)
     {
         if (e.handled)
             break;
-        layer->OnEvent(e);
+        (*it)->OnEvent(e);
     }
 }
 
@@ -93,6 +93,11 @@ void Application::Run()
 
         m_Window->OnUpdate();
     }
+}
+
+void Application::Close() 
+{
+    m_Running = false;
 }
 
 void Application::PushLayer(Layer* layer) 

@@ -16,6 +16,7 @@ public:
     virtual unsigned int GetHeight() const override { return m_Height; }
     virtual void SetData(void* data, unsigned int size) override;
     virtual void Bind(unsigned int slot) const override;
+    virtual unsigned int GetRendererID() const override { return this->m_RendererID; }
 
     virtual bool operator==(const Texture& other) const override 
     { 

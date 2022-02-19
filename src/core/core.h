@@ -19,3 +19,4 @@ constexpr Ref<T> CreateRef(Args&& ... args)
 }
 
 #define BIND_EVENT(fn) std::bind(&fn, this, std::placeholders::_1)
+#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)

@@ -17,6 +17,10 @@
 #include "Renderer/Renderer3D.h"
 #include "Renderer/Perspective3DCamera.h"
 #include "Renderer/Mesh.h"
+#include "Renderer/FrameBuffer.h"
+
+#include "scene/Scene.h"
+#include "scene/Components.h"
 
 #include "OpenGl/OpenGLShader.h"
 // #include "core/Log.h"

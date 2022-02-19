@@ -20,6 +20,8 @@ enum EventType : char
 class Event
 {
 public:
+    virtual ~Event() = default;
+
     EventType getType();
     bool handled = 0;
 

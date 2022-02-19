@@ -200,6 +200,16 @@ void Renderer3D::Flush()
 {
 
 }
+
+unsigned int Renderer3D::GetDrawcall() 
+{
+    return s_Data.StaticBufferCount;
+}
+
+unsigned int Renderer3D::GetVertexCount() 
+{
+    return s_Data.StaticVertexCount;
+}
 static const Vector3 cube_positions[4 * 6] = {
     { -0.5f, -0.5f, -0.5f },
     {  0.5f, -0.5f, -0.5f },

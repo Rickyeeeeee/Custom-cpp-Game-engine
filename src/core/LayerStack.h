@@ -6,9 +6,6 @@
 #include <algorithm>
 class LayerStack
 {
-using Layers = std::vector<Layer*>;
-using iterator = Layers::iterator;
-
 public:
     LayerStack();
     ~LayerStack();
@@ -18,10 +15,16 @@ public:
     void PopLayer(Layer *layer);
     void PopOverLayer(Layer *layer);
 
-    iterator begin() { return m_Layers.begin(); }
-    iterator end() { return m_Layers.end(); }
+    std::vector<Layer*>::iterator begin() { return m_Layers.begin(); }
+    std::vector<Layer*>::iterator end() { return m_Layers.end(); }
+    std::vector<Layer*>::reverse_iterator rbegin() { return m_Layers.rbegin(); }
+    std::vector<Layer*>::reverse_iterator rend() { return m_Layers.rend(); }
+    std::vector<Layer*>::const_iterator cbegin() { return m_Layers.cbegin(); }
+    std::vector<Layer*>::const_iterator cend() { return m_Layers.cend(); }
+    std::vector<Layer*>::const_reverse_iterator crbegin() { return m_Layers.crbegin(); }
+    std::vector<Layer*>::const_reverse_iterator crend() { return m_Layers.crend(); }
 
 private:
-    Layers   m_Layers;
-    iterator m_LayerInsert;
+    std::vector<Layer*>           m_Layers;
+    unsigned int m_LayerInsertIndex = 0;
 };

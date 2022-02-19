@@ -64,16 +64,6 @@ CMAKE_BINARY_DIR = C:\Users\ricky\Dev\coolgame\build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
@@ -103,6 +93,16 @@ edit_cache:
 # Special rule for the target edit_cache
 edit_cache/fast: edit_cache
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -134,32 +134,6 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
-
-#=============================================================================
-# Target rules for targets named project1
-
-# Build rule for target.
-project1: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 project1
-.PHONY : project1
-
-# fast build rule for target.
-project1/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/build
-.PHONY : project1/fast
-
-#=============================================================================
-# Target rules for targets named project2
-
-# Build rule for target.
-project2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 project2
-.PHONY : project2
-
-# fast build rule for target.
-project2/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/build
-.PHONY : project2/fast
 
 #=============================================================================
 # Target rules for targets named imgui
@@ -200,53 +174,44 @@ engine/fast:
 	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\engine.dir\build.make src/CMakeFiles/engine.dir/build
 .PHONY : engine/fast
 
-sandbox/demo3d.obj: sandbox/demo3d.cpp.obj
-.PHONY : sandbox/demo3d.obj
+#=============================================================================
+# Target rules for targets named sandbox
 
-# target to build an object file
-sandbox/demo3d.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/sandbox/demo3d.cpp.obj
-.PHONY : sandbox/demo3d.cpp.obj
+# Build rule for target.
+sandbox: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 sandbox
+.PHONY : sandbox
 
-sandbox/demo3d.i: sandbox/demo3d.cpp.i
-.PHONY : sandbox/demo3d.i
+# fast build rule for target.
+sandbox/fast:
+	$(MAKE) $(MAKESILENT) -f sandbox\CMakeFiles\sandbox.dir\build.make sandbox/CMakeFiles/sandbox.dir/build
+.PHONY : sandbox/fast
 
-# target to preprocess a source file
-sandbox/demo3d.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/sandbox/demo3d.cpp.i
-.PHONY : sandbox/demo3d.cpp.i
+#=============================================================================
+# Target rules for targets named demo3d
 
-sandbox/demo3d.s: sandbox/demo3d.cpp.s
-.PHONY : sandbox/demo3d.s
+# Build rule for target.
+demo3d: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 demo3d
+.PHONY : demo3d
 
-# target to generate assembly for a file
-sandbox/demo3d.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project2.dir\build.make CMakeFiles/project2.dir/sandbox/demo3d.cpp.s
-.PHONY : sandbox/demo3d.cpp.s
+# fast build rule for target.
+demo3d/fast:
+	$(MAKE) $(MAKESILENT) -f sandbox\CMakeFiles\demo3d.dir\build.make sandbox/CMakeFiles/demo3d.dir/build
+.PHONY : demo3d/fast
 
-sandbox/sandbox.obj: sandbox/sandbox.cpp.obj
-.PHONY : sandbox/sandbox.obj
+#=============================================================================
+# Target rules for targets named editor
 
-# target to build an object file
-sandbox/sandbox.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/sandbox/sandbox.cpp.obj
-.PHONY : sandbox/sandbox.cpp.obj
+# Build rule for target.
+editor: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 editor
+.PHONY : editor
 
-sandbox/sandbox.i: sandbox/sandbox.cpp.i
-.PHONY : sandbox/sandbox.i
-
-# target to preprocess a source file
-sandbox/sandbox.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/sandbox/sandbox.cpp.i
-.PHONY : sandbox/sandbox.cpp.i
-
-sandbox/sandbox.s: sandbox/sandbox.cpp.s
-.PHONY : sandbox/sandbox.s
-
-# target to generate assembly for a file
-sandbox/sandbox.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\project1.dir\build.make CMakeFiles/project1.dir/sandbox/sandbox.cpp.s
-.PHONY : sandbox/sandbox.cpp.s
+# fast build rule for target.
+editor/fast:
+	$(MAKE) $(MAKESILENT) -f editor\CMakeFiles\editor.dir\build.make editor/CMakeFiles/editor.dir/build
+.PHONY : editor/fast
 
 # Help Target
 help:
@@ -258,17 +223,12 @@ help:
 	@echo ... package
 	@echo ... package_source
 	@echo ... rebuild_cache
+	@echo ... demo3d
+	@echo ... editor
 	@echo ... engine
 	@echo ... imgui
-	@echo ... project1
-	@echo ... project2
+	@echo ... sandbox
 	@echo ... spdlog
-	@echo ... sandbox/demo3d.obj
-	@echo ... sandbox/demo3d.i
-	@echo ... sandbox/demo3d.s
-	@echo ... sandbox/sandbox.obj
-	@echo ... sandbox/sandbox.i
-	@echo ... sandbox/sandbox.s
 .PHONY : help
 
 

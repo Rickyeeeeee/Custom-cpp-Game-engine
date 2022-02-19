@@ -29,8 +29,12 @@ public:
     void OnEvent(Event &e);
     void Run();
 
+    void Close();
+
     void PushLayer(Layer* layer);
     void PushOverLayer(Layer* layer);
+
+    ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 
     inline static Application& Get() { return *s_Instance; }
     inline Window& GetWindow() { return *m_Window; }

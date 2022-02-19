@@ -27,4 +27,7 @@ public:
     static void EndScene();
     static void Flush();
 
+    static unsigned int GetDrawcall();
+    static unsigned int GetVertexCount();
+
 };

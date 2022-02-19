@@ -1,22 +1,21 @@
 #include <vector>
+#include <string>
 #include <iostream>
-#include <utility>
 
+using namespace std;
 
-struct Vector
-{
-    float a;
-    float b;
-    float c;
-};
-
-struct Vertex
-{
-    Vector x;
-    Vector y;
-    Vertex(Vector x, Vector y)
-        : x(x), y(y) {}
-};
 int main()
 {
+    vector<string> string_stack;
+    unsigned int index = 0;
+    string_stack.emplace(string_stack.begin(), "pushlayer 1");
+    index++;
+    string_stack.emplace_back("pushOVERlayer 1");
+    string_stack.emplace(string_stack.begin() + index, "pushlayer 2");
+    index++;
+    string_stack.emplace_back("pushOVERlayer 2");
+    for ( auto& string : string_stack)
+    {
+        cout << string << endl;       
+    }
 }
