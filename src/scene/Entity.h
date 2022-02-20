@@ -2,7 +2,6 @@
 
 #include "scene/Scene.h"
 #include "entt.hpp"
-
 class Entity
 {
 public:
@@ -39,6 +38,15 @@ public:
     }
 
     operator bool() const { return m_EntityHandle != entt::null; }
+    operator unsigned int() const { return (unsigned int)m_EntityHandle; }
+    bool operator==(const Entity& other) const 
+    { 
+        return m_EntityHandle == other.m_EntityHandle && m_Scene == other.m_Scene;
+    }
+    bool  operator!=(const Entity& other) const 
+    {
+        return !(*this == other);
+    }
 private:
     entt::entity m_EntityHandle;
     Scene* m_Scene;

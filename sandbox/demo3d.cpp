@@ -43,27 +43,25 @@ ExampleLayer::ExampleLayer()
            (float)Application::Get().GetWindow().GetHeight()
   , 45.0f, 0.1f, 100.0f })
 {
-    m_transform1 = glm::translate(Matrix4(1.0f), Vector3(2.0f, 3.0f, 2.0f))
-                 * glm::scale(Matrix4(1.0f), Vector3(2.0f, 0.5f, 1.0f));
-    for (int i = 0; i < 10; i++)
-        for (int j = 0; j < 10; j++)
-        for (int k = 0; k < 10; k++)
-        {
-            Transform transform = 
-            {
-                { i * 2, j * 2, k * 2 },
-                { 0.0f, 0.0f, 0.0f },
-                { 0.0f, 0.0f, 0.0f }
-            };
-            Renderer3D::Shape::GetCubeVertex(m_Meshes[i * 100 + j * 10 + k].Vertices, transform, { 1.0f, 0.5f, 0.2f, 1.0f });
-            Renderer3D::Shape::GetCubeIndex(m_Meshes[i * 100 + j * 10 + k].Indices);
-            Renderer3D::SubmitStaticMesh(m_Meshes[i * 100 + j * 10 + k]);
-        }
-    // Transform transform;
-    // transform.Position = { 1.0f, 1.0f, 1.0f };
-    // Renderer3D::Shape::GetCubeVertex(m_Meshes[0].Vertices, transform, { 1.0f, 0.5f, 0.2f, 1.0f });
-    // Renderer3D::Shape::GetCubeIndex(m_Meshes[0].Indices);
-    // Renderer3D::SubmitStaticMesh(m_Meshes[0]);
+    // for (int i = 0; i < 10; i++)
+    //     for (int j = 0; j < 10; j++)
+    //     for (int k = 0; k < 10; k++)
+    //     {
+    //         Transform transform = 
+    //         {
+    //             { i * 2, j * 2, k * 2 },
+    //             { 0.0f, 0.0f, 0.0f },
+    //             { 0.0f, 0.0f, 0.0f }
+    //         };
+    //         Renderer3D::Shape::GetCubeVertex(m_Meshes[i * 100 + j * 10 + k].Vertices, transform, { 1.0f, 0.5f, 0.2f, 1.0f });
+    //         Renderer3D::Shape::GetCubeIndex(m_Meshes[i * 100 + j * 10 + k].Indices);
+    //         Renderer3D::SubmitStaticMesh(m_Meshes[i * 100 + j * 10 + k]);
+    //     }
+    Transform transform;
+    transform.Position = { 5.0f, 1.0f, 1.0f };
+    Renderer3D::Shape::GetCubeVertex(m_Meshes[0].Vertices, transform, { 1.0f, 0.5f, 0.2f, 1.0f });
+    Renderer3D::Shape::GetCubeIndex(m_Meshes[0].Indices);
+    Renderer3D::SubmitStaticMesh(m_Meshes[0]);
     // transform.Position = { 4.0f, 2.0f, 1.0f };
     // Renderer3D::Shape::GetCubeVertex(m_Vertices, transform, { 1.0f, 0.5f, 0.2f, 1.0f });
     // Renderer3D::Shape::GetCubeIndex(m_Indices[1]);
@@ -84,11 +82,11 @@ void ExampleLayer::OnUpdate(Timestep ts)
     RenderCommand::Clear();
     
     Renderer3D::BeginScene(m_CameraController.GetCamera());
-    for (int i = 0; i < 10; i++)
-        for (int j = 0; j < 10; j++)
-            for (int k = 0; k < 10; k++)
-                Renderer3D::DrawStaticMesh(m_Meshes[i * 100 + j * 10 + k]);
-    // Renderer3D::DrawStaticMesh(m_Meshes[0]);
+    // for (int i = 0; i < 10; i++)
+    //     for (int j = 0; j < 10; j++)
+    //         for (int k = 0; k < 10; k++)
+    //             Renderer3D::DrawStaticMesh(m_Meshes[i * 100 + j * 10 + k]);
+    Renderer3D::DrawStaticMesh(m_Meshes[0]);
     // Renderer3D::DrawStaticMesh(m_Indices[1]);
     Renderer3D::EndScene();
 

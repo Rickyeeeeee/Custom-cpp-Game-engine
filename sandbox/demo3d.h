@@ -17,7 +17,7 @@ private:
 
     Matrix4 m_transform1;
     Vector2 LastMousePosition;
-    std::array<Mesh, 1000> m_Meshes;
+    std::array<Mesh, 1> m_Meshes;
 
     unsigned int m_offset = 0;
     bool Initialized = false;
@@ -29,7 +29,6 @@ private:
     };
     
     std::vector<profile_result> m_ProfileResults;
-    float m_CameraTranslationSpeed = 10.0f;
 };
 
 class App : public Application

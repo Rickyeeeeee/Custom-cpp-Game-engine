@@ -15,6 +15,7 @@ public:
     
     void OnUpdate(Timestep ts, const Vector2& offset);
     void OnEvent(Event& e);
+    void Resize(float aspectRatio);
     Perspective3DCamera& GetCamera() { return m_Camera; }
 private:
     bool OnMouseScrolled(MouseScrollEvent& e);

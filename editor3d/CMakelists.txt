@@ -4,22 +4,21 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(
-    editor
-    EditorApp.cpp
-    EditorLayer.cpp
-    SceneHierarchyPanel.cpp
+    editor3d
+    EditorApp3d.cpp
+    EditorLayer3d.cpp
 )
 
 
 target_include_directories(
-    editor
+    editor3d
     PRIVATE ../src
     PRIVATE ../external
 )
 
     
 target_link_libraries(
-    editor
+    editor3d
     engine
 )
     

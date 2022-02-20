@@ -1,6 +1,10 @@
 #pragma once
 #include <string>
 #include "core/GLM.h"
+#include "Renderer/Camera.h"
+#include "Renderer/Mesh.h"
+#include "Scene/SceneCamera.h"
+#include "Scene/ScriptableEntity.h"
 
 struct TransformComponent
 {
@@ -24,6 +28,16 @@ struct SpriteComponent
         : Color(color) {}
 };
 
+struct MeshComponent
+{
+    Mesh mesh;
+
+    MeshComponent() = default;
+    MeshComponent(const MeshComponent&) = default;
+    operator Mesh& () { return mesh; }
+    operator const Mesh& () { return mesh; }
+};
+
 struct TagComponent
 {
     std::string Tag;
@@ -34,4 +48,29 @@ struct TagComponent
         : Tag(tag)
     {
     }   
+};
+
+struct CameraComponent
+{
+    SceneCamera Camera;
+    bool Primary = true; // TODO: move into scene
+    bool FixedAspectRatio = false;
+
+    CameraComponent() = default;   
+    CameraComponent(const CameraComponent&) = default;   
+};
+
+struct NativeScriptComponent
+{
+    ScriptableEntity* Instance = nullptr;
+
+    ScriptableEntity*(*InstantiateScript)();
+    void (*DestroyScript)(NativeScriptComponent*);
+
+    template<typename T>
+    void Bind()
+    {
+        InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); }; 
+        DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+    }
 };

@@ -1,68 +1,95 @@
-#include "EditorLayer.h"
+#include "EditorLayer3d.h"
 
 #include "imgui/backends/imgui_impl_glfw.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
 
+#include <chrono>
+
+template<typename Fn>
+class Timer
+{
+public:
+    Timer(const char* name, Fn&& func)
+        : m_Name(name), m_func(func), m_Stopped(false)
+    {
+        m_StartTimepiont = std::chrono::steady_clock::now();
+    }
+
+    ~Timer()
+    {
+        if (!m_Stopped)
+            Stop();
+    }
+
+    void Stop()
+    {
+        auto endTimepoint = std::chrono::steady_clock::now();
+
+        long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepiont).time_since_epoch().count();
+        long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+
+        m_Stopped = true;
+        float duration = (end - start) * 0.001f;
+        m_func( { m_Name, duration});
+    }
+
+private:
+    const char* m_Name;
+    Fn m_func;
+    std::chrono::time_point<std::chrono::steady_clock> m_StartTimepiont;
+    bool m_Stopped;
+};
+
+#define PROFILE_SCOPE(name) Timer timer##__LINE__(name, [&](profile_result profileResult){ m_ProfileResults.push_back(profileResult); })
 
 EditorLayer::EditorLayer()
-    : Layer(), m_CameraController(
-        Application::Get().GetWindow().GetWidth() / 
-        Application::Get().GetWindow().GetHeight())
+    : Layer(), m_CameraController({ (float)Application::Get().GetWindow().GetWidth() / 
+           (float)Application::Get().GetWindow().GetHeight()
+  , 45.0f, 0.1f, 100.0f })
 {
 }
 
 void EditorLayer::OnAttach()
 {
-    m_Texture = Texture2D::Create("asset/picture/shhiop.png");
     FramebufferSpecification fbSpec;
     fbSpec.Width = Application::Get().GetWindow().GetWidth();
     fbSpec.Height = Application::Get().GetWindow().GetHeight();
     m_ViewportSize = { 1280.0f, 720.0f };
     m_Framebuffer = Framebuffer::Create(fbSpec);
 
-    m_ActiveScene = CreateRef<Scene2D>();
+    m_ActiveScene = CreateRef<Scene3D>();
 
-    auto square = m_ActiveScene->CreateEntity("Square");
-    square.AddComponent<SpriteComponent>(Vector4{ 0.0f, 1.0f, 0.0f, 1.0f });
+    auto cube = m_ActiveScene->CreateEntity("Cube");
+    cube.AddComponent<MeshComponent>();
 
-    m_SquareEntity = square;
-
-    m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
-    auto& cameraComponent = m_CameraEntity.AddComponent<CameraComponent>();
-
-    class CameraController : public ScriptableEntity
-    {
-    public:
-        void OnCreate() {}
-        void OnDestroy() {}
-        void OnUpdate(Timestep ts) {}
-    };
-
-    m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-    m_Panel.SetContext(m_ActiveScene);
+    Transform transform;
+    transform.Position = { 0.0f, 0.0f, 0.0f };
+    auto& mesh = cube.GetComponent<MeshComponent>().mesh;
+    Renderer3D::Shape::GetCubeVertex(mesh.Vertices,  transform, { 0.5f, 0.5f, 0.5f, 1.0f });
+    Renderer3D::Shape::GetCubeIndex(mesh.Indices);
+    Renderer3D::SubmitStaticMesh(mesh);
+    mesh.Submitted = true;
+    m_Mesh = &mesh;
 }
 
 void EditorLayer::OnUpdate(Timestep ts) 
 {
-    
-    if (FramebufferSpecification spec = m_Framebuffer->GetSpecification();
-        m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f &&
-        (spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
-    {
-        m_Framebuffer->Resize((unsigned int)m_ViewportSize.x, (unsigned int) m_ViewportSize.y);
-        m_CameraController.Resize(m_ViewportSize.x, m_ViewportSize.y);
+    PROFILE_SCOPE("ExamplerLayer OnUpdate: ");
 
-        m_ActiveScene->OnViewportResize((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);
-    }
+    Vector2 MousePosition = { Input::GetMouseX(), Input::GetMouseY()};
+    Vector2 offset = MousePosition - LastMousePosition;
+    LastMousePosition = MousePosition;
 
-    if (m_ViewportFocused)
-        m_CameraController.OnUpdate(ts);
+    m_CameraController.OnUpdate(ts, offset);
 
-    Renderer2D::ResetStats();
     m_Framebuffer->Bind();
     RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
     RenderCommand::Clear();
-    m_ActiveScene->OnUpdate(ts);
+
+    Renderer3D::BeginScene(m_CameraController.GetCamera());
+    Renderer3D::DrawStaticMesh(*m_Mesh);
+    Renderer3D::EndScene();
+
     m_Framebuffer->Unbind();
 }
 
@@ -129,19 +156,8 @@ void EditorLayer::OnImGuiRender()
         }
         ImGui::EndMenuBar();
     }
-    ImGui::Begin("Renderer2D");
+    ImGui::Begin("Scene");
     // ImGui::Text("")
-    ImGui::End();
-
-    m_Panel.OnImGuiRender();
-
-    auto stats = Renderer2D::GetStats();
-    ImGui::Begin("Settings");
-    ImGui::Text("Renderer2D Stats:");
-    ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-    ImGui::Text("Quads: ", stats.QuadCount);
-    ImGui::Text("Vertices: %d ", stats.GetTotalVertexCount());
-    ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
     ImGui::End();
 
     ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
@@ -154,12 +170,29 @@ void EditorLayer::OnImGuiRender()
     ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
     if (m_ViewportSize != *((Vector2*)&viewportPanelSize))
     {
+        m_Framebuffer->Resize((unsigned int)viewportPanelSize.x, (unsigned int)viewportPanelSize.y);
         m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
-        m_CameraController.Resize(viewportPanelSize.x, viewportPanelSize.y);
+        m_CameraController.Resize(viewportPanelSize.x / viewportPanelSize.y);
     }
     unsigned int textureID = m_Framebuffer->GetColorAttachmentRendererID();
     ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2( 0, 1 ), ImVec2( 1, 0));
+    ImGui::End();
+
+    ImGui::Begin("Profile: ");
+    for (auto& result : m_ProfileResults)
+    {
+        char label[50];
+        strcpy(label, result.name);
+        strcat(label, " %.3fms");
+        ImGui::Text(label, result.time);
+    }
+    m_ProfileResults.clear();
+    ImGui::End();
+
+    ImGui::Begin("Renderer3D Profile: ");
+    ImGui::Text("Draw call: %d", Renderer3D::GetDrawcall());
+    ImGui::Text("Vertex count: %d", Renderer3D::GetVertexCount());
     ImGui::End();
     ImGui::PopStyleVar();
 
@@ -167,6 +200,6 @@ ImGui::End();
 }
 
 void EditorLayer::OnEvent(Event& event)
-    {
-        m_CameraController.OnEvent(event);
-    }
+{
+    m_CameraController.OnEvent(event);
+}

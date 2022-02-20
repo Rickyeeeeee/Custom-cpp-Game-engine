@@ -15,6 +15,7 @@ add_subdirectory(external/spdlog)
 add_subdirectory(src) 
 add_subdirectory(sandbox)
 add_subdirectory(editor)
+add_subdirectory(editor3d)
 
 
 target_include_directories(

@@ -2,14 +2,15 @@
 
 #include "Renderer/Orthographic2DCamera.h"
 #include "Renderer/Texture.h"
-
-
+#include "Renderer/Camera.h"
 
 class Renderer2D
 {
 public:
+
     static void Init();
     static void Shutdown();
+    static void BeginScene(const Camera& camera, const Matrix4& transform);
     static void BeginScene(const Orthographic2DCamera& camera);
     static void Flush();
     static void EndScene();

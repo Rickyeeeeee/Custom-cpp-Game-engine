@@ -2,8 +2,9 @@
 #include "Entity.h"
 #include "Components.h"
 #include "Renderer/Renderer2D.h"
-
-Scene::Scene()
+#include "scene/ScriptableEntity.h"
+Scene::Scene(SceneType type)
+    : m_SceneType(type)
 {
 }
 
@@ -21,14 +22,78 @@ Entity Scene::CreateEntity(const std::string& name)
     return entity;
 }
 
-
-void Scene::OnUpdate(Timestep ts)
+void Scene::OnViewportResize(unsigned int width, unsigned int height)
 {
-    auto group = m_Registry.group<TransformComponent>(entt::get<SpriteComponent>);
-    for (auto entity : group)
-    {
-        auto [transform, sprite] = group.get<TransformComponent, SpriteComponent>(entity);
+    m_ViewportHeight = height;
+    m_ViewportWidth = width;
 
-        Renderer2D::DrawQuad(transform, sprite.Color);
+    auto view = m_Registry.view<CameraComponent>();
+    for (auto entity : view)
+    {
+        auto& cameraComponent = view.get<CameraComponent>(entity);
+        if (!cameraComponent.FixedAspectRatio)
+        {
+            cameraComponent.Camera.SetViewportSize(width, height);
+        }
+    }    
+}
+
+void Scene2D::OnUpdate(Timestep ts)
+{
+    {
+        m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+        {
+            if (!nsc.Instance)
+            {
+                nsc.Instance = nsc.InstantiateScript();
+                nsc.Instance->m_Entity = Entity{ entity, this };
+                nsc.Instance->OnCreate();
+            }
+            nsc.Instance->OnUpdate(ts);
+        });
     }
+
+    Camera* mainCamera = nullptr;
+    Matrix4* cameraTransform = nullptr;
+    {
+        auto view = m_Registry.view<TransformComponent, CameraComponent>();
+        for (auto entity : view)
+        {
+            auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+
+            if (camera.Primary)
+            {
+                mainCamera = &camera.Camera;
+                cameraTransform = &transform.Transform; 
+            }
+        }
+    }
+
+    if (mainCamera)
+    {
+        Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
+
+        auto group = m_Registry.group<TransformComponent>(entt::get<SpriteComponent>);
+        for (auto entity : group)
+        {
+            auto [transform, sprite] = group.get<TransformComponent, SpriteComponent>(entity);
+
+            Renderer2D::DrawQuad(transform, sprite.Color);
+        }
+
+        Renderer2D::EndScene();
+    }
+    
+}
+
+void Scene3D::OnUpdate(Timestep ts)
+{
+    // auto group = m_Registry.group<TransformComponent>(entt::get<SpriteComponent>);
+    // for (auto entity : group)
+    // {
+    //     auto [transform, sprite] = group.get<TransformComponent, SpriteComponent>(entity);
+
+    //     Renderer2D::DrawQuad(transform, sprite.Color);
+    // }
+    
 }

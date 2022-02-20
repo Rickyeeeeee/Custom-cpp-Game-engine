@@ -289,14 +289,15 @@ void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, con
 void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Vector4 color) 
 {
     const unsigned int max = 24;
-    vertices.reserve(max);
+    vertices.clear();
     for (int i = 0; i < max; i++)
-        vertices.emplace_back(cube_positions[i], color, cube_normals[i], 0);
+        vertices.push_back({ cube_positions[i], color, cube_normals[i], 0} );
 }
 
 void Renderer3D::Shape::GetCubeIndex(std::vector<unsigned int>& indices) 
 {
     const unsigned int max = 36;
+    indices.clear();
     indices.reserve(max);
     for (int i = 0; i < max; i++)
         indices.emplace_back(cube_indices[i]);

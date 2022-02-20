@@ -60,3 +60,9 @@ void Editor3DCameraController::OnEvent(Event& e)
 }
 
 
+
+void Editor3DCameraController::Resize(float aspectRatio)
+{
+    m_Frustum.aspectRatio = aspectRatio;
+    m_Camera.SetProjection(m_Frustum);
+}
