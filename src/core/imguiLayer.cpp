@@ -45,7 +45,7 @@ void ImGuiLayer::OnAttach()
         style.Colors[ImGuiCol_WindowBg].z = 0.1f;
     }
     Application& app = Application::Get();
-    GLFWwindow* window = app.GetWindow().getWindow();
+    GLFWwindow* window = app.GetWindow().GetNativeWindow();
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 450");

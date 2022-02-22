@@ -8,14 +8,22 @@
 
 struct TransformComponent
 {
-    Matrix4 Transform;
+    Vector3 Translation = { 0.0f, 0.0f, 0.0f };
+    Vector3 Rotation = { 0.0f, 0.0f, 0.0f };
+    Vector3 Scale = { 1.0f, 1.0f, 1.0f };
 
     TransformComponent() = default;
     TransformComponent(const TransformComponent&) = default;
-    TransformComponent(const Matrix4& transform)
-        : Transform(transform) {}
-    operator Matrix4& () { return Transform; }
-    operator const Matrix4& () const{ return Transform; }
+    Matrix4 GetTransform() const 
+    {
+        Matrix4 rotation = glm::rotate(Matrix4(1.0f), Rotation.x, { 1, 0, 0})
+            * glm::rotate(Matrix4(1.0f), Rotation.y, { 0, 1, 0 })
+            * glm::rotate(Matrix4(1.0f), Rotation.z, { 0, 0, 1 });
+        return glm::translate(Matrix4(1.0f), Translation) *  rotation
+            * glm::scale(Matrix4(1.0f), Scale);
+    }
+    TransformComponent(const Vector3& translation)
+        : Translation(translation) {}
 };  
 
 struct SpriteComponent

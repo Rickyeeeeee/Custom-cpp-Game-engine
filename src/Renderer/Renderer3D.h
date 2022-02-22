@@ -5,6 +5,7 @@
 #include "Renderer/Vertex3D.h"
 #include "Renderer/Mesh.h"
 #include "core/pch.h"
+#include "Renderer/Camera.h"
 
 class Renderer3D
 {
@@ -22,6 +23,7 @@ public:
 
     static void SubmitStaticMesh(Mesh& mesh);
     
+    static void BeginScene(const Camera& camera, const Matrix4& transform);
     static void BeginScene(const Perspective3DCamera& camera);
     static void DrawStaticMesh(const Mesh& indices);
     static void EndScene();

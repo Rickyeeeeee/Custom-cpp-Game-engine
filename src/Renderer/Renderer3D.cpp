@@ -97,6 +97,21 @@ void Renderer3D::Shutdown()
     s_Data.StaticMeshBufferPtr = s_Data.StaticMeshBuffers.begin();
 }
 
+void Renderer3D::BeginScene(const Camera& camera, const Matrix4& transform)
+{
+    s_Data.ViewProjection = camera.GetProjection() * glm::inverse(transform);
+    s_Data.simple3dShader->Bind();  
+    s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
+
+    for (auto& MeshBuffer : s_Data.StaticMeshBuffers)
+    {
+        MeshBuffer.Indices = new unsigned int[MeshBuffer.IndexSize];
+        MeshBuffer.IndexCount = 0;
+    }
+
+    s_Data.StaticIndexCount = 0;
+}
+
 void Renderer3D::BeginScene(const Perspective3DCamera& camera) 
 {
     s_Data.simple3dShader->Bind();  

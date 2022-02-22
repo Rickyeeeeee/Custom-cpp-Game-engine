@@ -6,10 +6,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../run)
 
 include_directories(
     PUBLIC external/entt/include
-    PUBLIC external
+    PUBLIC external/yaml-cpp/include
     PUBLIC external/std_image
+    PUBLIC external
 )
  
+# add_subdirectory(external/yaml-cpp)
 add_subdirectory(external/imgui) 
 add_subdirectory(external/spdlog)
 add_subdirectory(src) 

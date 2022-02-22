@@ -61,6 +61,7 @@ void EditorLayer::OnAttach()
 
     auto cube = m_ActiveScene->CreateEntity("Cube");
     cube.AddComponent<MeshComponent>();
+    cube.AddComponent<CameraComponent>();
 
     Transform transform;
     transform.Position = { 0.0f, 0.0f, 0.0f };
@@ -86,9 +87,11 @@ void EditorLayer::OnUpdate(Timestep ts)
     RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
     RenderCommand::Clear();
 
-    Renderer3D::BeginScene(m_CameraController.GetCamera());
-    Renderer3D::DrawStaticMesh(*m_Mesh);
-    Renderer3D::EndScene();
+    m_ActiveScene->OnUpdate(ts);
+
+    // Renderer3D::BeginScene(m_CameraController.GetCamera());
+    // Renderer3D::DrawStaticMesh(*m_Mesh);
+    // Renderer3D::EndScene();
 
     m_Framebuffer->Unbind();
 }

@@ -22,7 +22,7 @@ class KeyPressedEvent : public KeyEvent
 public: 
     KeyPressedEvent(int key, bool r);
 
-    inline int GetCount();
+    inline int GetCount() { return this->count; }
     static EventType getStaticType();
 private:
     int count;

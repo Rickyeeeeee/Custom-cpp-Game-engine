@@ -14,9 +14,15 @@ public:
     virtual void OnImGuiRender() override;
     virtual void OnEvent(Event& e) override;
 private:
+    bool OnKeyPressed(KeyPressedEvent& e);
+
+    void NewScene(SceneType type);
+    void OpenScene();
+    void SaveSceneAs();
+private:
     Ref<Texture2D> m_Texture;
     Ref<Framebuffer> m_Framebuffer;
-    Ref<Scene2D> m_ActiveScene;
+    Ref<Scene> m_ActiveScene;
     Entity m_SquareEntity;
     Entity m_CameraEntity;
     OrthographicCameraController m_CameraController;

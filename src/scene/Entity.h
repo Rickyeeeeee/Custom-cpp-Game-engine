@@ -14,7 +14,9 @@ public:
     T& AddComponent(Args&&... args)
     {
         if (HasComponent<T>()) std::cout << "entity already has component!" << std::endl;
-        return m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
+        T& component = m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
+        m_Scene->OnComponentAdded<T>(*this, component);
+        return component;
     }
 
     template<typename T>
@@ -47,6 +49,7 @@ public:
     {
         return !(*this == other);
     }
+    operator entt::entity() const { return m_EntityHandle; }
 private:
     entt::entity m_EntityHandle;
     Scene* m_Scene;

@@ -5,7 +5,7 @@
 class SceneCamera : public Camera
 {
 public:
-    enum class ProjectionType : int{ Perspective = 0, Orthographic = 1 };
+    enum class ProjectionType : int { Perspective = 0, Orthographic = 1 };
 public:
     SceneCamera();
     virtual ~SceneCamera() = default;

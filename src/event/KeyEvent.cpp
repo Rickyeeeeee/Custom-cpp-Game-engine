@@ -15,10 +15,6 @@ KeyPressedEvent::KeyPressedEvent(int key, bool r)
 {
 }
 
-inline int KeyPressedEvent::GetCount()
-{
-    return this->count;
-}
 
 EventType KeyPressedEvent::getStaticType() 
 {
@@ -37,4 +33,5 @@ EventType KeyReleasedEvent::getStaticType()
     return KEY_RELEASED;
 }
 // --------------------------------------------------------
+
 

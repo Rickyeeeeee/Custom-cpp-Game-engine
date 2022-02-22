@@ -2,10 +2,11 @@
 #include "core/pch.h"
 #include "entt.hpp"
 #include "core/Timestep.h"
+#include "core/core.h"
 
 class Entity;
 
-enum  SceneType
+enum  SceneType : int
 {
     _2D, _3D
 };
@@ -16,11 +17,16 @@ public:
     Scene(SceneType type);
     ~Scene();
 
+    static Ref<Scene> Create(SceneType);
     Entity CreateEntity(const std::string& name = std::string());
+    void DestroyEntity(Entity entity);
 
     virtual void OnUpdate(Timestep ts) = 0;
     
     void OnViewportResize(unsigned int width, unsigned int height);
+private:
+    template<typename T>
+    void OnComponentAdded(Entity entity, T& component);
 protected:
     entt::registry m_Registry;
     unsigned int m_ViewportWidth = 0;
@@ -28,6 +34,7 @@ protected:
     SceneType m_SceneType;
 
     friend class Entity;
+    friend class SceneSerializer;
     friend class SceneHierarchyPanel;
 };
 

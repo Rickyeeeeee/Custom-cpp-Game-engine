@@ -23,6 +23,9 @@
 #include "scene/Components.h"
 #include "scene/Entity.h"
 #include "scene/ScriptableEntity.h"
+#include "scene/SceneSerializer.h"
+
+#include "utils/PlatformUtils.h"
 
 #include "OpenGl/OpenGLShader.h"
 // #include "core/Log.h"

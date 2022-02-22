@@ -44,8 +44,7 @@ public:
     inline unsigned int GetHeight() { return m_Data.Height; }
     void SetEventCallback(const EventCallbackFn &fn);
 
-    inline GLFWwindow* getWindow() { return m_Window; }
-
+    inline GLFWwindow* GetNativeWindow() { return m_Window; }
 private:
     void Init(const WindowProps &props);
     void Shutdown();

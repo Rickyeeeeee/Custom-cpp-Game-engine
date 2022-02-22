@@ -1,7 +1,5 @@
 #pragma once
-#include "core/core.h"
-#include "scene/Scene.h"
-#include "scene/Entity.h"
+#include <Engine.h>
 class SceneHierarchyPanel
 {
 public:
