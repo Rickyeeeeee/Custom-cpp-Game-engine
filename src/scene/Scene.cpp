@@ -20,6 +20,7 @@ Ref<Scene> Scene::Create(SceneType type)
         return CreateRef<Scene2D>();
     if (type == SceneType::_3D)
         return CreateRef<Scene3D>();
+    return nullptr;
 }
 
 Entity Scene::CreateEntity(const std::string& name)
@@ -174,7 +175,9 @@ void Scene3D::OnUpdate(Timestep ts)
         for (auto entity : group)
         {
             auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
-            Renderer3D::DrawStaticMesh(mesh.mesh);
+            Renderer3D::DrawStaticMesh(mesh.mesh, transform.GetTransform());
+
+
         }
 
         Renderer3D::EndScene();

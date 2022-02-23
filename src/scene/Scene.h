@@ -29,8 +29,8 @@ private:
     void OnComponentAdded(Entity entity, T& component);
 protected:
     entt::registry m_Registry;
-    unsigned int m_ViewportWidth = 0;
-    unsigned int m_ViewportHeight = 0;
+    unsigned int m_ViewportWidth = 1;
+    unsigned int m_ViewportHeight = 1;
     SceneType m_SceneType;
 
     friend class Entity;

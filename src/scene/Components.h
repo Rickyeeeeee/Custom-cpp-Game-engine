@@ -38,8 +38,8 @@ struct SpriteComponent
 
 struct MeshComponent
 {
+    int meshSource = 0;
     Mesh mesh;
-
     MeshComponent() = default;
     MeshComponent(const MeshComponent&) = default;
     operator Mesh& () { return mesh; }

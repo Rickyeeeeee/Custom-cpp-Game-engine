@@ -1,26 +1,27 @@
 Scene: Untitled
-Type: 0
+Type: 1
 Entities:
   - Entity: 1216546513215
     TagComponent:
-      Tag: Empty Entity
+      Tag: box2
     TransformComponent:
-      Translation: [0.899999976, 1.5, 0]
-      Rotation: [0, 0, 1.29999995]
-      Scale: [1.10000002, 3.20000005, 1]
-    SpriteComponent:
-      Color: [0.828431368, 0.162437513, 0.162437513, 1]
+      Translation: [0, 4, 0]
+      Rotation: [0, 0.899999976, 0.699999988]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.642156839, 0.147947907, 0.147947907, 1]
   - Entity: 1216546513215
     TagComponent:
-      Tag: myCamera
+      Tag: Camera
     TransformComponent:
-      Translation: [0, 0, 0]
-      Rotation: [0, 0, 0]
+      Translation: [0, 6.80000019, 16.2999992]
+      Rotation: [-0.300000012, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
       Camera:
-        ProjectionType: 1
-        PerspectiveFOV: 0.785398185
+        ProjectionType: 0
+        PerspectiveFOV: 45
         PerspectiveFar: 100
         PerspectiveNear: 0.00999999978
         OrthographicSize: 10
@@ -30,10 +31,11 @@ Entities:
       FixedAspectRatio: false
   - Entity: 1216546513215
     TagComponent:
-      Tag: Empty Entity
+      Tag: Box
     TransformComponent:
       Translation: [0, 0, 0]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    SpriteComponent:
-      Color: [1, 1, 1, 1]
+      Scale: [12.5, 0.899999976, 11.3000002]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.233690664, 0.108347759, 0.818627477, 1]

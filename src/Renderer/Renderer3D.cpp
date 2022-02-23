@@ -149,6 +149,7 @@ void Renderer3D::EndScene()
 
 void Renderer3D::SubmitStaticMesh(Mesh& mesh) 
 {
+    if (mesh.Submitted) return;
     auto size = mesh.Vertices.size();
     if (size + s_Data.StaticMeshBufferPtr->VertexCount >= s_Data.MaxStaticVertices)
     {
@@ -189,6 +190,9 @@ void Renderer3D::SubmitStaticMesh(Mesh& mesh)
         vertex.ID = s_Data.StaticMeshCount;
         s_Data.StaticMeshBufferPtr->Vertices[offset++] = vertex;
     }
+    
+    mesh.Submitted = true;
+
     s_Data.StaticMeshBufferPtr->VertexCount += size;
     s_Data.StaticMeshBufferPtr->IndexSize += mesh.Indices.size();
 
@@ -197,13 +201,51 @@ void Renderer3D::SubmitStaticMesh(Mesh& mesh)
     s_Data.StaticMeshCount++;
 }
 
+void Renderer3D::DestroyStaticMesh(Mesh& mesh)
+{
+    if (!mesh.Submitted) return;
+
+    auto [vertexPtr, bufferID] = s_Data.StaticMeshDataStorage[mesh.ID];
+    auto Vsize = mesh.Vertices.size();
+    auto Isize = mesh.Indices.size();
+    auto meshID = mesh.ID;
+    s_Data.StaticMeshBuffers[bufferID].VertexCount -= Vsize;
+    s_Data.StaticMeshBuffers[bufferID].IndexCount -= Isize;
+
+    if ((vertexPtr + Vsize) == s_Data.StaticMeshBufferPtr->Vertices)
+        s_Data.StaticMeshBufferPtr -= Vsize;
+    mesh.Submitted =false;
+
+    s_Data.StaticVertexCount -= Vsize;
+}
+
 
 void Renderer3D::DrawStaticMesh(const Mesh& mesh) 
 {
     // for (int i = 0; i < indices.size(); i++)
     //     s_Data.StaticIndices[i + s_Data.StaticIndexCount] = indices[i];
-
+    if (!mesh.Submitted) return;
     auto [vertexPtr, bufferid] = s_Data.StaticMeshDataStorage[mesh.ID];
+    memcpy(s_Data.StaticMeshBuffers[bufferid].Indices + s_Data.StaticMeshBuffers[bufferid].IndexCount, 
+            mesh.Indices.begin().base(), 
+            mesh.Indices.size() * sizeof(unsigned int));
+    s_Data.StaticMeshBuffers[bufferid].IndexCount += mesh.Indices.size();
+    s_Data.StaticIndexCount += mesh.Indices.size();
+}
+
+void Renderer3D::DrawStaticMesh(const Mesh& mesh, const Matrix4& transform)
+{
+    if (!mesh.Submitted) return;
+    auto size = mesh.Vertices.size();
+    auto color = mesh.color;
+    auto [vertexPtr, bufferid] = s_Data.StaticMeshDataStorage[mesh.ID];
+    for (int i = 0; i < size; i++)
+    {
+        vertexPtr[i].Position = Vector3(transform * Vector4( mesh.Vertices[i].Position.x, 
+            mesh.Vertices[i].Position.y, mesh.Vertices[i].Position.z, 1.0f ));
+        vertexPtr[i].Color = color;
+
+    }
     memcpy(s_Data.StaticMeshBuffers[bufferid].Indices + s_Data.StaticMeshBuffers[bufferid].IndexCount, 
             mesh.Indices.begin().base(), 
             mesh.Indices.size() * sizeof(unsigned int));
@@ -307,6 +349,17 @@ void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, con
     vertices.clear();
     for (int i = 0; i < max; i++)
         vertices.push_back({ cube_positions[i], color, cube_normals[i], 0} );
+}
+
+void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Matrix4& value, const Vector4 color)
+{
+    const unsigned int max = 24;
+    vertices.clear();
+    for (int i = 0; i < max; i++)
+    {
+        Vector3 position = value * Vector4(cube_positions[i], 1.0f);
+        vertices.push_back({ position, color, cube_normals[i], 0 });
+    }
 }
 
 void Renderer3D::Shape::GetCubeIndex(std::vector<unsigned int>& indices) 

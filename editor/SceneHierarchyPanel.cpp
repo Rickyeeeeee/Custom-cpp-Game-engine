@@ -53,7 +53,12 @@ void SceneHierarchyPanel::OnImGuiRender()
                     m_SelectionEntity.AddComponent<SpriteComponent>();
                 ImGui::CloseCurrentPopup();
             }
-
+            if (ImGui::MenuItem("StaticMesh"))
+            {
+                if (!m_SelectionEntity.HasComponent<MeshComponent>())
+                    m_SelectionEntity.AddComponent<MeshComponent>();
+                ImGui::CloseCurrentPopup();
+            }
             ImGui::EndPopup();
         }
         
@@ -209,5 +214,47 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
 
         if (removeComponent)
             entity.RemoveComponent<SpriteComponent>();
+    }
+
+    if (entity.HasComponent<MeshComponent>())
+    {
+        bool open = ImGui::TreeNodeEx((void*)typeid(MeshComponent).hash_code(), treeNodeFlag, "Mesh Renderer");
+
+        ImGui::SameLine(ImGui::GetWindowWidth() - 25.0f);
+        if (ImGui::Button("+", ImVec2(20, 20)))
+        {
+            ImGui::OpenPopup("Component Settings");
+        }
+        bool removeComponent = false;
+        if (ImGui::BeginPopup("ComponentSettings"))
+        {
+            if (ImGui::MenuItem("Remove component"))
+                removeComponent = true;
+
+            ImGui::EndPopup();
+        }
+        if (open)
+        {
+            auto& src = entity.GetComponent<MeshComponent>();
+            const char* items[] = { "none", "cube" };
+            int lastShape = src.meshSource;;
+            ImGui::Combo("Mesh Shape", &src.meshSource, items, IM_ARRAYSIZE(items));
+            // if (item_current == 0)
+            if (lastShape != src.meshSource)
+            {
+                if (src.meshSource == 1)
+                    src.mesh.SetCube();
+                else if (src.meshSource == 0)
+                    src.mesh.Reset();
+            }
+            else 
+            {
+                ImGui::ColorEdit4("Color", glm::value_ptr(src.mesh.color));
+            }
+            ImGui::TreePop();
+        }
+
+        if (removeComponent)
+            entity.RemoveComponent<MeshComponent>();
     }
 }

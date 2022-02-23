@@ -136,6 +136,19 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
 
         out << YAML::EndMap;
     }
+
+    if (entity.HasComponent<MeshComponent>())
+    {
+        out << YAML::Key << "MeshComponent";
+        out << YAML::BeginMap;
+        
+        auto& mcs = entity.GetComponent<MeshComponent>();
+        auto& mesh = mcs.mesh;
+        out << YAML::Key << "MeshSource" << YAML::Value << mcs.meshSource;
+        out << YAML::Key << "Color" << YAML::Value << mesh.color;
+
+        out << YAML::EndMap;
+    }
     out << YAML::EndMap;
 }
 
@@ -231,6 +244,16 @@ std::tuple<bool, Ref<Scene>> SceneSerializer::DeserializeText(const std::string&
             {
                 auto& src = deserializedEntity.AddComponent<SpriteComponent>();
                 src.Color = spriteComponent["Color"].as<glm::vec4>();
+            }
+
+            auto meshComponent = entity["MeshComponent"];
+            if (meshComponent)
+            {
+                auto& src = deserializedEntity.AddComponent<MeshComponent>();
+                src.meshSource = meshComponent["MeshSource"].as<int>();
+                if (src.meshSource == 1)
+                    src.mesh.SetCube();
+                src.mesh.color = meshComponent["Color"].as<glm::vec4>();
             }
         }
     }

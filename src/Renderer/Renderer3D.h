@@ -14,6 +14,7 @@ public:
     {
     public:
         static void GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Transform& transform, const Vector4 color);
+        static void GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Matrix4& value, const Vector4 color);
         static void GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Vector4 color);
         static void GetCubeIndex(std::vector<unsigned int>& indices);
         static void GetCubeIndex(std::vector<unsigned int>& indices, unsigned int offset);
@@ -22,10 +23,12 @@ public:
     static void Shutdown();
 
     static void SubmitStaticMesh(Mesh& mesh);
+    static void DestroyStaticMesh(Mesh& mesh);
     
     static void BeginScene(const Camera& camera, const Matrix4& transform);
     static void BeginScene(const Perspective3DCamera& camera);
-    static void DrawStaticMesh(const Mesh& indices);
+    static void DrawStaticMesh(const Mesh& mesh);
+    static void DrawStaticMesh(const Mesh& mesh, const Matrix4& transform);
     static void EndScene();
     static void Flush();
 

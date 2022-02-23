@@ -116,9 +116,7 @@ void EditorLayer::OnImGuiRender()
         }
         ImGui::EndMenuBar();
     }
-    ImGui::Begin("Renderer2D");
-    // ImGui::Text("")
-    ImGui::End();
+
 
     m_Panel.OnImGuiRender();
 
@@ -129,6 +127,11 @@ void EditorLayer::OnImGuiRender()
     ImGui::Text("Quads: ", stats.QuadCount);
     ImGui::Text("Vertices: %d ", stats.GetTotalVertexCount());
     ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
+    ImGui::End();
+
+    ImGui::Begin("Renderer3D Profile: ");
+    ImGui::Text("Draw call: %d", Renderer3D::GetDrawcall());
+    ImGui::Text("Vertex count: %d", Renderer3D::GetVertexCount());
     ImGui::End();
 
     ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });

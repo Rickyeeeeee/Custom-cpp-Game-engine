@@ -13,6 +13,10 @@ public:
         Vertices.clear();
         Indices.clear();
     }
+    void SetCube();
+    void Reset();
+public:
+    Vector4 color = { 0.2f, 0.2f, 0.2f, 1.0f };
     std::vector<Vertex3DSimple> Vertices;
     std::vector<unsigned int> Indices;
     unsigned int ID;

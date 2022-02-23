@@ -131,6 +131,7 @@ public:
         ImGui::Image((void*)textureID, ImVec2{ 320.0f, 180.0f });
         ImGui::End();
 
+    ImGui::ShowDemoWindow();
 
     ImGui::End();
     }
