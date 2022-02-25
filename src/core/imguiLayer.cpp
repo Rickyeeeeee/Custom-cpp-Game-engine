@@ -4,6 +4,9 @@
 #include "core/Application.h"
 #include "event/EventDispatcher.h"
 #include <GLFW/glfw3.h>
+
+#include "ImGuizmo.h"
+
 ImGuiLayer::ImGuiLayer() 
     : Layer()
 {
@@ -69,6 +72,7 @@ void ImGuiLayer::Begin()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+    ImGuizmo::BeginFrame();
 }
 
 void ImGuiLayer::End() 

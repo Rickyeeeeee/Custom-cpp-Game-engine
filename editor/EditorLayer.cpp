@@ -2,6 +2,8 @@
 #include "imgui/backends/imgui_impl_glfw.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
 
+#include "ImGuizmo.h"
+#include "Maths/Math.h"
 
 EditorLayer::EditorLayer()
     : Layer(), m_CameraController(
@@ -50,6 +52,7 @@ void EditorLayer::OnUpdate(Timestep ts)
 
 void EditorLayer::OnImGuiRender() 
 {
+    
     static bool dockspaceOpen = true;
     static bool opt_fullscreen = true;
     static bool opt_padding = false;
@@ -150,6 +153,46 @@ void EditorLayer::OnImGuiRender()
     }
     unsigned int textureID = m_Framebuffer->GetColorAttachmentRendererID();
     ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2( 0, 1 ), ImVec2( 1, 0));
+
+    m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+
+// ImGuizmo
+    Entity selectedEntity = m_Panel.GetSelectedEntity();
+    if (selectedEntity && m_GizmoType != -1)
+    {
+        ImGuizmo::SetOrthographic(false);
+        ImGuizmo::SetDrawlist();
+
+        float windowWidth = (float)ImGui::GetWindowWidth();
+        float windowHeight = (float)ImGui::GetWindowHeight();
+        ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+        
+        // Camera
+        auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+        const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+        const Matrix4& cameraProjection = camera.GetProjection();
+        Matrix4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+
+        // Entity transform
+        auto& tc = selectedEntity.GetComponent<TransformComponent>();
+        Matrix4 transform = tc.GetTransform();
+
+        ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
+            (ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform));
+        
+        if (ImGuizmo::IsUsing())
+        {
+            glm::vec3 translation(1.0f), rotation(1.0f), scale(1.0f);
+            Math::DecomposeTransform(transform, translation, rotation, scale);
+            Vector3 deltaRotation = rotation - tc.Rotation;
+            tc.Translation = translation;
+            tc.Rotation += deltaRotation;
+            tc.Scale = scale;
+        }
+    }
+
+
+
     ImGui::End();
     ImGui::PopStyleVar();
 

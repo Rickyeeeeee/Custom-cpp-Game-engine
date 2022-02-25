@@ -9,15 +9,16 @@ include_directories(
     PUBLIC external/yaml-cpp/include
     PUBLIC external/std_image
     PUBLIC external
+    PUBLIC external/ImGuizmo
 )
  
 # add_subdirectory(external/yaml-cpp)
 add_subdirectory(external/imgui) 
+add_subdirectory(external/ImGuizmo)
 add_subdirectory(external/spdlog)
 add_subdirectory(src) 
 add_subdirectory(sandbox)
 add_subdirectory(editor)
-add_subdirectory(editor3d)
 
 
 target_include_directories(

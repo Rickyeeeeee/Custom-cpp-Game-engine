@@ -48,7 +48,6 @@ struct Renderer3Dstorage
     int StaticIndexCount = 0;
 
     Matrix4 ViewProjection = Matrix4(1.0f);
-
 // dynamics meshes
 };
 
@@ -127,10 +126,33 @@ void Renderer3D::BeginScene(const Perspective3DCamera& camera)
     s_Data.StaticIndexCount = 0;
 }
 
-void Renderer3D::EndScene() 
+void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>& pointLights, Light* dirLight) 
 {
     s_Data.simple3dShader->Bind();
     s_Data.simple3dShader->SetMat4("u_Model", Matrix4(1.0f));
+    s_Data.simple3dShader->SetFloat3("u_ViewPos", viewPosition);
+    bool HaveDirectionalLight = dirLight != nullptr;
+    s_Data.simple3dShader->SetInt("u_HasDirectionalLight", HaveDirectionalLight);
+    if (HaveDirectionalLight)
+    {
+        s_Data.simple3dShader->SetFloat("u_DirLight.ambient", dirLight->ambient);
+        s_Data.simple3dShader->SetFloat("u_DirLight.diffuse", dirLight->diffuse);
+        s_Data.simple3dShader->SetFloat("u_DirLight.specular", dirLight->specular);
+        s_Data.simple3dShader->SetFloat3("u_DirLight.direction", dirLight->direction);
+        s_Data.simple3dShader->SetFloat3("u_DirLight.color", dirLight->color);
+    }
+    s_Data.simple3dShader->SetInt("u_PointLightSize", pointLights.size());
+    for (int i = 0; i < pointLights.size(); i++)
+    {
+        s_Data.simple3dShader->SetFloat("u_PointLights[" + std::to_string(i) + "].ambient", pointLights[i].ambient);
+        s_Data.simple3dShader->SetFloat("u_PointLights[" + std::to_string(i) + "].diffuse", pointLights[i].diffuse);
+        s_Data.simple3dShader->SetFloat("u_PointLights[" + std::to_string(i) + "].specular", pointLights[i].specular);
+        s_Data.simple3dShader->SetFloat("u_PointLights[" + std::to_string(i) + "].constant", pointLights[i].constant);
+        s_Data.simple3dShader->SetFloat("u_PointLights[" + std::to_string(i) + "].linear", pointLights[i].linear);
+        s_Data.simple3dShader->SetFloat("u_PointLights[" + std::to_string(i) + "].quadratic", pointLights[i].quadratic);
+        s_Data.simple3dShader->SetFloat3("u_PointLights[" + std::to_string(i) + "].color", pointLights[i].color);
+        s_Data.simple3dShader->SetFloat3("u_PointLights[" + std::to_string(i) + "].position", pointLights[i].position);
+    }
 
     for (int i = 0; i < s_Data.StaticBufferCount; i++)
     {
@@ -239,10 +261,11 @@ void Renderer3D::DrawStaticMesh(const Mesh& mesh, const Matrix4& transform)
     auto size = mesh.Vertices.size();
     auto color = mesh.color;
     auto [vertexPtr, bufferid] = s_Data.StaticMeshDataStorage[mesh.ID];
+    auto normalTransform = glm::mat3(glm::transpose(glm::inverse(transform)));
     for (int i = 0; i < size; i++)
     {
-        vertexPtr[i].Position = Vector3(transform * Vector4( mesh.Vertices[i].Position.x, 
-            mesh.Vertices[i].Position.y, mesh.Vertices[i].Position.z, 1.0f ));
+        vertexPtr[i].Position = Vector3(transform * Vector4(mesh.Vertices[i].Position, 1.0f));
+        vertexPtr[i].Normal = normalTransform * mesh.Vertices[i].Normal;
         vertexPtr[i].Color = color;
 
     }

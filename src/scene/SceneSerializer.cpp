@@ -126,6 +126,29 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
         out << YAML::EndMap;
     }
 
+    if (entity.HasComponent<LightComponent>())
+    {
+        out << YAML::Key << "LightComponent";
+        out << YAML::BeginMap;
+
+        auto& lc = entity.GetComponent<LightComponent>();
+        auto& l = lc.Light;
+        out << YAML::Key << "Type" << YAML::Value << (int)lc.Type;
+        out << YAML::Key << "Light";
+        out << YAML::BeginMap;
+        out << YAML::Key << "Ambient" << YAML::Value << l.ambient;
+        out << YAML::Key << "Diffuse" << YAML::Value << l.diffuse;
+        out << YAML::Key << "Specular" << YAML::Value << l.specular;
+        out << YAML::Key << "Constant" << YAML::Value << l.constant;
+        out << YAML::Key << "Linear" << YAML::Value << l.linear;
+        out << YAML::Key << "Quadratic" << YAML::Value << l.quadratic;
+        out << YAML::Key << "Color" << YAML::Value << l.color;
+        out << YAML::Key << "Direction" << YAML::Value << l.direction;
+        out << YAML::EndMap;
+
+        out << YAML::EndMap;
+    }
+
     if (entity.HasComponent<SpriteComponent>())
     {
         out << YAML::Key << "SpriteComponent";
@@ -254,6 +277,22 @@ std::tuple<bool, Ref<Scene>> SceneSerializer::DeserializeText(const std::string&
                 if (src.meshSource == 1)
                     src.mesh.SetCube();
                 src.mesh.color = meshComponent["Color"].as<glm::vec4>();
+            }
+
+            auto lightComponent = entity["LightComponent"];
+            if (lightComponent)
+            {
+                auto& lc = deserializedEntity.AddComponent<LightComponent>();
+                lc.Type = (LightType)lightComponent["Type"].as<int>();
+                auto l = lightComponent["Light"];
+                lc.Light.ambient = l["Ambient"].as<float>();
+                lc.Light.diffuse = l["Diffuse"].as<float>();
+                lc.Light.specular = l["Specular"].as<float>();
+                lc.Light.constant = l["Constant"].as<float>();
+                lc.Light.linear = l["Linear"].as<float>();
+                lc.Light.quadratic = l["Quadratic"].as<float>();
+                lc.Light.color = l["Color"].as<glm::vec3>();
+                lc.Light.direction = l["Direction"].as<glm::vec3>();
             }
         }
     }

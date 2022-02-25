@@ -1,10 +1,15 @@
 #pragma once
 #include <string>
 #include "core/GLM.h"
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
+
 #include "Renderer/Camera.h"
 #include "Renderer/Mesh.h"
 #include "Scene/SceneCamera.h"
 #include "Scene/ScriptableEntity.h"
+#include "Scene/Light.h"
 
 struct TransformComponent
 {
@@ -16,9 +21,7 @@ struct TransformComponent
     TransformComponent(const TransformComponent&) = default;
     Matrix4 GetTransform() const 
     {
-        Matrix4 rotation = glm::rotate(Matrix4(1.0f), Rotation.x, { 1, 0, 0})
-            * glm::rotate(Matrix4(1.0f), Rotation.y, { 0, 1, 0 })
-            * glm::rotate(Matrix4(1.0f), Rotation.z, { 0, 0, 1 });
+        Matrix4 rotation = glm::toMat4(glm::quat(Rotation));
         return glm::translate(Matrix4(1.0f), Translation) *  rotation
             * glm::scale(Matrix4(1.0f), Scale);
     }
@@ -80,5 +83,20 @@ struct NativeScriptComponent
     {
         InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); }; 
         DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+    }
+};
+
+enum class LightType : int
+{ POINT, DIRECTIONAL, SPOT };
+
+struct LightComponent
+{
+    Light Light;
+    LightType Type = LightType::POINT;
+    LightComponent() = default;
+    LightComponent(const LightComponent&) = default;
+    LightComponent(LightType type)
+        : Type(type)
+    {
     }
 };

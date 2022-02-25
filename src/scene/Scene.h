@@ -24,6 +24,7 @@ public:
     virtual void OnUpdate(Timestep ts) = 0;
     
     void OnViewportResize(unsigned int width, unsigned int height);
+    Entity GetPrimaryCameraEntity();
 private:
     template<typename T>
     void OnComponentAdded(Entity entity, T& component);

@@ -59,6 +59,12 @@ void SceneHierarchyPanel::OnImGuiRender()
                     m_SelectionEntity.AddComponent<MeshComponent>();
                 ImGui::CloseCurrentPopup();
             }
+            if (ImGui::MenuItem("Light"))
+            {
+                if (!m_SelectionEntity.HasComponent<LightComponent>())
+                    m_SelectionEntity.AddComponent<LightComponent>();
+                ImGui::CloseCurrentPopup();
+            }
             ImGui::EndPopup();
         }
         
@@ -185,6 +191,35 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
 
 
 
+    }
+
+    if (entity.HasComponent<LightComponent>())
+    {
+        bool open = ImGui::TreeNodeEx((void*)typeid(LightComponent).hash_code(), treeNodeFlag, "Light");
+
+        if (open)
+        {
+            auto& lc = entity.GetComponent<LightComponent>();
+            const char* items[] = { "PointLight", "DirectionalLight", "SpotLight" };
+            ImGui::Combo("Type", (int*)&lc.Type, items, IM_ARRAYSIZE(items));
+            if (lc.Type == LightType::POINT)
+            {
+                ImGui::DragFloat("ambient", &lc.Light.ambient, 0.01f, 0.0f, 1.0f);
+                ImGui::DragFloat("diffuse", &lc.Light.diffuse, 0.01f, 0.0f, 1.0f);
+                ImGui::DragFloat("specular", &lc.Light.specular, 0.01f, 0.0f, 1.0f);
+                ImGui::DragFloat("constant", &lc.Light.constant, 0.01f, 0.0f, 1.0f);
+                ImGui::DragFloat("linear", &lc.Light.linear, 0.01f, 0.0f, 1.0f);
+                ImGui::DragFloat("quadratic", &lc.Light.quadratic, 0.01f, 0.0f, 1.0f);
+                ImGui::ColorEdit3("Color", glm::value_ptr(lc.Light.color));
+            }
+            else if (lc.Type == LightType::DIRECTIONAL)
+            {
+                ImGui::DragFloat("ambient", &lc.Light.ambient, 0.01f, 0.0f, 1.0f);
+                ImGui::ColorEdit3("Color", glm::value_ptr(lc.Light.color));
+            }
+
+            ImGui::TreePop();
+        }
     }
 
     if (entity.HasComponent<SpriteComponent>())

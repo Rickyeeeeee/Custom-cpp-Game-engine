@@ -30,5 +30,6 @@ private:
     bool m_ViewportHovered = false;
     Vector2 m_ViewportSize;
 
+    int m_GizmoType = -1;
     SceneHierarchyPanel m_Panel;
 };

@@ -14,6 +14,7 @@ file(GLOB CPP_SOURCE
     stb_image/*.cpp
     OpenGL/*.cpp
     Renderer/*.cpp
+    Maths/*.cpp
     utils/*.cpp
 )
 add_library(engine 

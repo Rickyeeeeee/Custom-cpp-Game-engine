@@ -53,6 +53,19 @@ void Scene::OnViewportResize(unsigned int width, unsigned int height)
     }    
 }
 
+Entity Scene::GetPrimaryCameraEntity()
+{
+    auto view = m_Registry.view<CameraComponent>();
+    for (auto entity : view)
+    {
+        auto camera = view.get<CameraComponent>(entity);
+        if (camera.Primary )
+            return Entity{entity, this};
+        
+    }
+    return {};
+}
+
 template<typename T>
 void Scene::OnComponentAdded(Entity entity, T& component)
 {
@@ -85,6 +98,11 @@ void Scene::OnComponentAdded<MeshComponent>(Entity entity, MeshComponent& compon
 }
 template<>
 void Scene::OnComponentAdded<SpriteComponent>(Entity entity, SpriteComponent& component)
+{
+    
+}
+template<>
+void Scene::OnComponentAdded<LightComponent>(Entity entity, LightComponent& component)
 {
     
 }
@@ -153,6 +171,7 @@ void Scene3D::OnUpdate(Timestep ts)
 
     Camera* mainCamera = nullptr;
     Matrix4 cameraTransform = Matrix4(1.0f);
+    Vector3 cameraPosition;
     {
         auto view = m_Registry.view<TransformComponent, CameraComponent>();
         for (auto entity : view)
@@ -162,11 +181,31 @@ void Scene3D::OnUpdate(Timestep ts)
             if (camera.Primary)
             {
                 mainCamera = &camera.Camera;
+                cameraPosition = transform.Translation;
                 cameraTransform = transform.GetTransform(); 
             }
         }
     }
-
+    std::vector<Light> pointLights;
+    Vector3 lightPosition;
+    Light* dirLight = nullptr;
+    {
+        auto view = m_Registry.view<TransformComponent, LightComponent>();
+        for (auto entity : view)
+        {
+            auto [transform, light] = view.get<TransformComponent, LightComponent>(entity);
+            if (light.Type == LightType::POINT)
+            {
+                light.Light.position = transform.Translation;
+                pointLights.push_back(light.Light);
+            }
+            else if (light.Type == LightType::DIRECTIONAL)
+            {
+                light.Light.direction = transform.GetTransform() * Vector4(0.0f, -1.0f, 0.0f, 1.0f);
+                dirLight = &light.Light;
+            }
+        }
+    }
     if (mainCamera)
     {
         Renderer3D::BeginScene(*mainCamera, cameraTransform);
@@ -179,7 +218,6 @@ void Scene3D::OnUpdate(Timestep ts)
 
 
         }
-
-        Renderer3D::EndScene();
+        Renderer3D::EndScene(cameraPosition, pointLights, dirLight);
     }
 }
