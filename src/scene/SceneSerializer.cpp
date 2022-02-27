@@ -169,6 +169,7 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
         auto& mesh = mcs.mesh;
         out << YAML::Key << "MeshSource" << YAML::Value << mcs.meshSource;
         out << YAML::Key << "Color" << YAML::Value << mesh.color;
+        out << YAML::Key << "Filepath" << YAML::Value << mcs.filepath;
 
         out << YAML::EndMap;
     }
@@ -274,8 +275,15 @@ std::tuple<bool, Ref<Scene>> SceneSerializer::DeserializeText(const std::string&
             {
                 auto& src = deserializedEntity.AddComponent<MeshComponent>();
                 src.meshSource = meshComponent["MeshSource"].as<int>();
-                if (src.meshSource == 1)
-                    src.mesh.SetCube();
+                auto g = meshComponent["Filepath"].as<std::string>();
+                src.filepath = g;
+                if (src.meshSource == 0)
+                    src.mesh.Reset();
+                else
+                {
+                    src.Load();
+                    src.mesh.Submit();
+                }
                 src.mesh.color = meshComponent["Color"].as<glm::vec4>();
             }
 

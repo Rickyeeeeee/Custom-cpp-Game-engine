@@ -7,6 +7,7 @@
 #include "core/pch.h"
 #include "Renderer/Camera.h"
 #include "scene/Light.h"
+#include "scene/EditorCamera.h"
 
 class Renderer3D
 {
@@ -26,11 +27,15 @@ public:
     static void SubmitStaticMesh(Mesh& mesh);
     static void DestroyStaticMesh(Mesh& mesh);
     
+    static void BeginScene(const EditorCamera& camera);
     static void BeginScene(const Camera& camera, const Matrix4& transform);
     static void BeginScene(const Perspective3DCamera& camera);
+
     static void DrawStaticMesh(const Mesh& mesh);
-    static void DrawStaticMesh(const Mesh& mesh, const Matrix4& transform);
+    static void DrawStaticMesh(const Mesh& mesh, const Matrix4& transform, const Vector4& color);
+
     static void EndScene(const Vector3& position, const std::vector<Light>& pointLight, Light* dirLight = nullptr) ;
+
     static void Flush();
 
     static unsigned int GetDrawcall();

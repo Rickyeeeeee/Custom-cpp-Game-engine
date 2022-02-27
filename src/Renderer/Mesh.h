@@ -15,6 +15,7 @@ public:
     }
     void SetCube();
     void Reset();
+    void Submit();
 public:
     Vector4 color = { 0.2f, 0.2f, 0.2f, 1.0f };
     std::vector<Vertex3DSimple> Vertices;

@@ -1,6 +1,7 @@
 #include "SceneHierarchyPanel.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
 #include "imgui/backends/imgui_impl_glfw.h"
+
 SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& context)
 {
    SetContext(context); 
@@ -271,16 +272,20 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
         if (open)
         {
             auto& src = entity.GetComponent<MeshComponent>();
-            const char* items[] = { "none", "cube" };
+            const char* items[] = { "none", "cube", "sphere", "other" };
             int lastShape = src.meshSource;;
             ImGui::Combo("Mesh Shape", &src.meshSource, items, IM_ARRAYSIZE(items));
-            // if (item_current == 0)
             if (lastShape != src.meshSource)
             {
+                src.mesh.Reset();
                 if (src.meshSource == 1)
-                    src.mesh.SetCube();
-                else if (src.meshSource == 0)
-                    src.mesh.Reset();
+                    src.filepath = "C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj";
+                if (src.meshSource == 2)
+                    src.filepath = "C:/Users/ricky/Dev/coolgame/run/asset/models/icoSphere.obj";
+                else if (src.meshSource == 3)
+                    src.filepath = FileDialogs::OpenFile("Model (*.obj)\0*.obj\0") ;
+                src.Load();
+                src.mesh.Submit();
             }
             else 
             {

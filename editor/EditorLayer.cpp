@@ -8,7 +8,8 @@
 EditorLayer::EditorLayer()
     : Layer(), m_CameraController(
         Application::Get().GetWindow().GetWidth() / 
-        Application::Get().GetWindow().GetHeight())
+        Application::Get().GetWindow().GetHeight()),
+        m_EditorCamera( { 4.0f / 3.0f, 45.0f, 0.01f, 500.0f })
 {
 }
 
@@ -39,14 +40,16 @@ void EditorLayer::OnUpdate(Timestep ts)
     }
 
 
-    if (m_ViewportFocused)
-        m_CameraController.OnUpdate(ts);
+    // if (m_ViewportFocused)
+    //     m_CameraController.OnUpdate(ts);
+
+    m_EditorCamera.OnUpdate(ts);
 
     Renderer2D::ResetStats();
     m_Framebuffer->Bind();
     RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
     RenderCommand::Clear();
-    m_ActiveScene->OnUpdate(ts);
+    m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
     m_Framebuffer->Unbind();
 }
 
@@ -149,12 +152,10 @@ void EditorLayer::OnImGuiRender()
     {
         m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
-        m_CameraController.Resize(viewportPanelSize.x, viewportPanelSize.y);
+        m_EditorCamera.Resize(viewportPanelSize.x, viewportPanelSize.y);
     }
     unsigned int textureID = m_Framebuffer->GetColorAttachmentRendererID();
     ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2( 0, 1 ), ImVec2( 1, 0));
-
-    m_GizmoType = ImGuizmo::OPERATION::ROTATE;
 
 // ImGuizmo
     Entity selectedEntity = m_Panel.GetSelectedEntity();
@@ -168,16 +169,16 @@ void EditorLayer::OnImGuiRender()
         ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
         
         // Camera
-        auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
-        const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
-        const Matrix4& cameraProjection = camera.GetProjection();
-        Matrix4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+        // auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+        // const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+        // const Matrix4& cameraProjection = camera.GetProjection();
+        // Matrix4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
 
         // Entity transform
         auto& tc = selectedEntity.GetComponent<TransformComponent>();
         Matrix4 transform = tc.GetTransform();
 
-        ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
+        ImGuizmo::Manipulate(glm::value_ptr(m_EditorCamera.GetView()), glm::value_ptr(m_EditorCamera.GetProjection()),
             (ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform));
         
         if (ImGuizmo::IsUsing())
@@ -202,6 +203,7 @@ ImGui::End();
 
 void EditorLayer::OnEvent(Event& event)
 {
+    m_EditorCamera.OnEvent(event);
     m_CameraController.OnEvent(event);
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(EditorLayer::OnKeyPressed));
@@ -216,12 +218,12 @@ bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
     bool shift = Input::IsKeyPressed(KEY_LEFT_SHIFT) || Input::IsKeyPressed(KEY_RIGHT_SHIFT);
     switch (e.GetKeyCode())
     {
-        // case KEY_N:
-        // {
-        //     if (control)
-        //         NewScene();
-        //     break;
-        // }
+        case KEY_N:
+        {
+            if (control)
+                NewScene(SceneType::_3D);
+            break;
+        }
         case KEY_O:
         {
             if (control)
@@ -232,8 +234,28 @@ bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
         {
             if (control && shift)
                 SaveSceneAs();
-        }
         break;
+        }
+        case KEY_Q:
+        {
+            m_GizmoType = -1;
+            break;
+        }
+        case KEY_W:
+        {
+            m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+            break;
+        }
+        case KEY_E:
+        {
+            m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+            break;
+        }
+        case KEY_R:
+        {
+            m_GizmoType = ImGuizmo::OPERATION::SCALE;
+            break;
+        }
     }
     return true;
 }

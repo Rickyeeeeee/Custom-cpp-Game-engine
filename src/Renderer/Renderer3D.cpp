@@ -3,97 +3,62 @@
 #include "Renderer/Shader.h"
 #include "core/core.h"
 #include "Renderer/RenderCommand.h"
-
+#include "scene/EditorCamera.h"
 #include <array>
 #include <vector>
 #include <unordered_map>
 #include <utility>
-
-struct MeshData
+#include <queue>
+struct RenderObject
 {
-    Vertex3DSimple* Renderer3DVertexPtr;
-    int MeshBufferIndex;
+    uint32_t id;
+    Matrix4 transform;
+    Vector4 color;
 };
 
 struct Renderer3Dstorage
 {
-// Static meshes
-    static const unsigned int MaxStaticVertices = 10000;
-
     // GPU side buffer
     std::vector<Ref<VertexArray>> StaticVertexArray;
     std::vector<Ref<VertexBuffer>> StaticVertexBuffers;
     std::vector<Ref<IndexBuffer>> StaticIndexBuffers;
     Ref<Shader> simple3dShader;
 
-    int StaticBufferCount = 0;
+    int StaticBufferCount;
 
-    std::unordered_map<unsigned int, std::tuple<Vertex3DSimple*, int>> StaticMeshDataStorage;
+    std::vector<RenderObject> RenderQueue;
 
-    // CPU side buffer
-    struct RendererMeshBuffer
-    {
-        Vertex3DSimple* Vertices;
-        unsigned int* Indices;
-        int VertexCount;
-        int IndexCount;
-        int IndexSize;
-    };
-
-    std::vector<RendererMeshBuffer> StaticMeshBuffers;
-    std::vector<RendererMeshBuffer>::iterator StaticMeshBufferPtr;
-
-    int StaticMeshCount = 0;
-    int StaticVertexCount = 0;
-    int StaticIndexCount = 0;
+    int StaticMeshCount;
+    int StaticVertexCount;
+    int StaticIndexCount;
 
     Matrix4 ViewProjection = Matrix4(1.0f);
-// dynamics meshes
 };
 
 static Renderer3Dstorage s_Data;
 
 void Renderer3D::Init() 
 {
-// GPU initialization
-    auto vertexArray = VertexArray::Create();
-
-    auto vertexBuffer = VertexBuffer::Create(s_Data.MaxStaticVertices * sizeof(Vertex3DSimple));
-    vertexBuffer->SetLayout(Vertex3DSimple::GetLayout());
-    vertexArray->AddVertexBuffer(vertexBuffer);
-
-    auto indexBuffer = IndexBuffer::Create(1);
-    vertexArray->SetIndexBuffer(indexBuffer);    
-
     s_Data.simple3dShader = Shader::Create("asset/shaders/simple3d.glsl");
     s_Data.simple3dShader->Bind();
 
-    s_Data.StaticVertexArray.push_back(vertexArray); 
-    s_Data.StaticVertexBuffers.push_back(vertexBuffer);
-    s_Data.StaticIndexBuffers.push_back(indexBuffer);
-// CPU initilization
-    Vertex3DSimple* vertices = new Vertex3DSimple[s_Data.MaxStaticVertices];
-    // Vertex3DSimple* vertices = new Vertex3DSimple[s_Data.MaxStaticVertices];
-    s_Data.StaticMeshBuffers.push_back({vertices, nullptr, 0, 0, 0});
-
-// variable initialization
-    s_Data.StaticMeshBufferPtr = s_Data.StaticMeshBuffers.begin();
-    s_Data.StaticBufferCount = 1;
+    s_Data.StaticMeshCount = 0;
     s_Data.StaticVertexCount = 0;
     s_Data.StaticIndexCount = 0;
-    s_Data.StaticMeshCount = 0;
+
 }
 
 void Renderer3D::Shutdown() 
 {
-    for (auto& MeshBuffer : s_Data.StaticMeshBuffers)
-    {
-        delete[] MeshBuffer.Vertices;
-        delete[] MeshBuffer.Indices;
-    }
+}
 
-    s_Data.StaticMeshBuffers.clear();
-    s_Data.StaticMeshBufferPtr = s_Data.StaticMeshBuffers.begin();
+void Renderer3D::BeginScene(const EditorCamera& camera)
+{
+    s_Data.ViewProjection = camera.GetProjection() * camera.GetView();
+    s_Data.simple3dShader->Bind();  
+    s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
+
+    s_Data.RenderQueue.clear();
 }
 
 void Renderer3D::BeginScene(const Camera& camera, const Matrix4& transform)
@@ -102,13 +67,7 @@ void Renderer3D::BeginScene(const Camera& camera, const Matrix4& transform)
     s_Data.simple3dShader->Bind();  
     s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
 
-    for (auto& MeshBuffer : s_Data.StaticMeshBuffers)
-    {
-        MeshBuffer.Indices = new unsigned int[MeshBuffer.IndexSize];
-        MeshBuffer.IndexCount = 0;
-    }
-
-    s_Data.StaticIndexCount = 0;
+    s_Data.RenderQueue.clear();
 }
 
 void Renderer3D::BeginScene(const Perspective3DCamera& camera) 
@@ -117,19 +76,12 @@ void Renderer3D::BeginScene(const Perspective3DCamera& camera)
     s_Data.ViewProjection = camera.GetViewProjectionMatrix();
     s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
 
-    for (auto& MeshBuffer : s_Data.StaticMeshBuffers)
-    {
-        MeshBuffer.Indices = new unsigned int[MeshBuffer.IndexSize];
-        MeshBuffer.IndexCount = 0;
-    }
-
-    s_Data.StaticIndexCount = 0;
+    s_Data.RenderQueue.clear();
 }
 
 void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>& pointLights, Light* dirLight) 
 {
     s_Data.simple3dShader->Bind();
-    s_Data.simple3dShader->SetMat4("u_Model", Matrix4(1.0f));
     s_Data.simple3dShader->SetFloat3("u_ViewPos", viewPosition);
     bool HaveDirectionalLight = dirLight != nullptr;
     s_Data.simple3dShader->SetInt("u_HasDirectionalLight", HaveDirectionalLight);
@@ -154,126 +106,79 @@ void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>&
         s_Data.simple3dShader->SetFloat3("u_PointLights[" + std::to_string(i) + "].position", pointLights[i].position);
     }
 
-    for (int i = 0; i < s_Data.StaticBufferCount; i++)
+    for (auto& Object : s_Data.RenderQueue)
     {
-        s_Data.StaticVertexBuffers[i]->SetData(s_Data.StaticMeshBuffers[i].Vertices, 0, s_Data.StaticMeshBuffers[i].VertexCount * sizeof(Vertex3DSimple));
-        s_Data.StaticIndexBuffers[i]->ResetData(s_Data.StaticMeshBuffers[i].Indices, s_Data.StaticMeshBuffers[i].IndexSize);
-
-        delete[] s_Data.StaticMeshBuffers[i].Indices;
-    }
-
-    for (int i = 0; i < s_Data.StaticBufferCount; i++)
-    {
-        s_Data.StaticVertexArray[i]->Bind();
-        RenderCommand::DrawIndexed(s_Data.StaticVertexArray[i], s_Data.StaticMeshBuffers[i].IndexCount);   
+        s_Data.simple3dShader->SetMat4("u_Model", Object.transform);
+        s_Data.simple3dShader->SetMat4("u_NormalModel", glm::transpose(glm::inverse(Object.transform)));
+        s_Data.simple3dShader->SetFloat4("u_Color", Object.color);
+        RenderCommand::DrawIndexed(s_Data.StaticVertexArray[Object.id], s_Data.StaticIndexBuffers[Object.id]->GetCount());   
     }
 }
 
 void Renderer3D::SubmitStaticMesh(Mesh& mesh) 
 {
-    if (mesh.Submitted) return;
-    auto size = mesh.Vertices.size();
-    if (size + s_Data.StaticMeshBufferPtr->VertexCount >= s_Data.MaxStaticVertices)
+    if (!mesh.Submitted)
     {
     // GPU initialization
         auto vertexArray = VertexArray::Create();
 
-        auto vertexBuffer = VertexBuffer::Create(s_Data.MaxStaticVertices * sizeof(Vertex3DSimple));
+        auto vertexBuffer = VertexBuffer::Create(mesh.Vertices.size() * sizeof(Vertex3DSimple));
+        vertexBuffer->SetData(mesh.Vertices.begin().base(), mesh.Vertices.size() * sizeof(Vertex3DSimple));
         vertexBuffer->SetLayout(Vertex3DSimple::GetLayout());
         vertexArray->AddVertexBuffer(vertexBuffer);
 
-        auto indexBuffer = IndexBuffer::Create(1);
+        auto indexBuffer = IndexBuffer::Create(mesh.Indices.size());
+        indexBuffer->SetData(mesh.Indices.begin().base(), mesh.Indices.size());
         vertexArray->SetIndexBuffer(indexBuffer);    
 
         s_Data.StaticVertexArray.push_back(vertexArray);
         s_Data.StaticVertexBuffers.push_back(vertexBuffer);
         s_Data.StaticIndexBuffers.push_back(indexBuffer);
-    // CPU initilization
-        Vertex3DSimple* vertices = new Vertex3DSimple[s_Data.MaxStaticVertices];
-        // Vertex3DSimple* vertices = new Vertex3DSimple[s_Data.MaxStaticVertices];
-        s_Data.StaticMeshBuffers.push_back({vertices, nullptr, 0, 0, 0});
 
     // variable initialization
-        s_Data.StaticMeshBufferPtr = s_Data.StaticMeshBuffers.end() - 1;
-        s_Data.StaticBufferCount++;
-    }
+        mesh.ID = s_Data.StaticMeshCount;
+        s_Data.StaticMeshCount++;
 
-    s_Data.StaticMeshDataStorage[s_Data.StaticMeshCount] = std::make_tuple(
-        s_Data.StaticMeshBufferPtr->Vertices + s_Data.StaticMeshBufferPtr->VertexCount, 
-        s_Data.StaticBufferCount - 1
-    );
-    mesh.ID = s_Data.StaticMeshCount;
-    auto offset = s_Data.StaticMeshBufferPtr->VertexCount;
-    for (auto& index : mesh.Indices)
-        index += offset;
-
-    for (auto& vertex : mesh.Vertices)
-    {
-        vertex.ID = s_Data.StaticMeshCount;
-        s_Data.StaticMeshBufferPtr->Vertices[offset++] = vertex;
-    }
+        for (auto& vertex : mesh.Vertices)
+        {
+            vertex.ID = mesh.ID;
+        }
     
     mesh.Submitted = true;
+    }
+    else
+    {
+        auto id = mesh.ID;
+        auto vertexArray = s_Data.StaticVertexArray[id];
+        auto vertexBuffer = VertexBuffer::Create(mesh.Vertices.size() * sizeof(Vertex3DSimple));
+        vertexBuffer->SetData(mesh.Vertices.begin().base(), mesh.Vertices.size() * sizeof(Vertex3DSimple));
+        vertexBuffer->SetLayout(Vertex3DSimple::GetLayout());
+        vertexArray->AddVertexBuffer(vertexBuffer);
 
-    s_Data.StaticMeshBufferPtr->VertexCount += size;
-    s_Data.StaticMeshBufferPtr->IndexSize += mesh.Indices.size();
+        auto indexBuffer = IndexBuffer::Create(mesh.Indices.size());
+        indexBuffer->SetData(mesh.Indices.begin().base(), mesh.Indices.size());
+        vertexArray->SetIndexBuffer(indexBuffer);    
 
-    
-    s_Data.StaticVertexCount += size;
-    s_Data.StaticMeshCount++;
+        s_Data.StaticVertexBuffers[id] = vertexBuffer;
+        s_Data.StaticIndexBuffers[id] = indexBuffer;
+    }
+
 }
 
 void Renderer3D::DestroyStaticMesh(Mesh& mesh)
 {
-    if (!mesh.Submitted) return;
 
-    auto [vertexPtr, bufferID] = s_Data.StaticMeshDataStorage[mesh.ID];
-    auto Vsize = mesh.Vertices.size();
-    auto Isize = mesh.Indices.size();
-    auto meshID = mesh.ID;
-    s_Data.StaticMeshBuffers[bufferID].VertexCount -= Vsize;
-    s_Data.StaticMeshBuffers[bufferID].IndexCount -= Isize;
-
-    if ((vertexPtr + Vsize) == s_Data.StaticMeshBufferPtr->Vertices)
-        s_Data.StaticMeshBufferPtr -= Vsize;
-    mesh.Submitted =false;
-
-    s_Data.StaticVertexCount -= Vsize;
 }
 
 
 void Renderer3D::DrawStaticMesh(const Mesh& mesh) 
 {
-    // for (int i = 0; i < indices.size(); i++)
-    //     s_Data.StaticIndices[i + s_Data.StaticIndexCount] = indices[i];
-    if (!mesh.Submitted) return;
-    auto [vertexPtr, bufferid] = s_Data.StaticMeshDataStorage[mesh.ID];
-    memcpy(s_Data.StaticMeshBuffers[bufferid].Indices + s_Data.StaticMeshBuffers[bufferid].IndexCount, 
-            mesh.Indices.begin().base(), 
-            mesh.Indices.size() * sizeof(unsigned int));
-    s_Data.StaticMeshBuffers[bufferid].IndexCount += mesh.Indices.size();
-    s_Data.StaticIndexCount += mesh.Indices.size();
 }
 
-void Renderer3D::DrawStaticMesh(const Mesh& mesh, const Matrix4& transform)
+void Renderer3D::DrawStaticMesh(const Mesh& mesh, const Matrix4& transform, const Vector4& color)
 {
     if (!mesh.Submitted) return;
-    auto size = mesh.Vertices.size();
-    auto color = mesh.color;
-    auto [vertexPtr, bufferid] = s_Data.StaticMeshDataStorage[mesh.ID];
-    auto normalTransform = glm::mat3(glm::transpose(glm::inverse(transform)));
-    for (int i = 0; i < size; i++)
-    {
-        vertexPtr[i].Position = Vector3(transform * Vector4(mesh.Vertices[i].Position, 1.0f));
-        vertexPtr[i].Normal = normalTransform * mesh.Vertices[i].Normal;
-        vertexPtr[i].Color = color;
-
-    }
-    memcpy(s_Data.StaticMeshBuffers[bufferid].Indices + s_Data.StaticMeshBuffers[bufferid].IndexCount, 
-            mesh.Indices.begin().base(), 
-            mesh.Indices.size() * sizeof(unsigned int));
-    s_Data.StaticMeshBuffers[bufferid].IndexCount += mesh.Indices.size();
-    s_Data.StaticIndexCount += mesh.Indices.size();
+    s_Data.RenderQueue.push_back({ mesh.ID, transform, color});
 }
 
 void Renderer3D::Flush() 
@@ -361,7 +266,7 @@ void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, con
     for (int i = 0; i < max; i++)
     {
         Vector3 position = ModelMatrix * Vector4(cube_positions[i], 1.0f);
-        vertices.push_back({ position, color, cube_normals[i], 0 });
+        vertices.push_back({ position, cube_normals[i], 0 });
     }
     // vertices.resize(max);
 }
@@ -371,7 +276,7 @@ void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, con
     const unsigned int max = 24;
     vertices.clear();
     for (int i = 0; i < max; i++)
-        vertices.push_back({ cube_positions[i], color, cube_normals[i], 0} );
+        vertices.push_back({ cube_positions[i], cube_normals[i], 0} );
 }
 
 void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Matrix4& value, const Vector4 color)
@@ -381,7 +286,7 @@ void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, con
     for (int i = 0; i < max; i++)
     {
         Vector3 position = value * Vector4(cube_positions[i], 1.0f);
-        vertices.push_back({ position, color, cube_normals[i], 0 });
+        vertices.push_back({ position, cube_normals[i], 0 });
     }
 }
 

@@ -1,15 +1,7 @@
 #pragma once
 
 #include "core/GLM.h"
-
-struct Frustum
-{
-    float aspectRatio;
-    float fovY;
-    float near;
-    float far;
-};
-
+#include "scene/Frustum.h"
 class Perspective3DCamera
 {
 public:

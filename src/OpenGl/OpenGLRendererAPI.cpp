@@ -26,6 +26,9 @@ void OpenGLRendererAPI::Init()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
+
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK); 
 }
 
 void OpenGLRendererAPI::SetViewport(unsigned int x, unsigned int  y, unsigned int  width, unsigned int  height) 

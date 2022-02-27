@@ -24,6 +24,8 @@
 #include "scene/Entity.h"
 #include "scene/ScriptableEntity.h"
 #include "scene/SceneSerializer.h"
+#include "scene/MeshLoader.h"
+#include "scene/EditorCamera.h"
 
 #include "utils/PlatformUtils.h"
 

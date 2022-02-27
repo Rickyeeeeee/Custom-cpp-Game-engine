@@ -16,8 +16,10 @@ file(GLOB CPP_SOURCE
     Renderer/*.cpp
     Maths/*.cpp
     utils/*.cpp
+    physic/*.cpp
 )
 add_library(engine 
+    STATIC
     ${CPP_SOURCE}
 )
 
@@ -30,6 +32,7 @@ add_library(engine
 target_link_libraries(
     engine
     yaml-cpp
+    assimp
     # spdlog::spdlog
     imgui
     glad

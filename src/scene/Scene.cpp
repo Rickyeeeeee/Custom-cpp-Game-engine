@@ -71,6 +71,7 @@ void Scene::OnComponentAdded(Entity entity, T& component)
 {
     std::cout << "onComponent Added ERROR!" << std::endl;
 }
+
 template<>
 void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
 {
@@ -106,8 +107,12 @@ void Scene::OnComponentAdded<LightComponent>(Entity entity, LightComponent& comp
 {
     
 }
+void Scene2D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
+{
+    
+}
 
-void Scene2D::OnUpdate(Timestep ts)
+void Scene2D::OnUpdateRuntime(Timestep ts)
 {
     {
         m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
@@ -154,7 +159,54 @@ void Scene2D::OnUpdate(Timestep ts)
     
 }
 
-void Scene3D::OnUpdate(Timestep ts)
+void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
+{
+    {
+        m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+        {
+            if (!nsc.Instance)
+            {
+                nsc.Instance = nsc.InstantiateScript();
+                nsc.Instance->m_Entity = Entity{ entity, this };
+                nsc.Instance->OnCreate();
+            }
+            nsc.Instance->OnUpdate(ts);
+        });
+    }
+    
+    std::vector<Light> pointLights;
+    Vector3 lightPosition;
+    Light* dirLight = nullptr;
+    {
+        auto view = m_Registry.view<TransformComponent, LightComponent>();
+        for (auto entity : view)
+        {
+            auto [transform, light] = view.get<TransformComponent, LightComponent>(entity);
+            if (light.Type == LightType::POINT)
+            {
+                light.Light.position = transform.Translation;
+                pointLights.push_back(light.Light);
+            }
+            else if (light.Type == LightType::DIRECTIONAL)
+            {
+                light.Light.direction = transform.GetTransform() * Vector4(0.0f, -1.0f, 0.0f, 1.0f);
+                dirLight = &light.Light;
+            }
+        }
+    }
+ 
+        Renderer3D::BeginScene(camera);
+
+        auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
+        for (auto entity : group)
+        {
+            auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
+            Renderer3D::DrawStaticMesh(mesh.mesh, transform.GetTransform(), mesh.mesh.color);
+        }
+        Renderer3D::EndScene(camera.GetPosition(), pointLights, dirLight);
+}
+
+void Scene3D::OnUpdateRuntime(Timestep ts)
 {
     {
         m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
@@ -214,9 +266,7 @@ void Scene3D::OnUpdate(Timestep ts)
         for (auto entity : group)
         {
             auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
-            Renderer3D::DrawStaticMesh(mesh.mesh, transform.GetTransform());
-
-
+            Renderer3D::DrawStaticMesh(mesh.mesh, transform.GetTransform(), mesh.mesh.color);
         }
         Renderer3D::EndScene(cameraPosition, pointLights, dirLight);
     }

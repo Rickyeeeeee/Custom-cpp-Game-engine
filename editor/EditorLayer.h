@@ -29,7 +29,7 @@ private:
     bool m_ViewportFocused = false;
     bool m_ViewportHovered = false;
     Vector2 m_ViewportSize;
-
+    EditorCamera m_EditorCamera;
     int m_GizmoType = -1;
     SceneHierarchyPanel m_Panel;
 };

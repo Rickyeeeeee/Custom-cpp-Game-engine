@@ -1,0 +1,117 @@
+Scene: Untitled
+Type: 1
+Entities:
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: light1
+    TransformComponent:
+      Translation: [5.414958, -0.06915842, -6.03708315]
+      Rotation: [-0.305093139, 0.25691089, -0.202468589]
+      Scale: [0.999997735, 0.999999404, 0.999999881]
+    LightComponent:
+      Type: 0
+      Light:
+        Ambient: 1
+        Diffuse: 1
+        Specular: 1
+        Constant: 1
+        Linear: 0.0900000036
+        Quadratic: 0.0320000015
+        Color: [0.239186838, 0.648551464, 0.774509788]
+        Direction: [0, 0, 0]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box2
+    TransformComponent:
+      Translation: [-3.16030359, 3.4887743, 4.93390656]
+      Rotation: [-0.284910202, -0.428136528, 0.862966061]
+      Scale: [2.94866753, 2.08181024, 1.76231253]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.146097645, 0.465686262, 0.221294969, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: plane
+    TransformComponent:
+      Translation: [0.0406769812, -5.25046492, -7.82549572]
+      Rotation: [0, 0.999999642, 0]
+      Scale: [38.5717583, 1.85887992, 37.6423225]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.426470578, 0.405565143, 0.405565143, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box1
+    TransformComponent:
+      Translation: [1.15544689, -1.1716814, -4.71815443]
+      Rotation: [2.70000005, 0.600000024, 1.10000002]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.828431368, 0.134010941, 0.134010941, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Directional Light
+    TransformComponent:
+      Translation: [1.08377588, 1.13589394, 0.163754299]
+      Rotation: [0, 0.600000024, 12.8000002]
+      Scale: [1, 1.10000002, 1]
+    LightComponent:
+      Type: 1
+      Light:
+        Ambient: 0.50999999
+        Diffuse: 1
+        Specular: 1
+        Constant: 1
+        Linear: 0.0900000036
+        Quadratic: 0.0299999993
+        Color: [1, 1, 1]
+        Direction: [1.33843684, 0.0657781363, 0.163754299]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Translation: [0, 8.30000019, 24.2999992]
+      Rotation: [-0.300000012, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveFar: 1000
+        PerspectiveNear: 0.00999999978
+        OrthographicSize: 10
+        OrthographicFar: 1
+        OrthographicNear: -1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Empty Entity
+    TransformComponent:
+      Translation: [0, 5.5, 8.89999962]
+      Rotation: [-1.96648955, -0.525139451, -0.663449883]
+      Scale: [2.09999394, 2.30000806, 1.09999931]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.187211633, 0.779411793, 0.535564542, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Empty Entity
+    TransformComponent:
+      Translation: [6.39768362, 4.68395901, -4.68240356]
+      Rotation: [0.951277971, -0.301449895, 3.06551027]
+      Scale: [3.03048015, 3.52193642, 3.95191908]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.774509788, 0.167051122, 0.167051122, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Empty Entity
+    TransformComponent:
+      Translation: [3.28764367, 0.922950327, 4.23729181]
+      Rotation: [0.663739979, -0.229361162, 0.732674479]
+      Scale: [1.58875251, 2.60108352, 1.09966362]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.408273399, 0.217104003, 0.681372523, 1]

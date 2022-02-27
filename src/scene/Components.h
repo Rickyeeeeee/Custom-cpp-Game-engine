@@ -10,6 +10,8 @@
 #include "Scene/SceneCamera.h"
 #include "Scene/ScriptableEntity.h"
 #include "Scene/Light.h"
+#include "scene/MeshLoader.h"
+
 
 struct TransformComponent
 {
@@ -43,8 +45,14 @@ struct MeshComponent
 {
     int meshSource = 0;
     Mesh mesh;
+    std::string filepath = "none";
     MeshComponent() = default;
     MeshComponent(const MeshComponent&) = default;
+    void Load()
+    {
+        MeshLoader loader(filepath);
+        loader.LoadMeshTo(mesh);
+    }
     operator Mesh& () { return mesh; }
     operator const Mesh& () { return mesh; }
 };
