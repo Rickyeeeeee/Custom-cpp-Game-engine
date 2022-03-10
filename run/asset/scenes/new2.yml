@@ -3,33 +3,22 @@ Type: 1
 Entities:
   - Entity: 1216546513215
     TagComponent:
-      Tag: donut
+      Tag: wall
     TransformComponent:
-      Translation: [-1.73966861, 4.08866262, -11.6668768]
-      Rotation: [-1.11809468, 0.667045534, 1.50414002]
-      Scale: [86.5298767, 86.529808, 86.5301819]
+      Translation: [10.039072, 6.25168848, -14.1163425]
+      Rotation: [0.000971400761, 0.998939335, 0.00137701316]
+      Scale: [0.606669188, 11.7031574, 16.1627426]
     MeshComponent:
-      MeshSource: 3
-      Color: [0.747430325, 0.852941155, 0.255046159, 1]
-      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\untitled.obj
+      MeshSource: 1
+      Color: [0.450980365, 0.444348305, 0.444348305, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
   - Entity: 1216546513215
     TagComponent:
-      Tag: Cup
+      Tag: light3
     TransformComponent:
-      Translation: [6.41745043, -1.2759285, -4.15299177]
-      Rotation: [1.70946169, 1.21183646, 2.21850038]
-      Scale: [0.86999929, 0.869985163, 0.869986475]
-    MeshComponent:
-      MeshSource: 2
-      Color: [0.813725471, 0.733948469, 0.733948469, 1]
-      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\teamugobj.obj
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: light2
-    TransformComponent:
-      Translation: [7.72059298, -1.61753666, 1.14619291]
+      Translation: [19.6502857, -2.12433195, -3.04745913]
       Rotation: [0, 0, 0]
-      Scale: [0.24000001, 0.24000001, 0.24000001]
+      Scale: [0.189999998, 0.189999998, 0.189999998]
     LightComponent:
       Type: 0
       Light:
@@ -39,17 +28,100 @@ Entities:
         Constant: 1
         Linear: 0.0900000036
         Quadratic: 0.0320000015
-        Color: [0.153690875, 0.602941155, 0.351889491]
+        Color: [1, 0, 0]
         Direction: [0, 0, 0]
     MeshComponent:
       MeshSource: 2
-      Color: [0.990196049, 0.990196049, 0.990196049, 1]
-      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\icoSphere.obj
+      Color: [1, 1, 1, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/icoSphere.obj
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Gun
+    TransformComponent:
+      Translation: [-5.72465229, -2.03157377, -1.61578536]
+      Rotation: [-2.99305487, 0.063234672, -2.95937514]
+      Scale: [4.81223249, 4.81222582, 4.81225443]
+    MeshComponent:
+      MeshSource: 2
+      Color: [0.117647052, 0.108996533, 0.108996533, 1]
+      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\Gun.obj
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Translation: [0.0161132812, 8.26812077, 24.2686272]
+      Rotation: [-0.300000131, 0, 0]
+      Scale: [1, 0.999999464, 0.999999464]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveFar: 1000
+        PerspectiveNear: 0.00999999978
+        OrthographicSize: 10
+        OrthographicFar: 1
+        OrthographicNear: -1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Directional Light
+    TransformComponent:
+      Translation: [-0.689459324, -3.20237827, 30.9957771]
+      Rotation: [-2.32943201, 0.237248227, 0.909267604]
+      Scale: [0.99999702, 1.09997308, 0.999949634]
+    LightComponent:
+      Type: 1
+      Light:
+        Ambient: 0.49000001
+        Diffuse: 1
+        Specular: 1
+        Constant: 1
+        Linear: 0.0900000036
+        Quadratic: 0.0299999993
+        Color: [0.665369093, 0.896070838, 0.95588237]
+        Direction: [-1.17127526, -2.58946419, 31.7717476]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box1
+    TransformComponent:
+      Translation: [3.16725135, 22.1340008, 6.10104656]
+      Rotation: [0, 0, 0]
+      Scale: [0.999999881, 0.999999642, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.305819899, 0.305819899, 0.700980425, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    RigidBodyComponent:
+      type: 0
+      mass: 11
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: plane
+    TransformComponent:
+      Translation: [0.730740547, -4.32616568, 0.449514866]
+      Rotation: [0, 1, 0]
+      Scale: [16.6000004, 0.800000012, 16.2000008]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.426470578, 0.405565143, 0.405565143, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box2
+    TransformComponent:
+      Translation: [-8.34379864, 3.97683287, 7.57272625]
+      Rotation: [0, 0, 0]
+      Scale: [2.94866753, 2.08181024, 1.76231253]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.146097645, 0.465686262, 0.221294969, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
   - Entity: 1216546513215
     TagComponent:
       Tag: light1
     TransformComponent:
-      Translation: [-4.39750099, -2.09711742, 1.66665912]
+      Translation: [10.6053648, -2.09712148, -9.12567902]
       Rotation: [0, 0, 0]
       Scale: [0.220000044, 0.220001101, 0.220000044]
     LightComponent:
@@ -69,91 +141,11 @@ Entities:
       Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\icoSphere.obj
   - Entity: 1216546513215
     TagComponent:
-      Tag: box2
+      Tag: light2
     TransformComponent:
-      Translation: [-8.48905849, 4.15608358, 7.48135996]
-      Rotation: [-0.284910202, -0.428136528, 0.862966061]
-      Scale: [2.94866753, 2.08181024, 1.76231253]
-    MeshComponent:
-      MeshSource: 1
-      Color: [0.146097645, 0.465686262, 0.221294969, 1]
-      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: plane
-    TransformComponent:
-      Translation: [0.644321918, -4.32616568, 0.361376911]
-      Rotation: [0, 1, 0]
-      Scale: [16.6000004, 0.800000012, 16.2000008]
-    MeshComponent:
-      MeshSource: 1
-      Color: [0.426470578, 0.405565143, 0.405565143, 1]
-      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: box1
-    TransformComponent:
-      Translation: [2.50549245, 0.639927089, 3.74267411]
-      Rotation: [2.70000005, 0.600000083, 1.10000002]
-      Scale: [1, 1.00000012, 1]
-    MeshComponent:
-      MeshSource: 1
-      Color: [0.305819899, 0.305819899, 0.700980425, 1]
-      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: Directional Light
-    TransformComponent:
-      Translation: [1.08377588, 1.13589394, 0.163754299]
-      Rotation: [0, 0.600000024, 12.8000002]
-      Scale: [1, 1.10000002, 1]
-    LightComponent:
-      Type: 1
-      Light:
-        Ambient: 0.50999999
-        Diffuse: 1
-        Specular: 1
-        Constant: 1
-        Linear: 0.0900000036
-        Quadratic: 0.0299999993
-        Color: [1, 1, 1]
-        Direction: [1.33843684, 0.0657781363, 0.163754299]
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: Camera
-    TransformComponent:
-      Translation: [0, 8.30000019, 24.2999992]
-      Rotation: [-0.300000012, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 0
-        PerspectiveFOV: 0.785398185
-        PerspectiveFar: 1000
-        PerspectiveNear: 0.00999999978
-        OrthographicSize: 10
-        OrthographicFar: 1
-        OrthographicNear: -1
-      Primary: true
-      FixedAspectRatio: false
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: Gun
-    TransformComponent:
-      Translation: [-0.101471752, 0.428871423, 5.12199879]
-      Rotation: [-0.159260094, -1.03326416, 0.0252236892]
-      Scale: [4.81220055, 4.81220675, 4.81219769]
-    MeshComponent:
-      MeshSource: 2
-      Color: [0.117647052, 0.108996533, 0.108996533, 1]
-      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\Gun.obj
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: light3
-    TransformComponent:
-      Translation: [1.35629487, -2.12433147, -2.63177991]
+      Translation: [14.4820118, -1.61753893, -6.21517134]
       Rotation: [0, 0, 0]
-      Scale: [0.189999998, 0.189999998, 0.189999998]
+      Scale: [0.24000001, 0.24000001, 0.24000001]
     LightComponent:
       Type: 0
       Light:
@@ -163,7 +155,73 @@ Entities:
         Constant: 1
         Linear: 0.0900000036
         Quadratic: 0.0320000015
-        Color: [1, 0, 0]
+        Color: [0.153690875, 0.602941155, 0.351889491]
+        Direction: [0, 0, 0]
+    MeshComponent:
+      MeshSource: 2
+      Color: [0.990196049, 0.990196049, 0.990196049, 1]
+      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\icoSphere.obj
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Cup
+    TransformComponent:
+      Translation: [-2.01744676, -3.07694292, 4.15775204]
+      Rotation: [2.64501286, 1.48520601, 2.51079297]
+      Scale: [0.869999349, 0.869986713, 0.869986534]
+    MeshComponent:
+      MeshSource: 2
+      Color: [0.813725471, 0.733948469, 0.733948469, 1]
+      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\teamugobj.obj
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: donut
+    TransformComponent:
+      Translation: [0.101136595, 1.15456522, -11.7166204]
+      Rotation: [-1.11809468, 0.667045534, 1.50414002]
+      Scale: [86.5298767, 86.529808, 86.5301819]
+    MeshComponent:
+      MeshSource: 3
+      Color: [0.747430325, 0.852941155, 0.255046159, 1]
+      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\untitled.obj
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: tank
+    TransformComponent:
+      Translation: [1.39859104, -2.22366524, 3.75901985]
+      Rotation: [3.47091657e-07, 0.995831668, 3.89403993e-07]
+      Scale: [0.406600207, 0.406599969, 0.406600207]
+    MeshComponent:
+      MeshSource: 3
+      Color: [0.5, 0.470588237, 0.470588237, 1]
+      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\tank\t_34_obj.obj
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Empty Entity
+    TransformComponent:
+      Translation: [-11.9714346, 6.44504404, -9.48422909]
+      Rotation: [-0.00646212837, -0.574826062, 0.00182925048]
+      Scale: [0.771572649, 11.2584124, 17.3756466]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.593137264, 0.546616673, 0.546616673, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Empty Entity
+    TransformComponent:
+      Translation: [-0.250106812, 0.971830368, -11.8853455]
+      Rotation: [0, -0.592070222, 0]
+      Scale: [0.350000083, 0.350000024, 0.350000083]
+    LightComponent:
+      Type: 0
+      Light:
+        Ambient: 1
+        Diffuse: 1
+        Specular: 1
+        Constant: 1
+        Linear: 0.0900000036
+        Quadratic: 0.0320000015
+        Color: [1, 1, 1]
         Direction: [0, 0, 0]
     MeshComponent:
       MeshSource: 2

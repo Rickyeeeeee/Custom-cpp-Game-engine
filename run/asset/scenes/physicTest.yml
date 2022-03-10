@@ -1,0 +1,101 @@
+Scene: Untitled
+Type: 1
+Entities:
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: plane2
+    TransformComponent:
+      Translation: [5.48727608, 0.498159409, -0.683690548]
+      Rotation: [-0.186076537, 5.21540642e-08, 0.763000429]
+      Scale: [5.00000095, 0.00999996066, 4.99999571]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0, 0, 0.5, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    RigidBodyComponent:
+      type: 0
+      Mass: 92
+    ColliderComponent:
+      type: 2
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: ball2
+    TransformComponent:
+      Translation: [1.31326354, 1.67499995, -0.950474262]
+      Rotation: [1.53648293, -1.57079637, -3.10870957]
+      Scale: [0.999946713, 0.9999699, 0.999968052]
+    MeshComponent:
+      MeshSource: 2
+      Color: [0, 0, 0.5, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/icoSphere.obj
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 0
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: ball1
+    TransformComponent:
+      Translation: [2.95493364, 1.50699997, 0.27173844]
+      Rotation: [-0.501229405, 1.57079637, 3.05448794]
+      Scale: [0.999959946, 1.00000036, 0.999959886]
+    MeshComponent:
+      MeshSource: 2
+      Color: [0, 0, 0.5, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/icoSphere.obj
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 0
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: plane
+    TransformComponent:
+      Translation: [0, 0, 0]
+      Rotation: [-0.342660367, -2.23517418e-08, -0.500000298]
+      Scale: [5, 0.100000039, 4.99999905]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0, 0, 0.5, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    RigidBodyComponent:
+      type: 0
+      Mass: 82
+    ColliderComponent:
+      type: 2
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: dl
+    TransformComponent:
+      Translation: [16.3999996, -58.4000015, 42.5999985]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    LightComponent:
+      Type: 1
+      Light:
+        Ambient: 1
+        Diffuse: 1
+        Specular: 1
+        Constant: 1
+        Linear: 0.0900000036
+        Quadratic: 0.0320000015
+        Color: [1, 1, 1]
+        Direction: [16.3999996, -59.4000015, 42.5999985]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Empty Entity
+    TransformComponent:
+      Translation: [2.78394675, 0.751594782, -3.01367903]
+      Rotation: [0.600000381, -0, 0.300000042]
+      Scale: [5, 0.00999999978, 5]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0, 0, 0.5, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    RigidBodyComponent:
+      type: 0
+      Mass: 82
+    ColliderComponent:
+      type: 2

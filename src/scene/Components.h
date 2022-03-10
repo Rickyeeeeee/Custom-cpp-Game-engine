@@ -12,6 +12,8 @@
 #include "Scene/Light.h"
 #include "scene/MeshLoader.h"
 
+#include "physic/RigidBody.h"
+#include "physic/Collider.h"
 
 struct TransformComponent
 {
@@ -21,6 +23,10 @@ struct TransformComponent
 
     TransformComponent() = default;
     TransformComponent(const TransformComponent&) = default;
+    Matrix4 GetRotationMatrix() const
+    {
+        return glm::toMat4(glm::quat(Rotation));
+    }
     Matrix4 GetTransform() const 
     {
         Matrix4 rotation = glm::toMat4(glm::quat(Rotation));
@@ -50,11 +56,11 @@ struct MeshComponent
     MeshComponent(const MeshComponent&) = default;
     void Load()
     {
-        MeshLoader loader(filepath);
-        loader.LoadMeshTo(mesh);
+        MeshLoader loader(filepath, mesh);
+        loader.LoadMeshTo();
     }
-    operator Mesh& () { return mesh; }
-    operator const Mesh& () { return mesh; }
+    // operator Mesh& () { return mesh; }
+    // operator const Mesh& () { return mesh; }
 };
 
 struct TagComponent
@@ -107,4 +113,24 @@ struct LightComponent
         : Type(type)
     {
     }
+};
+
+struct RigidBodyComponent
+{
+    RigidBody* body;
+    RigidBodyComponent() = default;
+    RigidBodyComponent(const RigidBodyComponent& ) = default;
+
+};
+
+struct ColliderComponent
+{
+    ColliderType type;
+    Collider* collider = nullptr;
+    ColliderComponent(ColliderType t = ColliderType::SPHERE)
+        : type(t)
+    {
+        // collider = new SphereCollider;
+    }
+    ColliderComponent(const ColliderComponent&) = default;
 };

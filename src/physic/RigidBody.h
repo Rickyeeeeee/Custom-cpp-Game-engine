@@ -3,11 +3,38 @@
 #include "core/GLM.h"
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
+
+enum RIGIDBODY_TYPE : int
+{
+    STATIC, DYNAMIC, KENIMATIC
+};
+
 class RigidBody
 {
 public:
-    RigidBody(float m, const Matrix4& i, const Vector3 position, const Matrix4& rotation);
+    RigidBody(float m, const Matrix3& i, const Vector3 position, const glm::quat& rotation);
     ~RigidBody();
+
+    void SetType(RIGIDBODY_TYPE t) { type = t; }
+    RIGIDBODY_TYPE GetType() { return type; }
+
+    float GetMass()  { return mass; }
+    void SetMass(float m ) 
+    { 
+        mass = m; 
+        Ibody = Matrix4(2.0f / 3.0f * m);
+        Ibodyinv = glm::inverse(Ibody);
+    }
+
+    Vector3 GetPosition() const { return x; }
+    Vector3 GetRotation() const { return glm::eulerAngles(q); }
+    void SetPosition(const Vector3& position) { x = position; }
+    void SetRotation(const glm::quat& rotation) { q = rotation; }
+    void SetMomentum(const Vector3& momentum) { P = momentum; }
+    void SetAngularMomentum(const Vector3& angularMomemtum) { L = angularMomemtum; }
+private:
+    RIGIDBODY_TYPE type = STATIC;
+
 private:
 // precalculate variables
     float mass;
@@ -15,7 +42,7 @@ private:
     Matrix3 Ibodyinv;
 // state variables
     Vector3 x; // position
-    glm::quat q; // rotation
+    glm::quat q; // rotation 
     Vector3 P; // monentan
     Vector3 L; // angular momentun
 // axualiry variables
@@ -27,4 +54,5 @@ private:
     Vector3 force;
     Vector3 torque;
 friend class PhysicWorld;
+friend class ImpulseSolver;
 };

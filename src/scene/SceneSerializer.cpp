@@ -173,6 +173,29 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
 
         out << YAML::EndMap;
     }
+
+    if (entity.HasComponent<RigidBodyComponent>())
+    {
+        out << YAML::Key << "RigidBodyComponent";
+        out << YAML::BeginMap;
+
+        auto& rbc = entity.GetComponent<RigidBodyComponent>();
+        auto* rb = rbc.body;
+        out << YAML::Key << "type" << YAML::Value << (int)rb->GetType();
+        out << YAML::Key << "Mass" << YAML::Value << rb->GetMass();
+        out << YAML::EndMap;
+
+    }
+    if (entity.HasComponent<ColliderComponent>())
+    {
+        out << YAML::Key << "ColliderComponent";
+        out << YAML::BeginMap;
+
+        auto& cc = entity.GetComponent<ColliderComponent>();
+        out << YAML::Key << "type" << YAML::Value << (int)cc.type;
+        out << YAML::EndMap;
+
+    }
     out << YAML::EndMap;
 }
 
@@ -301,6 +324,21 @@ std::tuple<bool, Ref<Scene>> SceneSerializer::DeserializeText(const std::string&
                 lc.Light.quadratic = l["Quadratic"].as<float>();
                 lc.Light.color = l["Color"].as<glm::vec3>();
                 lc.Light.direction = l["Direction"].as<glm::vec3>();
+            }
+
+            auto rigidBodyComponent = entity["RigidBodyComponent"];
+            if (rigidBodyComponent)
+            {
+                auto& rb = deserializedEntity.AddComponent<RigidBodyComponent>();
+                rb.body->SetType((RIGIDBODY_TYPE)rigidBodyComponent["type"].as<int>());
+                rb.body->SetMass(rigidBodyComponent["Mass"].as<float>());
+            }
+
+            auto colliderComponent = entity["ColliderComponent"];
+            if (colliderComponent)
+            {
+                auto type = (ColliderType)colliderComponent["type"].as<int>();
+                auto& cc = deserializedEntity.AddComponent<ColliderComponent>(type);
             }
         }
     }

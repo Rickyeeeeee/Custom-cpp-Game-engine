@@ -6,7 +6,8 @@
 #include "core/Editor3DCameraController.h"
 
 #include "scene/EditorCamera.h"
-
+#include "physic/Solver.h"
+#include "physic/PhysicWorld.h"
 class Entity;
 
 enum  SceneType : int
@@ -56,7 +57,14 @@ class Scene3D : public Scene
 {
 public:
     Scene3D()
-        : Scene(SceneType::_3D) {}
+        : Scene(SceneType::_3D), m_PhysicWorld() 
+    {
+       
+    }
     virtual void OnUpdateEditor(Timestep ts, const EditorCamera& camera) override;
     virtual void OnUpdateRuntime(Timestep ts) override;
+public:
+    PhysicWorld m_PhysicWorld;
+
+    friend class Scene;
 };

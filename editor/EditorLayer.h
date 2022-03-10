@@ -32,4 +32,12 @@ private:
     EditorCamera m_EditorCamera;
     int m_GizmoType = -1;
     SceneHierarchyPanel m_Panel;
+
+    struct profile_result
+    {
+        const char* name;
+        float time;
+    };
+    
+    std::vector<profile_result> m_ProfileResults;
 };

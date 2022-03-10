@@ -34,8 +34,8 @@ private:
     Matrix4 m_ViewMatrix;
 
     float m_CameraMoveSpeed = 0.01f;
-    float m_CameraTranslationSpeed = 0.008f;
-    float m_CameraRotationSpeed = 0.003f;
+    float m_CameraTranslationSpeed = 0.01f;
+    float m_CameraRotationSpeed = 0.007f;
 };
 
 

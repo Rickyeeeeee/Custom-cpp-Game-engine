@@ -9,9 +9,17 @@
 #include "scene/Light.h"
 #include "scene/EditorCamera.h"
 
+struct RenderStats
+{
+    uint32_t DrawCallcount;
+    uint32_t totalVertexCount;
+    uint32_t totalIndexCount;
+    // uint32_t totalTriangleCount;
+};
 class Renderer3D
 {
 public:
+
     class Shape
     {
     public:
@@ -40,5 +48,6 @@ public:
 
     static unsigned int GetDrawcall();
     static unsigned int GetVertexCount();
+    static RenderStats GetRenderStats();
 
 };

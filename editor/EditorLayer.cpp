@@ -5,6 +5,44 @@
 #include "ImGuizmo.h"
 #include "Maths/Math.h"
 
+template<typename Fn>
+class Timer
+{
+public:
+    Timer(const char* name, Fn&& func)
+        : m_Name(name), m_func(func), m_Stopped(false)
+    {
+        m_StartTimepiont = std::chrono::steady_clock::now();
+    }
+
+    ~Timer()
+    {
+        if (!m_Stopped)
+            Stop();
+    }
+
+    void Stop()
+    {
+        auto endTimepoint = std::chrono::steady_clock::now();
+
+        long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepiont).time_since_epoch().count();
+        long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+
+        m_Stopped = true;
+        float duration = (end - start) * 0.001f;
+        m_func( { m_Name, duration});
+    }
+
+private:
+    const char* m_Name;
+    Fn m_func;
+    std::chrono::time_point<std::chrono::steady_clock> m_StartTimepiont;
+    bool m_Stopped;
+};
+
+#define PROFILE_SCOPE(name) Timer timer##__LINE__(name, [&](profile_result profileResult){ m_ProfileResults.push_back(profileResult); })
+
+
 EditorLayer::EditorLayer()
     : Layer(), m_CameraController(
         Application::Get().GetWindow().GetWidth() / 
@@ -28,7 +66,7 @@ void EditorLayer::OnAttach()
 
 void EditorLayer::OnUpdate(Timestep ts) 
 {
-    
+    PROFILE_SCOPE("ExamplerLayer OnUpdate: ");
     if (FramebufferSpecification spec = m_Framebuffer->GetSpecification();
         m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f &&
         (spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
@@ -55,7 +93,7 @@ void EditorLayer::OnUpdate(Timestep ts)
 
 void EditorLayer::OnImGuiRender() 
 {
-    
+    PROFILE_SCOPE("ExamplerLayer OnImGuiRender: ");
     static bool dockspaceOpen = true;
     static bool opt_fullscreen = true;
     static bool opt_padding = false;
@@ -123,6 +161,16 @@ void EditorLayer::OnImGuiRender()
         ImGui::EndMenuBar();
     }
 
+    ImGui::Begin("Profile: ");
+    for (auto& result : m_ProfileResults)
+    {
+        char label[50];
+        strcpy(label, result.name);
+        strcat(label, " %.3fms");
+        ImGui::Text(label, result.time);
+    }
+    m_ProfileResults.clear();
+    ImGui::End();
 
     m_Panel.OnImGuiRender();
 
@@ -136,8 +184,10 @@ void EditorLayer::OnImGuiRender()
     ImGui::End();
 
     ImGui::Begin("Renderer3D Profile: ");
-    ImGui::Text("Draw call: %d", Renderer3D::GetDrawcall());
-    ImGui::Text("Vertex count: %d", Renderer3D::GetVertexCount());
+    RenderStats stats3D = Renderer3D::GetRenderStats();
+    ImGui::Text("Draw call: %d", stats3D.DrawCallcount);
+    ImGui::Text("Vertex count: %d", stats3D.totalVertexCount);
+    ImGui::Text("Index count: %d", stats3D.totalIndexCount);
     ImGui::End();
 
     ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });

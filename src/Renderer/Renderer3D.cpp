@@ -28,9 +28,9 @@ struct Renderer3Dstorage
 
     std::vector<RenderObject> RenderQueue;
 
-    int StaticMeshCount;
-    int StaticVertexCount;
-    int StaticIndexCount;
+    uint32_t StaticMeshCount;
+    uint32_t StaticVertexCount;
+    uint32_t StaticIndexCount;
 
     Matrix4 ViewProjection = Matrix4(1.0f);
 };
@@ -52,6 +52,7 @@ void Renderer3D::Shutdown()
 {
 }
 
+
 void Renderer3D::BeginScene(const EditorCamera& camera)
 {
     s_Data.ViewProjection = camera.GetProjection() * camera.GetView();
@@ -59,6 +60,10 @@ void Renderer3D::BeginScene(const EditorCamera& camera)
     s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
 
     s_Data.RenderQueue.clear();
+
+    s_Data.StaticMeshCount = 0;
+    s_Data.StaticIndexCount = 0;
+    s_Data.StaticVertexCount = 0;
 }
 
 void Renderer3D::BeginScene(const Camera& camera, const Matrix4& transform)
@@ -68,6 +73,9 @@ void Renderer3D::BeginScene(const Camera& camera, const Matrix4& transform)
     s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
 
     s_Data.RenderQueue.clear();
+    s_Data.StaticMeshCount = 0;
+    s_Data.StaticIndexCount = 0;
+    s_Data.StaticVertexCount = 0;
 }
 
 void Renderer3D::BeginScene(const Perspective3DCamera& camera) 
@@ -77,6 +85,9 @@ void Renderer3D::BeginScene(const Perspective3DCamera& camera)
     s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
 
     s_Data.RenderQueue.clear();
+    s_Data.StaticMeshCount = 0;
+    s_Data.StaticIndexCount = 0;
+    s_Data.StaticVertexCount = 0;
 }
 
 void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>& pointLights, Light* dirLight) 
@@ -150,6 +161,7 @@ void Renderer3D::SubmitStaticMesh(Mesh& mesh)
     {
         auto id = mesh.ID;
         auto vertexArray = s_Data.StaticVertexArray[id];
+
         auto vertexBuffer = VertexBuffer::Create(mesh.Vertices.size() * sizeof(Vertex3DSimple));
         vertexBuffer->SetData(mesh.Vertices.begin().base(), mesh.Vertices.size() * sizeof(Vertex3DSimple));
         vertexBuffer->SetLayout(Vertex3DSimple::GetLayout());
@@ -179,6 +191,10 @@ void Renderer3D::DrawStaticMesh(const Mesh& mesh, const Matrix4& transform, cons
 {
     if (!mesh.Submitted) return;
     s_Data.RenderQueue.push_back({ mesh.ID, transform, color});
+
+    s_Data.StaticMeshCount++;
+    s_Data.StaticIndexCount += mesh.Indices.size();
+    s_Data.StaticVertexCount += mesh.Vertices.size();
 }
 
 void Renderer3D::Flush() 
@@ -194,6 +210,16 @@ unsigned int Renderer3D::GetDrawcall()
 unsigned int Renderer3D::GetVertexCount() 
 {
     return s_Data.StaticVertexCount;
+}
+
+RenderStats Renderer3D::GetRenderStats()
+{
+    return 
+    {
+        s_Data.StaticMeshCount,
+        s_Data.StaticVertexCount,
+        s_Data.StaticIndexCount,
+    };
 }
 static const Vector3 cube_positions[4 * 6] = {
     { -0.5f, -0.5f, -0.5f },

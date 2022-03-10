@@ -34,6 +34,10 @@ Entity Scene::CreateEntity(const std::string& name)
 
 void Scene::DestroyEntity(Entity entity)
 {
+    if (entity.HasComponent<RigidBodyComponent>())
+        ((Scene3D*)this)->m_PhysicWorld.RemoveRigidBody(entity.GetComponent<RigidBodyComponent>().body);
+    if (entity.HasComponent<ColliderComponent>())
+        ((Scene3D*)this)->m_PhysicWorld.RemoveCollider(entity.GetComponent<ColliderComponent>().collider);
     m_Registry.destroy(entity);
 }
 
@@ -107,6 +111,35 @@ void Scene::OnComponentAdded<LightComponent>(Entity entity, LightComponent& comp
 {
     
 }
+template<>
+void Scene::OnComponentAdded<RigidBodyComponent>(Entity entity, RigidBodyComponent& component)
+{
+    if (m_SceneType == SceneType::_3D)
+    {
+        auto& tc = entity.GetComponent<TransformComponent>();
+        component.body = new RigidBody(10.0f, Matrix3(1.0f), tc.Translation, glm::toQuat(tc.GetRotationMatrix()));
+        ((Scene3D*)this)->m_PhysicWorld.AddRigidBody(component.body);
+    }
+}
+template<>
+void Scene::OnComponentAdded<ColliderComponent>(Entity entity, ColliderComponent& component)
+{
+    component.collider = Collider::CreateCollidser(component.type);
+    if (entity.HasComponent<RigidBodyComponent>())
+    {
+        component.collider->m_RigidBody = entity.GetComponent<RigidBodyComponent>().body;
+    }
+    if (entity.HasComponent<TransformComponent>())
+    {
+        auto& tfc = entity.GetComponent<TransformComponent>();
+        component.collider->m_Transform = { tfc.Translation, glm::quat(tfc.Rotation) };
+    }
+    if (m_SceneType == SceneType::_3D)
+    {
+        ((Scene3D*)this)->m_PhysicWorld.AddCollider(component.collider);
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Scene2D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
 {
     
@@ -174,6 +207,49 @@ void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
         });
     }
     
+    m_PhysicWorld.Step(ts);
+
+    {
+        auto view = m_Registry.view<MeshComponent, ColliderComponent>();
+        for (auto entity : view)
+        {
+            auto [mesh, collider] = view.get<MeshComponent, ColliderComponent>(entity);
+            if (collider.collider->m_HasCollision)
+                mesh.mesh.color = { 0.5f, 0.0f, 0.0f, 1.0f };
+            else
+                mesh.mesh.color = { 0.0f, 0.0f, 0.5f, 1.0f };
+        }
+    }
+
+    {
+        auto view = m_Registry.view<TransformComponent, ColliderComponent>();
+        for (auto entity : view)
+        {
+            auto [transform, collider] = view.get<TransformComponent, ColliderComponent>(entity);
+            collider.collider->m_Transform = { transform.Translation, glm::quat(transform.Rotation)};
+        }
+    }
+
+    {
+        auto view = m_Registry.view<TransformComponent, RigidBodyComponent>();
+        for (auto entity : view)
+        {
+            auto [transform, rigidbody] = view.get<TransformComponent, RigidBodyComponent>(entity);
+            if (m_PhysicWorld.IsRunning())
+            {
+                transform.Translation = rigidbody.body->GetPosition();
+                transform.Rotation = rigidbody.body->GetRotation();
+            }
+            else
+            {
+                rigidbody.body->SetPosition(transform.Translation);
+                rigidbody.body->SetRotation(glm::quat(transform.Rotation));
+                rigidbody.body->SetMomentum(Vector3(0.0f));
+                rigidbody.body->SetAngularMomentum(Vector3(0.0f));
+            }
+        }
+    }
+
     std::vector<Light> pointLights;
     Vector3 lightPosition;
     Light* dirLight = nullptr;

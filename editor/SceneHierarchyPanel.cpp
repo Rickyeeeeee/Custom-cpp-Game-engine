@@ -15,6 +15,19 @@ void SceneHierarchyPanel::SetContext(const Ref<Scene>& context)
 
 void SceneHierarchyPanel::OnImGuiRender()
 {
+    ImGui::Begin("Scene Setting");
+    if (m_Context->m_SceneType == SceneType::_3D)
+    {
+        ImGui::Text("Physic World");
+        auto scene = (Scene3D*)(m_Context.get());
+        static bool phy_running;
+        ImGui::Checkbox("Simulating", &phy_running);
+        if (phy_running) scene->m_PhysicWorld.Start();
+        else             scene->m_PhysicWorld.Stop();
+    }
+
+    ImGui::End();
+
     ImGui::Begin("Scene Hierarchy");
     m_Context->m_Registry.each([&](auto entityID)
     {
@@ -64,6 +77,18 @@ void SceneHierarchyPanel::OnImGuiRender()
             {
                 if (!m_SelectionEntity.HasComponent<LightComponent>())
                     m_SelectionEntity.AddComponent<LightComponent>();
+                ImGui::CloseCurrentPopup();
+            }
+            if (ImGui::MenuItem("RigidBody"))
+            {
+                if (!m_SelectionEntity.HasComponent<RigidBodyComponent>())
+                    m_SelectionEntity.AddComponent<RigidBodyComponent>();
+                ImGui::CloseCurrentPopup();
+            }
+            if (ImGui::MenuItem("Collider"))
+            {
+                if (!m_SelectionEntity.HasComponent<ColliderComponent>())
+                    m_SelectionEntity.AddComponent<ColliderComponent>();
                 ImGui::CloseCurrentPopup();
             }
             ImGui::EndPopup();
@@ -293,8 +318,50 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
             }
             ImGui::TreePop();
         }
-
         if (removeComponent)
             entity.RemoveComponent<MeshComponent>();
+    }
+
+    if (entity.HasComponent<RigidBodyComponent>())
+    {
+        bool open = ImGui::TreeNodeEx((void*)typeid(RigidBodyComponent).hash_code(), treeNodeFlag, "RigidBody");
+        if (open)
+        {
+            auto& rbc = entity.GetComponent<RigidBodyComponent>();
+            const char* items[] = { "Static", "Dynamic", "Kinematic" };
+            int type = rbc.body->GetType();
+            ImGui::Combo("Type", &type, items, IM_ARRAYSIZE(items));
+            float mass = rbc.body->GetMass();
+            ImGui::DragFloat("Mass", &mass);
+            rbc.body->SetMass(mass);
+            rbc.body->SetType((RIGIDBODY_TYPE)type);
+
+            ImGui::TreePop();
+        }
+    }
+
+    if (entity.HasComponent<ColliderComponent>())
+    {
+        bool open = ImGui::TreeNodeEx((void*)typeid(ColliderComponent).hash_code(), treeNodeFlag, "Collider");
+        if (open)
+        {
+            auto& cc = entity.GetComponent<ColliderComponent>();
+            const char* items[] = { "SPHERE", "BOX", "PLANE", "MESH" };
+
+            int type = cc.type;
+            ImGui::Combo("Type", &type, items, IM_ARRAYSIZE(items));
+            if (type != cc.type)
+            {
+                auto oc = cc.collider;
+                cc.collider = Collider::CreateCollidser((ColliderType)type, oc);
+                ((Scene3D*)m_Context.get())->m_PhysicWorld.RemoveCollider(oc);
+                ((Scene3D*)m_Context.get())->m_PhysicWorld.AddCollider(cc.collider);
+                delete oc;
+                cc.type = (ColliderType)type;
+            }
+
+
+            ImGui::TreePop();
+        }
     }
 }
