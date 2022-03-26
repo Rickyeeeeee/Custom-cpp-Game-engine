@@ -331,10 +331,14 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
             const char* items[] = { "Static", "Dynamic", "Kinematic" };
             int type = rbc.body->GetType();
             ImGui::Combo("Type", &type, items, IM_ARRAYSIZE(items));
-            float mass = rbc.body->GetMass();
-            ImGui::DragFloat("Mass", &mass);
-            rbc.body->SetMass(mass);
             rbc.body->SetType((RIGIDBODY_TYPE)type);
+            if (type != RIGIDBODY_TYPE::STATIC)
+            {
+                float mass = rbc.body->GetMass();
+                ImGui::DragFloat("Mass", &mass);
+                rbc.body->SetMass(mass);
+            }
+            ImGui::DragFloat("restitution", &rbc.body->restitution, 0.01f, 0.0f, 1.0f);
 
             ImGui::TreePop();
         }
@@ -360,6 +364,21 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
                 cc.type = (ColliderType)type;
             }
 
+            switch (type)
+            {
+            case 0:
+                ImGui::DragFloat("Radius", &((SphereCollider*)cc.collider)->Radius);
+                break;
+            case 1:
+                ImGui::DragFloat3("Scale", glm::value_ptr(((BoxCollider*)cc.collider)->Width));
+                break;
+            case 2:
+                ImGui::DragFloat("Width", &((PlaneCollider*)cc.collider)->Width);
+                ImGui::DragFloat("Height", &((PlaneCollider*)cc.collider)->Height);
+                break;
+            default:
+                break;
+            }
 
             ImGui::TreePop();
         }

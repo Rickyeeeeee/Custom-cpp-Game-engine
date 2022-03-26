@@ -19,10 +19,12 @@ private:
     void NewScene(SceneType type);
     void OpenScene();
     void SaveSceneAs();
+    void SaveScene();
 private:
     Ref<Texture2D> m_Texture;
     Ref<Framebuffer> m_Framebuffer;
     Ref<Scene> m_ActiveScene;
+    std::string m_ActiveSceneName;  
     Entity m_SquareEntity;
     Entity m_CameraEntity;
     OrthographicCameraController m_CameraController;

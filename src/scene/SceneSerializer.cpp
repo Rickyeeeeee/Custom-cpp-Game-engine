@@ -300,9 +300,7 @@ std::tuple<bool, Ref<Scene>> SceneSerializer::DeserializeText(const std::string&
                 src.meshSource = meshComponent["MeshSource"].as<int>();
                 auto g = meshComponent["Filepath"].as<std::string>();
                 src.filepath = g;
-                if (src.meshSource == 0)
-                    src.mesh.Reset();
-                else
+                if (src.meshSource != 0)
                 {
                     src.Load();
                     src.mesh.Submit();

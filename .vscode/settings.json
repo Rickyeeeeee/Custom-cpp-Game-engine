@@ -62,7 +62,12 @@
     "iomanip": "cpp",
     "mutex": "cpp",
     "thread": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "any": "cpp",
+    "hash_map": "cpp",
+    "hash_set": "cpp",
+    "forward_list": "cpp",
+    "unordered_set": "cpp"
   },
   "C_Cpp.errorSquiggles": "Enabled"
 }

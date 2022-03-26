@@ -19,9 +19,14 @@ struct RenderObject
 struct Renderer3Dstorage
 {
     // GPU side buffer
-    std::vector<Ref<VertexArray>> StaticVertexArray;
-    std::vector<Ref<VertexBuffer>> StaticVertexBuffers;
-    std::vector<Ref<IndexBuffer>> StaticIndexBuffers;
+    struct MeshData
+    {
+        Ref<VertexArray> StaticVertexArray;
+        Ref<VertexBuffer> StaticVertexBuffer;
+        Ref<IndexBuffer> StaticIndexBuffer;
+        bool empty = true;
+    };
+    std::vector<MeshData> StaticMashDatas; 
     Ref<Shader> simple3dShader;
 
     int StaticBufferCount;
@@ -122,7 +127,7 @@ void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>&
         s_Data.simple3dShader->SetMat4("u_Model", Object.transform);
         s_Data.simple3dShader->SetMat4("u_NormalModel", glm::transpose(glm::inverse(Object.transform)));
         s_Data.simple3dShader->SetFloat4("u_Color", Object.color);
-        RenderCommand::DrawIndexed(s_Data.StaticVertexArray[Object.id], s_Data.StaticIndexBuffers[Object.id]->GetCount());   
+        RenderCommand::DrawIndexed(s_Data.StaticMashDatas[Object.id].StaticVertexArray, s_Data.StaticMashDatas[Object.id].StaticIndexBuffer->GetCount());   
     }
 }
 
@@ -142,25 +147,38 @@ void Renderer3D::SubmitStaticMesh(Mesh& mesh)
         indexBuffer->SetData(mesh.Indices.begin().base(), mesh.Indices.size());
         vertexArray->SetIndexBuffer(indexBuffer);    
 
-        s_Data.StaticVertexArray.push_back(vertexArray);
-        s_Data.StaticVertexBuffers.push_back(vertexBuffer);
-        s_Data.StaticIndexBuffers.push_back(indexBuffer);
+        bool EmptyMeshSlotFound = false;
+        for (uint32_t i = 0; i < s_Data.StaticMashDatas.size(); i++)
+        {
+            if (s_Data.StaticMashDatas[i].empty)
+            {
+                EmptyMeshSlotFound = true;
+                s_Data.StaticMashDatas[i] = { vertexArray, vertexBuffer, indexBuffer, false };
+                mesh.ID = i;
+            } 
+        }
+
+        if (!EmptyMeshSlotFound)
+        {
+            mesh.ID = s_Data.StaticMashDatas.size();
+            s_Data.StaticMashDatas.push_back({
+                vertexArray, vertexBuffer, indexBuffer, false
+            });
+        }
 
     // variable initialization
-        mesh.ID = s_Data.StaticMeshCount;
-        s_Data.StaticMeshCount++;
 
         for (auto& vertex : mesh.Vertices)
         {
             vertex.ID = mesh.ID;
         }
     
-    mesh.Submitted = true;
+         mesh.Submitted = true;
     }
     else
     {
         auto id = mesh.ID;
-        auto vertexArray = s_Data.StaticVertexArray[id];
+        auto vertexArray = s_Data.StaticMashDatas[id].StaticVertexArray;
 
         auto vertexBuffer = VertexBuffer::Create(mesh.Vertices.size() * sizeof(Vertex3DSimple));
         vertexBuffer->SetData(mesh.Vertices.begin().base(), mesh.Vertices.size() * sizeof(Vertex3DSimple));
@@ -171,15 +189,18 @@ void Renderer3D::SubmitStaticMesh(Mesh& mesh)
         indexBuffer->SetData(mesh.Indices.begin().base(), mesh.Indices.size());
         vertexArray->SetIndexBuffer(indexBuffer);    
 
-        s_Data.StaticVertexBuffers[id] = vertexBuffer;
-        s_Data.StaticIndexBuffers[id] = indexBuffer;
+        s_Data.StaticMashDatas[id].StaticVertexBuffer = vertexBuffer;
+        s_Data.StaticMashDatas[id].StaticIndexBuffer = indexBuffer;
+        s_Data.StaticMashDatas[id].empty = false;
     }
 
 }
 
 void Renderer3D::DestroyStaticMesh(Mesh& mesh)
 {
-
+    s_Data.StaticMashDatas[mesh.ID] = {
+        {}, {}, {}, false
+    };
 }
 
 
@@ -204,7 +225,7 @@ void Renderer3D::Flush()
 
 unsigned int Renderer3D::GetDrawcall() 
 {
-    return s_Data.StaticBufferCount;
+    return s_Data.StaticMeshCount;
 }
 
 unsigned int Renderer3D::GetVertexCount() 

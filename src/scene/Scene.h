@@ -49,6 +49,7 @@ class Scene2D : public Scene
 public:
     Scene2D()
         : Scene(SceneType::_2D) {}
+    ~Scene2D();
     virtual void OnUpdateEditor(Timestep ts, const EditorCamera& camera) override;
     virtual void OnUpdateRuntime(Timestep ts) override;
 };
@@ -61,6 +62,7 @@ public:
     {
        
     }
+    ~Scene3D();
     virtual void OnUpdateEditor(Timestep ts, const EditorCamera& camera) override;
     virtual void OnUpdateRuntime(Timestep ts) override;
 public:

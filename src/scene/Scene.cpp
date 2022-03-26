@@ -11,7 +11,7 @@ Scene::Scene(SceneType type)
 
 Scene::~Scene()
 {
-    
+
 }
 
 Ref<Scene> Scene::Create(SceneType type)
@@ -76,6 +76,11 @@ void Scene::OnComponentAdded(Entity entity, T& component)
     std::cout << "onComponent Added ERROR!" << std::endl;
 }
 
+Scene2D::~Scene2D()
+{
+    
+}
+
 template<>
 void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
 {
@@ -118,6 +123,8 @@ void Scene::OnComponentAdded<RigidBodyComponent>(Entity entity, RigidBodyCompone
     {
         auto& tc = entity.GetComponent<TransformComponent>();
         component.body = new RigidBody(10.0f, Matrix3(1.0f), tc.Translation, glm::toQuat(tc.GetRotationMatrix()));
+
+
         ((Scene3D*)this)->m_PhysicWorld.AddRigidBody(component.body);
     }
 }
@@ -129,11 +136,7 @@ void Scene::OnComponentAdded<ColliderComponent>(Entity entity, ColliderComponent
     {
         component.collider->m_RigidBody = entity.GetComponent<RigidBodyComponent>().body;
     }
-    if (entity.HasComponent<TransformComponent>())
-    {
-        auto& tfc = entity.GetComponent<TransformComponent>();
-        component.collider->m_Transform = { tfc.Translation, glm::quat(tfc.Rotation) };
-    }
+    component.collider->m_Transform = { { 0.0f, 0.0f, 0.0f }, glm::quat(Vector3{ 0.0f, 0.0f, 0.0f }) };
     if (m_SceneType == SceneType::_3D)
     {
         ((Scene3D*)this)->m_PhysicWorld.AddCollider(component.collider);
@@ -192,6 +195,16 @@ void Scene2D::OnUpdateRuntime(Timestep ts)
     
 }
 
+Scene3D::~Scene3D()
+{
+    auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
+    for (auto entity : group)
+    {
+        auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
+        Renderer3D::DestroyStaticMesh(mesh.mesh);
+    }
+}
+
 void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
 {
     {
@@ -218,15 +231,6 @@ void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
                 mesh.mesh.color = { 0.5f, 0.0f, 0.0f, 1.0f };
             else
                 mesh.mesh.color = { 0.0f, 0.0f, 0.5f, 1.0f };
-        }
-    }
-
-    {
-        auto view = m_Registry.view<TransformComponent, ColliderComponent>();
-        for (auto entity : view)
-        {
-            auto [transform, collider] = view.get<TransformComponent, ColliderComponent>(entity);
-            collider.collider->m_Transform = { transform.Translation, glm::quat(transform.Rotation)};
         }
     }
 

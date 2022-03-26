@@ -195,7 +195,7 @@ void EditorLayer::OnImGuiRender()
     
     m_ViewportFocused = ImGui::IsWindowFocused();
     m_ViewportHovered = ImGui::IsWindowHovered();
-    Application::Get().GetImGuiLayer()->SetBlockEvent(!m_ViewportFocused && !m_ViewportHovered);
+    Application::Get().GetImGuiLayer()->SetBlockEvent(!m_ViewportFocused || !m_ViewportHovered);
 
     ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
     if (m_ViewportSize != *((Vector2*)&viewportPanelSize))
@@ -284,6 +284,8 @@ bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
         {
             if (control && shift)
                 SaveSceneAs();
+            if (control)
+                SaveScene();
         break;
         }
         case KEY_Q:
@@ -329,6 +331,7 @@ void EditorLayer::OpenScene()
         {
             scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
             m_Panel.SetContext(scene);
+            m_ActiveSceneName = filepath;
             m_ActiveScene = scene;
         }
     }
@@ -342,4 +345,15 @@ void EditorLayer::SaveSceneAs()
         SceneSerializer serializer(m_ActiveScene);
         serializer.SerializeText(filepath);
     }
+}
+
+void EditorLayer::SaveScene()
+{
+    std::string filepath = m_ActiveSceneName;
+    if (!filepath.empty())
+    {
+        SceneSerializer serializer(m_ActiveScene);
+        serializer.SerializeText(filepath);
+    }
+    
 }

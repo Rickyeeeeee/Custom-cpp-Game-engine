@@ -28,14 +28,15 @@ public:
 
     Vector3 GetPosition() const { return x; }
     Vector3 GetRotation() const { return glm::eulerAngles(q); }
+    glm::quat GetQuart() const { return q; }
     void SetPosition(const Vector3& position) { x = position; }
     void SetRotation(const glm::quat& rotation) { q = rotation; }
     void SetMomentum(const Vector3& momentum) { P = momentum; }
     void SetAngularMomentum(const Vector3& angularMomemtum) { L = angularMomemtum; }
-private:
+public:
     RIGIDBODY_TYPE type = STATIC;
 
-private:
+public:
 // precalculate variables
     float mass;
     Matrix3 Ibody;
@@ -53,6 +54,10 @@ private:
 // computed variables
     Vector3 force;
     Vector3 torque;
-friend class PhysicWorld;
-friend class ImpulseSolver;
+// configs
+    float restitution = 0.5f;
+// friend class PhysicWorld;
+// friend class ImpulseSolver;
+// friend class CollisionPoint;
+// friend class RestingContactSolver;
 };

@@ -7,8 +7,9 @@
 #include "Renderer/Camera.h"
 #include "event/Event.h"
 #include "event/MouseEvent.h"
+#define UP  Vector3(0.0f, 1.0f, 0.0f)
 
-#define WORLD_UP Vector3(0.0f, 1.0f, 0.0f)
+// #define WORLD_UP Vector3(0.0f, 1.0f, 0.0f)
 
 class EditorCamera : public Camera
 {
@@ -21,6 +22,7 @@ public:
     const Vector3& GetPosition() const { return m_Position; }
     void SetPerspective(float aspectRatio);
     void OnEvent(Event& e);
+    void Set();
 private:
     bool OnMouseScrolled(MouseScrollEvent& e);
 private:
@@ -28,14 +30,17 @@ private:
 
     Vector3 m_Position = { 50.0f, 50.0f, 5.0f };
     Vector3 m_Front    = -glm::normalize(m_Position);
-    Vector3 m_Up       = WORLD_UP;
+    Vector3 m_UP      = UP;
+    Vector3 m_Right;
     Vector3 m_Focus = { 0.0f, 1.0f, 0.0f };
 
     Matrix4 m_ViewMatrix;
 
     float m_CameraMoveSpeed = 0.01f;
     float m_CameraTranslationSpeed = 0.01f;
-    float m_CameraRotationSpeed = 0.007f;
+    float m_CameraRotationSpeed = 0.006f;
+
+    bool turn = false;
 };
 
 
