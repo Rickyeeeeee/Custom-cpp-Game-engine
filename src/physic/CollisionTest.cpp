@@ -1,5 +1,5 @@
 #include "CollisionTest.h"
-
+#include <tuple>
 #include "core/GLM.h"
 
 #define AXIS_X Vector3{ 1.0f, 0.0f, 0.0f }
@@ -57,6 +57,35 @@ namespace PhysicALGO
         }
     }
     
+    inline void project_points(Vector3 basis1, Vector3 basis2, Vector3 point, Vector2* point_destination)
+    {
+        point_destination->x = glm::dot(point, basis1);
+        point_destination->y = glm::dot(point, basis2);
+    }
+
+    struct boxLineSegment 
+    { 
+        int p1; 
+        int p2; 
+    };
+
+    inline std::tuple<bool, float, float> line_intersect2D(/*first pair*/ Vector2 p0, Vector2 p1, 
+                                                            /*second pair*/ Vector2 p2, Vector2 p3)
+    {
+        float s1_x, s1_y, s2_x, s2_y;
+        s1_x = p1.x - p0.x;     s1_y = p1.y - p0.y;
+        s2_x = p3.x - p2.x;     s2_y = p3.y - p2.y;
+
+        float s, t;
+        s = (-s1_y * (p0.x - p2.x) + s1_x * (p0.y - p2.y)) / (-s2_x * s1_y + s1_x * s2_y);
+        t = ( s2_x * (p0.y - p2.y) - s2_y * (p0.x - p2.x)) / (-s2_x * s1_y + s1_x * s2_y);
+
+        if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
+            return { true, t, s };
+        else
+            return { false,t, s };
+    }
+
     void FindBoxBoxCollisionPoint(std::vector<CollisionPoint>& collisionPoints,  const BoxCollider* a, const BoxCollider* b)
     {
         // find point/face contact
@@ -90,7 +119,75 @@ namespace PhysicALGO
                     normalB = boxARota * GetAABBNormal(boxBpoints[i]);
                 collisionPoints.push_back({ b->m_RigidBody, a->m_RigidBody, boxARota * boxBpoints[i] + boxAorigin, normalB, -normalB, normalB, 0.0f, true, true});
             }
-        // find edge-edge collistion
+
+
+// find edge-edge collistion
+
+        GetBoxPoints(boxApoints, a->Width, boxARota, boxAorigin);
+        GetBoxPoints(boxBpoints, b->Width, boxBRota, boxBorigin);
+       
+        // find a basis of the vector of boxAorigin - boxBorigin
+        Vector3 view = (boxAorigin - boxBorigin);
+
+        Vector3 basis1;
+        Vector3 basis2;
+        if (view.y != 0.0f)
+        {
+            basis1 = glm::normalize(Vector3{ 1.0f, (-view.x - view.z) / view.y, 1.0f });
+            basis2 = glm::normalize(Vector3{ 0.5f, (-view.x * 0.5f - view.z * 1.5f) / view.y, 1.5f });
+        }
+        else 
+        {
+            basis1 = glm::normalize(Vector3{ (-view.y - view.z) / view.x, 1.0f, 1.0f });
+            basis2 = glm::normalize(Vector3{ (-view.y * 0.5f - view.z * 1.5f) / view.x, 0.5f, 1.5f });
+        }
+        basis2 = basis2 - basis1 *(glm::dot(basis1, basis2) / glm::dot(basis1, basis1));
+        // project all the points on to the plane 
+        Vector2 boxAProjectedPoints[8];
+        Vector2 boxBProjectedPoints[8];
+        for (int i = 0; i < 8; i++)
+            project_points(basis1, basis2, boxApoints[i], boxAProjectedPoints + i);
+        for (int i = 0; i < 8; i++)
+            project_points(basis1, basis2, boxBpoints[i], boxBProjectedPoints + i);
+        // find the intersection points
+        const boxLineSegment BoxEdges[12] = {
+            {0, 4}, {1, 5}, {2, 6}, {3, 7},
+            {0, 1}, {2, 3}, {4, 5}, {6, 7},
+            {0, 2}, {1, 3}, {4, 6}, {5, 7}
+        };
+        int count = 0;
+        for (int i = 0; i < 12; i++)
+            for (int j = 0; j < 12; j++)
+            {
+                auto [IsIntersected, ratio_1, ratio_2] = 
+                line_intersect2D(boxAProjectedPoints[BoxEdges[i].p1], 
+                                boxAProjectedPoints[BoxEdges[i].p2],
+                                boxBProjectedPoints[BoxEdges[j].p1],
+                                boxBProjectedPoints[BoxEdges[j].p2]);
+                if (IsIntersected)
+                {
+                    Vector3 vec = boxBpoints[BoxEdges[j].p2] - boxBpoints[BoxEdges[j].p1];
+                    Vector3 point = vec * ratio_2 + boxBpoints[BoxEdges[j].p1];
+                    Vector3 ea, eb, n;
+                    ea = glm::normalize(boxApoints[BoxEdges[i].p2] - boxApoints[BoxEdges[i].p1]);
+                    eb = glm::normalize(boxBpoints[BoxEdges[j].p2] - boxBpoints[BoxEdges[j].p1]);
+                    n = glm::normalize(glm::cross(ea, eb));
+                    n = glm::dot(n, view) > 0.0f ? n : -n;
+                    if (InBox(a->Width, point - boxAorigin))
+                    {
+                        count++;
+                        collisionPoints.push_back(
+                            { a->m_RigidBody, b->m_RigidBody, point, n, ea, eb, 0.0f, false, true});
+                        if (b->m_RigidBody->type == RIGIDBODY_TYPE::STATIC)
+                            std::cout << "is static" << std::endl;
+                        std::cout << n.x << ", " << n.y << ", " << n.z << std::endl;
+                        std::cout << point.x << ", " << point.y << ", " << point.z << std::endl;
+                    }
+                }
+            }  
+        // convert that point on boxB to 3D to test if it is in boxA
+        // push.back that collision point
+        std::cout << "count: " << count << std::endl;
     }
     
     void FindBoxSphereCollisionPoint(std::vector<CollisionPoint>& collisionPoints,  const BoxCollider* a, const SphereCollider* b)

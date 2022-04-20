@@ -31,11 +31,11 @@ add_library(engine
 #     )
 target_link_libraries(
     engine
-    yaml-cpp
-    assimp
     # spdlog::spdlog
     imgui
     glad
     glfw3
-    )
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libyaml-cpp.dll
+    ImGuizmo
+)
 

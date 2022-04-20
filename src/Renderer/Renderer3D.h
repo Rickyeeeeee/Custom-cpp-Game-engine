@@ -42,7 +42,7 @@ public:
     static void DrawStaticMesh(const Mesh& mesh);
     static void DrawStaticMesh(const Mesh& mesh, const Matrix4& transform, const Vector4& color);
 
-    static void EndScene(const Vector3& position, const std::vector<Light>& pointLight, Light* dirLight = nullptr) ;
+    static void EndScene(const Vector3& position, const std::vector<Light>& pointLight, const Light* dirLight = nullptr);
 
     static void Flush();
 

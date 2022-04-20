@@ -3,6 +3,7 @@ project(project1 VERSION 0.1.1)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../run)
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 include_directories(
     PUBLIC external/entt/include
@@ -14,7 +15,7 @@ include_directories(
 )
  
 # add_subdirectory(external/yaml-cpp)
-add_subdirectory(external/imgui) 
+add_subdirectory(external/imgui)
 add_subdirectory(external/ImGuizmo)
 add_subdirectory(external/spdlog)
 add_subdirectory(external/assimp)

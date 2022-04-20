@@ -8,9 +8,8 @@ public:
     Editor()
         :Application()
     {
-        PushLayer(new EditorLayer());
+            PushLayer(new EditorLayer());
     }
-
 };
 
 Application* CreateApplication()

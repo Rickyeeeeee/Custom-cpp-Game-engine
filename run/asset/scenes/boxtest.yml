@@ -5,9 +5,9 @@ Entities:
     TagComponent:
       Tag: box2
     TransformComponent:
-      Translation: [0, 2.58164191, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1.00000024, 1, 0.99999994]
+      Translation: [0, 4.69999981, 0]
+      Rotation: [-1.58603942, 1.25370288, -0.0248276442]
+      Scale: [0.999995887, 0.999999642, 1.09784997]
     MeshComponent:
       MeshSource: 1
       Color: [0, 0, 0.5, 1]
@@ -19,11 +19,11 @@ Entities:
       type: 1
   - Entity: 1216546513215
     TagComponent:
-      Tag: box2
+      Tag: box1
     TransformComponent:
-      Translation: [0, 12.0744181, 0]
-      Rotation: [0, 0, 0]
-      Scale: [0.999999881, 0.999999404, 1]
+      Translation: [-0.0115419067, 8.21734047, 0.0969469026]
+      Rotation: [-3.08424091, 1.1840111, -3.09104419]
+      Scale: [1.00000167, 0.999993622, 1.00000143]
     MeshComponent:
       MeshSource: 1
       Color: [0, 0, 0.5, 1]

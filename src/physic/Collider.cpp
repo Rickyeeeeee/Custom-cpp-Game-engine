@@ -75,6 +75,7 @@ void PlaneCollider::FindCollision(std::vector<CollisionPoint>& collisionPoints, 
 
 void PlaneCollider::FindCollision(std::vector<CollisionPoint>& collisionPoints, const PlaneCollider* planeCollider) const 
 {
+    
 }
 
 void PlaneCollider::FindCollision(std::vector<CollisionPoint>& collisionPoints, const BoxCollider* boxCollider) const 

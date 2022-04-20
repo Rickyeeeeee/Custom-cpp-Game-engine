@@ -95,7 +95,7 @@ void Renderer3D::BeginScene(const Perspective3DCamera& camera)
     s_Data.StaticVertexCount = 0;
 }
 
-void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>& pointLights, Light* dirLight) 
+void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>& pointLights, const Light* dirLight) 
 {
     s_Data.simple3dShader->Bind();
     s_Data.simple3dShader->SetFloat3("u_ViewPos", viewPosition);

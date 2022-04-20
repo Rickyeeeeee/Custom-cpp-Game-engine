@@ -58,7 +58,6 @@ void EditorCamera::OnUpdate(Timestep)
     m_CameraTranslationSpeed = 0.000007f * py * py + 0.0009f * py + 0.005f;
     m_CameraMoveSpeed        = 0.0007f * py * py + 0.007f * py + 0.4f;
     Set();
-  
 }
 
 

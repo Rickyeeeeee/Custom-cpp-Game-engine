@@ -10,17 +10,17 @@ add_executable(
     SceneHierarchyPanel.cpp
 )
 
-
 target_include_directories(
     editor
     PRIVATE ../src
     PRIVATE ../external
 )
 
-    
 target_link_libraries(
     editor
     engine
     ImGuizmo
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libassimpd-5.dll
+    imgui
 )
-    
+
