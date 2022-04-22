@@ -1,4 +1,5 @@
 #include "PhysicWorld.h"
+#include "bvh.hpp"
 #include <algorithm>
 #include <list>
 
@@ -147,7 +148,7 @@ void PhysicWorld::FindCollision(Timestep ts)
                 {
                     StepBackwardBody(a->m_RigidBody, ts);
                     StepBackwardBody(b->m_RigidBody, ts);
-                    BisectionCollsionFinder(a, b, ts / 2, 4);
+                    BisectionCollsionFinder(a, b, ts / 2.0f, 4);
                 }
                 a->FindCollision(m_Contacts, b);
                 a->m_HasCollision = hasCollision;

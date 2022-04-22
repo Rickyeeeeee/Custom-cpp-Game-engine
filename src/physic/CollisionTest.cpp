@@ -88,6 +88,7 @@ namespace PhysicALGO
 
     void FindBoxBoxCollisionPoint(std::vector<CollisionPoint>& collisionPoints,  const BoxCollider* a, const BoxCollider* b)
     {
+        int count1 = 0;
         // find point/face contact
         const auto& rb1q = a->m_RigidBody->q;
         const auto& rb2q = b->m_RigidBody->q;
@@ -108,6 +109,7 @@ namespace PhysicALGO
         for (int i = 0; i < 8; i++)
             if (InBox(b->Width, boxApoints[i]))
             {
+                count1++;
                 if (normalA == Vector3{0.0f})
                     normalA = boxBRota * GetAABBNormal(boxApoints[i]);
                 collisionPoints.push_back({ a->m_RigidBody, b->m_RigidBody, boxBRota * boxApoints[i] + boxBorigin, normalA, -normalA, normalA, 0.0f, true, true});
@@ -115,6 +117,7 @@ namespace PhysicALGO
         for (int i = 0; i < 8; i++)
             if (InBox(a->Width, boxBpoints[i]))
             {
+                count1++;
                 if (normalB == Vector3{0.0f})
                     normalB = boxARota * GetAABBNormal(boxBpoints[i]);
                 collisionPoints.push_back({ b->m_RigidBody, a->m_RigidBody, boxARota * boxBpoints[i] + boxAorigin, normalB, -normalB, normalB, 0.0f, true, true});
@@ -136,12 +139,17 @@ namespace PhysicALGO
             basis1 = glm::normalize(Vector3{ 1.0f, (-view.x - view.z) / view.y, 1.0f });
             basis2 = glm::normalize(Vector3{ 0.5f, (-view.x * 0.5f - view.z * 1.5f) / view.y, 1.5f });
         }
-        else 
+        else if (view.x != 0.0f)
         {
             basis1 = glm::normalize(Vector3{ (-view.y - view.z) / view.x, 1.0f, 1.0f });
             basis2 = glm::normalize(Vector3{ (-view.y * 0.5f - view.z * 1.5f) / view.x, 0.5f, 1.5f });
         }
-        basis2 = basis2 - basis1 *(glm::dot(basis1, basis2) / glm::dot(basis1, basis1));
+        else
+        {
+            basis1 = glm::normalize(Vector3{ 1.0f, 1.0f, (-view.y - view.x) / view.z });
+            basis2 = glm::normalize(Vector3{ 0.5f, 1.5f, (-view.y * 1.5f - view.x * 0.5f) / view.z });
+        }
+        basis2 = basis2 - basis1 * (glm::dot(basis1, basis2) / glm::dot(basis1, basis1));
         // project all the points on to the plane 
         Vector2 boxAProjectedPoints[8];
         Vector2 boxBProjectedPoints[8];
@@ -155,7 +163,7 @@ namespace PhysicALGO
             {0, 1}, {2, 3}, {4, 5}, {6, 7},
             {0, 2}, {1, 3}, {4, 6}, {5, 7}
         };
-        int count = 0;
+        int count2 = 0;
         for (int i = 0; i < 12; i++)
             for (int j = 0; j < 12; j++)
             {
@@ -175,19 +183,14 @@ namespace PhysicALGO
                     n = glm::dot(n, view) > 0.0f ? n : -n;
                     if (InBox(a->Width, point - boxAorigin))
                     {
-                        count++;
+                        count2++;
                         collisionPoints.push_back(
                             { a->m_RigidBody, b->m_RigidBody, point, n, ea, eb, 0.0f, false, true});
-                        if (b->m_RigidBody->type == RIGIDBODY_TYPE::STATIC)
-                            std::cout << "is static" << std::endl;
-                        std::cout << n.x << ", " << n.y << ", " << n.z << std::endl;
-                        std::cout << point.x << ", " << point.y << ", " << point.z << std::endl;
                     }
                 }
             }  
         // convert that point on boxB to 3D to test if it is in boxA
         // push.back that collision point
-        std::cout << "count: " << count << std::endl;
     }
     
     void FindBoxSphereCollisionPoint(std::vector<CollisionPoint>& collisionPoints,  const BoxCollider* a, const SphereCollider* b)

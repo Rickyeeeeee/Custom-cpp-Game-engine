@@ -3,54 +3,6 @@ Type: 1
 Entities:
   - Entity: 1216546513215
     TagComponent:
-      Tag: box2
-    TransformComponent:
-      Translation: [0, 4.69999981, 0]
-      Rotation: [-1.58603942, 1.25370288, -0.0248276442]
-      Scale: [0.999995887, 0.999999642, 1.09784997]
-    MeshComponent:
-      MeshSource: 1
-      Color: [0, 0, 0.5, 1]
-      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
-    RigidBodyComponent:
-      type: 0
-      Mass: 10
-    ColliderComponent:
-      type: 1
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: box1
-    TransformComponent:
-      Translation: [-0.0115419067, 8.21734047, 0.0969469026]
-      Rotation: [-3.08424091, 1.1840111, -3.09104419]
-      Scale: [1.00000167, 0.999993622, 1.00000143]
-    MeshComponent:
-      MeshSource: 1
-      Color: [0, 0, 0.5, 1]
-      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
-    RigidBodyComponent:
-      type: 1
-      Mass: 10
-    ColliderComponent:
-      type: 1
-  - Entity: 1216546513215
-    TagComponent:
-      Tag: plane
-    TransformComponent:
-      Translation: [0, 0, 0]
-      Rotation: [0, -0, 0]
-      Scale: [5, 0.00999999978, 5]
-    MeshComponent:
-      MeshSource: 1
-      Color: [0, 0, 0.5, 1]
-      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
-    RigidBodyComponent:
-      type: 0
-      Mass: 10
-    ColliderComponent:
-      type: 2
-  - Entity: 1216546513215
-    TagComponent:
       Tag: dl
     TransformComponent:
       Translation: [6, -17.2000008, 3.70000005]
@@ -67,3 +19,51 @@ Entities:
         Quadratic: 0.0320000015
         Color: [1, 1, 1]
         Direction: [6, -18.2000008, 3.70000005]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: plane
+    TransformComponent:
+      Translation: [0, 4.0999999, 0]
+      Rotation: [0, -0, 0]
+      Scale: [5, 0.00999999978, 5]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0, 0, 0.5, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    RigidBodyComponent:
+      type: 0
+      Mass: 10
+    ColliderComponent:
+      type: 2
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box1
+    TransformComponent:
+      Translation: [0, 9.54852772, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1.00000107, 1, 0.99999994]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0, 0, 0.5, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box2
+    TransformComponent:
+      Translation: [0, 6.30000019, 0]
+      Rotation: [-1.58603954, 1.25370288, -0.0248277336]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0, 0, 0.5, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
