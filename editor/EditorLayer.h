@@ -31,6 +31,7 @@ private:
     bool m_ViewportFocused = false;
     bool m_ViewportHovered = false;
     Vector2 m_ViewportSize;
+    Vector2 m_ViewportBounds[2];
     EditorCamera m_EditorCamera;
     int m_GizmoType = -1;
     SceneHierarchyPanel m_Panel;

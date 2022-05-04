@@ -55,6 +55,11 @@ void EditorLayer::OnAttach()
 {
     m_Texture = Texture2D::Create("asset/picture/shhiop.png");
     FramebufferSpecification fbSpec;
+    fbSpec.Attachments = {
+        FrameBufferTextureFormat::RGBA8,
+        FrameBufferTextureFormat::RED_INTERGER,
+        FrameBufferTextureFormat::Depth
+    };
     fbSpec.Width = Application::Get().GetWindow().GetWidth();
     fbSpec.Height = Application::Get().GetWindow().GetHeight();
     m_ViewportSize = { 1280.0f, 720.0f };
@@ -88,6 +93,23 @@ void EditorLayer::OnUpdate(Timestep ts)
     RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
     RenderCommand::Clear();
     m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
+
+    auto[mx, my] = ImGui::GetMousePos();
+    mx -= m_ViewportBounds[0].x;
+    my -= m_ViewportBounds[0].y;
+
+    Vector2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
+    my = viewportSize.y - my;
+
+    int mouseX = (int)mx;
+    int mouseY = (int)my;
+
+    if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
+    {
+        auto id = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
+        std::cout << id << std::endl;
+        std::cout << "mouseX: " << mouseX << "mouseY: " << mouseY << std::endl;
+    }
     m_Framebuffer->Unbind();
 }
 
@@ -192,10 +214,10 @@ void EditorLayer::OnImGuiRender()
 
     ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
     ImGui::Begin("Viewport");
-    
+    auto viewportOffset = ImGui::GetCursorPos();
     m_ViewportFocused = ImGui::IsWindowFocused();
     m_ViewportHovered = ImGui::IsWindowHovered();
-    Application::Get().GetImGuiLayer()->SetBlockEvent(!m_ViewportFocused || !m_ViewportHovered);
+    Application::Get().GetImGuiLayer()->SetBlockEvent(!m_ViewportFocused && !m_ViewportHovered);
 
     ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
     if (m_ViewportSize != *((Vector2*)&viewportPanelSize))
@@ -204,8 +226,18 @@ void EditorLayer::OnImGuiRender()
 
         m_EditorCamera.Resize(viewportPanelSize.x, viewportPanelSize.y);
     }
-    unsigned int textureID = m_Framebuffer->GetColorAttachmentRendererID();
+    unsigned int textureID = m_Framebuffer->GetColorAttachmentRendererID(0);
     ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2( 0, 1 ), ImVec2( 1, 0));
+
+    auto windowSize = ImGui::GetWindowSize();
+    ImVec2 minBound = ImGui::GetWindowPos();
+    minBound.x += viewportOffset.x;
+    minBound.y += viewportOffset.y;
+    
+
+    ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
+    m_ViewportBounds[0] = { minBound.x, minBound.y };
+    m_ViewportBounds[1] = { maxBound.x, maxBound.y };
 
 // ImGuizmo
     Entity selectedEntity = m_Panel.GetSelectedEntity();

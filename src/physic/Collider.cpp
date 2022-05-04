@@ -161,3 +161,18 @@ CollisionTest BoxCollider::TestCollision(const BoxCollider* boxCollider) const
     return PhysicALGO::TestBoxBoxCollision(this, boxCollider);
 }
 // ------------------------------------------------------------------------------------------------------------------------
+
+SphereCollider::operator AABB() const
+{
+    return { Vector3{Radius}, GetCenter()};
+}
+
+BoxCollider::operator AABB() const
+{
+    return { Width, GetCenter()};
+}
+
+PlaneCollider::operator AABB() const
+{
+    return { Vector3{}, GetCenter()};
+}

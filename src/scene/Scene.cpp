@@ -223,18 +223,6 @@ void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
     m_PhysicWorld.Step(ts);
 
     {
-        auto view = m_Registry.view<MeshComponent, ColliderComponent>();
-        for (auto entity : view)
-        {
-            auto [mesh, collider] = view.get<MeshComponent, ColliderComponent>(entity);
-            if (collider.collider->m_HasCollision)
-                mesh.mesh.color = { 0.5f, 0.0f, 0.0f, 1.0f };
-            else
-                mesh.mesh.color = { 0.0f, 0.0f, 0.5f, 1.0f };
-        }
-    }
-
-    {
         auto view = m_Registry.view<TransformComponent, RigidBodyComponent>();
         for (auto entity : view)
         {

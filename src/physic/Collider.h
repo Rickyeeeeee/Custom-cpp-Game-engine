@@ -1,8 +1,10 @@
 #pragma once
 
 #include "core/GLM.h"
-#include "physic/RigidBody.h"
 #include "core/pch.h"
+#include "physic/bv.h"
+#include "physic/RigidBody.h"
+
 class PhysicWorld;
 
 enum ColliderType
@@ -70,6 +72,14 @@ struct Collider
     virtual CollisionTest TestCollision(const PlaneCollider* planeCollider) const = 0;
     virtual CollisionTest TestCollision(const BoxCollider* boxCollider) const = 0;
 
+    virtual operator AABB() const = 0;
+
+    Vector3 GetCenter() const
+    {
+        Vector3 rc = !m_RigidBody ? m_RigidBody->GetPosition() : Vector3{0.0f};
+        return m_Transform.position + rc;
+    }
+
     ColliderTransform m_Transform;
     bool m_HasCollision = false;
     RigidBody* m_RigidBody = nullptr;
@@ -87,6 +97,8 @@ struct SphereCollider : Collider
     virtual CollisionTest TestCollision(const SphereCollider* sphereCollider) const override;
     virtual CollisionTest TestCollision(const PlaneCollider* planeCollider) const override;
     virtual CollisionTest TestCollision(const BoxCollider* boxCollider) const override;
+
+    virtual operator AABB() const override;
 };
 
 struct PlaneCollider : Collider
@@ -102,6 +114,8 @@ struct PlaneCollider : Collider
     virtual CollisionTest TestCollision(const SphereCollider* sphereCollider) const override;
     virtual CollisionTest TestCollision(const PlaneCollider* planeCollider) const override;
     virtual CollisionTest TestCollision(const BoxCollider* boxCollider) const override;
+
+    virtual operator AABB() const override;
 };
 struct BoxCollider : Collider
 {
@@ -115,4 +129,7 @@ struct BoxCollider : Collider
     virtual CollisionTest TestCollision(const SphereCollider* sphereCollider) const override;
     virtual CollisionTest TestCollision(const PlaneCollider* planeCollider) const override;
     virtual CollisionTest TestCollision(const BoxCollider* boxCollider) const override;
+    
+    virtual operator AABB() const override;
+    
 };

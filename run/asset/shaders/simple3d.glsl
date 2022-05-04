@@ -49,6 +49,7 @@ struct DirectionalLight
 };
 
 layout(location = 0) out vec4 FragColor;
+layout(location = 1) out int id;
 
 in vec4 v_Color;
 in vec3 v_Normal;
@@ -77,6 +78,7 @@ void main()
         result += CalcPointLight(u_PointLights[i], norm, v_FragPos, viewDir);
     // result = vec3(1.0f, 1.0f, 1.0f);
     FragColor = vec4(result * objectColor, 1.0);
+    id = 50;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)

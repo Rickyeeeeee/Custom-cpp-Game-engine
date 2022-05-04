@@ -6,6 +6,9 @@
 #include "core/GLM.h"
 #include "core/Timestep.h"
 #include "physic/Solver.h"
+#include "bvh.h"
+#include "ColliderBV.h"
+#include "CollisionManager.h"
 
 struct BigMatrix
 {
@@ -36,10 +39,12 @@ public:
     void AddCollider(Collider* collider);
     void RemoveCollider(Collider* collider);
 
+    void Initialize();
     void Start() { m_Simmulating = true; }
     void Stop() { m_Simmulating = false; }
     void Step(Timestep ts);
-    bool IsRunning() { return m_Simmulating; }
+
+    bool IsRunning() const { return m_Simmulating; }
 private:
     void CalculateForce(Timestep ts);
    
@@ -51,25 +56,14 @@ private:
     void StepBackwardBody(RigidBody* body, Timestep ts);
     void UpdateVariablesBody(RigidBody* body);
 
-    void ResetCollision();
-    void FindCollision(Timestep ts);
-    void ComputeContactForce(Timestep ts);
-    void ResolveCollisions(Timestep ts);
-
-    CollisionTest BisectionCollsionFinder(Collider* a, Collider* b, Timestep ts, uint32_t n);
+    // CollisionTest BisectionCollsionFinder(Collider* a, Collider* b, Timestep ts, uint32_t n);
     void ComputeAMatrix(std::vector<CollisionPoint>& contacts, BigMatrix& amat);
     void ComputeBVector(std::vector<CollisionPoint>& contacts, float* bves);
     void QPsolver(BigMatrix& amat, float* bvec, float* fvec);
 private:
+    Vector3         m_Gravity;
+    bool            m_Simmulating = false;
+
     std::vector<RigidBody*> m_RigidBodies;
-    std::vector<Collider*> m_Colliders;
-    
-    std::vector<CollisionPoint> m_Contacts;
-    std::vector<CollisionPoint> m_Collisions;
-    std::vector<CollisionPoint> m_ResetingContacts;
-    Vector3 m_Gravity;
-    ImpulseSolver solver;
-    RestingContactSolver Csolver;
-    const float DEPTHTHRESHOLD = 0.5f;
-    bool m_Simmulating = false;
+    CollisionManager m_CollisionManager;
 };

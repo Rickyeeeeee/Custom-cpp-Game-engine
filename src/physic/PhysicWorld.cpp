@@ -1,5 +1,4 @@
 #include "PhysicWorld.h"
-#include "bvh.hpp"
 #include <algorithm>
 #include <list>
 
@@ -19,15 +18,16 @@ void PhysicWorld::RemoveRigidBody(RigidBody* rigidBody)
 
 void PhysicWorld::AddCollider(Collider* collider)
 {
-    if (collider != nullptr)
-        m_Colliders.push_back(collider);
+    m_CollisionManager.AddCollisionUnit(collider);
 }
 void PhysicWorld::RemoveCollider(Collider* collider)
 {
-    if (!collider) return;
-    auto itr = std::find(m_Colliders.begin(), m_Colliders.end(), collider);
-    if (itr == m_Colliders.end()) return;
-    m_Colliders.erase(itr);
+    m_CollisionManager.RemoveCollisionUnit(collider);
+}
+
+void PhysicWorld::Initialize()
+{
+    // m_BVH.Construct(m_CollisionUnit, m_CollisionUnit.size());
 }
 
 void PhysicWorld::Step(Timestep ts)
@@ -35,11 +35,11 @@ void PhysicWorld::Step(Timestep ts)
     if (m_Simmulating)
     {
         CalculateForce(ts);
-        // ComputeContactForce(ts);
+        m_CollisionManager.ComputeContactForce(ts);
         StepForward(ts);
-        ResetCollision();
-        FindCollision(ts);
-        ResolveCollisions(ts);
+        m_CollisionManager.ResetCollision();
+        m_CollisionManager.GenerateCollision(ts);
+        m_CollisionManager.ResolveCollisions(ts);
         UpdateVariables();
     }
 }
@@ -124,109 +124,56 @@ void PhysicWorld::UpdateVariablesBody(RigidBody* rdb)
     rdb->R = glm::toMat3(glm::normalize(rdb->q));
 }
 
-void PhysicWorld::ResetCollision()
-{
-    m_Contacts.clear();
-    m_Collisions.clear();
-    m_ResetingContacts.clear();
+// void PhysicWorld::ComputeContactForce(Timestep ts)
+// {
+    // auto size = m_ResetingContacts.size();
+    // auto amat = BigMatrix(size);
+    // auto bvec = new float[size];
+    // auto fvec = new float[size];
 
-    for (auto *a : m_Colliders)
-        a->m_HasCollision = false;
-}
+    // ComputeAMatrix(m_ResetingContacts, amat);
+    // ComputeBVector(m_ResetingContacts, bvec);
 
-void PhysicWorld::FindCollision(Timestep ts)
-{
-    for (const auto& a : m_Colliders)
-        for (const auto& b : m_Colliders)
-        {
-            if (a == b) break;
-            if (a->m_RigidBody->type == RIGIDBODY_TYPE::STATIC && b->m_RigidBody->type == RIGIDBODY_TYPE::STATIC) continue;
-            const auto& [depth, hasCollision] = a->TestCollision(b);
-            if (hasCollision)
-            {
-                if (abs(depth) > DEPTHTHRESHOLD)
-                {
-                    StepBackwardBody(a->m_RigidBody, ts);
-                    StepBackwardBody(b->m_RigidBody, ts);
-                    BisectionCollsionFinder(a, b, ts / 2.0f, 4);
-                }
-                a->FindCollision(m_Contacts, b);
-                a->m_HasCollision = hasCollision;
-                b->m_HasCollision = hasCollision;
-            }
-        }
-        for (auto& point : m_Contacts)
-        {
+    // QPsolver(amat, bvec, fvec);
 
-            float vrel = point.getVrel();
-            float THRESHOLD = 0.01f;
-            if (point.hasCollision)
-                if (vrel < THRESHOLD)
-                {
-                    if (vrel > -THRESHOLD)
-                        m_ResetingContacts.push_back(point);
-                    else
-                        m_Collisions.push_back(point);
-                } 
-        }
-}
+    // for (int i = 0; i < size; i++)
+    // {
+    //     float       f = fvec[i];
+    //     Vector3     n = m_ResetingContacts[i].n;
+    //     RigidBody*  A = m_ResetingContacts[i].a;
+    //     RigidBody*  B = m_ResetingContacts[i].b;
 
+    //     A->force    += f * n;
+    //     A->torque   += glm::dot((m_ResetingContacts[i].p - A->x), (f * n));
+    //     A->force    -= f * n;
+    //     A->torque   -= glm::dot((m_ResetingContacts[i].p - B->x), (f * n));
+    // }
 
-void PhysicWorld::ComputeContactForce(Timestep ts)
-{
-    auto size = m_ResetingContacts.size();
-    auto amat = BigMatrix(size);
-    auto bvec = new float[size];
-    auto fvec = new float[size];
+// }
 
-    ComputeAMatrix(m_ResetingContacts, amat);
-    ComputeBVector(m_ResetingContacts, bvec);
-
-    QPsolver(amat, bvec, fvec);
-
-    for (int i = 0; i < size; i++)
-    {
-        float       f = fvec[i];
-        Vector3     n = m_ResetingContacts[i].n;
-        RigidBody*  A = m_ResetingContacts[i].a;
-        RigidBody*  B = m_ResetingContacts[i].b;
-
-        A->force    += f * n;
-        A->torque   += glm::dot((m_ResetingContacts[i].p - A->x), (f * n));
-        A->force    -= f * n;
-        A->torque   -= glm::dot((m_ResetingContacts[i].p - B->x), (f * n));
-    }
-
-}
-
-void PhysicWorld::ResolveCollisions(Timestep ts)
-{
-    solver.Solve(ts, m_Collisions);
-}
-
-CollisionTest PhysicWorld::BisectionCollsionFinder(Collider* a, Collider*b, Timestep ts, uint32_t n)
-{
-    const auto& [depth, hasCollision] = a->TestCollision(b);
+// CollisionTest PhysicWorld::BisectionCollsionFinder(Collider* a, Collider*b, Timestep ts, uint32_t n)
+// {
+//     const auto& [depth, hasCollision] = a->TestCollision(b);
     
-    if ( (depth <= DEPTHTHRESHOLD && depth >= -DEPTHTHRESHOLD) || n == 0)
-    {
-        return { depth, hasCollision };
-    }
-    else if (depth > 0.0f) 
-    {
-        ts /= 2.0f;
-        StepBackwardBody(a->m_RigidBody, ts);
-        StepBackwardBody(b->m_RigidBody, ts);
-        return BisectionCollsionFinder(a, b, ts, n - 1);
-    }
-    else
-    {
-        ts /= 2.0f;
-        StepForwardBody(a->m_RigidBody, ts);
-        StepForwardBody(b->m_RigidBody, ts);
-        return BisectionCollsionFinder(a, b, ts, n - 1);
-    }
-}
+//     if ( (depth <= DEPTHTHRESHOLD && depth >= -DEPTHTHRESHOLD) || n == 0)
+//     {
+//         return { depth, hasCollision };
+//     }
+//     else if (depth > 0.0f) 
+//     {
+//         ts /= 2.0f;
+//         StepBackwardBody(a->m_RigidBody, ts);
+//         StepBackwardBody(b->m_RigidBody, ts);
+//         return BisectionCollsionFinder(a, b, ts, n - 1);
+//     }
+//     else
+//     {
+//         ts /= 2.0f;
+//         StepForwardBody(a->m_RigidBody, ts);
+//         StepForwardBody(b->m_RigidBody, ts);
+//         return BisectionCollsionFinder(a, b, ts, n - 1);
+//     }
+// }
 
 void PhysicWorld::ComputeAMatrix(std::vector<CollisionPoint>& contacts, BigMatrix& amat)
 {
@@ -268,6 +215,5 @@ void PhysicWorld::QPsolver(BigMatrix& amat, float* bvec, float* fvec)
         fvec[i] = 0.0f;
     for (int i = 0; i < size; i++)
         avec[i] = bvec[i];
-    std::list<uint32_t> C, NC;
 
 }
