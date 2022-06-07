@@ -11,7 +11,7 @@ public:
     virtual void Bind() override;
     virtual void Unbind() override;
     virtual void Resize(unsigned int width, unsigned int height) override;
-
+    virtual void ClearAttachment(uint32_t index, int value) override;
     virtual unsigned int GetColorAttachmentRendererID(uint32_t index) const override { return m_ColorAttachments[index]; }
     virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) override;
     virtual  const FramebufferSpecification& GetSpecification() const override { return this->m_Specification; }

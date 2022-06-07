@@ -34,7 +34,7 @@ void MeshLoader::processMesh(aiMesh* mesh, const aiScene* scene)
         m_Mesh.Vertices.push_back({
            Vector3{ mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z },
            Vector3{ mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z },
-           0}
+           Vector2{ mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y }}
         );
     }
     for (uint32_t i = 0; i < mesh->mNumFaces; i++)

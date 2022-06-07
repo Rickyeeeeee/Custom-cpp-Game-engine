@@ -173,7 +173,23 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
 
         out << YAML::EndMap;
     }
+    if (entity.HasComponent<MeshRendererComponent>())
+    {
+        out << YAML::Key << "MeshRendererComponent";
+        out << YAML::BeginMap;
 
+        const auto& mrc = entity.GetComponent<MeshRendererComponent>();
+        out << YAML::Key << "Color" << YAML::Value << mrc.Material.Ambient;
+        out << YAML::Key << "Diffuse" << YAML::Value << mrc.Material.Diffuse;
+        out << YAML::Key << "Specular" << YAML::Value << mrc.Material.Specular;
+        out << YAML::Key << "HasTexture" << YAML::Value << mrc.Material.HasTexture;
+        out << YAML::Key << "HasNormalMap" << YAML::Value << mrc.Material.HasNormalMap;
+        if (mrc.Material.HasTexture)
+            out << YAML::Key << "TexturePath" << YAML::Value << mrc.Material.AmbientTexture->GetPath();
+        if (mrc.Material.HasNormalMap)
+            out << YAML::Key << "NormalMapPath" << YAML::Value << mrc.Material.NormalMap->GetPath();
+        out << YAML::EndMap;
+    }
     if (entity.HasComponent<RigidBodyComponent>())
     {
         out << YAML::Key << "RigidBodyComponent";
@@ -193,6 +209,19 @@ static void SerializeEntity(YAML::Emitter& out, Entity entity)
 
         auto& cc = entity.GetComponent<ColliderComponent>();
         out << YAML::Key << "type" << YAML::Value << (int)cc.type;
+        switch(cc.type)
+        {
+            case ColliderType::BOX:
+                out << YAML::Key << "Width" << YAML::Value << ((BoxCollider*)cc.collider)->Width;
+                break;
+            case ColliderType::SPHERE:
+                out << YAML::Key << "Radius" << YAML::Value << ((SphereCollider*)cc.collider)->Radius;
+                break;
+            case ColliderType::PLANE:
+                out << YAML::Key << "Width" << YAML::Value << ((PlaneCollider*)cc.collider)->Width;
+                out << YAML::Key << "Height" << YAML::Value << ((PlaneCollider*)cc.collider)->Height;
+                break;
+        }
         out << YAML::EndMap;
 
     }
@@ -303,11 +332,32 @@ std::tuple<bool, Ref<Scene>> SceneSerializer::DeserializeText(const std::string&
                 if (src.meshSource != 0)
                 {
                     src.Load();
-                    src.mesh.Submit();
+                    // src.mesh.Submit();
                 }
                 src.mesh.color = meshComponent["Color"].as<glm::vec4>();
             }
 
+            auto meshRendererComponent = entity["MeshRendererComponent"];
+            if (meshRendererComponent)
+            {
+                auto& mrc = deserializedEntity.AddComponent<MeshRendererComponent>();
+                mrc.Material.Ambient = meshRendererComponent["Color"].as<Vector3>();
+                mrc.Material.Diffuse = meshRendererComponent["Diffuse"].as<float>();
+                mrc.Material.Specular = meshRendererComponent["Specular"].as<float>();
+                mrc.Material.HasTexture = meshRendererComponent["HasTexture"].as<bool>();
+                mrc.Material.HasNormalMap = meshRendererComponent["HasNormalMap"].as<bool>();
+                if (mrc.Material.HasTexture)
+                {
+                    std::string path = meshRendererComponent["TexturePath"].as<std::string>();
+                    mrc.Material.AmbientTexture = Texture2D::Create(path);
+                }
+                if (mrc.Material.HasNormalMap)
+                {
+                    std::string path = meshRendererComponent["NormalMapPath"].as<std::string>();
+                    mrc.Material.NormalMap = Texture2D::Create(path);
+                }
+
+            }
             auto lightComponent = entity["LightComponent"];
             if (lightComponent)
             {
@@ -337,6 +387,19 @@ std::tuple<bool, Ref<Scene>> SceneSerializer::DeserializeText(const std::string&
             {
                 auto type = (ColliderType)colliderComponent["type"].as<int>();
                 auto& cc = deserializedEntity.AddComponent<ColliderComponent>(type);
+                switch (type)
+                {
+                    case ColliderType::SPHERE:
+                        ((SphereCollider*)cc.collider)->Radius = colliderComponent["Radius"].as<float>();
+                        break;
+                    case ColliderType::PLANE:
+                        ((PlaneCollider*)cc.collider)->Width = colliderComponent["Width"].as<float>();
+                        ((PlaneCollider*)cc.collider)->Height = colliderComponent["Height"].as<float>();
+                        break;
+                    case ColliderType::BOX:
+                        ((BoxCollider*)cc.collider)->Width = colliderComponent["Width"].as<Vector3>();
+                        break;
+                }
             }
         }
     }

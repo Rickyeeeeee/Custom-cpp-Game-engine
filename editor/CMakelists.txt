@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(
     editor
+    ContentBrowser.cpp
     EditorApp.cpp
     EditorLayer.cpp
     SceneHierarchyPanel.cpp

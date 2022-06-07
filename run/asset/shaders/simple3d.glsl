@@ -3,14 +3,19 @@
 
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec3 a_Normal;
+layout(location = 2) in vec2 a_TexCoord;
+// layout(location = 2) in int a_ID;
 
 uniform mat4 u_ViewProjection;
 uniform mat4 u_Model;
 uniform mat4 u_NormalModel;
 uniform vec4 u_Color;
+
 out vec3 v_FragPos;
 out vec4 v_Color;
 out vec3 v_Normal;
+out vec2 v_TexCoord;
+
 
 void main()
 {
@@ -19,6 +24,7 @@ void main()
     v_FragPos = vec3(pos.x, pos.y, pos.z);
     v_Color = u_Color;
     v_Normal = vec3(u_NormalModel * vec4(a_Normal, 1.0f));
+    v_TexCoord = a_TexCoord;
 }
 
 #type pixel
@@ -54,13 +60,20 @@ layout(location = 1) out int id;
 in vec4 v_Color;
 in vec3 v_Normal;
 in vec3 v_FragPos;  
+in vec2 v_TexCoord;
 
 uniform vec3 u_ViewPos;
+
+uniform sampler2D u_Texture;
 
 uniform PointLight[4] u_PointLights;  
 uniform int u_PointLightSize;
 uniform DirectionalLight u_DirLight; 
 uniform int u_HasDirectionalLight;
+uniform int u_id;
+
+uniform vec2 u_Tiling;
+uniform vec2 u_Offset;
 
 vec3 CalcDirectionalLight(DirectionalLight light, vec3 normal, vec3 viewDir);
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
@@ -77,8 +90,8 @@ void main()
     for (int i = 0; i < u_PointLightSize; i++)
         result += CalcPointLight(u_PointLights[i], norm, v_FragPos, viewDir);
     // result = vec3(1.0f, 1.0f, 1.0f);
-    FragColor = vec4(result * objectColor, 1.0);
-    id = 50;
+    id = u_id;
+    FragColor = vec4(result * objectColor, 1.0) * texture(u_Texture, (v_TexCoord + u_Offset) * u_Tiling);
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)

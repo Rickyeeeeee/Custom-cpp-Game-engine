@@ -69,6 +69,17 @@ static void AttachDepthTexture(uint32_t id, int samples, GLenum format, GLenum a
     glFramebufferTexture2D(GL_FRAMEBUFFER, attachmentType, TextureTarget(multisampled), id, 0);
 }
 
+static GLenum TextureFormattoGl(FrameBufferTextureFormat format)
+{
+    switch (format)
+    {
+    case FrameBufferTextureFormat::RGBA8:           return GL_RGB8;
+    case FrameBufferTextureFormat::RED_INTERGER:    return GL_RED_INTEGER;
+    }
+
+    return 0;
+}
+
 OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferSpecification& spec) 
     : m_Specification(spec)
 {
@@ -114,13 +125,20 @@ void OpenGLFramebuffer::Resize(unsigned int width, unsigned int height)
     Invalidate();
 }
 
+void OpenGLFramebuffer::ClearAttachment(uint32_t index, int value)
+{
+    auto& spec = m_ColorAttachmentSpecs[index];
+    glClearTexImage(m_ColorAttachments[index], 0, 
+        TextureFormattoGl(spec.TextureFormat), GL_INT, &value);
+}
+
 int OpenGLFramebuffer::ReadPixel(uint32_t attachmentIndex, int x, int y)
 {
 
     glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
     int pixelData;
     glReadPixels(x, y, 1, 1, GL_RED_INTEGER, GL_INT, &pixelData);
-    
+
     return pixelData;
 }
 

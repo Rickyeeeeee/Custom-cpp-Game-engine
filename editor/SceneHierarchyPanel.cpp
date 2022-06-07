@@ -10,7 +10,7 @@ SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& context)
 void SceneHierarchyPanel::SetContext(const Ref<Scene>& context)
 {
     m_Context = context;
-    m_SelectionEntity = {};
+    m_SelectionEntity = Entity(entt::null, nullptr);
 }
 
 void SceneHierarchyPanel::OnImGuiRender()
@@ -35,7 +35,7 @@ void SceneHierarchyPanel::OnImGuiRender()
         DrawEntityNode(entity);
     });
     if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-        m_SelectionEntity = {};
+        m_SelectionEntity = {entt::null, nullptr};
 
     if (ImGui::BeginPopupContextWindow(0, 1, false))
     {
@@ -46,7 +46,7 @@ void SceneHierarchyPanel::OnImGuiRender()
     ImGui::End();
 
     ImGui::Begin("Properties");
-    if (m_SelectionEntity)
+    if ((bool)m_SelectionEntity)
     {
         DrawComponents(m_SelectionEntity);
 
@@ -71,6 +71,12 @@ void SceneHierarchyPanel::OnImGuiRender()
             {
                 if (!m_SelectionEntity.HasComponent<MeshComponent>())
                     m_SelectionEntity.AddComponent<MeshComponent>();
+                ImGui::CloseCurrentPopup();
+            }
+            if (ImGui::MenuItem("MeshRenderer"))
+            {
+                if (!m_SelectionEntity.HasComponent<MeshRendererComponent>())
+                    m_SelectionEntity.AddComponent<MeshRendererComponent>();
                 ImGui::CloseCurrentPopup();
             }
             if (ImGui::MenuItem("Light"))
@@ -105,7 +111,7 @@ void SceneHierarchyPanel::DrawEntityNode(Entity entity)
     bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)entity, flags, tag.c_str());
     if (ImGui::IsItemClicked())
     {
-        m_SelectionEntity =  entity;
+        m_SelectionEntity = entity;
     }
     bool entityDeleted = false;
     if (ImGui::BeginPopupContextItem())
@@ -303,6 +309,7 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
             if (lastShape != src.meshSource)
             {
                 src.mesh.Reset();
+                src.filepath.clear();
                 if (src.meshSource == 1)
                     src.filepath = "C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj";
                 if (src.meshSource == 2)
@@ -310,7 +317,12 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
                 else if (src.meshSource == 3)
                     src.filepath = FileDialogs::OpenFile("Model (*.obj)\0*.obj\0") ;
                 src.Load();
-                src.mesh.Submit();
+                if (entity.HasComponent<MeshRendererComponent>() && src.meshSource != 0)
+                {
+                    auto& meshRendererComponent = entity.GetComponent<MeshRendererComponent>();
+                    ComponentUtils::UnSubmitMesh(meshRendererComponent);
+                    ComponentUtils::SubmitMesh(src, meshRendererComponent);
+                }
             }
             else 
             {
@@ -320,6 +332,34 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
         }
         if (removeComponent)
             entity.RemoveComponent<MeshComponent>();
+    }
+
+    if (entity.HasComponent<MeshRendererComponent>())
+    {
+        bool open = ImGui::TreeNodeEx((void*)typeid(MeshRendererComponent).hash_code(), treeNodeFlag, "MeshRenderer");
+        if (open)
+        {
+            auto& mrc = entity.GetComponent<MeshRendererComponent>();
+            ImGui::ColorEdit3("Ambient", glm::value_ptr(mrc.Material.Ambient));
+            ImGui::DragFloat("Diffuse", &mrc.Material.Diffuse, 0.05f, 0.0f, 1.0f);
+            ImGui::DragFloat("Specular", &mrc.Material.Specular, 0.05f, 0.0f, 1.0f);
+            if (ImGui::Button("Load Texture"))
+            {
+                std::string path = FileDialogs::OpenFile("Texture (*.jpg;*.png)\0*.jpg;*png\0");
+                mrc.Material.AmbientTexture = Texture2D::Create(path);
+                mrc.Material.HasTexture = true;
+            }
+            if (mrc.Material.HasTexture)
+            {
+                ImGui::DragFloat2("Tiling", glm::value_ptr(mrc.Tiling), 0.1f, 0.1f, 100.f);
+                ImGui::DragFloat2("Offset", glm::value_ptr(mrc.Offset), 0.01f, 0.0f, 1.0f);
+                auto texture = mrc.Material.AmbientTexture;
+                ImGui::Image((void*)texture->GetRendererID(), { 50.0f, 50.0f * texture->GetHeight() / texture->GetWidth() });
+            }
+            ImGui::Checkbox("Normal Map", &mrc.Material.HasNormalMap);
+
+        }
+        ImGui::TreePop();
     }
 
     if (entity.HasComponent<RigidBodyComponent>())

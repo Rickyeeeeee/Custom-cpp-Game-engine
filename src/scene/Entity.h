@@ -50,6 +50,7 @@ public:
         return !(*this == other);
     }
     operator entt::entity() const { return m_EntityHandle; }
+    const Entity& operator=(uint32_t id) { m_EntityHandle = (entt::entity)id; return *this; } 
 private:
     entt::entity m_EntityHandle;
     Scene* m_Scene;

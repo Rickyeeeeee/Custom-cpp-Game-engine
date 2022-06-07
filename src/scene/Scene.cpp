@@ -41,6 +41,34 @@ void Scene::DestroyEntity(Entity entity)
     m_Registry.destroy(entity);
 }
 
+Entity Scene::DuplicateEntity(Entity entity)
+{
+    if ((bool)entity)
+    {
+        Entity duplicateEntity(m_Registry.create(), this);
+        if (entity.HasComponent<TransformComponent>()) 
+        {
+            duplicateEntity.AddComponent<TransformComponent>(entity.GetComponent<TransformComponent>());
+            auto& tfc = duplicateEntity.GetComponent<TransformComponent>();
+            tfc.Translation += Vector3{ 3.0f, 0.0f, 0.0f };
+        }
+        if (entity.HasComponent<MeshComponent>()) duplicateEntity.AddComponent<MeshComponent>(entity.GetComponent<MeshComponent>());
+        if (entity.HasComponent<MeshRendererComponent>()) duplicateEntity.AddComponent<MeshRendererComponent>(entity.GetComponent<MeshRendererComponent>());
+        if (entity.HasComponent<TagComponent>()) duplicateEntity.AddComponent<TagComponent>(entity.GetComponent<TagComponent>().Tag + "_d");
+        if (entity.HasComponent<CameraComponent>()) duplicateEntity.AddComponent<CameraComponent>(entity.GetComponent<CameraComponent>());
+        if (entity.HasComponent<LightComponent>()) duplicateEntity.AddComponent<LightComponent>(entity.GetComponent<LightComponent>());
+        if (entity.HasComponent<RigidBodyComponent>()) 
+        {
+            duplicateEntity.AddComponent<RigidBodyComponent>();
+            duplicateEntity.GetComponent<RigidBodyComponent>().body
+                ->SetType(entity.GetComponent<RigidBodyComponent>().body->GetType());
+        }
+        if (entity.HasComponent<ColliderComponent>()) duplicateEntity.AddComponent<ColliderComponent>(entity.GetComponent<ColliderComponent>());
+        return duplicateEntity;
+    }
+    return { entt::null, nullptr};
+}
+
 void Scene::OnViewportResize(unsigned int width, unsigned int height)
 {
     m_ViewportHeight = height;
@@ -105,6 +133,16 @@ template<>
 void Scene::OnComponentAdded<MeshComponent>(Entity entity, MeshComponent& component)
 {
     
+}
+template<>
+void Scene::OnComponentAdded<MeshRendererComponent>(Entity entity, MeshRendererComponent& component)
+{
+    component.Submitted = false;
+    if (entity.HasComponent<MeshComponent>())
+    {
+        auto& mc = entity.GetComponent<MeshComponent>();
+        ComponentUtils::SubmitMesh(mc, component);
+    }
 }
 template<>
 void Scene::OnComponentAdded<SpriteComponent>(Entity entity, SpriteComponent& component)
@@ -197,11 +235,14 @@ void Scene2D::OnUpdateRuntime(Timestep ts)
 
 Scene3D::~Scene3D()
 {
-    auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
+    auto group = m_Registry.group<TransformComponent>(entt::get<MeshRendererComponent>);
     for (auto entity : group)
     {
-        auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
-        Renderer3D::DestroyStaticMesh(mesh.mesh);
+        auto [transform, mesh] = group.get<TransformComponent, MeshRendererComponent>(entity);
+        if (mesh.Submitted)
+        {
+            ComponentUtils::UnSubmitMesh(mesh);
+        }
     }
 }
 
@@ -262,16 +303,25 @@ void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
             }
         }
     }
- 
-        Renderer3D::BeginScene(camera);
+    
+    Renderer3D::BeginScene(camera);
 
-        auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
-        for (auto entity : group)
+    auto group = m_Registry.group<TransformComponent>(entt::get<MeshRendererComponent>);
+    for (auto entity : group)
+    {
+        auto [transform, meshRenderer] = group.get<TransformComponent, MeshRendererComponent>(entity);
+        if (meshRenderer.Submitted)
         {
-            auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
-            Renderer3D::DrawStaticMesh(mesh.mesh, transform.GetTransform(), mesh.mesh.color);
+            if (meshRenderer.Material.HasTexture)
+                Renderer3D::DrawStaticMesh(meshRenderer.Renderer3Did, transform.GetTransform(), 
+                    meshRenderer.Material.AmbientTexture, meshRenderer.Material.Ambient, (int)entity, 
+                    meshRenderer.Tiling, meshRenderer.Offset);
+            else
+                Renderer3D::DrawStaticMesh(meshRenderer.Renderer3Did, transform.GetTransform(), 
+                    meshRenderer.Material.Ambient, (int)entity);
         }
-        Renderer3D::EndScene(camera.GetPosition(), pointLights, dirLight);
+    }
+    Renderer3D::EndScene(camera.GetPosition(), pointLights, dirLight);
 }
 
 void Scene3D::OnUpdateRuntime(Timestep ts)
@@ -334,7 +384,7 @@ void Scene3D::OnUpdateRuntime(Timestep ts)
         for (auto entity : group)
         {
             auto [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
-            Renderer3D::DrawStaticMesh(mesh.mesh, transform.GetTransform(), mesh.mesh.color);
+            // Renderer3D::DrawStaticMesh(mesh.mesh, transform.GetTransform(), mesh.mesh.color, (int)entity);
         }
         Renderer3D::EndScene(cameraPosition, pointLights, dirLight);
     }

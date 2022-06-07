@@ -7,13 +7,12 @@
 class Mesh
 {
 public:
-    Mesh() {}
+    Mesh() = default;
     ~Mesh()
     {
         Vertices.clear();
         Indices.clear();
     }
-    void SetCube();
     void Reset();
     void Submit();
 public:

@@ -1,7 +1,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-
+#include <iomanip>
 using namespace std;
 
 class Base
@@ -48,9 +48,11 @@ private:
 
 int main()
 {
-    Base a;
-    Base b;
-    Base c;
-    Base d;
-    d = a + b + c;
+    cout << std::quoted("name");
+
+    int a = 0;
+    int& b = a;
+    auto c = b;
+    cout << c;
+
 }

@@ -54,6 +54,7 @@ EditorLayer::EditorLayer()
 void EditorLayer::OnAttach()
 {
     m_Texture = Texture2D::Create("asset/picture/shhiop.png");
+
     FramebufferSpecification fbSpec;
     fbSpec.Attachments = {
         FrameBufferTextureFormat::RGBA8,
@@ -67,6 +68,9 @@ void EditorLayer::OnAttach()
 
     m_ActiveScene = CreateRef<Scene2D>();
     m_Panel.SetContext(m_ActiveScene);
+    m_Framebuffer->Bind();
+    m_Framebuffer->ClearAttachment(1, -1);
+    m_Framebuffer->Unbind();
 }
 
 void EditorLayer::OnUpdate(Timestep ts) 
@@ -78,10 +82,12 @@ void EditorLayer::OnUpdate(Timestep ts)
     {
         m_Framebuffer->Resize((unsigned int)m_ViewportSize.x, (unsigned int) m_ViewportSize.y);
         m_CameraController.Resize(m_ViewportSize.x, m_ViewportSize.y);
+        m_Framebuffer->Bind();
+        m_Framebuffer->ClearAttachment(1, -1);
+        m_Framebuffer->Unbind();
 
         m_ActiveScene->OnViewportResize((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);
     }
-
 
     // if (m_ViewportFocused)
     //     m_CameraController.OnUpdate(ts);
@@ -90,14 +96,9 @@ void EditorLayer::OnUpdate(Timestep ts)
 
     Renderer2D::ResetStats();
     m_Framebuffer->Bind();
-    RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
-    RenderCommand::Clear();
-    m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
-
     auto[mx, my] = ImGui::GetMousePos();
     mx -= m_ViewportBounds[0].x;
     my -= m_ViewportBounds[0].y;
-
     Vector2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
     my = viewportSize.y - my;
 
@@ -106,10 +107,20 @@ void EditorLayer::OnUpdate(Timestep ts)
 
     if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
     {
+        cursorRegion = 1;
         auto id = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-        std::cout << id << std::endl;
-        std::cout << "mouseX: " << mouseX << "mouseY: " << mouseY << std::endl;
+        m_HoverEntity = id == -1 ? Entity(entt::null, nullptr) : Entity((entt::entity)id, m_ActiveScene.get());
     }
+    else
+        cursorRegion = 0;
+    RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
+    RenderCommand::Clear();
+    m_Framebuffer->ClearAttachment(1, -1);
+
+    m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
+    
+    // Renderer3D::DrawStaticMesh();
+
     m_Framebuffer->Unbind();
 }
 
@@ -210,7 +221,12 @@ void EditorLayer::OnImGuiRender()
     ImGui::Text("Draw call: %d", stats3D.DrawCallcount);
     ImGui::Text("Vertex count: %d", stats3D.totalVertexCount);
     ImGui::Text("Index count: %d", stats3D.totalIndexCount);
+    std::string name("NONE");
+    if (m_HoverEntity)
+        name = m_HoverEntity.GetComponent<TagComponent>().Tag;
+    ImGui::Text("HoverEntity %s", name.c_str());
     ImGui::End();
+
 
     ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
     ImGui::Begin("Viewport");
@@ -263,7 +279,9 @@ void EditorLayer::OnImGuiRender()
         ImGuizmo::Manipulate(glm::value_ptr(m_EditorCamera.GetView()), glm::value_ptr(m_EditorCamera.GetProjection()),
             (ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform));
         
-        if (ImGuizmo::IsUsing())
+        m_usingImGuizmo = ImGuizmo::IsOver((ImGuizmo::OPERATION)m_GizmoType);
+
+        if (m_usingImGuizmo)
         {
             glm::vec3 translation(1.0f), rotation(1.0f), scale(1.0f);
             Math::DecomposeTransform(transform, translation, rotation, scale);
@@ -289,6 +307,8 @@ void EditorLayer::OnEvent(Event& event)
     m_CameraController.OnEvent(event);
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN(EditorLayer::OnKeyPressed));
+    dispatcher.Dispatch<MousePressedEvent>(BIND_EVENT_FN(EditorLayer::OnMousePressed));
+
 }
     
 bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
@@ -340,7 +360,19 @@ bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
             m_GizmoType = ImGuizmo::OPERATION::SCALE;
             break;
         }
+        case KEY_D:
+        {
+            if (control)
+                m_ActiveScene->DuplicateEntity(m_Panel.GetSelectedEntity());
+        }
     }
+    return true;
+}
+
+bool EditorLayer::OnMousePressed(MousePressedEvent& e)
+{
+    if (!m_usingImGuizmo && e.getButton() == MOUSE_BUTTON_LEFT && cursorRegion == 1)
+        m_Panel.SetSelectedEntity(m_HoverEntity);
     return true;
 }
 

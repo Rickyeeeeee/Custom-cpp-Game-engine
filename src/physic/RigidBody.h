@@ -13,6 +13,7 @@ class RigidBody
 {
 public:
     RigidBody(float m, const Matrix3& i, const Vector3 position, const glm::quat& rotation);
+    RigidBody(const RigidBody& body) = default;
     ~RigidBody();
 
     void SetType(RIGIDBODY_TYPE t) { type = t; }

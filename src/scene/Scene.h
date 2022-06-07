@@ -24,10 +24,11 @@ public:
     static Ref<Scene> Create(SceneType);
     Entity CreateEntity(const std::string& name = std::string());
     void DestroyEntity(Entity entity);
+    Entity DuplicateEntity(Entity entity);
 
     virtual void OnUpdateEditor(Timestep ts, const EditorCamera& camera) = 0;
     virtual void OnUpdateRuntime(Timestep ts) = 0;
-    
+
     void OnViewportResize(unsigned int width, unsigned int height);
     Entity GetPrimaryCameraEntity();
 private:

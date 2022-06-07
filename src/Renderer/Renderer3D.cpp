@@ -4,16 +4,25 @@
 #include "core/core.h"
 #include "Renderer/RenderCommand.h"
 #include "scene/EditorCamera.h"
-#include <array>
-#include <vector>
-#include <unordered_map>
-#include <utility>
-#include <queue>
-struct RenderObject
+#include "Renderer/Texture.h"
+#include "core/pch.h"
+
+struct StaticMeshInfo
 {
-    uint32_t id;
+    uint32_t VertexCount = 0;
+    uint32_t IndexCount = 0;
+};
+
+struct StaticRenderObject
+{
+    uint32_t MeshID;
     Matrix4 transform;
     Vector4 color;
+    int32_t id;
+
+    Ref<Texture> texture;
+    Vector2 textureTiling{ 1.0f, 1.0f };
+    Vector2 textureOffset{ 0.0f, 0.0f };
 };
 
 struct Renderer3Dstorage
@@ -24,14 +33,19 @@ struct Renderer3Dstorage
         Ref<VertexArray> StaticVertexArray;
         Ref<VertexBuffer> StaticVertexBuffer;
         Ref<IndexBuffer> StaticIndexBuffer;
+        StaticMeshInfo info;
         bool empty = true;
     };
     std::vector<MeshData> StaticMashDatas; 
+
+    Ref<Texture2D> WhiteTexture;
+
     Ref<Shader> simple3dShader;
+    Ref<Shader> skyboxShader;
 
     int StaticBufferCount;
 
-    std::vector<RenderObject> RenderQueue;
+    std::vector<StaticRenderObject> RenderQueue;
 
     uint32_t StaticMeshCount;
     uint32_t StaticVertexCount;
@@ -46,6 +60,11 @@ void Renderer3D::Init()
 {
     s_Data.simple3dShader = Shader::Create("asset/shaders/simple3d.glsl");
     s_Data.simple3dShader->Bind();
+    s_Data.simple3dShader->SetInt("u_Texture", 0);
+
+    s_Data.WhiteTexture = Texture2D::Create(1, 1);
+    unsigned int white_texture_data = 0xffffffff;
+    s_Data.WhiteTexture->SetData(&white_texture_data, sizeof(uint32_t));
 
     s_Data.StaticMeshCount = 0;
     s_Data.StaticVertexCount = 0;
@@ -127,95 +146,91 @@ void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>&
         s_Data.simple3dShader->SetMat4("u_Model", Object.transform);
         s_Data.simple3dShader->SetMat4("u_NormalModel", glm::transpose(glm::inverse(Object.transform)));
         s_Data.simple3dShader->SetFloat4("u_Color", Object.color);
-        RenderCommand::DrawIndexed(s_Data.StaticMashDatas[Object.id].StaticVertexArray, s_Data.StaticMashDatas[Object.id].StaticIndexBuffer->GetCount());   
+        s_Data.simple3dShader->SetInt("u_id", Object.id);
+        s_Data.simple3dShader->SetFloat2("u_Tiling", Object.textureTiling);
+        s_Data.simple3dShader->SetFloat2("u_Offset", Object.textureOffset);
+        Object.texture->Bind();
+        RenderCommand::DrawIndexed(s_Data.StaticMashDatas[Object.MeshID].StaticVertexArray, 
+            s_Data.StaticMashDatas[Object.MeshID].StaticIndexBuffer->GetCount());   
+        // Object.texture->UnBind();
     }
+    s_Data.simple3dShader->UnBind();
 }
 
-void Renderer3D::SubmitStaticMesh(Mesh& mesh) 
+uint32_t Renderer3D::SubmitStaticMesh(Mesh& mesh) 
 {
-    if (!mesh.Submitted)
-    {
-    // GPU initialization
-        auto vertexArray = VertexArray::Create();
+    uint32_t id;
 
-        auto vertexBuffer = VertexBuffer::Create(mesh.Vertices.size() * sizeof(Vertex3DSimple));
-        vertexBuffer->SetData(mesh.Vertices.begin().base(), mesh.Vertices.size() * sizeof(Vertex3DSimple));
-        vertexBuffer->SetLayout(Vertex3DSimple::GetLayout());
-        vertexArray->AddVertexBuffer(vertexBuffer);
-
-        auto indexBuffer = IndexBuffer::Create(mesh.Indices.size());
-        indexBuffer->SetData(mesh.Indices.begin().base(), mesh.Indices.size());
-        vertexArray->SetIndexBuffer(indexBuffer);    
-
-        bool EmptyMeshSlotFound = false;
-        for (uint32_t i = 0; i < s_Data.StaticMashDatas.size(); i++)
-        {
-            if (s_Data.StaticMashDatas[i].empty)
-            {
-                EmptyMeshSlotFound = true;
-                s_Data.StaticMashDatas[i] = { vertexArray, vertexBuffer, indexBuffer, false };
-                mesh.ID = i;
-            } 
-        }
-
-        if (!EmptyMeshSlotFound)
-        {
-            mesh.ID = s_Data.StaticMashDatas.size();
-            s_Data.StaticMashDatas.push_back({
-                vertexArray, vertexBuffer, indexBuffer, false
-            });
-        }
-
-    // variable initialization
-
-        for (auto& vertex : mesh.Vertices)
-        {
-            vertex.ID = mesh.ID;
-        }
+    StaticMeshInfo info = { (uint32_t)mesh.Vertices.size(), (uint32_t)mesh.Indices.size() };
     
-         mesh.Submitted = true;
-    }
-    else
+    auto vertexArray = VertexArray::Create();
+
+    auto vertexBuffer = VertexBuffer::Create(mesh.Vertices.size() * sizeof(Vertex3DSimple));
+    vertexBuffer->SetData(mesh.Vertices.begin().base(), mesh.Vertices.size() * sizeof(Vertex3DSimple));
+    vertexBuffer->SetLayout(Vertex3DSimple::GetLayout());
+    vertexArray->AddVertexBuffer(vertexBuffer);
+
+    auto indexBuffer = IndexBuffer::Create(mesh.Indices.size());
+    indexBuffer->SetData(mesh.Indices.begin().base(), mesh.Indices.size());
+    vertexArray->SetIndexBuffer(indexBuffer);    
+
+    bool EmptyMeshSlotFound = false;
+    for (uint32_t i = 0; i < s_Data.StaticMashDatas.size(); i++)
     {
-        auto id = mesh.ID;
-        auto vertexArray = s_Data.StaticMashDatas[id].StaticVertexArray;
-
-        auto vertexBuffer = VertexBuffer::Create(mesh.Vertices.size() * sizeof(Vertex3DSimple));
-        vertexBuffer->SetData(mesh.Vertices.begin().base(), mesh.Vertices.size() * sizeof(Vertex3DSimple));
-        vertexBuffer->SetLayout(Vertex3DSimple::GetLayout());
-        vertexArray->AddVertexBuffer(vertexBuffer);
-
-        auto indexBuffer = IndexBuffer::Create(mesh.Indices.size());
-        indexBuffer->SetData(mesh.Indices.begin().base(), mesh.Indices.size());
-        vertexArray->SetIndexBuffer(indexBuffer);    
-
-        s_Data.StaticMashDatas[id].StaticVertexBuffer = vertexBuffer;
-        s_Data.StaticMashDatas[id].StaticIndexBuffer = indexBuffer;
-        s_Data.StaticMashDatas[id].empty = false;
+        if (s_Data.StaticMashDatas[i].empty)
+        {
+            EmptyMeshSlotFound = true;
+            s_Data.StaticMashDatas[i] = { vertexArray, vertexBuffer, indexBuffer, info, false };
+            id = i;
+        } 
     }
 
+    if (!EmptyMeshSlotFound)
+    {
+        id = s_Data.StaticMashDatas.size();
+        s_Data.StaticMashDatas.push_back({
+            vertexArray, vertexBuffer, indexBuffer, info, false
+        });
+    }
+
+    return id;
 }
 
-void Renderer3D::DestroyStaticMesh(Mesh& mesh)
+void Renderer3D::DestroyStaticMesh(uint32_t id)
 {
-    s_Data.StaticMashDatas[mesh.ID] = {
-        {}, {}, {}, false
+    s_Data.StaticMashDatas[id] = {
+        {}, {}, {}, {}, true,
     };
 }
 
-
-void Renderer3D::DrawStaticMesh(const Mesh& mesh) 
+void Renderer3D::DrawStaticMesh(uint32_t mesh_ID, const Matrix4& transform, const Vector4& color, int id)
 {
-}
-
-void Renderer3D::DrawStaticMesh(const Mesh& mesh, const Matrix4& transform, const Vector4& color)
-{
-    if (!mesh.Submitted) return;
-    s_Data.RenderQueue.push_back({ mesh.ID, transform, color});
+    if (mesh_ID >= s_Data.StaticMashDatas.size()) return;
+    s_Data.RenderQueue.push_back({ mesh_ID, transform, color, id, s_Data.WhiteTexture });
 
     s_Data.StaticMeshCount++;
-    s_Data.StaticIndexCount += mesh.Indices.size();
-    s_Data.StaticVertexCount += mesh.Vertices.size();
+    s_Data.StaticIndexCount += s_Data.StaticMashDatas[mesh_ID].info.IndexCount;
+    s_Data.StaticVertexCount += s_Data.StaticMashDatas[mesh_ID].info.VertexCount;
+}
+
+void Renderer3D::DrawStaticMesh(uint32_t mesh_ID, const Matrix4& transform, const Vector3& color, int id)
+{
+    if (mesh_ID >= s_Data.StaticMashDatas.size()) return;
+    s_Data.RenderQueue.push_back({ mesh_ID, transform, Vector4(color, 1.0f), id, s_Data.WhiteTexture });
+
+    s_Data.StaticMeshCount++;
+    s_Data.StaticIndexCount += s_Data.StaticMashDatas[mesh_ID].info.IndexCount;
+    s_Data.StaticVertexCount += s_Data.StaticMashDatas[mesh_ID].info.VertexCount;
+}
+
+void Renderer3D::DrawStaticMesh(uint32_t mesh_ID, const Matrix4& transform, Ref<Texture2D> texture, const Vector3& color, int id, Vector2 Tiling , Vector2 Offset)
+{
+    if (mesh_ID >= s_Data.StaticMashDatas.size()) return;
+    s_Data.RenderQueue.push_back({ mesh_ID, transform, Vector4(color, 1.0f), id, texture, Tiling, Offset });
+
+    s_Data.StaticMeshCount++;
+    s_Data.StaticIndexCount += s_Data.StaticMashDatas[mesh_ID].info.IndexCount;
+    s_Data.StaticVertexCount += s_Data.StaticMashDatas[mesh_ID].info.VertexCount;
 }
 
 void Renderer3D::Flush() 
@@ -242,114 +257,4 @@ RenderStats Renderer3D::GetRenderStats()
         s_Data.StaticIndexCount,
     };
 }
-static const Vector3 cube_positions[4 * 6] = {
-    { -0.5f, -0.5f, -0.5f },
-    {  0.5f, -0.5f, -0.5f },
-    {  0.5f,  0.5f, -0.5f },
-    { -0.5f,  0.5f, -0.5f },
-    { -0.5f, -0.5f,  0.5f },
-    {  0.5f, -0.5f,  0.5f },
-    {  0.5f,  0.5f,  0.5f },
-    { -0.5f,  0.5f,  0.5f },
-    { -0.5f,  0.5f,  0.5f },
-    { -0.5f,  0.5f, -0.5f },
-    { -0.5f, -0.5f, -0.5f },
-    { -0.5f, -0.5f,  0.5f },
-    {  0.5f,  0.5f,  0.5f },
-    {  0.5f,  0.5f, -0.5f },
-    {  0.5f, -0.5f, -0.5f },
-    {  0.5f, -0.5f,  0.5f },
-    { -0.5f, -0.5f, -0.5f },
-    {  0.5f, -0.5f, -0.5f },
-    {  0.5f, -0.5f,  0.5f },
-    { -0.5f, -0.5f,  0.5f },
-    { -0.5f,  0.5f, -0.5f },
-    {  0.5f,  0.5f, -0.5f },
-    {  0.5f,  0.5f,  0.5f },
-    { -0.5f,  0.5f,  0.5f },
-};
 
-static const Vector3 cube_normals[4 * 6] = {
-    { 0.0f,  0.0f, -1.0f },
-    { 0.0f,  0.0f, -1.0f },
-    { 0.0f,  0.0f, -1.0f },
-    { 0.0f,  0.0f, -1.0f },
-    { 0.0f,  0.0f,  1.0f },
-    { 0.0f,  0.0f,  1.0f },
-    { 0.0f,  0.0f,  1.0f },
-    { 0.0f,  0.0f,  1.0f },
-    {-1.0f,  0.0f,  0.0f },
-    {-1.0f,  0.0f,  0.0f },
-    {-1.0f,  0.0f,  0.0f },
-    {-1.0f,  0.0f,  0.0f },
-    { 1.0f,  0.0f,  0.0f },
-    { 1.0f,  0.0f,  0.0f },
-    { 1.0f,  0.0f,  0.0f },
-    { 1.0f,  0.0f,  0.0f },
-    { 0.0f, -1.0f,  0.0f },
-    { 0.0f, -1.0f,  0.0f },
-    { 0.0f, -1.0f,  0.0f },
-    { 0.0f, -1.0f,  0.0f },
-    { 0.0f,  1.0f,  0.0f },
-    { 0.0f,  1.0f,  0.0f },
-    { 0.0f,  1.0f,  0.0f },
-    { 0.0f,  1.0f,  0.0f }
-};
-
-static const unsigned int cube_indices[6 * 6] = {
-    0, 1, 2, 2, 3, 0,
-    4, 5, 6, 6, 7, 4,
-    8, 9, 10, 10, 11, 8,
-    12, 13, 14, 14, 15, 12,
-    16, 17, 18, 18, 19, 16,
-    20, 21, 22, 22, 23, 20
-};
-
-void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Transform& transform, const Vector4 color) 
-{
-    const unsigned int max = 24;
-    vertices.clear();
-    Matrix4 ModelMatrix = glm::translate(Matrix4(1.0f), transform.Position);
-    for (int i = 0; i < max; i++)
-    {
-        Vector3 position = ModelMatrix * Vector4(cube_positions[i], 1.0f);
-        vertices.push_back({ position, cube_normals[i], 0 });
-    }
-    // vertices.resize(max);
-}
-
-void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Vector4 color) 
-{
-    const unsigned int max = 24;
-    vertices.clear();
-    for (int i = 0; i < max; i++)
-        vertices.push_back({ cube_positions[i], cube_normals[i], 0} );
-}
-
-void Renderer3D::Shape::GetCubeVertex(std::vector<Vertex3DSimple>& vertices, const Matrix4& value, const Vector4 color)
-{
-    const unsigned int max = 24;
-    vertices.clear();
-    for (int i = 0; i < max; i++)
-    {
-        Vector3 position = value * Vector4(cube_positions[i], 1.0f);
-        vertices.push_back({ position, cube_normals[i], 0 });
-    }
-}
-
-void Renderer3D::Shape::GetCubeIndex(std::vector<unsigned int>& indices) 
-{
-    const unsigned int max = 36;
-    indices.clear();
-    indices.reserve(max);
-    for (int i = 0; i < max; i++)
-        indices.emplace_back(cube_indices[i]);
-}
-
-void Renderer3D::Shape::GetCubeIndex(std::vector<unsigned int>& indices, unsigned int offset) 
-{
-    const unsigned int max = 36;
-    indices.reserve(max);
-    for (int i = 0; i < max; i++)
-        indices.emplace_back(cube_indices[i] + offset);
-}

@@ -17,7 +17,10 @@ public:
     virtual void SetData(void* data, unsigned int size) override;
     virtual void Bind(unsigned int slot) const override;
     virtual unsigned int GetRendererID() const override { return this->m_RendererID; }
-
+    virtual std::string GetPath() const
+    {
+        return m_Path;
+    }
     virtual bool operator==(const Texture& other) const override 
     { 
         return m_RendererID == ((OpenGLTexture2D&)other).m_RendererID; 

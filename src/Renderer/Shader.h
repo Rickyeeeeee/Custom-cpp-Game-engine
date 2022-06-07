@@ -13,6 +13,7 @@ public:
     virtual void UnBind() const = 0;
 
     virtual void SetFloat(const std::string& name, const float& value) = 0;
+    virtual void SetFloat2(const std::string& name, const Vector2& value) = 0;
     virtual void SetFloat3(const std::string& name, const Vector3& vec) = 0;
     virtual void SetFloat4(const std::string& name,const Vector4& vec) = 0;
     virtual void SetMat4(const std::string& name,const Matrix4& mat) = 0;

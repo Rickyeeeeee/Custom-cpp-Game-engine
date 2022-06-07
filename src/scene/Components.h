@@ -7,6 +7,7 @@
 
 #include "Renderer/Camera.h"
 #include "Renderer/Mesh.h"
+#include "Renderer/Material.h"
 #include "Scene/SceneCamera.h"
 #include "Scene/ScriptableEntity.h"
 #include "Scene/Light.h"
@@ -53,14 +54,36 @@ struct MeshComponent
     Mesh mesh;
     std::string filepath = "none";
     MeshComponent() = default;
-    MeshComponent(const MeshComponent&) = default;
+    MeshComponent(const MeshComponent& mc)
+        : meshSource(mc.meshSource), filepath(mc.filepath)
+    {
+        Load();
+    }
     void Load()
     {
-        MeshLoader loader(filepath, mesh);
-        loader.LoadMeshTo();
+        if (!filepath.empty())
+        {
+            MeshLoader loader(filepath, mesh);
+            loader.LoadMeshTo();
+        }
     }
     // operator Mesh& () { return mesh; }
     // operator const Mesh& () { return mesh; }
+};
+
+struct MeshRendererComponent
+{
+    SimpleMaterial Material;
+    uint32_t Renderer3Did;
+    bool Submitted = false;
+    Vector2 Tiling{ 1.0f, 1.0f };
+    Vector2 Offset{ 0.0f, 0.0f };
+    MeshRendererComponent() = default;
+    MeshRendererComponent(const MeshRendererComponent& mrc)
+        : Material(mrc.Material), Submitted(false), Tiling(mrc.Tiling), Offset(mrc.Offset)
+    {}
+    MeshRendererComponent(const SimpleMaterial& material)
+        : Material(material) {}
 };
 
 struct TagComponent
@@ -68,7 +91,7 @@ struct TagComponent
     std::string Tag;
 
     TagComponent() = default;   
-    TagComponent(const TagComponent&) = default;   
+    TagComponent(const TagComponent&) = default; 
     TagComponent(const std::string& tag) 
         : Tag(tag)
     {
@@ -82,7 +105,9 @@ struct CameraComponent
     bool FixedAspectRatio = false;
 
     CameraComponent() = default;   
-    CameraComponent(const CameraComponent&) = default;   
+    CameraComponent(const CameraComponent& cc) 
+        : Camera(cc.Camera), Primary(false), FixedAspectRatio(cc.FixedAspectRatio) 
+    {}
 };
 
 struct NativeScriptComponent
@@ -119,7 +144,8 @@ struct RigidBodyComponent
 {
     RigidBody* body;
     RigidBodyComponent() = default;
-    RigidBodyComponent(const RigidBodyComponent& ) = default;
+    ~RigidBodyComponent() {}
+    RigidBodyComponent(const RigidBodyComponent& rbc) {}
 
 };
 
@@ -132,5 +158,12 @@ struct ColliderComponent
     {
         // collider = new SphereCollider;
     }
-    ColliderComponent(const ColliderComponent&) = default;
+    ColliderComponent(const ColliderComponent& cc)
+        : type(cc.type) {}
 };
+
+namespace ComponentUtils {
+
+   void SubmitMesh(MeshComponent& mesh, MeshRendererComponent& meshRenderer);
+   void UnSubmitMesh(MeshRendererComponent& meshRenderer);
+}

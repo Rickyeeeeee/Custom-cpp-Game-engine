@@ -38,12 +38,17 @@ void OpenGLShader::Bind() const
 
 void OpenGLShader::UnBind() const
 {
-    glUseProgram(m_RendererID);
+    glUseProgram(0);
 }
 
 void OpenGLShader::SetFloat(const std::string& name, const float& value) 
 {
     this->UploadUniformFloat(name, value);
+}
+
+void OpenGLShader::SetFloat2(const std::string& name, const Vector2& value)
+{
+    this->UploadUniformVector2(name, value);
 }
 
 void OpenGLShader::SetFloat3(const std::string& name, const Vector3& vec) 

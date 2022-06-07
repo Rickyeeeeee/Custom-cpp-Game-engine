@@ -1,5 +1,7 @@
 #pragma once
 #include "core/core.h"
+
+#include "core/pch.h"
 #include <string>
 
 class Texture
@@ -20,4 +22,13 @@ class Texture2D : public Texture
 public:
     static Ref<Texture2D> Create(const std::string& path);
     static Ref<Texture2D> Create(unsigned int width, unsigned int height);
+
+    virtual std::string GetPath() const = 0;
+};
+
+class CubeMapTexture : public Texture
+{
+public: 
+    static Ref<CubeMapTexture> Create(const std::vector<std::string>& paths);
+
 };
