@@ -52,6 +52,6 @@ public:
     operator entt::entity() const { return m_EntityHandle; }
     const Entity& operator=(uint32_t id) { m_EntityHandle = (entt::entity)id; return *this; } 
 private:
-    entt::entity m_EntityHandle;
+    entt::entity m_EntityHandle = entt::null;
     Scene* m_Scene;
 };

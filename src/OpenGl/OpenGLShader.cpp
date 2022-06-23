@@ -255,8 +255,8 @@ void OpenGLShader::Complie(const std::unordered_map<GLenum, std::string>& shader
         std::cout << "Linking error occur!" << std::endl;
     	return;
     }
-    for (auto id : glShaderIDs)
-       glDetachShader(program, id);
+    // for (auto id : glShaderIDs)
+    //    glDetachShader(program, id);
 
     m_RendererID = program;
 }

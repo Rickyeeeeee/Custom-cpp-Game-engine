@@ -298,3 +298,16 @@ Renderer2D::Statistics Renderer2D::GetStats()
 {
     return s_Data.Stats;
 }
+
+void Renderer2D::DrawLines(const Vector2& p1, const Vector2& p2, const Vector4& color)
+{
+    auto vertexArray = VertexArray::Create();
+    vertexArray->Bind();
+    float vertices[] = {
+        p1.x, p1.y, 
+        p2.x, p2.y
+    };
+    auto vertexBuffer = VertexBuffer::Create(vertices, 2);
+    auto indexBuffer = IndexBuffer::Create(2);
+    RenderCommand::DrawLines(vertexArray, 2);
+}

@@ -1,0 +1,206 @@
+Scene: Untitled
+Type: 1
+Entities:
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box_d_d_d_d_d
+    TransformComponent:
+      Translation: [18.2881432, -0.38671878, -0.622100592]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    MeshRendererComponent:
+      Color: [0.558823526, 0.558823526, 0.558823526]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
+      Width: [1, 1, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box_d_d_d_d
+    TransformComponent:
+      Translation: [15.2881432, -0.38671878, -0.622100592]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    MeshRendererComponent:
+      Color: [0.558823526, 0.558823526, 0.558823526]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
+      Width: [1, 1, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box_d_d_d
+    TransformComponent:
+      Translation: [12.2881432, -0.38671878, -0.622100592]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    MeshRendererComponent:
+      Color: [0.558823526, 0.558823526, 0.558823526]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
+      Width: [1, 1, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box_d_d
+    TransformComponent:
+      Translation: [9.28814316, -0.38671878, -0.62210077]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    MeshRendererComponent:
+      Color: [0.558823526, 0.558823526, 0.558823526]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
+      Width: [1, 1, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box_d_d
+    TransformComponent:
+      Translation: [6, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    MeshRendererComponent:
+      Color: [0.558823526, 0.558823526, 0.558823526]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
+      Width: [1, 1, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box_d
+    TransformComponent:
+      Translation: [3, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    MeshRendererComponent:
+      Color: [0.558823526, 0.558823526, 0.558823526]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
+      Width: [1, 1, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: DirectionalLight
+    TransformComponent:
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    LightComponent:
+      Type: 1
+      Light:
+        Ambient: 1
+        Diffuse: 1
+        Specular: 1
+        Constant: 1
+        Linear: 0.0900000036
+        Quadratic: 0.0320000015
+        Color: [1, 1, 1]
+        Direction: [0, -1, 0]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: box
+    TransformComponent:
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    MeshRendererComponent:
+      Color: [0.558823526, 0.558823526, 0.558823526]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false
+    RigidBodyComponent:
+      type: 1
+      Mass: 10
+    ColliderComponent:
+      type: 1
+      Width: [1, 1, 1]
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Empty Entity
+    TransformComponent:
+      Translation: [0, -4.03666019, 0]
+      Rotation: [0, 0, 0]
+      Scale: [20, 0.7584095, 20]
+    MeshComponent:
+      MeshSource: 1
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:/Users/ricky/Dev/coolgame/run/asset/models/cube.obj
+    MeshRendererComponent:
+      Color: [0.328431368, 0.321991533, 0.321991533]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false
+    RigidBodyComponent:
+      type: 0
+      Mass: 10
+    ColliderComponent:
+      type: 2
+      Width: 20
+      Height: 20

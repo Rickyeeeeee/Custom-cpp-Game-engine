@@ -9,6 +9,7 @@
 #include "core/OrthographicCameraController.h"
 #include "core/Editor3DCameraController.h"
 #include "core/imguiLayer.h"
+#include "core/Layer.h"
 
 #include "Renderer/Renderer.h"
 #include "Renderer/Texture.h"

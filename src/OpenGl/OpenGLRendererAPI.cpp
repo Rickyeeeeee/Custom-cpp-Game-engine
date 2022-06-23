@@ -40,3 +40,15 @@ void OpenGLRendererAPI::SetViewport(unsigned int x, unsigned int  y, unsigned in
 {
     glViewport(x, y, width, height);
 }
+
+void OpenGLRendererAPI::DrawLines(const Ref<VertexArray>& vertexArray, uint32_t count)
+{
+    glDrawElements(GL_LINES, count, GL_UNSIGNED_INT, nullptr);
+}
+
+void OpenGLRendererAPI::SetLineWidth(float width)
+{
+    if (width > 1.0f)
+        width = 1.0f;
+    glLineWidth(width);
+}

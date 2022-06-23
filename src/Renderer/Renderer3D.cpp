@@ -6,6 +6,7 @@
 #include "scene/EditorCamera.h"
 #include "Renderer/Texture.h"
 #include "core/pch.h"
+#include "physic/PhysicUtils.h"
 
 struct StaticMeshInfo
 {
@@ -39,9 +40,9 @@ struct Renderer3Dstorage
     std::vector<MeshData> StaticMashDatas; 
 
     Ref<Texture2D> WhiteTexture;
-
     Ref<Shader> simple3dShader;
     Ref<Shader> skyboxShader;
+    Ref<Shader> LineShader;
 
     int StaticBufferCount;
 
@@ -52,12 +53,21 @@ struct Renderer3Dstorage
     uint32_t StaticIndexCount;
 
     Matrix4 ViewProjection = Matrix4(1.0f);
+    
+    std::vector<Vector3> LinesVertices;
+    std::vector<uint32_t> LinesIndices;
+    Ref<VertexArray> LineVertexArray;
+    Ref<VertexBuffer> LineVertexBuffer;
+    Ref<IndexBuffer> LineIndexBuffer;
+    Vector3 DebugLineColor = { 1.0f, 1.0f, 1.0f };
+    uint32_t LineMaxNumber = 10000;
 };
 
 static Renderer3Dstorage s_Data;
 
 void Renderer3D::Init() 
 {
+    s_Data.LineShader = Shader::Create("asset/shaders/line.glsl");
     s_Data.simple3dShader = Shader::Create("asset/shaders/simple3d.glsl");
     s_Data.simple3dShader->Bind();
     s_Data.simple3dShader->SetInt("u_Texture", 0);
@@ -69,6 +79,15 @@ void Renderer3D::Init()
     s_Data.StaticMeshCount = 0;
     s_Data.StaticVertexCount = 0;
     s_Data.StaticIndexCount = 0;
+
+    s_Data.LineVertexArray = VertexArray::Create();
+    s_Data.LineVertexBuffer = VertexBuffer::Create(s_Data.LineMaxNumber * sizeof(Vector3));
+    s_Data.LineVertexBuffer->SetLayout({
+        { ShaderDataType::Float3, "a_Position" }
+    });
+    s_Data.LineVertexArray->AddVertexBuffer(s_Data.LineVertexBuffer);
+    s_Data.LineIndexBuffer = IndexBuffer::Create(s_Data.LineMaxNumber);
+    s_Data.LineVertexArray->SetIndexBuffer(s_Data.LineIndexBuffer);
 
 }
 
@@ -88,6 +107,7 @@ void Renderer3D::BeginScene(const EditorCamera& camera)
     s_Data.StaticMeshCount = 0;
     s_Data.StaticIndexCount = 0;
     s_Data.StaticVertexCount = 0;
+
 }
 
 void Renderer3D::BeginScene(const Camera& camera, const Matrix4& transform)
@@ -258,3 +278,93 @@ RenderStats Renderer3D::GetRenderStats()
     };
 }
 
+void Renderer3D::BeginLine(const Vector3& color)
+{
+    s_Data.DebugLineColor = color;
+
+    s_Data.LineShader->Bind();
+    s_Data.LineShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
+
+    s_Data.LinesVertices.clear();
+    s_Data.LinesIndices.clear();
+}
+
+void Renderer3D::EndLine()
+{
+    s_Data.LineVertexBuffer->SetData(s_Data.LinesVertices.data(), sizeof(Vector3) * s_Data.LinesVertices.size());
+    s_Data.LineIndexBuffer->SetData(s_Data.LinesIndices.data(), s_Data.LinesIndices.size());
+    s_Data.LineShader->Bind();
+    s_Data.LineShader->SetFloat4("u_Color", { s_Data.DebugLineColor, 1.0f });
+    s_Data.LineShader->SetMat4("u_Model", Matrix4(1.0f));
+    // for (auto vertex : s_Data.LinesVertices)
+    //     std::cout << vertex.x << " " << vertex.y << " " << vertex.z << std::endl;
+    // for (auto index : s_Data.LinesIndices)
+    //     std::cout << index << " ";
+    // std::cout << std::endl;
+    RenderCommand::DrawLines(s_Data.LineVertexArray, s_Data.LinesIndices.size());
+    s_Data.LineShader->UnBind();
+}
+
+void Renderer3D::DrawLine(const Vector3& p1, const Vector3& p2, const Vector3& color)
+{
+    auto index = s_Data.LinesVertices.size();
+    s_Data.LinesVertices.push_back(p1);
+    s_Data.LinesVertices.push_back(p2);
+    s_Data.LinesIndices.push_back(index);
+    s_Data.LinesIndices.push_back(index + 1);
+}
+
+void Renderer3D::DrawCubeLine(const Vector3& position, const Matrix3& rotation, const Vector3& scale)
+{
+    uint32_t index = s_Data.LinesVertices.size();
+    Vector3 vertices[8];
+    PhysicALGO::GetBoxPoints(vertices, scale, rotation, position);
+
+    for (auto i = 0; i < 8; i++)
+        s_Data.LinesVertices.push_back(vertices[i]);
+    const uint32_t BoxEdges[24] = {
+        0, 4, 1, 5, 2, 6, 3, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 2, 1, 3, 4, 6, 5, 7
+    };
+    for (auto j = 0; j < 24; j++)
+        s_Data.LinesIndices.push_back(BoxEdges[j] + index);
+}
+
+void Renderer3D::DrawSphereLine(const Vector3& position, float radius)
+{
+
+}
+
+void Renderer3D::DrawPlaneLine(const Vector3& position, const Vector3& rotation, const Vector3& scale)
+{
+    auto size = s_Data.LinesVertices.size();
+
+    int Xcount = scale.x;
+    int Ycount = scale.y;
+    for (int j = -Ycount; j <= Ycount; j++)
+        for (int i = -Xcount; i <= Xcount; i++)
+            s_Data.LinesVertices.push_back(position + Vector3{ i, 0.0f, j });
+    
+    Xcount = Xcount * 2 + 1;
+    Ycount = Ycount * 2 + 1;
+    for (auto indexY = 0; indexY < Ycount; indexY++)
+        for (auto indexX = 0; indexX < Xcount - 1; indexX++)
+        {
+            s_Data.LinesIndices.push_back(indexX + size + Xcount * indexY);
+            s_Data.LinesIndices.push_back(indexX + size + Xcount * indexY + 1);
+        }
+
+    for (auto indexX = 0; indexX < Xcount; indexX++)
+        for (auto indexY = 0; indexY < Ycount - 1; indexY++)
+        {
+            s_Data.LinesIndices.push_back(indexX + size + Xcount * indexY);
+            s_Data.LinesIndices.push_back(indexX + size + Xcount * indexY + Xcount);
+        }
+}
+
+
+void Renderer3D::SetLineWidth(float width)
+{
+    RenderCommand::SetLineWidth(width);
+}

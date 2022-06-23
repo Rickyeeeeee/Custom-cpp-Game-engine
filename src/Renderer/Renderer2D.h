@@ -23,7 +23,8 @@ public:
     static void DrawQuad(const Vector2& position, const Vector2& size, const Ref<Texture2D>& texture);
     static void DrawQuad(const Vector3& position, const Vector2& size, const Ref<Texture2D>& texture);
 
-    
+    static void DrawLines(const Vector2& p1, const Vector2& p2, const Vector4& color);
+
     struct Statistics
     {
         unsigned int DrawCalls = 0;

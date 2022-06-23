@@ -17,6 +17,15 @@ public:
         vertexArray->Bind();
         s_RendererAPI->DrawIndexed(vertexArray, indexCount);
     }
+    static inline void DrawLines(const Ref<VertexArray>& vertexArray, uint32_t indexCount = 0)
+    {
+        vertexArray->Bind();
+        s_RendererAPI->DrawLines(vertexArray, indexCount);
+    }
+    static inline void SetLineWidth(float width)
+    {
+        s_RendererAPI->SetLineWidth(width);
+    }
 private:
     static RendererAPI* s_RendererAPI;
 };

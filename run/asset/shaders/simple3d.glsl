@@ -66,7 +66,7 @@ uniform vec3 u_ViewPos;
 
 uniform sampler2D u_Texture;
 
-uniform PointLight[4] u_PointLights;  
+uniform PointLight[5] u_PointLights;  
 uniform int u_PointLightSize;
 uniform DirectionalLight u_DirLight; 
 uniform int u_HasDirectionalLight;
@@ -87,6 +87,9 @@ void main()
     vec3 result = vec3(0.0f, 0.0f, 0.0f);
     if (u_HasDirectionalLight > 0)
         result = CalcDirectionalLight(u_DirLight, norm, viewDir);
+    int pointLightSize = u_PointLightSize;
+    if (u_PointLightSize > 5)
+         pointLightSize = 5;
     for (int i = 0; i < u_PointLightSize; i++)
         result += CalcPointLight(u_PointLights[i], norm, v_FragPos, viewDir);
     // result = vec3(1.0f, 1.0f, 1.0f);

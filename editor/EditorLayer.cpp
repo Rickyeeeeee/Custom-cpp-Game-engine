@@ -113,14 +113,31 @@ void EditorLayer::OnUpdate(Timestep ts)
     }
     else
         cursorRegion = 0;
+
     RenderCommand::SetClearColor({ 0.2, 0.2, 0.2, 1.0 });
     RenderCommand::Clear();
+
     m_Framebuffer->ClearAttachment(1, -1);
 
     m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
-    
     // Renderer3D::DrawStaticMesh();
-
+    Renderer3D::BeginLine({ 1.0f, 1.0f, 1.0f });
+    // Renderer3D::DrawCubeLine();
+    Renderer3D::DrawSphereLine();
+    Renderer3D::DrawPlaneLine(Vector3{ 0.0f }, Vector3{ 0.0f }, Vector3{ 5.0f, 5.0f, 0.0f });
+    auto selectdEntity = m_Panel.GetSelectedEntity();
+    if (selectdEntity && selectdEntity.HasComponent<ColliderComponent>())
+    {
+        auto& cc = selectdEntity.GetComponent<ColliderComponent>();
+        switch (cc.type)
+        {
+        case BOX:
+            BoxCollider* bc = (BoxCollider*)cc.collider;
+            Renderer3D::DrawCubeLine(bc->GetCenter(), bc->GetRotation(), bc->Width * 1.01f);
+            break;
+        }
+    }
+    Renderer3D::EndLine();
     m_Framebuffer->Unbind();
 }
 
@@ -216,6 +233,12 @@ void EditorLayer::OnImGuiRender()
     ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
     ImGui::End();
 
+    ImGui::Begin("lineWidth");
+    static float LineWidth = 1.0f;
+    ImGui::DragFloat("width", &LineWidth, 0.1f, 0.0f, 1.0f);
+    Renderer3D::SetLineWidth(LineWidth);
+    ImGui::End();
+
     ImGui::Begin("Renderer3D Profile: ");
     RenderStats stats3D = Renderer3D::GetRenderStats();
     ImGui::Text("Draw call: %d", stats3D.DrawCallcount);
@@ -300,6 +323,7 @@ void EditorLayer::OnImGuiRender()
 ImGui::End();
     // ImGui::ShowDemoWindow();
 }
+
 
 void EditorLayer::OnEvent(Event& event)
 {

@@ -48,7 +48,7 @@ struct CollisionPoint
 
 struct ColliderTransform
 {
-    Vector3 position;
+    Vector3 position{ 0.0f, 0.0f, 0.0f };
     glm::quat rotation;
 };
 
@@ -74,10 +74,18 @@ struct Collider
 
     virtual operator AABB() const = 0;
 
+    
+
     Vector3 GetCenter() const
     {
-        Vector3 rc = !m_RigidBody ? m_RigidBody->GetPosition() : Vector3{0.0f};
+        Vector3 rc = m_RigidBody ? m_RigidBody->GetPosition() : Vector3{ 0.0f };
         return m_Transform.position + rc;
+    }
+
+    Matrix3 GetRotation() const
+    {
+        glm::quat rr = m_RigidBody ? m_RigidBody->q : glm::quat{};
+        return glm::toMat3(m_Transform.rotation) * glm::toMat3(rr);
     }
 
     ColliderTransform m_Transform;

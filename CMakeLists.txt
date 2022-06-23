@@ -21,6 +21,7 @@ include_directories(
     PUBLIC external
     PUBLIC external/assimp/include
     PUBLIC external/ImGuizmo
+    PUBLIC src
 )
  
 # add_subdirectory(external/yaml-cpp)
@@ -31,6 +32,7 @@ add_subdirectory(external/assimp)
 add_subdirectory(src) 
 add_subdirectory(sandbox)
 add_subdirectory(editor)
+add_subdirectory(examples)
 
 
 target_include_directories(
