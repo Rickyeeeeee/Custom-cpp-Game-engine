@@ -15,4 +15,8 @@ public:
     virtual void DrawLines(const Ref<VertexArray>& vertexArray, uint32_t count = 0) override;
     virtual void SetLineWidth(float width) override;
     virtual void EnableDepthTest(bool value) override;
+    virtual void EnableWritingDepth() override;
+    virtual void DisableWritingDepth() override;
+    virtual void EnableFaceCulling() override;
+    virtual void DisableFaceCulling() override;
 };

@@ -41,8 +41,6 @@ struct Renderer3Dstorage
 
     Ref<Texture2D> WhiteTexture;
     Ref<Shader> simple3dShader;
-    Ref<Shader> skyboxShader;
-    Ref<Shader> LineShader;
 
     int StaticBufferCount;
 
@@ -52,34 +50,69 @@ struct Renderer3Dstorage
     uint32_t StaticVertexCount;
     uint32_t StaticIndexCount;
 
-    Matrix4 LightSpaceMatrix;
     Matrix4 ViewProjection = Matrix4(1.0f);
 
     Ref<Shader> DepthMapShader;
     Ref<Framebuffer> DepthMap;
+    Matrix4 LightSpaceMatrix;
 
     std::vector<Vector3> LinesVertices;
     std::vector<uint32_t> LinesIndices;
-
+    Ref<Shader> LineShader;
     Ref<VertexArray> LineVertexArray;
     Ref<VertexBuffer> LineVertexBuffer;
     Ref<IndexBuffer> LineIndexBuffer;
-
     Vector3 DebugLineColor = { 1.0f, 1.0f, 1.0f };
     uint32_t LineMaxNumber = 10000;
+
+    Ref<CubeMapTexture> CubeTexture;
+    Ref<Shader> skyboxShader;
+    Ref<VertexArray> SkyboxVertexArray;
+    Matrix4 skyboxViewProjection;
 };
 
 static Renderer3Dstorage s_Data;
 
 void Renderer3D::Init() 
 {
-    
+    s_Data.skyboxShader = Shader::Create("asset/shaders/skybox.glsl");
+    s_Data.skyboxShader->SetInt("u_Skybox", 0);
     s_Data.LineShader = Shader::Create("asset/shaders/line.glsl");
     s_Data.DepthMapShader = Shader::Create("asset/shaders/depthMap.glsl");
     s_Data.simple3dShader = Shader::Create("asset/shaders/simple3d.glsl");
     s_Data.simple3dShader->Bind();
     s_Data.simple3dShader->SetInt("u_Texture", 0);
     s_Data.simple3dShader->SetInt("u_DepthMap", 1);
+
+    s_Data.CubeTexture = CubeMapTexture::Create({
+        "asset/picture/skybox/right.jpg",
+        "asset/picture/skybox/left.jpg",
+        "asset/picture/skybox/top.jpg",
+        "asset/picture/skybox/bottom.jpg",
+        "asset/picture/skybox/front.jpg",
+        "asset/picture/skybox/back.jpg",
+    });
+
+    s_Data.SkyboxVertexArray = VertexArray::Create();
+    auto skyboxVBO = VertexBuffer::Create(8 * sizeof(Vector3));
+    Vector3 vertices[8];
+    PhysicALGO::GetBoxPoints(vertices, Vector3{ 1.0f });
+    skyboxVBO->SetLayout({
+        { ShaderDataType::Float3, "a_Position"},
+    });
+    skyboxVBO->SetData(vertices, 8 * sizeof(Vector3));
+    s_Data.SkyboxVertexArray->AddVertexBuffer(skyboxVBO);
+    auto skyboxIBO = IndexBuffer::Create(36);
+    uint32_t indices[36] = {
+        6, 4, 0, 0, 2, 6,
+        0, 1, 2, 2, 1, 3,
+        0, 4, 5, 0, 5, 1,
+        1, 5, 7, 1, 7, 3,
+        2, 3, 7, 2, 7, 6,
+        6, 5, 4, 6, 7, 5
+    };
+    skyboxIBO->SetData(indices, 36);
+    s_Data.SkyboxVertexArray->SetIndexBuffer(skyboxIBO);
 
     s_Data.WhiteTexture = Texture2D::Create(1, 1);
     unsigned int white_texture_data = 0xffffffff;
@@ -111,6 +144,10 @@ void Renderer3D::BeginScene(const EditorCamera& camera)
     s_Data.simple3dShader->Bind();  
     s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
 
+    s_Data.skyboxViewProjection = camera.GetProjection() * Matrix4(Matrix3(camera.GetView()));
+    s_Data.skyboxShader->Bind();
+    s_Data.skyboxShader->SetMat4("u_ViewProjection", s_Data.skyboxViewProjection);
+
     s_Data.RenderQueue.clear();
 
     s_Data.StaticMeshCount = 0;
@@ -125,6 +162,10 @@ void Renderer3D::BeginScene(const Camera& camera, const Matrix4& transform)
     s_Data.simple3dShader->Bind();  
     s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
 
+    s_Data.skyboxViewProjection = camera.GetProjection() * Matrix4(Matrix3(glm::inverse(transform)));
+    s_Data.skyboxShader->Bind();
+    s_Data.skyboxShader->SetMat4("u_ViewProjection", s_Data.skyboxViewProjection);
+
     s_Data.RenderQueue.clear();
     s_Data.StaticMeshCount = 0;
     s_Data.StaticIndexCount = 0;
@@ -136,6 +177,10 @@ void Renderer3D::BeginScene(const Perspective3DCamera& camera)
     s_Data.simple3dShader->Bind();  
     s_Data.ViewProjection = camera.GetViewProjectionMatrix();
     s_Data.simple3dShader->SetMat4("u_ViewProjection", s_Data.ViewProjection);
+
+    s_Data.skyboxViewProjection = camera.GetProjectionMatrix() * Matrix4(Matrix3(camera.GetViewMatrix()));
+    s_Data.skyboxShader->Bind();
+    s_Data.skyboxShader->SetMat4("u_ViewProjection", s_Data.skyboxViewProjection);
 
     s_Data.RenderQueue.clear();
     s_Data.StaticMeshCount = 0;
@@ -150,6 +195,15 @@ void Renderer3D::UploadDepthMap(Ref<Framebuffer> depthMap)
 
 void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>& pointLights, const Light* dirLight) 
 {
+    RenderCommand::DisableWritingDepth();
+    RenderCommand::DisableFaceCulling();
+    s_Data.skyboxShader->Bind();
+    s_Data.CubeTexture->Bind(0);
+    RenderCommand::DrawIndexed(s_Data.SkyboxVertexArray, 36);
+    
+    RenderCommand::EnableFaceCulling();
+    RenderCommand::EnableWritingDepth();
+
     s_Data.simple3dShader->Bind();
     s_Data.simple3dShader->SetFloat3("u_ViewPos", viewPosition);
     bool HaveDirectionalLight = dirLight != nullptr;

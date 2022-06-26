@@ -71,3 +71,24 @@ void OpenGLRendererAPI::EnableDepthTest(bool value)
     else
         glDisable(GL_DEPTH_TEST);
 }
+
+void OpenGLRendererAPI::EnableWritingDepth()
+{
+    glDepthMask(GL_TRUE);
+}
+
+void OpenGLRendererAPI::DisableWritingDepth()
+{
+    glDepthMask(GL_FALSE);
+    
+}
+
+void OpenGLRendererAPI::EnableFaceCulling()
+{
+    glEnable(GL_CULL_FACE);
+}
+
+void OpenGLRendererAPI::DisableFaceCulling()
+{
+    glDisable(GL_CULL_FACE);
+}

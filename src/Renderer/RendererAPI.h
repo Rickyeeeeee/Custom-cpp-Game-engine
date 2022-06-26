@@ -22,6 +22,10 @@ public:
     virtual void DrawLines(const Ref<VertexArray>& vertexArray, unsigned int indexCount = 0) = 0;
     virtual void SetLineWidth(float width) = 0;
     virtual void EnableDepthTest(bool value) = 0;
+    virtual void EnableWritingDepth() = 0;
+    virtual void DisableWritingDepth() = 0;
+    virtual void EnableFaceCulling() = 0;
+    virtual void DisableFaceCulling() = 0;
     inline static API GetAPI() { return s_API; }
 
 private:

@@ -21,6 +21,17 @@ namespace PhysicALGO {
         return cp;
     }
 
+    /*
+           6
+        /      \
+    4               2
+    |     (7)       |
+    |        0      |
+    5        |      3
+             |
+             1
+    */
+
     void GetBoxPoints(Vector3 points[], const Vector3& widths, const Matrix3& transform, const Vector3& center)
     {
         Vector3 axis[3] = {

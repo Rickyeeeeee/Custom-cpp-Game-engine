@@ -32,6 +32,22 @@ public:
     {
         s_RendererAPI->EnableDepthTest(value);
     }
+    static inline void EnableWritingDepth()
+    {
+        s_RendererAPI->EnableWritingDepth();
+    }
+    static inline void DisableWritingDepth()
+    {
+        s_RendererAPI->DisableWritingDepth();
+    }
+    static inline void EnableFaceCulling()
+    {
+        s_RendererAPI->EnableFaceCulling();
+    }
+    static inline void DisableFaceCulling()
+    {
+        s_RendererAPI->DisableFaceCulling();
+    }
 private:
     static RendererAPI* s_RendererAPI;
 };
