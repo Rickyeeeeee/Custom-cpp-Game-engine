@@ -4,10 +4,12 @@
 #include "core/Timestep.h"
 #include "core/core.h"
 #include "core/Editor3DCameraController.h"
-
+#include "Renderer/FrameBuffer.h"
+#include "Renderer/Environment.h"
 #include "scene/EditorCamera.h"
 #include "physic/Solver.h"
 #include "physic/PhysicWorld.h"
+
 class Entity;
 
 enum  SceneType : int
@@ -28,13 +30,14 @@ public:
 
     virtual void OnUpdateEditor(Timestep ts, const EditorCamera& camera) = 0;
     virtual void OnUpdateRuntime(Timestep ts) = 0;
+    virtual void OnRenderEditor(Timestep ts, const EditorCamera& camera, Ref<Framebuffer> viewport) = 0;
 
     void OnViewportResize(unsigned int width, unsigned int height);
     Entity GetPrimaryCameraEntity();
-private:
+// private:
     template<typename T>
     void OnComponentAdded(Entity entity, T& component);
-protected:
+// protected:
     entt::registry m_Registry;
     unsigned int m_ViewportWidth = 1;
     unsigned int m_ViewportHeight = 1;
@@ -53,7 +56,10 @@ public:
     ~Scene2D();
     virtual void OnUpdateEditor(Timestep ts, const EditorCamera& camera) override;
     virtual void OnUpdateRuntime(Timestep ts) override;
+    virtual void OnRenderEditor(Timestep ts, const EditorCamera& camera, Ref<Framebuffer> viewport) override {}
 };
+
+struct LightComponent;
 
 class Scene3D : public Scene
 {
@@ -66,8 +72,10 @@ public:
     ~Scene3D();
     virtual void OnUpdateEditor(Timestep ts, const EditorCamera& camera) override;
     virtual void OnUpdateRuntime(Timestep ts) override;
+    virtual void OnRenderEditor(Timestep ts, const EditorCamera& camera, Ref<Framebuffer> viewport) override;
+    LightComponent* GetLight();
 public:
+    LightComponent* light = nullptr;
     PhysicWorld m_PhysicWorld;
-
     friend class Scene;
 };

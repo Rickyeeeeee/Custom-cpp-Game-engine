@@ -68,7 +68,8 @@
     "hash_set": "cpp",
     "forward_list": "cpp",
     "unordered_set": "cpp",
-    "*.idl": "cpp"
+    "*.idl": "cpp",
+    "cassert": "cpp"
   },
   "C_Cpp.errorSquiggles": "Enabled"
 }

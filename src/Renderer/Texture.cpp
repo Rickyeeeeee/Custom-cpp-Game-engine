@@ -37,3 +37,13 @@ Ref<CubeMapTexture> CubeMapTexture::Create(const std::vector<std::string>& paths
 
     return nullptr;
 }
+
+Ref<CubeMapTexture> CubeMapTexture::Create(const std::string& top, 
+                                      const std::string& bottom,
+                                      const std::string& front,
+                                      const std::string& left,
+                                      const std::string& right,
+                                      const std::string& back)
+{
+    return nullptr;
+}

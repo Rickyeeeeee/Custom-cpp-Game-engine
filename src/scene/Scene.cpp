@@ -3,6 +3,8 @@
 #include "Components.h"
 #include "Renderer/Renderer2D.h"
 #include "Renderer/Renderer3D.h"
+#include "Renderer/RenderCommand.h"
+#include "Renderer/FrameBuffer.h"
 #include "scene/ScriptableEntity.h"
 Scene::Scene(SceneType type)
     : m_SceneType(type)
@@ -282,10 +284,15 @@ void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
             }
         }
     }
+}
 
+void Scene3D::OnRenderEditor(Timestep ts, const EditorCamera& camera, Ref<Framebuffer> viewport)
+{
     std::vector<Light> pointLights;
     Vector3 lightPosition;
     Light* dirLight = nullptr;
+    LightComponent* DirLight = nullptr;
+    Matrix4 ShadowViewMatrix;
     {
         auto view = m_Registry.view<TransformComponent, LightComponent>();
         for (auto entity : view)
@@ -298,14 +305,52 @@ void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
             }
             else if (light.Type == LightType::DIRECTIONAL)
             {
-                light.Light.direction = transform.GetTransform() * Vector4(0.0f, -1.0f, 0.0f, 1.0f);
+                light.Light.direction = transform.GetRotationMatrix() * Vector4(0.0f, -1.0f, 0.0f, 1.0f);
+                ShadowViewMatrix = glm::inverse(transform.GetTransform());
                 dirLight = &light.Light;
+                DirLight = &light;
             }
         }
     }
+    light = DirLight;
     
-    Renderer3D::BeginScene(camera);
+    if (dirLight && DirLight->hasShadow())
+    {
+        Renderer3D::DepthMapSpecification spec = {
+            dirLight->position,
+            dirLight->direction,
+            ShadowViewMatrix,
+            -30.0f, 30.0f, -30.0f, 30.0f,
+            1.0f, 100.0f
+        };
 
+        DirLight->BindDepthMap();
+        RenderCommand::Clear();
+        Renderer3D::BeginOrthographicDepthMap(spec);
+        auto group = m_Registry.group<TransformComponent>(entt::get<MeshRendererComponent>);
+        for (auto entity : group)
+        {
+            auto [transform, meshRenderer] = group.get<TransformComponent, MeshRendererComponent>(entity);
+            if (meshRenderer.Submitted)
+            {
+                if (meshRenderer.Material.HasTexture)
+                    Renderer3D::DrawStaticMesh(meshRenderer.Renderer3Did, transform.GetTransform(), 
+                        meshRenderer.Material.AmbientTexture, meshRenderer.Material.Ambient, (int)entity, 
+                        meshRenderer.Tiling, meshRenderer.Offset);
+                else
+                    Renderer3D::DrawStaticMesh(meshRenderer.Renderer3Did, transform.GetTransform(), 
+                        meshRenderer.Material.Ambient, (int)entity);
+            }
+        }
+        Renderer3D::EndOrthographicDepthMap();
+
+        DirLight->UnBindDepthMap();
+    }
+
+
+    RenderCommand::EnableDepthTest();
+    viewport->Bind();
+    Renderer3D::BeginScene(camera);
     auto group = m_Registry.group<TransformComponent>(entt::get<MeshRendererComponent>);
     for (auto entity : group)
     {
@@ -321,8 +366,10 @@ void Scene3D::OnUpdateEditor(Timestep ts, const EditorCamera& camera)
                     meshRenderer.Material.Ambient, (int)entity);
         }
     }
+    Renderer3D::UploadDepthMap(light->DepthMap);
     // Renderer3D::DrawLine( { 10.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f } );
     Renderer3D::EndScene(camera.GetPosition(), pointLights, dirLight);
+    viewport->Unbind();
 }
 
 void Scene3D::OnUpdateRuntime(Timestep ts)
@@ -357,6 +404,7 @@ void Scene3D::OnUpdateRuntime(Timestep ts)
             }
         }
     }
+
     std::vector<Light> pointLights;
     Vector3 lightPosition;
     Light* dirLight = nullptr;
@@ -377,6 +425,7 @@ void Scene3D::OnUpdateRuntime(Timestep ts)
             }
         }
     }
+
     if (mainCamera)
     {
         Renderer3D::BeginScene(*mainCamera, cameraTransform);
@@ -389,4 +438,9 @@ void Scene3D::OnUpdateRuntime(Timestep ts)
         }
         Renderer3D::EndScene(cameraPosition, pointLights, dirLight);
     }
+}
+
+LightComponent* Scene3D::GetLight()
+{
+    return light;
 }

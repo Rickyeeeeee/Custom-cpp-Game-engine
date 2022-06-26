@@ -24,6 +24,11 @@ private:
 private:
     Ref<Texture2D> m_Texture;
     Ref<Framebuffer> m_Framebuffer;
+
+    Ref<Framebuffer> m_DebugViewport;
+    Ref<Shader> m_DebugShader;
+    Ref<VertexArray> m_QuadVertexArray;
+
     Ref<Scene> m_ActiveScene;
     Ref<CubeMapTexture> m_CubeMapTexture;
     std::string m_ActiveSceneName;  

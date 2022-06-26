@@ -248,6 +248,9 @@ void SceneHierarchyPanel::DrawComponents(Entity entity)
             {
                 ImGui::DragFloat("ambient", &lc.Light.ambient, 0.01f, 0.0f, 1.0f);
                 ImGui::ColorEdit3("Color", glm::value_ptr(lc.Light.color));
+                ImGui::Checkbox("hasShadow", &lc.HasShadow);
+                if (lc.hasShadow() && !lc.DepthMap)
+                    lc.CreateShadow();
             }
 
             ImGui::TreePop();

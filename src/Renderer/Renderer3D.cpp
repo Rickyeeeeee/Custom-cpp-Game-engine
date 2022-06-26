@@ -52,13 +52,19 @@ struct Renderer3Dstorage
     uint32_t StaticVertexCount;
     uint32_t StaticIndexCount;
 
+    Matrix4 LightSpaceMatrix;
     Matrix4 ViewProjection = Matrix4(1.0f);
-    
+
+    Ref<Shader> DepthMapShader;
+    Ref<Framebuffer> DepthMap;
+
     std::vector<Vector3> LinesVertices;
     std::vector<uint32_t> LinesIndices;
+
     Ref<VertexArray> LineVertexArray;
     Ref<VertexBuffer> LineVertexBuffer;
     Ref<IndexBuffer> LineIndexBuffer;
+
     Vector3 DebugLineColor = { 1.0f, 1.0f, 1.0f };
     uint32_t LineMaxNumber = 10000;
 };
@@ -67,10 +73,13 @@ static Renderer3Dstorage s_Data;
 
 void Renderer3D::Init() 
 {
+    
     s_Data.LineShader = Shader::Create("asset/shaders/line.glsl");
+    s_Data.DepthMapShader = Shader::Create("asset/shaders/depthMap.glsl");
     s_Data.simple3dShader = Shader::Create("asset/shaders/simple3d.glsl");
     s_Data.simple3dShader->Bind();
     s_Data.simple3dShader->SetInt("u_Texture", 0);
+    s_Data.simple3dShader->SetInt("u_DepthMap", 1);
 
     s_Data.WhiteTexture = Texture2D::Create(1, 1);
     unsigned int white_texture_data = 0xffffffff;
@@ -134,11 +143,20 @@ void Renderer3D::BeginScene(const Perspective3DCamera& camera)
     s_Data.StaticVertexCount = 0;
 }
 
+void Renderer3D::UploadDepthMap(Ref<Framebuffer> depthMap)
+{
+    s_Data.DepthMap = depthMap;    
+}
+
 void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>& pointLights, const Light* dirLight) 
 {
     s_Data.simple3dShader->Bind();
     s_Data.simple3dShader->SetFloat3("u_ViewPos", viewPosition);
     bool HaveDirectionalLight = dirLight != nullptr;
+    if (s_Data.DepthMap)
+        s_Data.DepthMap->BindDepthAttachment(1);
+    else
+        s_Data.WhiteTexture->Bind(1);
     s_Data.simple3dShader->SetInt("u_HasDirectionalLight", HaveDirectionalLight);
     if (HaveDirectionalLight)
     {
@@ -147,6 +165,8 @@ void Renderer3D::EndScene(const Vector3& viewPosition, const std::vector<Light>&
         s_Data.simple3dShader->SetFloat("u_DirLight.specular", dirLight->specular);
         s_Data.simple3dShader->SetFloat3("u_DirLight.direction", dirLight->direction);
         s_Data.simple3dShader->SetFloat3("u_DirLight.color", dirLight->color);
+
+        s_Data.simple3dShader->SetMat4("u_LightSpaceMatrix", s_Data.LightSpaceMatrix);
     }
     s_Data.simple3dShader->SetInt("u_PointLightSize", pointLights.size());
     for (int i = 0; i < pointLights.size(); i++)
@@ -258,6 +278,28 @@ void Renderer3D::Flush()
 
 }
 
+void Renderer3D::BeginOrthographicDepthMap(const DepthMapSpecification& spec)
+{
+    auto LightMatrix = glm::ortho(spec.Left, spec.Right, spec.Bottom, spec.Top, spec.NearPlane, spec.FarPlane)
+                        // * spec.ViewMatrix;
+                     * glm::lookAt(spec.Position, spec.Direction + spec.Position, { 0.0f, 1.0f, 0.0f });
+    s_Data.LightSpaceMatrix = LightMatrix;
+    s_Data.DepthMapShader->Bind();
+    s_Data.DepthMapShader->SetMat4("u_LightMatrix", LightMatrix);
+}
+
+void Renderer3D::EndOrthographicDepthMap()
+{
+
+    for (const auto& renderObject : s_Data.RenderQueue)
+    {
+        s_Data.DepthMapShader->SetMat4("u_Model", renderObject.transform);
+        RenderCommand::DrawIndexed(s_Data.StaticMashDatas[renderObject.MeshID].StaticVertexArray, 
+            s_Data.StaticMashDatas[renderObject.MeshID].StaticIndexBuffer->GetCount());
+    }
+}
+
+
 unsigned int Renderer3D::GetDrawcall() 
 {
     return s_Data.StaticMeshCount;
@@ -336,7 +378,7 @@ void Renderer3D::DrawSphereLine(const Vector3& position, float radius)
 
 }
 
-void Renderer3D::DrawPlaneLine(const Vector3& position, const Vector3& rotation, const Vector3& scale)
+void Renderer3D::DrawPlaneLine(const Vector3& position, const Matrix3& rotation, const Vector3& scale)
 {
     auto size = s_Data.LinesVertices.size();
 
@@ -344,7 +386,7 @@ void Renderer3D::DrawPlaneLine(const Vector3& position, const Vector3& rotation,
     int Ycount = scale.y;
     for (int j = -Ycount; j <= Ycount; j++)
         for (int i = -Xcount; i <= Xcount; i++)
-            s_Data.LinesVertices.push_back(position + Vector3{ i, 0.0f, j });
+            s_Data.LinesVertices.push_back(position + rotation * Vector3{ i, 0.0f, j });
     
     Xcount = Xcount * 2 + 1;
     Ycount = Ycount * 2 + 1;

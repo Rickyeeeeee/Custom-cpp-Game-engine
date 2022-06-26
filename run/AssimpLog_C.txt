@@ -1,0 +1,649 @@
+Debug, T23516: ScenePreprocessor: Adding default material 'DefaultMaterial'
+Debug, T23516: SortByPTypeProcess begin
+Info,  T23516: Points: 5, Lines: 6, Triangles: 5, Polygons: 5 (Meshes, X = removed)
+Debug, T23516: SortByPTypeProcess finished
+Debug, T23516: ScenePreprocessor: Dummy rotation track has been generated
+Debug, T23516: ScenePreprocessor: Dummy position track has been generated
+Debug, T23516: ScenePreprocessor: Setting animation duration
+Debug, T23516: PretransformVerticesProcess begin
+Debug, T23516: PretransformVerticesProcess finished
+Info,  T23516: Removed 31 nodes and 0 animation channels (11 output nodes)
+Info,  T23516: Kept 0 lights and 0 cameras.
+Info,  T23516: Moved 25 meshes to WCS (number of output meshes: 10)
+Debug, T23516: PretransformVerticesProcess begin
+Info,  T23516: PretransformVertices: Copying mesh due to mismatching transforms
+Debug, T23516: PretransformVerticesProcess finished
+Info,  T23516: Removed 31 nodes and 0 animation channels (31 output nodes)
+Info,  T23516: Kept 0 lights and 0 cameras.
+Info,  T23516: Moved 25 meshes to WCS (number of output meshes: 49)
+Info,  T23516: Removed 5500 weights. Input bones: 30. Output bones: 8
+Error, T23516: FindInvalidDataProcess fails on mesh uvcoords: INF/NAN was found in a vector component
+Error, T23516: FindInvalidDataProcess fails on mesh normals: Found zero-length vector
+Error, T23516: FindInvalidDataProcess fails on mesh bitangents: All vectors are identical
+Warn,  T23516: Found 300 degenerated primitives
+Warn,  T23516: Found 400 degenerated primitives
+Debug, T23516: FindDegeneratesProcess begin
+Debug, T23516: FindDegeneratesProcess removed a mesh full of degenerated primitives
+Debug, T23516: FindDegeneratesProcess finished
+Info,  T23516: Mesh exceeds the triangle limit. It will be split ...
+Debug, T23516: RemoveVCProcess begin
+Debug, T23516: Setting AI_SCENE_FLAGS_INCOMPLETE flag
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: RemoveVCProcess begin
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: RemoveVCProcess begin
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: RemoveVCProcess begin
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: RemoveVCProcess begin
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: RemoveVCProcess begin
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: RemoveVCProcess begin
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: RemoveVCProcess begin
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: RemoveVCProcess begin
+Debug, T23516: Setting AI_SCENE_FLAGS_INCOMPLETE flag
+Info,  T23516: RemoveVCProcess finished. Data structure cleanup has been done.
+Debug, T23516: Mesh 0 (unnamed) | Verts in: 900 out: 300 | ~66.6667%
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/FBX/huesitos.fbx
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Autodesk FBX Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/FBX\'
+Debug, T23516: Reading FBX file
+Debug, T23516: Tokenizing binary FBX file
+Debug, T23516: FBX version: 7400
+Debug, T23516: Parsing FBX tokens
+Debug, T23516: Creating FBX Document
+Debug, T23516: FBX Version: 7400
+Debug, T23516: created new bone Bone. Deformer: Model::Bone
+Debug, T23516: bone research: Indices size: 106
+Debug, T23516: created new bone Bone.001. Deformer: Model::Bone.001
+Debug, T23516: bone research: Indices size: 82
+Debug, T23516: created new bone Bone.002. Deformer: Model::Bone.002
+Debug, T23516: bone research: Indices size: 100
+Debug, T23516: created new bone Bone.004. Deformer: Model::Bone.004
+Debug, T23516: bone research: Indices size: 52
+Debug, T23516: created new bone Bone.005. Deformer: Model::Bone.005
+Debug, T23516: bone research: Indices size: 0
+Debug, T23516: created new bone Bone.006. Deformer: Model::Bone.006
+Debug, T23516: bone research: Indices size: 44
+Debug, T23516: created new bone Bone.003. Deformer: Model::Bone.003
+Debug, T23516: bone research: Indices size: 90
+Debug, T23516: created new bone Bone.007. Deformer: Model::Bone.007
+Debug, T23516: bone research: Indices size: 98
+Debug, T23516: created new bone Bone.008. Deformer: Model::Bone.008
+Debug, T23516: bone research: Indices size: 72
+Debug, T23516: UpdateImporterScale scale set: 0.01
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Entering post processing pipeline
+Info,  T23516: Removed node from stack: Bone
+Debug, T23516: Successfully added bone[Bone] to stack and bone node is: Bone
+Info,  T23516: Removed node from stack: Bone.001
+Debug, T23516: Successfully added bone[Bone.001] to stack and bone node is: Bone.001
+Info,  T23516: Removed node from stack: Bone.002
+Debug, T23516: Successfully added bone[Bone.002] to stack and bone node is: Bone.002
+Info,  T23516: Removed node from stack: Bone.004
+Debug, T23516: Successfully added bone[Bone.004] to stack and bone node is: Bone.004
+Info,  T23516: Removed node from stack: Bone.005
+Debug, T23516: Successfully added bone[Bone.005] to stack and bone node is: Bone.005
+Info,  T23516: Removed node from stack: Bone.006
+Debug, T23516: Successfully added bone[Bone.006] to stack and bone node is: Bone.006
+Info,  T23516: Removed node from stack: Bone.003
+Debug, T23516: Successfully added bone[Bone.003] to stack and bone node is: Bone.003
+Info,  T23516: Removed node from stack: Bone.007
+Debug, T23516: Successfully added bone[Bone.007] to stack and bone node is: Bone.007
+Info,  T23516: Removed node from stack: Bone.008
+Debug, T23516: Successfully added bone[Bone.008] to stack and bone node is: Bone.008
+Debug, T23516: Bone stack size: 9
+Debug, T23516: active node lookup: Bone.005
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Debug, T23516: active node lookup: Bone.006
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Debug, T23516: active node lookup: Bone.007
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Debug, T23516: active node lookup: Bone.003
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Debug, T23516: active node lookup: Bone
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Debug, T23516: active node lookup: Bone.001
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Debug, T23516: active node lookup: Bone.004
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Debug, T23516: active node lookup: Bone.002
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Debug, T23516: active node lookup: Bone.008
+Debug, T23516: GetArmatureRoot() Found valid armature: Armature
+Info,  T23516: Leaving post processing pipeline
+Debug, T23516: RemoveVCProcess begin
+Debug, T23516: Setting AI_SCENE_FLAGS_INCOMPLETE flag
+Debug, T23516: RemoveVCProcess finished. Nothing to be done ...
+Debug, T23516: RemoveRedundantMatsProcess begin
+Info,  T23516: RemoveRedundantMatsProcess finished. Removed 2 redundant and 0 unused materials.
+Debug, T23516: RemoveRedundantMatsProcess begin
+Debug, T23516: Found positive match in exclusion list: 'Unique Mat2'
+Debug, T23516: Found positive match in exclusion list: 'Complex material name'
+Info,  T23516: RemoveRedundantMatsProcess finished. Removed 1 redundant and 0 unused materials.
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/RAW/Wuson.raw
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Raw Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/RAW\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/unnamed_bones.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/unnamed_bodyparts.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/duplicate_bodyparts.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/duplicate_submodels.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/unnamed_sequences.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/duplicate_sequences.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/unnamed_sequence_groups/unnamed_sequence_groups.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/unnamed_sequence_groups\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/duplicate_sequence_groups/duplicate_sequence_groups.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/duplicate_sequence_groups\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/chrome_sphere.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/chrome_sphere.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/blend_additive.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/alpha_test.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/sequence_transitions.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/sequence_transitions.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/man.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)/manT.mdl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Debug, T23516: (Deleting previous scene)
+Info,  T23516: Found a matching importer for this file format: Quake Mesh / 3D GameStudio Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MDL/MDL (HL1)\'
+Debug, T23516: MDL subtype: Half-Life 1/Goldsrc Engine, magic word is IDST/IDSQ
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD5/invalid/empty.md5mesh
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Error, T23516: Unable to open file "C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD5/invalid/empty.md5mesh".
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD5/SimpleCube.md5mesh
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Doom 3 / MD5 Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD5\'
+Debug, T23516: MD5Parser begin
+Info,  T23516: commandline "mesh models/code/code.ma -dest models/code/code.md5mesh -game blackrose -game sw"
+Debug, T23516: MD5Parser end. Parsed 4 sections
+Debug, T23516: MD5MeshParser begin
+Debug, T23516: MD5MeshParser end
+Warn,  T23516: Failed to read MD5ANIM file: C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD5/SimpleCube.md5anim
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD5/BoarMan.md5mesh
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Doom 3 / MD5 Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD5\'
+Debug, T23516: MD5Parser begin
+Info,  T23516: commandline ""
+Debug, T23516: MD5Parser end. Parsed 17 sections
+Debug, T23516: MD5MeshParser begin
+Debug, T23516: MD5MeshParser end
+Warn,  T23516: Failed to read MD5ANIM file: C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD5/BoarMan.md5anim
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD5/Bob.md5mesh
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Doom 3 / MD5 Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD5\'
+Debug, T23516: MD5Parser begin
+Info,  T23516: commandline ""
+Debug, T23516: MD5Parser end. Parsed 9 sections
+Debug, T23516: MD5MeshParser begin
+Debug, T23516: MD5MeshParser end
+Debug, T23516: MD5Parser begin
+Info,  T23516: commandline ""
+Debug, T23516: MD5Parser end. Parsed 147 sections
+Debug, T23516: MD5AnimParser begin
+Debug, T23516: MD5AnimParser end
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Debug, T23516: ScenePreprocessor: Dummy scaling track has been generated
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD2/faerie.md2
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake II Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD2\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD2/sydney.md2
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake II Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/MD2\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD2/dolphin.md2
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake II Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD2\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD2/flag.md2
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake II Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD2\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD2/horse.md2
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake II Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/MD2\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL/BCN_Epileptic.zgl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: XGL Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL/cubes_with_alpha.zgl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: XGL Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL/sample_official.xgl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: XGL Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL/sample_official_asxml.xml
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a possible importer: Irrlicht Mesh Reader; trying signature-based detection
+Info,  T23516: Found a possible importer: Irrlicht Scene Reader; trying signature-based detection
+Info,  T23516: Found a possible importer: Collada Importer; trying signature-based detection
+Info,  T23516: File extension not known, trying signature-based detection
+Debug, T23516: Found positive match for header keyword: <world>
+Info,  T23516: Found a matching importer for this file format: XGL Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL/sphere_with_mat_gloss_10pc.zgl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: XGL Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL/Spider_ascii.zgl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: XGL Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL/Wuson.zgl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: XGL Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL/wuson_dxf.zgl
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: XGL Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/XGL\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/NFF/NFF/ManyEarthsNotJustOne.nff
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Neutral File Format Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/NFF/NFF\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/OFF/Cube.off
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: OFF Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/OFF\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/PK3/SGDTT3.pk3
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Quake III BSP Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models-nonbsd/PK3\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/Ogre/TheThing/Mesh.mesh.xml
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a possible importer: Irrlicht Mesh Reader; trying signature-based detection
+Info,  T23516: Found a possible importer: Irrlicht Scene Reader; trying signature-based detection
+Info,  T23516: Found a possible importer: Collada Importer; trying signature-based detection
+Info,  T23516: Found a possible importer: Ogre3D Mesh Importer; trying signature-based detection
+Debug, T23516: Found positive match for header keyword: <mesh>
+Info,  T23516: Found a matching importer for this file format: Ogre3D Mesh Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/Ogre/TheThing\'
+Debug, T23516:   - Reading geometry of 1406 vertices
+Debug, T23516:     - Contains positions
+Debug, T23516:     - Contains normals
+Debug, T23516:     - Contains 1 texture coords
+Debug, T23516: Reading SubMesh 0
+Debug, T23516:   - Material: 'BlockMat'
+Debug, T23516:   - Uses shared geometry: true
+Debug, T23516:   - Faces 2656
+Debug, T23516: Reading Mesh
+Debug, T23516: Reading material 'BlockMat'
+Debug, T23516: material 'BlockMat'
+Debug, T23516:  technique 'b2ogre_1331419912.514'
+Debug, T23516:   pass 'b2ogre_1331419912.514'
+Debug, T23516:    ambient 0.8 0.8 0.8
+Debug, T23516:    diffuse 0.64 0.64 0.64
+Debug, T23516:    specular 0.5 0.5 0.5
+Debug, T23516:    emissive 0 0 0
+Debug, T23516:    texture_unit 'b2ogre_1331419912.514'
+Debug, T23516:     texture 'Wrinkles.jpg' type 1 index 0 UV 0
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB/dwarf_ascii.cob
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB\'
+Info,  T23516: File format tag: V00.01
+Warn,  T23516: Unexpected ThumbNailHdrSize, skipping this chunk
+Error, T23516: Encountered unsupported chunk: Chan [version: 12, size: 849]
+Error, T23516: End of file or read limit was reached
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB/dwarf.cob
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB\'
+Info,  T23516: File format tag: V00.01
+Error, T23516: Encountered unsupported chunk: Chan [version: 12, size: 579]
+Error, T23516: Encountered unsupported chunk: Chan [version: 12, size: 761]
+Error, T23516: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T23516: Encountered unsupported chunk: Chan [version: 12, size: 571]
+Error, T23516: Encountered unsupported chunk: ShBx [version: 4, size: 401]
+Error, T23516: Encountered unsupported chunk: ShBx [version: 4, size: 399]
+Debug, T23516: FlipWindingOrderProcess begin
+Debug, T23516: FlipWindingOrderProcess finished
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB/molecule_ascii.cob
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB\'
+Info,  T23516: File format tag: V00.01
+Warn,  T23516: Unexpected ThumbNailHdrSize, skipping this chunk
+Error, T23516: Cannot parse string "" as a real number: does not start with digit or decimal point followed by digit.
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB/molecule.cob
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB\'
+Info,  T23516: File format tag: V00.01
+Error, T23516: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T23516: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Error, T23516: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T23516: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Error, T23516: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T23516: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Error, T23516: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T23516: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Error, T23516: Encountered unsupported chunk: PhAn [version: 7, size: 124]
+Debug, T23516: FlipWindingOrderProcess begin
+Debug, T23516: FlipWindingOrderProcess finished
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB/spider_4_3_ascii.cob
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB\'
+Info,  T23516: File format tag: V00.01
+Debug, T23516: FlipWindingOrderProcess begin
+Debug, T23516: FlipWindingOrderProcess finished
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB/spider_4_3.cob
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB\'
+Info,  T23516: File format tag: V00.01
+Error, T23516: Encountered unsupported chunk: RSOb [version: 1, size: 125505]
+Error, T23516: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T23516: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Debug, T23516: FlipWindingOrderProcess begin
+Debug, T23516: FlipWindingOrderProcess finished
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB/spider_6_6_ascii.cob
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB\'
+Info,  T23516: File format tag: V00.01
+Warn,  T23516: Unexpected ThumbNailHdrSize, skipping this chunk
+Debug, T23516: FlipWindingOrderProcess begin
+Debug, T23516: FlipWindingOrderProcess finished
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB/spider_6_6.cob
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: TrueSpace Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/COB\'
+Info,  T23516: File format tag: V00.01
+Error, T23516: Encountered unsupported chunk: ObRQ [version: 1, size: 8]
+Error, T23516: Encountered unsupported chunk: ShBx [version: 4, size: 283]
+Debug, T23516: FlipWindingOrderProcess begin
+Debug, T23516: FlipWindingOrderProcess finished
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/OBJ/spider.obj
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/OBJ\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end
+Info,  T23516: Load C:/Users/ricky/Dev/coolgame/external/assimp/test/models/OBJ/spider.obj
+Debug, T23516: Assimp 5.2.962067386 amd64 gcc debug singlethreadedsingle : 
+Info,  T23516: Found a matching importer for this file format: Wavefront Object Importer.
+Info,  T23516: Import root directory is 'C:/Users/ricky/Dev/coolgame/external/assimp/test/models/OBJ\'
+Debug, T23516: UpdateImporterScale scale set: 1
+Debug, T23516: ValidateDataStructureProcess begin
+Debug, T23516: ValidateDataStructureProcess end

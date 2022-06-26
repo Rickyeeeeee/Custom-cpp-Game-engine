@@ -20,3 +20,26 @@ namespace ComponentUtils {
     }
     
 }
+
+void LightComponent::CreateShadow()
+{
+    FramebufferSpecification spec;
+    spec.Attachments = {
+        FrameBufferTextureFormat::Depth,
+    };
+    spec.Width = 900;
+    spec.Height = 900;
+    DepthMap = Framebuffer::Create(spec);
+    HasShadow  = true;
+}
+
+void LightComponent::DeleteShadow()
+{
+    DepthMap.reset();
+    HasShadow = false;
+}
+
+uint32_t LightComponent::GetDepthMapRendererID()
+{
+    return DepthMap->GetDepthAttachmentRendererID();
+}

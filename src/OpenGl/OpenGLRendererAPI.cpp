@@ -12,6 +12,17 @@ void OpenGLRendererAPI::Clear()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+void OpenGLRendererAPI::ClearColorBits()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void OpenGLRendererAPI::ClearDepthBits()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+}
+
+
 void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertexArray, unsigned int indexCount) 
 {
     unsigned int count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount() ;
@@ -51,4 +62,12 @@ void OpenGLRendererAPI::SetLineWidth(float width)
     if (width > 1.0f)
         width = 1.0f;
     glLineWidth(width);
+}
+
+void OpenGLRendererAPI::EnableDepthTest(bool value)
+{
+    if (value)
+        glEnable(GL_DEPTH_TEST);
+    else
+        glDisable(GL_DEPTH_TEST);
 }

@@ -8,6 +8,7 @@ static bool IsDepthFormat(FrameBufferTextureFormat format)
     switch (format)
     {
     case FrameBufferTextureFormat::DEPTH24STENCIL8: return true;
+    case FrameBufferTextureFormat::Depth: return true;
     }
     return false;
 }
@@ -48,7 +49,7 @@ static void AttachColorTexture(uint32_t id, int samples, GLenum internal_format,
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + index, TextureTarget(multisampled), id, 0);
 }
 
-static void AttachDepthTexture(uint32_t id, int samples, GLenum format, GLenum attachmentType, uint32_t width, uint32_t height)
+static void AttachDepthTexture(uint32_t id, int samples, GLenum internalFormat, GLenum format, GLenum attachmentType, GLenum type, uint32_t width, uint32_t height)
 {
     bool multisampled = samples > 1;
     if (multisampled)
@@ -57,7 +58,7 @@ static void AttachDepthTexture(uint32_t id, int samples, GLenum format, GLenum a
     }
     else
     {
-        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, NULL);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);      
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);      
@@ -113,6 +114,26 @@ void OpenGLFramebuffer::Unbind()
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+void OpenGLFramebuffer::BindDepthAttachment(uint32_t slot) 
+{
+    glBindTextureUnit(slot, m_DepthAttachment);
+}
+
+void OpenGLFramebuffer::BindColorAttachment(uint32_t slot, uint32_t index) 
+{
+    glBindTextureUnit(slot, m_ColorAttachments[index]);
+}
+
+void OpenGLFramebuffer::UnBindDepthAttachment() 
+{
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void OpenGLFramebuffer::UnBindColorAttachment(uint32_t index) 
+{
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
 void OpenGLFramebuffer::Resize(unsigned int width, unsigned int height) 
 {
     if (width <= 0 || height <= 0 || width > 1920 || height > 1080)
@@ -159,7 +180,7 @@ void OpenGLFramebuffer::Invalidate()
 
     bool multiSample = m_Specification.Samples > 1;
 
-    if (m_ColorAttachmentSpecs.size())
+    if (m_ColorAttachmentSpecs.size() > 0)
     {
         m_ColorAttachments.resize(m_ColorAttachmentSpecs.size());
         CreateTextures(multiSample, m_ColorAttachments.data(), m_ColorAttachmentSpecs.size());
@@ -192,7 +213,16 @@ void OpenGLFramebuffer::Invalidate()
         switch (m_DepthAttachmentSpecs.TextureFormat)
         {
             case FrameBufferTextureFormat::DEPTH24STENCIL8:
-                AttachDepthTexture(m_DepthAttachment, m_Specification.Samples, GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL_ATTACHMENT, m_Specification.Width, m_Specification.Height);
+                AttachDepthTexture(m_DepthAttachment, 
+                m_Specification.Samples, 
+                GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL, GL_DEPTH_STENCIL_ATTACHMENT, GL_UNSIGNED_INT_24_8,
+                m_Specification.Width, m_Specification.Height);
+                break;
+            case FrameBufferTextureFormat::Depth:
+                AttachDepthTexture(m_DepthAttachment, 
+                m_Specification.Samples, 
+                GL_DEPTH_COMPONENT32, GL_DEPTH_COMPONENT, GL_DEPTH_ATTACHMENT, GL_FLOAT, 
+                m_Specification.Width, m_Specification.Height);
                 break;
         }
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -206,6 +236,7 @@ void OpenGLFramebuffer::Invalidate()
     else if (m_ColorAttachments.empty())
     {
         glDrawBuffer(GL_NONE);
+        glReadBuffer(GL_NONE);
     }
 
     // glCreateTextures(GL_TEXTURE_2D, 1, m_ColorAttachments.data());

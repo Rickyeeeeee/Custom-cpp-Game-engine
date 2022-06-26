@@ -2,6 +2,8 @@
 
 #include "core/GLM.h"
 
+#include "Renderer/Buffer.h"
+
 class Light
 {
 public:
@@ -11,6 +13,7 @@ public:
 
     Vector3 color{1.0f};
     
+    bool hasShadow = true;
 // point light specific
     float constant = 1.0f;
     float linear = 0.09f;

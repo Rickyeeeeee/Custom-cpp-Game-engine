@@ -33,7 +33,7 @@ add_subdirectory(src)
 add_subdirectory(sandbox)
 add_subdirectory(editor)
 add_subdirectory(examples)
-
+add_subdirectory(test)
 
 target_include_directories(
     engine 

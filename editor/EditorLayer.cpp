@@ -59,12 +59,45 @@ void EditorLayer::OnAttach()
     fbSpec.Attachments = {
         FrameBufferTextureFormat::RGBA8,
         FrameBufferTextureFormat::RED_INTERGER,
-        FrameBufferTextureFormat::Depth
+        FrameBufferTextureFormat::DEPTH24STENCIL8
     };
     fbSpec.Width = Application::Get().GetWindow().GetWidth();
     fbSpec.Height = Application::Get().GetWindow().GetHeight();
     m_ViewportSize = { 1280.0f, 720.0f };
     m_Framebuffer = Framebuffer::Create(fbSpec);
+
+    FramebufferSpecification dbSpec;
+    dbSpec.Attachments = {
+        FrameBufferTextureFormat::RGBA8,
+        FrameBufferTextureFormat::DEPTH24STENCIL8
+    };
+    dbSpec.Width = 900;
+    dbSpec.Height = 900;
+    m_DebugViewport = Framebuffer::Create(dbSpec);
+    m_DebugShader = Shader::Create("asset/shaders/debug.glsl");
+    m_DebugShader->Bind();
+    m_DebugShader->SetInt("u_DepthMap", 0);
+    m_QuadVertexArray = VertexArray::Create();
+    float vertices[] = {
+         1.0f,  1.0f,  1.0f, 1.0f ,
+         1.0f, -1.0f,  1.0f, 0.0f ,
+        -1.0f, -1.0f,  0.0f, 0.0f ,
+        -1.0f,  1.0f,  0.0f, 1.0f ,
+    };
+
+    auto vbo = VertexBuffer::Create(16 * sizeof(float));
+    vbo->SetData(vertices, 16 * sizeof(float));
+    vbo->SetLayout({
+        { ShaderDataType::Float2, "a_Position" },
+        { ShaderDataType::Float2, "a_TexCoord" },
+    });
+    m_QuadVertexArray->AddVertexBuffer(vbo);
+    uint32_t indices[] = {
+        2, 1, 0, 
+        0, 3, 2
+    };
+    auto ibo = IndexBuffer::Create(indices, 6);
+    m_QuadVertexArray->SetIndexBuffer(ibo);
 
     m_ActiveScene = CreateRef<Scene2D>();
     m_Panel.SetContext(m_ActiveScene);
@@ -95,6 +128,7 @@ void EditorLayer::OnUpdate(Timestep ts)
     m_EditorCamera.OnUpdate(ts);
 
     Renderer2D::ResetStats();
+
     m_Framebuffer->Bind();
     auto[mx, my] = ImGui::GetMousePos();
     mx -= m_ViewportBounds[0].x;
@@ -120,25 +154,54 @@ void EditorLayer::OnUpdate(Timestep ts)
     m_Framebuffer->ClearAttachment(1, -1);
 
     m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
-    // Renderer3D::DrawStaticMesh();
+    m_ActiveScene->OnRenderEditor(ts, m_EditorCamera, m_Framebuffer);
+    
+    m_Framebuffer->Bind();
     Renderer3D::BeginLine({ 1.0f, 1.0f, 1.0f });
+    RenderCommand::EnableDepthTest(false);
     // Renderer3D::DrawCubeLine();
     Renderer3D::DrawSphereLine();
-    Renderer3D::DrawPlaneLine(Vector3{ 0.0f }, Vector3{ 0.0f }, Vector3{ 5.0f, 5.0f, 0.0f });
+    Renderer3D::DrawPlaneLine(Vector3{ 0.0f }, Matrix3{ 1.0f }, Vector3{ 5.0f, 5.0f, 0.0f });
     auto selectdEntity = m_Panel.GetSelectedEntity();
     if (selectdEntity && selectdEntity.HasComponent<ColliderComponent>())
     {
         auto& cc = selectdEntity.GetComponent<ColliderComponent>();
         switch (cc.type)
         {
-        case BOX:
-            BoxCollider* bc = (BoxCollider*)cc.collider;
-            Renderer3D::DrawCubeLine(bc->GetCenter(), bc->GetRotation(), bc->Width * 1.01f);
-            break;
+            case BOX:
+            {
+                BoxCollider* bc = (BoxCollider*)cc.collider;
+                Renderer3D::DrawCubeLine(bc->GetCenter(), bc->GetRotation(), bc->Width * 1.01f);
+                break;
+            }
+            case PLANE:
+            {
+                PlaneCollider* pc = (PlaneCollider*)cc.collider;
+                Renderer3D::DrawPlaneLine(pc->GetCenter(), pc->GetRotation(), { pc->Width, pc->Height, 0.0f });
+                break;
+
+            }
         }
     }
     Renderer3D::EndLine();
     m_Framebuffer->Unbind();
+    RenderCommand::EnableDepthTest(true);
+
+    if (m_ActiveScene->m_SceneType == SceneType::_3D)
+    {
+        auto lc = ((Scene3D*)m_ActiveScene.get())->GetLight();
+        if (lc && lc->hasShadow())
+        {
+            m_DebugViewport->Bind();
+            RenderCommand::SetClearColor({ 1.0f, 1.0f, 0.2, 1.0 });
+            RenderCommand::Clear();
+            m_DebugShader->Bind();
+            lc->DepthMap->BindDepthAttachment(0);
+            // m_Texture->Bind();
+            RenderCommand::DrawIndexed(m_QuadVertexArray, 6);
+            m_DebugViewport->Unbind();
+        }
+    }
 }
 
 void EditorLayer::OnImGuiRender() 
@@ -248,6 +311,11 @@ void EditorLayer::OnImGuiRender()
     if (m_HoverEntity)
         name = m_HoverEntity.GetComponent<TagComponent>().Tag;
     ImGui::Text("HoverEntity %s", name.c_str());
+    ImGui::End();
+
+    ImGui::Begin("DepthMap");
+    auto depthMapdebugID = m_DebugViewport->GetColorAttachmentRendererID(0);
+    ImGui::Image((void*)depthMapdebugID, ImVec2{ 400.0f, 400.0f }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
     ImGui::End();
 
 

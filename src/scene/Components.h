@@ -1,10 +1,12 @@
 #pragma once
 #include <string>
 #include "core/GLM.h"
+#include "core/core.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
+#include "Renderer/FrameBuffer.h"
 #include "Renderer/Camera.h"
 #include "Renderer/Mesh.h"
 #include "Renderer/Material.h"
@@ -27,6 +29,7 @@ struct TransformComponent
     Matrix4 GetRotationMatrix() const
     {
         return glm::toMat4(glm::quat(Rotation));
+        glm::radians(1.0f);
     }
     Matrix4 GetTransform() const 
     {
@@ -130,14 +133,22 @@ enum class LightType : int
 
 struct LightComponent
 {
-    Light Light;
-    LightType Type = LightType::POINT;
     LightComponent() = default;
     LightComponent(const LightComponent&) = default;
     LightComponent(LightType type)
         : Type(type)
     {
     }
+    void CreateShadow();
+    void DeleteShadow();
+    uint32_t GetDepthMapRendererID();
+    bool hasShadow() { return HasShadow; }
+    void BindDepthMap() { DepthMap->Bind(); }
+    void UnBindDepthMap() { DepthMap->Unbind(); }
+    Light Light;
+    LightType Type = LightType::POINT;
+    bool HasShadow = false;
+    Ref<Framebuffer> DepthMap;
 };
 
 struct RigidBodyComponent

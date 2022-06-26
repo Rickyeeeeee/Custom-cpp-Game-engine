@@ -1,5 +1,4 @@
 #pragma once
-
 #include "scene/Scene.h"
 #include "entt.hpp"
 class Entity

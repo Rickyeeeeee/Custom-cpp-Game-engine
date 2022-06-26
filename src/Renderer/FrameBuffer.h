@@ -13,7 +13,7 @@ enum class FrameBufferTextureFormat
 
     DEPTH24STENCIL8,
 
-    Depth = DEPTH24STENCIL8,
+    Depth,
 };
 
 struct FramebufferTextureSpecification
@@ -49,8 +49,13 @@ public:
     virtual void Unbind() = 0;
     virtual void Resize(unsigned int width, unsigned int height) = 0;
     virtual unsigned int GetColorAttachmentRendererID(uint32_t index) const  = 0;
+    virtual unsigned int GetDepthAttachmentRendererID() const  = 0;
     virtual void ClearAttachment(uint32_t index, int value) = 0;
     virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) = 0;
+    virtual void BindDepthAttachment(uint32_t slot) = 0;
+    virtual void BindColorAttachment(uint32_t slot, uint32_t index) = 0;
+    virtual void UnBindDepthAttachment() = 0;
+    virtual void UnBindColorAttachment(uint32_t index) = 0;
 
     virtual  const FramebufferSpecification& GetSpecification() const = 0;
     static Ref<Framebuffer> Create(const FramebufferSpecification& spec);
