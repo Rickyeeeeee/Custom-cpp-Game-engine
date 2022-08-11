@@ -24,7 +24,6 @@ Ref<Texture2D> Texture2D::Create(unsigned int width, unsigned int height)
     }    
 
     return nullptr;
-    
 }
 
 Ref<CubeMapTexture> CubeMapTexture::Create(const std::vector<std::string>& paths)

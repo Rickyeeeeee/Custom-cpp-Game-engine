@@ -160,7 +160,6 @@ void EditorLayer::OnUpdate(Timestep ts)
     Renderer3D::BeginLine({ 1.0f, 1.0f, 1.0f });
     RenderCommand::EnableDepthTest(false);
     // Renderer3D::DrawCubeLine();
-    Renderer3D::DrawSphereLine();
     Renderer3D::DrawPlaneLine(Vector3{ 0.0f }, Matrix3{ 1.0f }, Vector3{ 5.0f, 5.0f, 0.0f });
     auto selectdEntity = m_Panel.GetSelectedEntity();
     if (selectdEntity && selectdEntity.HasComponent<ColliderComponent>())
@@ -170,17 +169,23 @@ void EditorLayer::OnUpdate(Timestep ts)
         {
             case BOX:
             {
-                BoxCollider* bc = (BoxCollider*)cc.collider;
+                BoxCollider* bc = static_cast<BoxCollider*>(cc.collider);
                 Renderer3D::DrawCubeLine(bc->GetCenter(), bc->GetRotation(), bc->Width * 1.01f);
                 break;
             }
             case PLANE:
             {
-                PlaneCollider* pc = (PlaneCollider*)cc.collider;
+                PlaneCollider* pc = static_cast<PlaneCollider*>(cc.collider);
                 Renderer3D::DrawPlaneLine(pc->GetCenter(), pc->GetRotation(), { pc->Width, pc->Height, 0.0f });
                 break;
 
             }
+            case SPHERE:
+            {
+                SphereCollider* sc = static_cast<SphereCollider*>(cc.collider);
+                Renderer3D::DrawSphereLine(sc->GetCenter(), sc->Radius);
+                break;
+            } 
         }
     }
     Renderer3D::EndLine();

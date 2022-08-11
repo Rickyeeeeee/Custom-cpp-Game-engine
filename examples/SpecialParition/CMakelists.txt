@@ -7,6 +7,7 @@ add_executable(
     SpatialPartition
     RenderLayer.cpp
     SPApplication.cpp
+    BV.cpp
 )
 
 target_link_libraries(

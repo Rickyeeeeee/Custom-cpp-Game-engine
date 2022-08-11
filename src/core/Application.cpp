@@ -1,9 +1,21 @@
 #include "core/Application.h"
 #include "pch.h"
-#include "core/imguiLayer.h"
-#include "Renderer/Renderer.h"
+
 #include "core/core.h"
-// #include "core/Log.h"
+#include "core/Timestep.h"
+
+#include "event/Event.h"
+#include "event/EventDispatcher.h"
+#include "event/WindowEvent.h"
+#include "event/KeyEvent.h"
+
+#include "Renderer/Renderer.h"
+
+#include "Window.h"
+
+#include "Layer.h"
+#include "LayerStack.h"
+#include "imguiLayer.h"
 
 Application* Application::s_Instance = nullptr;
 
@@ -72,7 +84,7 @@ void Application::OnEvent(Event &e)
 
 void Application::Run()
 {
-    glfwSwapInterval(1);
+    glfwSwapInterval(2);
 
     while (m_Running)
     {

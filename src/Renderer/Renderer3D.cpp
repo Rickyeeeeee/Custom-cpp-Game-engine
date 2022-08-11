@@ -1,12 +1,19 @@
+#include "core/core.h"
+#include "core/pch.h"
 #include "Renderer3D.h"
 #include "Renderer/VertexArray.h"
 #include "Renderer/Shader.h"
-#include "core/core.h"
 #include "Renderer/RenderCommand.h"
-#include "scene/EditorCamera.h"
-#include "Renderer/Texture.h"
-#include "core/pch.h"
 #include "physic/PhysicUtils.h"
+#include "Renderer/Perspective3DCamera.h"
+#include "Renderer/Transform.h"
+#include "Renderer/Vertex3D.h"
+#include "Renderer/Mesh.h"
+#include "Renderer/Camera.h"
+#include "Renderer/Texture.h"
+#include "Renderer/FrameBuffer.h"
+#include "scene/Light.h"
+#include "scene/EditorCamera.h"
 
 struct StaticMeshInfo
 {
@@ -63,7 +70,7 @@ struct Renderer3Dstorage
     Ref<VertexBuffer> LineVertexBuffer;
     Ref<IndexBuffer> LineIndexBuffer;
     Vector3 DebugLineColor = { 1.0f, 1.0f, 1.0f };
-    uint32_t LineMaxNumber = 10000;
+    uint32_t LineMaxNumber = 100000;
 
     Ref<CubeMapTexture> CubeTexture;
     Ref<Shader> skyboxShader;
@@ -128,7 +135,7 @@ void Renderer3D::Init()
         { ShaderDataType::Float3, "a_Position" }
     });
     s_Data.LineVertexArray->AddVertexBuffer(s_Data.LineVertexBuffer);
-    s_Data.LineIndexBuffer = IndexBuffer::Create(s_Data.LineMaxNumber);
+    s_Data.LineIndexBuffer = IndexBuffer::Create(s_Data.LineMaxNumber * 2);
     s_Data.LineVertexArray->SetIndexBuffer(s_Data.LineIndexBuffer);
 
 }
@@ -429,7 +436,9 @@ void Renderer3D::DrawCubeLine(const Vector3& position, const Matrix3& rotation, 
 
 void Renderer3D::DrawSphereLine(const Vector3& position, float radius)
 {
-
+    int h = 12;
+    int v = 15;
+    PhysicALGO::GetSphere(s_Data.LinesVertices, s_Data.LinesIndices, position, h, v, radius);
 }
 
 void Renderer3D::DrawPlaneLine(const Vector3& position, const Matrix3& rotation, const Vector3& scale)

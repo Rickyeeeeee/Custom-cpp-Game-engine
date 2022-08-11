@@ -32,6 +32,44 @@ namespace PhysicALGO {
              1
     */
 
+    void GetSphere(std::vector<Vector3>& vertices, std::vector<uint32_t>& indices, const Vector3& position, 
+                            const int nH, const int nV, const float r)
+    {
+        uint32_t Vstart = vertices.size();
+        float angleH = glm::radians(180.0f / (float)(nH - 1));
+        float angleV = glm::radians(360.0f / (float)nV);
+        float radius = r;
+        for (int i = 1; i < nH - 1; i++)
+            for (int j = 0; j < nV; j++)
+            {
+                float aV = j * angleV;
+                float aH = i * angleH;
+                vertices.push_back(position + Vector3{ 
+                    r * cos(aV) * sin(aH), 
+                    r * cos(aH), 
+                    r * sin(aV) * sin(aH)
+                });
+                indices.push_back(Vstart + j + (i - 1) * nV);
+                indices.push_back(Vstart + (j + 1) % nV + (i - 1) * nV);
+            }
+        int top = vertices.size();
+        int down = top + 1;
+        vertices.push_back(Vector3{ 0.0f,  r, 0.0f } + position);
+        vertices.push_back(Vector3{ 0.0f, -r, 0.0f } + position);
+        for (int i = 0; i < nV; i++)
+        {
+            indices.push_back(top);
+            indices.push_back(Vstart + i);
+            for (int j = 0; j < nH - 3; j++)
+            {
+                indices.push_back(Vstart + i + j * nV);
+                indices.push_back(Vstart + i + (j + 1) * nV);
+            }
+            indices.push_back(Vstart + i + (nV) * (nH - 3));
+            indices.push_back(down);
+        }
+    }
+
     void GetBoxPoints(Vector3 points[], const Vector3& widths, const Matrix3& transform, const Vector3& center)
     {
         Vector3 axis[3] = {

@@ -21,7 +21,7 @@ target_link_libraries(
     editor
     engine
     ImGuizmo
-    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libassimpd-5.dll
+    # ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libassimpd-5.dll
     imgui
 )
 

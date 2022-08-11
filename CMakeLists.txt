@@ -10,8 +10,8 @@ message(STATUS "Is the C++ from GNU? ${CMAKE_COMPILER_IS_GNUCXX}")
 message(STATUS "The C++ compiler version is: ${CMAKE_CXX_COMPILER_VERSION}")
 endif()
 
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../run)
+
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 include_directories(
@@ -30,7 +30,6 @@ add_subdirectory(external/ImGuizmo)
 add_subdirectory(external/spdlog)
 add_subdirectory(external/assimp)
 add_subdirectory(src) 
-add_subdirectory(sandbox)
 add_subdirectory(editor)
 add_subdirectory(examples)
 add_subdirectory(test)

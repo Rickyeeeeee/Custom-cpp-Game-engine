@@ -366,7 +366,8 @@ void Scene3D::OnRenderEditor(Timestep ts, const EditorCamera& camera, Ref<Frameb
                     meshRenderer.Material.Ambient, (int)entity);
         }
     }
-    Renderer3D::UploadDepthMap(light->DepthMap);
+    if (light->DepthMap)
+        Renderer3D::UploadDepthMap(light->DepthMap);
     // Renderer3D::DrawLine( { 10.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f } );
     Renderer3D::EndScene(camera.GetPosition(), pointLights, dirLight);
     viewport->Unbind();

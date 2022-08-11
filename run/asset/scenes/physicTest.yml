@@ -5,9 +5,9 @@ Entities:
     TagComponent:
       Tag: Empty Entity
     TransformComponent:
-      Translation: [8.59059429, -12.6320686, 7.99915504]
-      Rotation: [2.97889471, -0.197240084, -0.0167144258]
-      Scale: [103.642372, 103.644173, 103.643951]
+      Translation: [11.450222, -15.4432411, 10.3464298]
+      Rotation: [1.45128095, 0.157277077, 1.52219868]
+      Scale: [103.642479, 103.645088, 103.644348]
     MeshComponent:
       MeshSource: 3
       Color: [0.200000003, 0.200000003, 0.200000003, 1]
@@ -28,7 +28,7 @@ Entities:
     TagComponent:
       Tag: PointLight_d_d_d
     TransformComponent:
-      Translation: [-7.71033859, -13.6617718, -16.0157547]
+      Translation: [-0.0345070362, -13.6617718, 4.60987806]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     LightComponent:
@@ -70,7 +70,7 @@ Entities:
       Tag: Plane_d_d
     TransformComponent:
       Translation: [3.96554279, -10.5104628, 19.6718616]
-      Rotation: [-1.55092537, 0.081367664, 1.55538702]
+      Rotation: [-1.55092525, 0.081367664, 1.55538702]
       Scale: [7.09019756, 0.174274296, 20.0000629]
     MeshComponent:
       MeshSource: 1
@@ -93,7 +93,7 @@ Entities:
     TagComponent:
       Tag: box_d_d_d_d_d_d
     TransformComponent:
-      Translation: [0.809052944, -5.93922663, -0.56643939]
+      Translation: [-0.703789592, -10.2116785, -6.52432919]
       Rotation: [-4.11321309e-07, -8.30400495e-08, 1.53224313e-08]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -164,8 +164,8 @@ Entities:
       Tag: Plane_d
     TransformComponent:
       Translation: [3, -17.040163, 0]
-      Rotation: [0, 0, 0]
-      Scale: [20, 0.174273878, 20]
+      Rotation: [0.00374788861, 0.00268974854, -0.0028394619]
+      Scale: [20, 0.174273863, 20.0000019]
     MeshComponent:
       MeshSource: 1
       Color: [0.200000003, 0.200000003, 0.200000003, 1]
@@ -187,7 +187,7 @@ Entities:
     TagComponent:
       Tag: box_d_d_d_d
     TransformComponent:
-      Translation: [1.27085567, -5.22151899, -3.69678092]
+      Translation: [1.27084899, -7.8433404, -3.69678903]
       Rotation: [2.63916058e-06, 4.63756209e-07, -2.35845664e-06]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -210,9 +210,9 @@ Entities:
     TagComponent:
       Tag: box_d_d_d
     TransformComponent:
-      Translation: [2.6724062, -9.41340542, 1.9238584]
-      Rotation: [0.00606481452, 0.0764803737, -3.12613583]
-      Scale: [0.999949336, 0.99997282, 0.999989867]
+      Translation: [2.6776607, -9.76389408, 1.92597818]
+      Rotation: [0.00606484199, 0.0764803812, -3.12613583]
+      Scale: [0.999949157, 0.99997282, 0.999989867]
     MeshComponent:
       MeshSource: 1
       Color: [0.200000003, 0.200000003, 0.200000003, 1]
@@ -233,7 +233,7 @@ Entities:
     TagComponent:
       Tag: box_d_d
     TransformComponent:
-      Translation: [6.31416512, -13.7346439, -0.768598497]
+      Translation: [2.30083275, -12.6787024, -9.26815033]
       Rotation: [-9.07785363e-07, -9.14153247e-07, 2.48819015e-06]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -279,8 +279,8 @@ Entities:
     TagComponent:
       Tag: Plane
     TransformComponent:
-      Translation: [23.2733154, -14.2760601, -1.43451643]
-      Rotation: [0, -0, 1.55228567]
+      Translation: [22.3150883, -14.2583237, -1.43451643]
+      Rotation: [0, 0, 1.55228567]
       Scale: [5.25591326, 0.174273938, 20]
     MeshComponent:
       MeshSource: 1
@@ -303,9 +303,9 @@ Entities:
     TagComponent:
       Tag: box
     TransformComponent:
-      Translation: [-4.75267506, -11.3735294, -0.722180247]
+      Translation: [-4.74768305, -12.2634153, -0.719128788]
       Rotation: [1.57451701, 0.398674607, -3.1345377]
-      Scale: [1.04006457, 1.04000628, 1.0400188]
+      Scale: [1.04006457, 1.04000628, 1.04003119]
     MeshComponent:
       MeshSource: 1
       Color: [0.200000003, 0.200000003, 0.200000003, 1]
@@ -327,8 +327,8 @@ Entities:
       Tag: DirectionalLight
     TransformComponent:
       Translation: [-5, 6.89774942, -7.26956701]
-      Rotation: [-0.200000003, -1.10000002, 0.00100000005]
-      Scale: [0.999989152, 1, 0.999928653]
+      Rotation: [0.13553752, -0.378090113, -0.305759966]
+      Scale: [0.999996006, 0.999994397, 0.999940157]
     LightComponent:
       Type: 1
       Light:
@@ -339,12 +339,12 @@ Entities:
         Linear: 0.0900000036
         Quadratic: 0.0320000015
         Color: [1, 1, 1]
-        Direction: [-0.176075429, -0.980243146, 0.0901156366]
+        Direction: [-0.250690699, -0.959887505, -0.125579357]
   - Entity: 1216546513215
     TagComponent:
       Tag: PointLight
     TransformComponent:
-      Translation: [15.6345997, -14.306982, 15.5027599]
+      Translation: [-12.062089, -14.306982, -0.319929004]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     LightComponent:
@@ -418,3 +418,20 @@ Entities:
       type: 2
       Width: 7
       Height: 20
+  - Entity: 1216546513215
+    TagComponent:
+      Tag: Gun
+    TransformComponent:
+      Translation: [8.50207424, -10.6963558, -12.4289818]
+      Rotation: [3.14159226, 1.33758175, 3.14159226]
+      Scale: [7.34400415, 7.34400034, 7.34400415]
+    MeshComponent:
+      MeshSource: 3
+      Color: [0.200000003, 0.200000003, 0.200000003, 1]
+      Filepath: C:\Users\ricky\Dev\coolgame\run\asset\models\Gun.obj
+    MeshRendererComponent:
+      Color: [1, 1, 1]
+      Diffuse: 1
+      Specular: 0.5
+      HasTexture: false
+      HasNormalMap: false

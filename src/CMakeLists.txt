@@ -19,7 +19,7 @@ file(GLOB CPP_SOURCE
     physic/*.cpp
 )
 add_library(engine 
-    STATIC
+    OBJECT
     ${CPP_SOURCE}
 )
 
@@ -32,10 +32,11 @@ add_library(engine
 target_link_libraries(
     engine
     # spdlog::spdlog
-    imgui
+    # imgui
     glad
     glfw3
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libyaml-cpp.dll
-    ImGuizmo
+    # ImGuizmo
+    assimp
 )
 

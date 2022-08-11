@@ -15,10 +15,14 @@
 #include "LayerStack.h"
 #include "imguiLayer.h"
 
-#include "Renderer/Buffer.h"
-#include "Renderer/Shader.h"
-#include "Renderer/VertexArray.h"
-#include "Renderer/Orthographic2DCamera.h"
+class Layer;
+class LayerStack;
+class ImGuiLayer;
+class Window;
+class Event;
+class WindowCloseEvent;
+class WindowResizeEvent;
+class KeyPressedEvent;
 
 class Application
 {

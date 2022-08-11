@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Renderer/Perspective3DCamera.h"
-#include "Renderer/Transform.h"
-#include "Renderer/Vertex3D.h"
-#include "Renderer/Mesh.h"
-#include "Renderer/Camera.h"
-#include "Renderer/Texture.h"
-#include "Renderer/FrameBuffer.h"
 #include "core/pch.h"
-#include "scene/Light.h"
-#include "scene/EditorCamera.h"
+#include "core/GLM.h"
+
+class Mesh;
+class EditorCamera;
+class Camera;
+class Perspective3DCamera;
+class Framebuffer;
+class Light;
+class Texture2D;
 
 struct RenderStats
 {

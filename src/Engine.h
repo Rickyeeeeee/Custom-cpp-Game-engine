@@ -10,6 +10,7 @@
 #include "core/Editor3DCameraController.h"
 #include "core/imguiLayer.h"
 #include "core/Layer.h"
+#include "core/GLM.h"
 
 #include "Renderer/Renderer.h"
 #include "Renderer/Texture.h"
@@ -32,3 +33,5 @@
 
 #include "OpenGl/OpenGLShader.h"
 // #include "core/Log.h"
+
+#include "physic/PhysicUtils.h"

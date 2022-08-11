@@ -133,7 +133,7 @@ vec3 CalcDirectionalLight(DirectionalLight light, vec3 normal, vec3 viewDir)
     float diff = max(dot(normal, lightDir), 0.0);
 
     vec3 reflectDir = reflect(-lightDir, normal);
-    float shiness = 3;
+    float shiness = 2;
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), shiness);
  
     float ambient = light.ambient;
@@ -171,7 +171,8 @@ float CalcShadow(vec4 fragPosLightSpace)
             shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;        
         }    
     }
-    shadow /= 9.0;
+    float sampleNum = range * 2 + 1;
+    shadow /= (sampleNum * sampleNum);
 
     if(projCoords.z > 1.0)
         shadow = 0.0;
