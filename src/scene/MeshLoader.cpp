@@ -44,8 +44,6 @@ void MeshLoader::processMesh(aiMesh* mesh, const aiScene* scene)
             m_Mesh.Indices.push_back(face.mIndices[j] + m_VertexOffset);
     }
     m_VertexOffset += mesh->mNumVertices;
-
-    
 }
 
 bool MeshLoader::LoadMeshTo()
